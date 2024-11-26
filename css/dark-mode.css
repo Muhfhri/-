@@ -6,18 +6,18 @@
 body {
   background-color: #F1F0F4 !important;
   color: #222;
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
 .bg-light {
   background: #F1F0F4 !important;
-  transition: background 0.3s;
+  transition: background 0.5s;
 }
 
 [data-theme="dark"] {
   background-color: #0E1419 !important;
   color: #eee;
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
 [data-theme="dark"] .bg-black {
@@ -246,7 +246,6 @@ label {
 }
 .link-none {
   text-decoration: none !important;
-  color: black;
 }
 .animasi {
   transition: background-color 0.9s, color 1s, font-size 1s;
