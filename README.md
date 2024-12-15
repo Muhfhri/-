@@ -1,4 +1,4 @@
-![dark](css\image\dark.gif)
+![1734263516946](images/readme/1734263516946.png)
 
 ## Website Portofolio Muhfhri.
 
