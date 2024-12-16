@@ -8,8 +8,10 @@ Beberapa fitur di dalam website ini :
 2. Website Serbaguna untuk mencari informasi seputar dunia elektronik.
 3. Mengintergrasikan API yang berguna untuk website ini seperti seputar cuaca menggunakan [AccuWeather](https://https://www.accuweather.com/).
 
-TODO / Pengerjaan Kedepannya : 
+TODO / Pengerjaan Kedepannya :
 
 * [ ]  Mengintergrasikan Sistem Transjakarta ke dalam website ini (Karena saya suka Transjakarta 😄)
 * [ ]  Membuat Algoritma Untuk Pelajaran Matematika
 * [X]  Membuat Website ini berguna bagi pengguna Xiaomi terutama Custom ROM user atau ROOT user (awal)
+
+Versi Website  : **3.9.0**
