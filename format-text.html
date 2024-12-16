@@ -22,6 +22,7 @@
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/nav.css" rel="stylesheet">
+  <script src="js/webver.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
 
@@ -394,10 +395,9 @@ a:hover {
       <div class="row">
         <div class="col-md-4">
           <font class="h5 fw-bold">Projects</font>
-          <br><a href="https://nurispedia.relaxstand.repl.co" class="link-none">Nurispedia</a>
-          <br><a href="project/index.html" class="link-none">Project Review</a>
-          <br><a href="https://github.com/flixdz/flixpseal" class="link-none">Portofolio Website</a>
-        </div>
+          <br>No More Projects, just visit my github...
+          <br><a href="https://github.com/muhfhri" class="link-none">Muhfhri GitHub</a>
+      </div>
         <div class="col-md-4">
           <br>
           <blockquote class="h5 text-muted" style="font-family: poppins"><iconify-icon
@@ -415,7 +415,8 @@ a:hover {
       </div>
     </div>
   </footer>
-  <div class="text-center small p-3" id="copy">Flixdz @flixpseal, Copyright <i class="fa-regular fa-copyright"></i> 2023
+  <div class="text-center small p-3" id="copy"><span id="version"></span>
+    <br><span id="lastupt"></span>
     <br>Theme by <img src="image/animation.gif" width="30">, Made with <i class="fa fa-heart" style="color: red"></i>
     for you
   </div>
@@ -431,6 +432,10 @@ a:hover {
   <!--JAVA SCRIPT FOR AOS-->
   <script>
     AOS.init();
+  </script>
+    <script>
+      document.getElementById("version").textContent = websiteVersion;
+      document.getElementById("lastupt").textContent = websiteDate;
   </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

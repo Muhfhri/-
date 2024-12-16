@@ -1,2 +1,2 @@
-var websiteVersion = "Flixdz @flixpseal 2024 v3.7"
-var websiteDate = "Pembaruan Terakhir 07 April 2024"
+var websiteVersion = "Muhfhri @flixpseal 2024 v3.9.0"
+var websiteDate = "Pembaruan Terakhir 16 Desember 2024"
