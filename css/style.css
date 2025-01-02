@@ -63,6 +63,29 @@ hr {
 img {
   pointer-events: none;
 }
+.ms-auto {
+  margin-left: auto; 
+}
+.carousel-item img {
+  width: 330px !important;
+}
+@media(max-width:1440px) {
+  .carousel-item img {
+    width: 340px !important;
+  }
+}
+
+@media(max-width:1080px) {
+  .carousel-item img {
+    width: 300px !important;
+  }
+}
+
+@media(max-width:850px) {
+  .carousel-item img {
+    width: 260px !important;
+  }
+}
 /* Functional Features added */
 .link-none {
   text-decoration: none !important;

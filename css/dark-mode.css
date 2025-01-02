@@ -20,6 +20,12 @@ body {
   transition: background-color 0.5s;
 }
 
+
+
+[data-theme="dark"] .navbar-nav .nav-link::after {
+  background-color: #ffffff; /* Garis bawah biru */
+}
+
 [data-theme="dark"] .bg-black {
   background-color: #fff !important;
 }
@@ -123,6 +129,7 @@ label {
 
 #light {
   content: url('image/light.gif');
+  max-width: 20em;
   transition: content 0.5s;
 }
 [data-theme="dark"] #light {
@@ -156,7 +163,12 @@ label {
   transition: outline 0.15s;
 }
 [data-theme="dark"] .btn-outline-dark:focus {
-  outline: 3px solid white !important;
+  outline: 2px solid white !important;
+  transition: outline 0.15s;
+}
+[data-theme="dark"] .btn-outline-dark.active {
+  background: white !important;
+  color: #212529 !important;
 }
 [data-theme="dark"] .card {
   background: #262626 !important;
