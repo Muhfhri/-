@@ -27,7 +27,6 @@
     <link href="css/nav.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-    <script src="js/webver.js"></script>
     <link rel="stylesheet" href="css/dark-mode.css">
     <link rel="stylesheet" href="css/multilevel.css">
     <style>
@@ -93,7 +92,7 @@
     <div class="container" id="coltop">
         <div class="row text-center" data-aos="fade-in" data-aos-duration="3000">
             <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-                <div id="lblGreetings"></div>
+                <div id="lblGreetings" ></div>
             </div>
             <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
                 <div id="waktu"></div>
@@ -144,6 +143,8 @@
             <br><a href="https://github.com/25huizengek1/ViTune" class="btn btn-sm btn-outline-dark rounded-5 mt-2">ViTune</a> <small class="text-info">* fork from vimusic</small>
             <br><a href="https://github.com/z-huang/InnerTune" class="btn btn-sm btn-outline-dark rounded-5 mt-2">InnerTune</a> <small class="text-info">* vimusic inspired</small>
             <br><a href="https://github.com/Natoune/SpotifyMobileLyricsAPI" class="btn btn-sm btn-outline-dark rounded-5 mt-2">Spotify</a> <small class="text-info">* patch for lyrics</small>
+
+            <br><a href="index.html" class="btn mt-4 btn-outline-dark rounded-5">Kembali</a>
         </div>
     </div>
     <!-- Footer Start -->
@@ -218,18 +219,6 @@
     <!-- JavaScript for functional features this cool website-->
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const dotAnimation = document.getElementById("dot-animation");
-            let dots = 0;
-
-            setInterval(function () {
-                dots = (dots + 1) % 4;
-                dotAnimation.textContent = "Updates" + ".".repeat(dots);
-            }, 1000);
-        });
-
-    </script>
-    <script>
         setInterval(() => {
             var date = new Date();
             var tahun = date.getFullYear();
@@ -268,92 +257,8 @@
         }, 1000);
     </script>
 
-    <script>
-        const apiKey = '962322a87800402e0b9d7052cb5e8f16';
-        const city = 'Jakarta'; // Ubah kota sesuai yang Anda inginkan
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=id&appid=${apiKey}`;
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const weatherDescription = data.weather[0].description.toLowerCase();
-                const temperature = data.main.temp;
-                // Update ikon cuaca berdasarkan kondisi cuaca
-                const weatherIcon = document.getElementById('weather-icon');
-                if (weatherDescription.includes('hujan')) {
-                    weatherIcon.className = 'fas fa-cloud-showers-heavy'; // Ikutin kondisi hujan
-                } else if (weatherDescription.includes('awan') || weatherDescription.includes('halimun')) {
-                    weatherIcon.className = 'fas fa-cloud'; // Ikutin kondisi mendung/berawan
-                } else if (weatherDescription.includes('petir')) {
-                    weatherIcon.className = 'fas fa-thunderstorm'; // Ikutin kondisi petir
-                }
-                else if (weatherDescription.includes('badai')) {
-                    weatherIcon.className = 'fa-solid fa-tornado'; // Ikutin badai
-                }
-                else if (weatherDescription.includes('kabut')) {
-                    weatherIcon.className = 'fa-solid fa-wind'; // Ikutin badai
-                }
-                else {
-                    weatherIcon.className = 'fas fa-sun'; // Ikutin kondisi cerah
-                }
-                // Konversi deskripsi cuaca ke dalam huruf kapital
-                const capitalizedWeatherDescription = weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
-                // Update informasi cuaca dengan deskripsi cuaca, suhu, dan nama kota
-                document.getElementById('weather-info').textContent = `${capitalizedWeatherDescription} | ${city} | ${temperature}°C`;
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-                document.getElementById('weather').textContent = 'Tidak dapat mengambil data cuaca.';
-            });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            var savedName = localStorage.getItem("userName");
-            if (savedName) {
-                greetUser(savedName);
-            } else {
-                $("#myModal").modal('show');
-            }
-        });
-
-        function greetUser(name) {
-            var myDate = new Date();
-            var hrs = myDate.getHours();
-
-            var greet;
-
-            if (hrs < 3)
-                greet = 'Selamat Malam';
-            else if (hrs >= 3 && hrs <= 10)
-                greet = 'Selamat Pagi';
-            else if (hrs >= 10 && hrs <= 15)
-                greet = 'Selamat Siang';
-            else if (hrs >= 15 && hrs <= 20)
-                greet = 'Selamat Sore';
-            else if (hrs >= 20 && hrs <= 24)
-                greet = 'Selamat Malam';
-
-            if (name.toLowerCase().includes("aina") || name.toLowerCase().includes("ida") || name.toLowerCase().includes("embul") || name.toLowerCase().includes("yasa")) {
-                name = "Sayanggg ^•^ ";
-            }
-
-            document.getElementById('lblGreetings').innerHTML =
-                greet + ' ' + name + '!<button class="btn btn-sm btn-link" onclick="changeName()"><small><sup><i class="fa-regular fa-pen-to-square"></i></sup></small></button>';
-        }
-
-        function saveName() {
-            var name = document.getElementById("name").value;
-            localStorage.setItem("userName", name);
-            $("#myModal").modal('hide');
-            greetUser(name);
-        }
-
-        function changeName() {
-            localStorage.removeItem("userName");
-            $("#myModal").modal('show');
-        }
-    </script>
+    <script src="js/greetings.js"></script>
 
     <script>
         // fungsi satuaku adalah membuat angka 0 menjadi 00
@@ -376,49 +281,6 @@
     <script>
         document.getElementById("version").textContent = websiteVersion;
         document.getElementById("lastupt").textContent = websiteDate;
-    </script>
-    <script>
-        const texts = [
-            "Muhammad Fachri Al Husein",
-            "Flixdz",
-            "@muhfhri._",
-            "Front End Developer",
-            "UI Design",
-            "♡ @nnayas_06 ^•^",
-            "To The Top!",
-            "Junior Web Developer",
-        ];
-
-        const typingSpeed = 100; // Kecepatan typing dalam milidetik
-        const delay = 1500; // Waktu jeda sebelum looping ulang dalam milidetik
-
-        const typingElement = document.getElementById("typing-effect");
-
-        let textIndex = 0;
-        let charIndex = 0;
-
-        function typeText() {
-            if (charIndex < texts[textIndex].length) {
-                typingElement.innerHTML += texts[textIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(typeText, typingSpeed);
-            } else {
-                setTimeout(eraseText, delay);
-            }
-        }
-
-        function eraseText() {
-            if (charIndex > 0) {
-                typingElement.innerHTML = texts[textIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(eraseText, typingSpeed / 2);
-            } else {
-                textIndex = (textIndex + 1) % texts.length;
-                setTimeout(typeText, typingSpeed / 2);
-            }
-        }
-
-        typeText();
     </script>
 
     <script>
@@ -447,6 +309,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/webver.js"></script>
     <script src="js/button_top.js"></script>
     <script src="js/dark-mode-switch.js"></script>
     <script src="js/multilevel.js"></script>
