@@ -22,24 +22,30 @@
         body {
             font-family: 'Amiri Quran', serif;
         }
-        h3 {
+
+        h1, h3 {
             font-family: 'Amiri Quran', serif;
         }
+
         .text-muted {
             font-family: 'Google Sans Mono', monospace !important;
         }
+
         span {
             font-size: 1.5rem;
             text-align: center;
         }
+
         #surah-arab {
             font-size: 1.9em;
-            line-height: 2.2em;
+            line-height: 2.5em;
         }
+
         #surah-translation {
             font-size: 1.2em;
             line-height: 1.5em;
         }
+
         .col-md-4 {
             font-size: 1.3rem;
         }
@@ -50,50 +56,84 @@
     <div class="container text-center mt-2 ">
         <img id="light" alt="" width="200px">
         <br><input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-        <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch"><iconify-icon id="darkmode"></iconify-icon></label>
+        <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch"><iconify-icon
+                id="darkmode"></iconify-icon></label>
     </div>
-    <div class="container mt-2 text-center">
-        <div class="row">
-            <div class="col-md-4">
-                <p id="ramadhan-counter"></p>
-            </div>
-            <div class="col-md-4">
-                <p id="prayer-schedule"></p>
-            </div>
-            <div class="col-md-4">
-                <p id="countdown"></p>
+    <div class="container text-center mt-2">
+        <h1>Info Ramadhan</h1>
+        <div class="container mt-2 text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <p id="ramadhan-counter"></p>
+                </div>
+                <div class="col-md-4">
+                    <p id="prayer-schedule"></p>
+                </div>
+                <div class="col-md-4">
+                    <p id="countdown"></p>
+                </div>
             </div>
         </div>
     </div>
     <div class="container text-center">
         <h3>Surah Hari Ini:</h3>
-        <p id="surah-arab"><img id="light" alt="" width="150px"></p>
+        <p id="surah-arab" class="quran"><img id="light" alt="" width="150px"></p>
         <p id="surah-translation"></p>
         <p id="surah-source"></p>
     </div>
     <div class="container text-center">
-        <a href="index" class="btn btn-outline-dark rounded-5 manrope">Kembali</a>
-        <br>
+        <h3>Pengingat:</h3>
         <span id="maaf"></span>
-        <br><small class="text-muted">v1.0.0</small>
+        <br>
+        <!-- <a href="index" class="btn btn-outline-dark rounded-5 manrope">Kembali</a> -->
+        <br><small class="text-muted">Open Source - v1.0.4, API by <a href="https://alquran.cloud/" class="link-none">Quran Cloud</a>. You can fork this project as you want, don't forget to give credit to me.</small>
+    </div>
+    <div class="container">
+        
     </div>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
         var typed = new Typed("#maaf", {
-            strings: ['Menggunakan API Quran CLOUD','Terimakasih telah berkunjung','Mohon maaf lahir dan batin','Semoga kita semua diberikan kesehatan dan keberkahan','Aamiin'],
-            typeSpeed: 50,
+            strings: [
+    'Semoga kita semua diberikan kesehatan dan keberkahan di bulan Ramadhan ini',
+    'Perbanyak membaca Al-Quran di bulan Ramadhan',
+    
+    'Jangan lupa untuk berdoa dan memohon ampunan kepada Allah SWT di bulan yang spesial ini',
+    'Jangan lupa untuk bersedekah kepada yang membutuhkan',
+    'Hindari perbuatan yang dapat membatalkan puasa',
+    'Tingkatkan ibadah malam seperti shalat tarawih',
+    'Shalat tarawih memberikan pahala besar dan menghapus dosa-dosa',
+    'Bersedekah di bulan Ramadhan dapat melipatgandakan pahala',
+    'Menahan amarah dan emosi adalah bagian dari kesempurnaan puasa',
+    'Puasa bukan hanya menahan lapar dan haus, tapi juga menjaga hati dan lisan',
+    'Memakan dan minum dengan sengaja akan membatalkan puasa',
+    'Berkata kasar dan berbohong dapat mengurangi pahala puasa, jadi berhati hatilah!',
+    'Membantu sesama di bulan Ramadhan membawa keberkahan hidup',
+    'Zakat fitrah membersihkan harta dan menyempurnakan ibadah puasa',
+    'Lailatul Qadar adalah malam yang lebih baik dari seribu bulan',
+    'Berpuasa dengan penuh keikhlasan akan mendapatkan pahala yang berlipat',
+    'Menggunjing atau bergosip bisa mengurangi pahala puasa',
+    'Sabar dan ikhlas dalam menjalankan puasa membawa ketenangan jiwa',
+    'Sahur adalah sunnah yang penuh berkah, jangan sampai terlewat!',
+    'Berbuka dengan yang manis bisa mengembalikan energi tubuh lebih cepat',
+    'Menjaga wudhu sepanjang hari membantu menjaga kesucian diri',
+    'Berdoa saat berbuka puasa adalah waktu yang mustajab',
+    'Menolong orang berbuka puasa mendapatkan pahala seperti orang yang berpuasa',
+    'Puasa mengajarkan kita arti syukur dan kepedulian terhadap sesama'
+],
+            typeSpeed: 30,
             backSpeed: 25,
             backDelay: 1400,
             startDelay: 500,
             loop: true,
             cursorChar: '|',
             smartBackspace: false,
-            shuffle: false,
+            shuffle: true,
             fadeOut: true,
             fadeOutClass: 'typed-fade-out',
             fadeOutDelay: 900,
             onComplete: (self) => {
-                self.cursor.remove();
+            self.cursor.remove();
             }
         });
     </script>
@@ -118,14 +158,35 @@
         // Jadwal salat selama Ramadhan (Subuh & Maghrib)
         const prayerTimes = [
             { day: 1, subuh: "04:42", maghrib: "18:14" },
+            { day: 2, subuh: "04:42", maghrib: "18:14" },
+            { day: 3, subuh: "04:42", maghrib: "18:14" },
             { day: 4, subuh: "04:42", maghrib: "18:13" },
+            { day: 5, subuh: "04:42", maghrib: "18:13" },
             { day: 6, subuh: "04:42", maghrib: "18:12" },
+            { day: 7, subuh: "04:42", maghrib: "18:12" },
+            { day: 8, subuh: "04:42", maghrib: "18:12" },
             { day: 9, subuh: "04:42", maghrib: "18:11" },
+            { day: 10, subuh: "04:42", maghrib: "18:11" },
             { day: 11, subuh: "04:42", maghrib: "18:10" },
+            { day: 12, subuh: "04:42", maghrib: "18:10" },
             { day: 13, subuh: "04:42", maghrib: "18:09" },
-            { day: 15, subuh: "04:42", maghrib: "18:07" },
-            { day: 22, subuh: "04:41", maghrib: "18:07" },
-            { day: 29, subuh: "04:30", maghrib: "18:07" }
+            { day: 14, subuh: "04:42", maghrib: "18:09" },
+            { day: 15, subuh: "04:42", maghrib: "18:08" },
+            { day: 16, subuh: "04:42", maghrib: "18:08" },
+            { day: 17, subuh: "04:42", maghrib: "18:08" },
+            { day: 18, subuh: "04:42", maghrib: "18:07" },
+            { day: 19, subuh: "04:42", maghrib: "18:07" },
+            { day: 20, subuh: "04:42", maghrib: "18:06" },
+            { day: 21, subuh: "04:42", maghrib: "18:06" },
+            { day: 22, subuh: "04:41", maghrib: "18:05" },
+            { day: 23, subuh: "04:41", maghrib: "18:05" },
+            { day: 24, subuh: "04:41", maghrib: "18:04" },
+            { day: 25, subuh: "04:41", maghrib: "18:04" },
+            { day: 26, subuh: "04:41", maghrib: "18:03" },
+            { day: 27, subuh: "04:41", maghrib: "18:03" },
+            { day: 28, subuh: "04:41", maghrib: "18:02" },
+            { day: 29, subuh: "04:30", maghrib: "18:02" },
+            { day: 30, subuh: "04:30", maghrib: "18:01" }
         ];
 
         function getPrayerTimes(day) {
