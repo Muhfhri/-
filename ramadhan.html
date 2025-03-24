@@ -139,23 +139,22 @@
     </script>
 
     <script>
-        // Tanggal awal Ramadhan
-        const ramadhanStart = new Date(2025, 2, 1); // 1 Maret 2025
-        const today = new Date();
-        const timeDiff = ramadhanStart - today;
-        const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+   // Tanggal awal Ramadhan
+const ramadhanStart = new Date(2025, 2, 1); // 1 Maret 2025
+const today = new Date();
+const timeDiff = ramadhanStart - today;
+const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-        let message = "";
-        if (dayDiff > 0) {
-            message = `Ramadhan akan dimulai dalam ${dayDiff} hari lagi.`;
-        } else {
-            const ramadhanDay = Math.abs(dayDiff) + 1;
-            message = `Memasuki hari ke-${ramadhanDay} Ramadhan.`;
-        }
+let message = "";
+if (dayDiff > 0) {
+    message = `Ramadhan akan dimulai dalam ${dayDiff} hari lagi.`;
+} else {
+    const ramadhanDay = Math.abs(dayDiff) + 1;
+    message = `Memasuki hari ke-${ramadhanDay} Ramadhan.`;
+}
+document.getElementById("ramadhan-counter").textContent = message;
 
-        document.getElementById("ramadhan-counter").textContent = message;
-
-        // Jadwal salat selama Ramadhan (Subuh & Maghrib)
+// Jadwal salat selama Ramadhan (Subuh & Maghrib)
         const prayerTimes = [
             { day: 1, subuh: "04:42", maghrib: "18:14" },
             { day: 2, subuh: "04:42", maghrib: "18:14" },
@@ -189,52 +188,85 @@
             { day: 30, subuh: "04:30", maghrib: "18:01" }
         ];
 
-        function getPrayerTimes(day) {
-            const defaultTimes = { subuh: "04:30", maghrib: "18:15" };
-            const times = prayerTimes.find(pt => pt.day === day);
-            return times || defaultTimes;
-        }
+function getPrayerTimes(day) {
+    const defaultTimes = { subuh: "04:30", maghrib: "18:15" };
+    const times = prayerTimes.find(pt => pt.day === day);
+    return times || defaultTimes;
+}
 
-        const currentPrayerTimes = getPrayerTimes(Math.abs(dayDiff) + 1);
-        document.getElementById("prayer-schedule").textContent = `Subuh ${currentPrayerTimes.subuh} | Maghrib ${currentPrayerTimes.maghrib}`;
+const currentPrayerTimes = getPrayerTimes(Math.abs(dayDiff) + 1);
+document.getElementById("prayer-schedule").textContent = `Subuh ${currentPrayerTimes.subuh} | Maghrib ${currentPrayerTimes.maghrib}`;
 
-        function updateCountdown() {
-            const now = new Date();
-            const currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
+function updateCountdown() {
+    const now = new Date();
+    
+    let nextPrayer = "";
+    let prayerTime = "";
+    let prayerMessage = "";
 
-            let nextPrayer = "";
-            let prayerTime = "";
+    // Ambil waktu Subuh dan Maghrib
+    const [subuhHour, subuhMin] = currentPrayerTimes.subuh.split(":").map(Number);
+    const [maghribHour, maghribMin] = currentPrayerTimes.maghrib.split(":").map(Number);
 
-            if (currentHour < 4 || (currentHour === 4 && currentMinute < 30)) {
-                nextPrayer = "Subuh";
-                prayerTime = currentPrayerTimes.subuh;
-            } else if (currentHour < 18 || (currentHour === 18 && currentMinute < 15)) {
-                nextPrayer = "Maghrib";
-                prayerTime = currentPrayerTimes.maghrib;
-            } else {
-                nextPrayer = "Subuh";
-                prayerTime = currentPrayerTimes.subuh;
-            }
+    // Buat objek Date untuk waktu salat
+    const subuhTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), subuhHour, subuhMin, 0);
+    const maghribTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), maghribHour, maghribMin, 0);
 
-            const [prayerHour, prayerMin] = prayerTime.split(":").map(Number);
-            const prayerDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), prayerHour, prayerMin, 0);
+    // Hitung waktu Imsak (10 menit sebelum Subuh)
+    const imsakTime = new Date(subuhTime);
+    imsakTime.setMinutes(subuhTime.getMinutes() - 10);
 
-            if (now > prayerDate) {
-                prayerDate.setDate(prayerDate.getDate() + 1); // Ambil jadwal besok
-            }
+    // Hitung waktu Persiapan Buka (10 menit sebelum Maghrib)
+    const persiapanBukaTime = new Date(maghribTime);
+    persiapanBukaTime.setMinutes(maghribTime.getMinutes() - 10);
 
-            const timeLeft = prayerDate - now;
-            const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-            const seconds = Math.floor((timeLeft / 1000) % 60);
+    // Tentukan salat berikutnya berdasarkan waktu saat ini
+    if (now >= maghribTime) {
+        nextPrayer = "Subuh";
+        prayerTime = currentPrayerTimes.subuh;
+    } else if (now >= subuhTime) {
+        nextPrayer = "Maghrib";
+        prayerTime = currentPrayerTimes.maghrib;
+    } else {
+        nextPrayer = "Subuh";
+        prayerTime = currentPrayerTimes.subuh;
+    }
 
-            document.getElementById("countdown").textContent = `Menuju ${nextPrayer}: ${hours} jam ${minutes} menit ${seconds} detik`;
-        }
+    // Hitung selisih waktu menuju salat berikutnya
+    const [prayerHour, prayerMin] = prayerTime.split(":").map(Number);
+    const prayerDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), prayerHour, prayerMin, 0);
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+    if (now > prayerDate) {
+        prayerDate.setDate(prayerDate.getDate() + 1); // Ambil jadwal besok
+    }
+
+    const timeLeft = prayerDate - now;
+    const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+    const seconds = Math.floor((timeLeft / 1000) % 60);
+
+    // Pesan peringatan khusus
+    if (now >= maghribTime && now < maghribTime.setSeconds(maghribTime.getSeconds() + 10)) {
+        prayerMessage = "🕌 Waktu Berbuka! Selamat berbuka puasa!";
+    } else if (now >= subuhTime && now < subuhTime.setSeconds(subuhTime.getSeconds() + 10)) {
+        prayerMessage = "🕌 Waktu Sahur Selesai! Subuh telah tiba.";
+    } else if (now >= imsakTime && now < subuhTime) {
+        prayerMessage = `⚠️ Memasuki waktu imsak! ${minutes} menit ${seconds} detik lagi menuju Subuh.`;
+    } else if (now >= persiapanBukaTime && now < maghribTime) {
+        prayerMessage = `🍽️ ${minutes} menit ${seconds} detik lagi menuju berbuka puasa. Siapkan bukaan!`;
+    } else {
+        prayerMessage = `🕰️ Menuju ${nextPrayer}: ${hours} jam ${minutes} menit ${seconds} detik`;
+    }
+
+    document.getElementById("countdown").textContent = prayerMessage;
+}
+
+// Jalankan setiap detik untuk memperbarui tampilan
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
     </script>
+
     <script>
         async function getSurah() {
             try {
