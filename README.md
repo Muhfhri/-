@@ -6,7 +6,7 @@ Beberapa fitur di dalam website ini :
 
 1. Menggunakan [Bootstrap 5](https://getbootstrap.com) dengan beberapa konfigurasi CSS & JS agar lebih maksimal.
 2. Website Serbaguna untuk mencari informasi seputar dunia elektronik.
-3. Mengintergrasikan API yang berguna untuk website ini seperti seputar cuaca menggunakan [AccuWeather](https://https://www.accuweather.com/).
+3. Mengintergrasikan API yang berguna untuk website ini seperti seputar cuaca menggunakan [AccuWeather](https://https://www.accuweather.com/) (Hanya Wilayah Jakarta)
 
 TODO / Pengerjaan Kedepannya :
 
@@ -14,4 +14,4 @@ TODO / Pengerjaan Kedepannya :
 * [ ]  Membuat Algoritma Untuk Pelajaran Matematika
 * [X]  Membuat Website ini berguna bagi pengguna Xiaomi terutama Custom ROM user atau ROOT user (awal)
 
-Versi Website  : **3.9.0**
+Versi Website  : **3.9.5**
