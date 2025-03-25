@@ -1,32 +1,26 @@
-/*!
- * Dark Mode Switch v1.0.1 (https://github.com/coliff/dark-mode-switch)
- * Copyright 2021 C.Oliff
- * Licensed under MIT (https://github.com/coliff/dark-mode-switch/blob/main/LICENSE)
- */
 var darkSwitch = document.getElementById("darkSwitch");
 
-// Fungsi untuk menerapkan tema saat halaman dimuat
-function initTheme() {
-  var darkThemeSelected = localStorage.getItem("darkSwitch") === "dark";
-  darkSwitch.checked = darkThemeSelected;
-  document.body.setAttribute("data-theme", darkThemeSelected ? "dark" : "light");
-}
+// Fungsi untuk menerapkan tema secepat mungkin sebelum tampilan muncul
+(function() {
+    var darkThemeSelected = localStorage.getItem("darkSwitch") === "dark";
+    document.documentElement.setAttribute("data-theme", darkThemeSelected ? "dark" : "light");
+})();
 
-// Fungsi untuk menyimpan tema yang dipilih dan menerapkannya
+// Fungsi untuk memperbarui tema dan menyimpan preferensi
 function resetTheme() {
-  if (darkSwitch.checked) {
-    document.body.setAttribute("data-theme", "dark");
-    localStorage.setItem("darkSwitch", "dark");
-  } else {
-    document.body.setAttribute("data-theme", "light");
-    localStorage.removeItem("darkSwitch");
-  }
+    var isDarkMode = darkSwitch.checked;
+    
+    document.documentElement.style.transition = "background-color 0.3s ease, color 0.3s ease";
+    document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+    
+    localStorage.setItem("darkSwitch", isDarkMode ? "dark" : "light");
 }
 
-// Menjalankan initTheme secepat mungkin sebelum tampilan tampak
+// Jalankan inisialisasi setelah halaman selesai dimuat
 window.addEventListener("DOMContentLoaded", function() {
-  if (darkSwitch) {
-    initTheme();
-    darkSwitch.addEventListener("change", resetTheme);
-  }
+    if (darkSwitch) {
+        var darkThemeSelected = localStorage.getItem("darkSwitch") === "dark";
+        darkSwitch.checked = darkThemeSelected;
+        darkSwitch.addEventListener("change", resetTheme);
+    }
 });
