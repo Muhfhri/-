@@ -11,6 +11,7 @@ body {
 
 .bg-light {
   background: #F1F0F4 !important;
+
   transition: background 0.5s;
 }
 
@@ -42,6 +43,8 @@ html {
 
 [data-theme="dark"] .bg-light {
   background-color: #0E1419 !important;
+  border: 1.5px solid #120e55 !important;
+  color: #ffffff;
 }
 
 [data-theme="dark"] .bg-white {
@@ -261,6 +264,9 @@ label {
 [data-theme="dark"] #share:hover, #share:focus {
 	 color: white;
 	 background-color: #84AFE0;
+}
+[data-theme="dark"] .text-dark {
+	 color: white !important;
 }
 .link-none {
   text-decoration: none !important;
