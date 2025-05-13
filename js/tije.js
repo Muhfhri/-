@@ -13,12 +13,20 @@ const koridorData = {
         "2": {
             start: "Pulo Gadung",
             end: "Monumen Nasional",
-            operator: "DAMRI (DMR) & Pahala Kencana Transportation (PKT)",
-            haltes: ["Pulo Gadung", "Bermis", "Pulomas", "Perintis Kemerdekaan", "Pedongkelan",
+            operator: "DAMRI (DMR) & Mayasari Bakti (MB)",
+            haltes: ["Pulo Gadung", "Bermis", "Pulo Mas", "Perintis Kemerdekaan", "Pedongkelan",
                 "Cempaka Mas", "Sumur Batu", "Cempaka Baru", "Pasar Cempaka Putih",
                 "Rawa Selatan", "Galur", "Senen TOYOTA Rangga", "Senen Raya", "RSPAD",
                 "Pejambon", "Gambir", "Istiqlal", "Juanda", "Pecenongan",
                 "Balai Kota", "Gambir 2", "Kwitang", "Monumen Nasional"]
+            },
+        "2A": {
+            start: "Pulo Gadung",
+            end: "Rawa Buaya",
+            operator: "Pahala Kencana Transportation (PKT)",
+            haltes: ["Pulo Gadung", "Bermis", "Pulo Mas", "Perintis Kemerdekaan", "Pedongkelan",
+                "Cempaka Mas", "Sumur Batu", "Cempaka Baru", "Pasar Cempaka Putih",
+                "Rawa Selatan", "Galur", "Senen TOYOTA Rangga", "Kwitang", "Gambir 2", "Balai Kota", "Petojo", "Roxy", "Grogol", "Jelambar", "Damai", "Taman Kota", "Jembatan Gantung", "Jembatan Baru", "Rawa Buaya"]
             },
             "3": {
                 start: "Kalideres",
@@ -54,14 +62,14 @@ const koridorData = {
         "7": {
             start: "Kampung Melayu",
             end: "Kampung Rambutan",
-            operator: "Mayasari Bakti (MB/MYS) & Steady Safe (SAF)",
-            haltes: ["Kampung Melayu", "Bidara Cina", "Gelanggang Remaja", "Cawang Baru", "Cawang", "Cawang Sentral", "Cawang Cililitan","Cililitan","Kramat Jati", "Pasar Induk", "Trikora", "Flyover Raya Bogor", "Tanah Merdeka","Kampung Rambutan"]
+            operator: "Mayasari Bakti (MYS) & Steady Safe (SAF)",
+            haltes: ["Kampung Rambutan", "Tanah Merdeka", "Flyover Raya Bogor", "Trikora", "Pasar Induk", "Kramat Jati", "Cililitan", "Cawang Cililitan", "Cawang Sentral", "Cawang", "Cawang Baru", "Gelanggang Remaja", "Bidara Cina", "Kampung Melayu"]
         },
         "7F": {
             start: "Kampung Rambutan",
             end: "Juanda via Cempaka Putih",
             operator: "DAMRI (DMR) & Mayasari Bakti (MYS)",
-            haltes: ["Juanda", "Pacenongan", "Pasar Baru", "Monumen Nasional", "Balai Kota", "Kwitang", "Senen TOYOTA Rangga", "Galur", "Rawa Selatan", "Pasar Cempaka Putih", "Cempaka Baru", "Sumur Batu", "Cempaka Mas", "Pulomas Bypass", "Kayu Putih Rawasari", "Pemuda Pramuka", "Utan Kayu Rawamangun", "Pasar Induk", "Trikora", "Flyover Raya Bogor", "Kampung Rambutan"]
+            haltes: ["Juanda", "Pecenongan", "Pasar Baru", "Monumen Nasional", "Balai Kota", "Kwitang", "Senen TOYOTA Rangga", "Galur", "Rawa Selatan", "Pasar Cempaka Putih", "Cempaka Baru", "Sumur Batu", "Cempaka Mas", "Pulomas Bypass", "Kayu Putih Rawasari", "Pemuda Pramuka", "Utan Kayu Rawamangun", "Pasar Induk", "Trikora", "Flyover Raya Bogor", "Kampung Rambutan"]
         },
         "9": {
             start: "Pinang Ranti",
@@ -85,7 +93,7 @@ const koridorData = {
             start: "Kampung Melayu",
             end: "Pulo Gebang",
             operator: "Steady Safe (SAF) & Bianglala Metropolitan (BMP)",
-            haltes: ["Kampung Melayu", "Jatinegara", "Stasiun Jatinegara", "Flyover Jatinegara", "Pasar Enjo", "Flyover Cipinang", "Cipinang","Stasiun Klender", "Klender", "Kampung Sumur", "Buaran", "Simpang Buaran", "Flyover Pondok Kopi", "Penggilingan", "Walikota Jakarta Timur", "Pulo Gebang"]
+            haltes: ["Pulo Gebang", "Walikota Jakarta Timur", "Penggilingan", "Flyover Pondok Kopi", "Simpang Buaran", "Buaran", "Kampung Sumur", "Klender", "Stasiun Klender", "Cipinang", "Flyover Cipinang", "Pasar Enjo", "Flyover Jatinegara", "Stasiun Jatinegara", "Jatinegara", "Kampung Melayu"]
         },
         "12": {
             start: "Tanjung Priok",
@@ -99,21 +107,15 @@ const koridorData = {
 };
 
 // Update daftar koridor berdasarkan layanan
-function updateKoridorOptions(service) {
+function updateKoridorOptions() {
     const koridorSelect = document.getElementById('koridorSelect');
-    koridorSelect.innerHTML = '<option value="" disabled selected>Koridor</option>';
-
-    // Jika belum memilih layanan, tetap disabled
-    koridorSelect.disabled = !service;
-
-    if (service && koridorData[service]) {
-        koridorSelect.disabled = false;
-        for (const koridor in koridorData[service]) {
-            const option = document.createElement('option');
-            option.value = koridor;
-            option.textContent = `Koridor ${koridor}`;
-            koridorSelect.appendChild(option);
-        }
+    koridorSelect.innerHTML = '<option value="" selected>Koridor</option>';
+    koridorSelect.disabled = false;
+    for (const koridor in koridorData["BRT"]) {
+        const option = document.createElement('option');
+        option.value = koridor;
+        option.textContent = `Koridor ${koridor}`;
+        koridorSelect.appendChild(option);
     }
 }
 
@@ -158,25 +160,45 @@ function displaySearchResults(query) {
 
     results.forEach(halte => {
         const servicesAndKoridors = getServicesAndKoridorsByHalte(halte);
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item d-flex bg-light justify-content-between ';
-        const halteLink = document.createElement('a');
-        halteLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Halte Transjakarta ' + halte)}`;
-        halteLink.target = '_blank';
-        halteLink.textContent = halte;
-        halteLink.className = 'text-decoration-none text-dark';
-
-        listItem.appendChild(halteLink);
-
-
-        const badges = document.createElement('span');
         servicesAndKoridors.forEach(({ service, koridor }) => {
-            const badge = createKoridorBadge(service, koridor);
-            badges.appendChild(badge);
-        });
+            const koridorEntry = koridorData[service][koridor];
+            const idx = koridorEntry.haltes.indexOf(halte);
 
-        listItem.appendChild(badges);
-        resultsContainer.appendChild(listItem);
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item d-flex bg-light align-items-center';
+
+            // Badge koridor
+            const koridorBadge = createKoridorBadge(service, koridor);
+            koridorBadge.style.marginRight = "8px";
+
+            // Badge nomor urut halte
+            const nomorBadge = document.createElement('span');
+            nomorBadge.textContent = String(idx + 1).padStart(2, '0');
+            nomorBadge.style.backgroundColor = getKoridorBadgeColor(koridor);
+            nomorBadge.style.color = "#fff";
+            nomorBadge.style.width = "24px";
+            nomorBadge.style.height = "24px";
+            nomorBadge.style.display = "inline-flex";
+            nomorBadge.style.alignItems = "center";
+            nomorBadge.style.justifyContent = "center";
+            nomorBadge.style.borderRadius = "50%";
+            nomorBadge.style.fontWeight = "bold";
+            nomorBadge.style.fontSize = "0.8rem";
+            nomorBadge.style.marginRight = "10px";
+
+            // Nama halte (link)
+            const halteLink = document.createElement('a');
+            halteLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Halte Transjakarta ' + halte)}`;
+            halteLink.target = '_blank';
+            halteLink.textContent = halte;
+            halteLink.className = 'text-decoration-none text-dark';
+
+            listItem.appendChild(koridorBadge);
+            listItem.appendChild(nomorBadge);
+            listItem.appendChild(halteLink);
+
+            resultsContainer.appendChild(listItem);
+        });
     });
 }
 
@@ -211,7 +233,7 @@ function getJurusan(koridorNumber, service) {
             "
         >${koridorNumber}</span>
     </div>
-    <div class="pt-sans-narrow-bold">${halteAwal} - ${halteAkhir}</div>
+    <div class="pt-sans-narrow-bold fw-bold">${halteAwal} - ${halteAkhir}</div>
     <div class="pt-sans-narrow-bold mt-2">Operator : ${operator}</div>
 `;
 }
@@ -221,49 +243,70 @@ function displayKoridorResults(service, koridor) {
     const resultsContainer = document.getElementById('koridorResults');
     resultsContainer.innerHTML = '';
 
-    // Tambahkan alert jika layanan belum dipilih
-    if (!service) {
-        alert('Silakan pilih layanan terlebih dahulu sebelum memilih koridor.');
-        return;
-    }
-
-    const koridorDataEntry = koridorData[service]?.[koridor];
+    const koridorDataEntry = koridorData["BRT"]?.[koridor];
     if (!koridor || !koridorDataEntry) return;
 
-    koridorDataEntry.haltes.forEach(halte => {
-        const servicesAndKoridors = getServicesAndKoridorsByHalte(halte);
+    // Tampilkan jurusan di atas daftar halte
+    const jurusanDiv = document.createElement('div');
+    resultsContainer.appendChild(jurusanDiv);
 
+    koridorDataEntry.haltes.forEach((halte, idx) => {
         const listItem = document.createElement('li');
-        listItem.className = 'list-group-item d-flex bg-light justify-content-between align-items-center';
+        listItem.className = 'list-group-item d-flex bg-light align-items-center justify-content-between';
+
+        // Kiri: badge nomor urut + nama halte
+        const left = document.createElement('span');
+        left.className = "d-flex align-items-center";
+
+        // Badge nomor urut halte (warna sesuai koridor utama)
+        const nomorBadge = document.createElement('span');
+        nomorBadge.textContent = String(idx + 1).padStart(2, '0'); // <-- dua digit
+        nomorBadge.style.backgroundColor = getKoridorBadgeColor(koridor);
+        nomorBadge.style.color = "#fff";
+        nomorBadge.style.width = "24px";
+        nomorBadge.style.height = "24px";
+        nomorBadge.style.display = "inline-flex";
+        nomorBadge.style.alignItems = "center";
+        nomorBadge.style.justifyContent = "center";
+        nomorBadge.style.borderRadius = "50%";
+        nomorBadge.style.fontWeight = "bold";
+        nomorBadge.style.fontSize = "0.9rem";
+        nomorBadge.style.marginRight = "10px";
+
+        // Nama halte (link)
         const halteLink = document.createElement('a');
         halteLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Halte Transjakarta ' + halte)}`;
         halteLink.target = '_blank';
         halteLink.textContent = halte;
         halteLink.className = 'text-decoration-none text-dark';
 
-        listItem.appendChild(halteLink);
+        left.appendChild(nomorBadge);
+        left.appendChild(halteLink);
 
+        // Kanan: badge koridor lain (selain koridor utama)
         const badges = document.createElement('span');
-        servicesAndKoridors.forEach(({ service, koridor }) => {
-            const badge = createKoridorBadge(service, koridor);
-            badges.appendChild(badge);
+        const servicesAndKoridors = getServicesAndKoridorsByHalte(halte);
+        servicesAndKoridors.forEach(({ service: svc, koridor: kor }) => {
+            if (kor !== koridor) {
+                const badge = createKoridorBadge(svc, kor);
+                badges.appendChild(badge);
+            }
         });
 
+        listItem.appendChild(left);
         listItem.appendChild(badges);
         resultsContainer.appendChild(listItem);
     });
 
-    getJurusan(koridor, service);
+    getJurusan(koridor, "BRT");
 }
 
 // Fungsi untuk memilih koridor ketika badge diklik
 function selectKoridor(service, koridor) {
-    document.getElementById('serviceSelect').value = service;
-    updateKoridorOptions(service);
-
+    updateKoridorOptions();
     setTimeout(() => {
         document.getElementById('koridorSelect').value = koridor;
-        displayKoridorResults(service, koridor);
+        displayKoridorResults("BRT", koridor);
     }, 100);
 }
 
@@ -315,40 +358,55 @@ function displayAutocompleteResults(results) {
         const listItem = document.createElement("li");
         listItem.className = "list-group-item bg-light d-flex flex-column";
 
-        // Tambahkan nama koridor
-        const koridorText = document.createElement("span");
-        koridorText.className = "fw-bold";
-        koridorText.textContent = `Koridor ${koridor}`;
+        // Baris atas: badge koridor + jurusan
+        const topRow = document.createElement("div");
+        topRow.className = "d-flex align-items-center mb-1";
 
-        // Tambahkan jurusan (halte awal dan akhir)
+        // Badge koridor
+        const koridorBadge = createKoridorBadge(service, koridor);
+        koridorBadge.style.marginRight = "10px";
+        koridorBadge.style.fontSize = "1em";
+        koridorBadge.style.width = "28px";
+        koridorBadge.style.height = "28px";
+
+        // Jurusan
         const jurusanText = document.createElement("span");
-        jurusanText.className = "text-muted";
-        jurusanText.textContent = `Jurusan: ${jurusan}`;
+        jurusanText.className = "fw-bold";
+        jurusanText.textContent = jurusan;
 
-        // Tambahkan daftar halte yang cocok
-        const haltesText = document.createElement("span");
-        haltesText.className = "text-secondary";
-        haltesText.textContent = haltes.length > 0
-            ? `Halte yang cocok: ${haltes.join(", ")}`
-            : "";
+        topRow.appendChild(koridorBadge);
+        topRow.appendChild(jurusanText);
 
-        // Tambahkan badge untuk layanan
-        const badge = document.createElement("span");
-        badge.className = `badge ${service === "BRT" ? "bg-primary" : "bg-warning"} rounded-pill mt-1`;
-        badge.textContent = service;
+        // Baris bawah: halte yang cocok (jika ada)
+        let haltesRow = null;
+        if (haltes.length > 0) {
+            haltesRow = document.createElement("div");
+            haltesRow.className = "mt-1";
+            haltes.forEach(halte => {
+                const halteBadge = document.createElement("span");
+                halteBadge.textContent = halte;
+                halteBadge.style.background = "#eee";
+                halteBadge.style.color = "#333";
+                halteBadge.style.borderRadius = "12px";
+                halteBadge.style.fontSize = "0.85em";
+                halteBadge.style.padding = "2px 10px";
+                halteBadge.style.marginRight = "6px";
+                halteBadge.style.display = "inline-block";
+                halteBadge.style.marginBottom = "2px";
+                haltesRow.appendChild(halteBadge);
+            });
+        }
 
-        // Gabungkan elemen ke dalam list item
-        listItem.appendChild(koridorText);
-        listItem.appendChild(jurusanText);
-        if (haltes.length > 0) listItem.appendChild(haltesText);
-        listItem.appendChild(badge);
+        // Gabungkan ke list item
+        listItem.appendChild(topRow);
+        if (haltesRow) listItem.appendChild(haltesRow);
 
-        // Tambahkan event klik untuk memilih koridor
+        // Klik: pilih koridor
         listItem.onclick = () => {
             const searchInput = document.getElementById("searchServiceKoridor");
-            searchInput.value = koridor; // Hanya menampilkan nomor koridor
-            autocompleteResults.innerHTML = ""; // Bersihkan hasil setelah memilih
-            selectKoridor(service, koridor); // Pilih koridor yang diklik
+            searchInput.value = koridor;
+            autocompleteResults.innerHTML = "";
+            selectKoridor(service, koridor);
         };
 
         autocompleteResults.appendChild(listItem);
@@ -478,9 +536,6 @@ function findRoutePanduanMultiTransit(halteAsal, halteTujuan) {
     return "Rute tidak ditemukan.";
 }
 
-// Contoh penggunaan:
-console.log(findRoutePanduanMultiTransit("Penggilingan", "Tebet Eco Park"));
-
 function getAllHalteNames() {
     const halteSet = new Set();
     for (const koridors of Object.values(koridorData)) {
@@ -505,14 +560,8 @@ function populateHalteDatalist() {
 populateHalteDatalist();
 
 // Event listeners
-document.getElementById('serviceSelect').addEventListener('change', function () {
-    updateKoridorOptions(this.value);
-    document.getElementById('koridorResults').innerHTML = '';
-    document.getElementById('jurusan').innerHTML = 'Jurusan akan ditampilkan di sini';
-});
-
 document.getElementById('koridorSelect').addEventListener('change', function () {
-    displayKoridorResults(document.getElementById('serviceSelect').value, this.value);
+    displayKoridorResults("BRT", this.value);
 });
 
 document.getElementById('searchInput').addEventListener('input', function () {
@@ -573,6 +622,7 @@ function getKoridorBadgeColor(koridor) {
     const colorMap = {
         "1": "#D02027",    
         "2": "#264697",   
+        "2A": "#4FA8DE",   
         "3": "#FCC81B",    
         "4": "#562A62",    
         "5": "#BC5827",   
@@ -621,3 +671,8 @@ function updateLiveClock() {
 }
 setInterval(updateLiveClock, 1000);
 updateLiveClock();
+
+// Panggil updateKoridorOptions saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    updateKoridorOptions();
+});
