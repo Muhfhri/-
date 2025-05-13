@@ -63,6 +63,10 @@
     </div>
 
     <div class="section-box bg-light">
+        <div class="alert alert-warning alert-dismissible fade show py-2 small mb-2" style="font-size:0.95em;" role="alert">
+            ⚠️ Fitur <b>Cari Rute</b> masih bersifat <b>eksperimental</b>. Untuk kepastian rute, silakan konfirmasi ke petugas halte.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+        </div>
         <h3 class="fw-bold text-center">Mau pergi kemana?</h3>
         <div class="row g-3 mt-2">
             <div class="col-md-6">
@@ -92,9 +96,7 @@
             <div class="col-md-6">
                 <label for="serviceSelect" class="form-label">Layanan</label>
                 <select id="serviceSelect" class="form-select rounded-input">
-                    <option value="">Pilih Layanan</option>
-                    <option value="BRT">BRT (Bus Rapid Transit)</option>
-                    <option value="Non-BRT">Non-BRT (Bus Pengumpan)</option>
+                    <option value="BRT" disabled selected>BRT (Bus Rapid Transit)</option>
                 </select>
             </div>
             <div class="col-md-6">
@@ -106,6 +108,14 @@
 
     <div class="section-box bg-light">
         <label for="searchInput" class="form-label">Cari Halte:</label>
+        <div class="mb-2 small text-muted">
+            <span class="text-muted fw-bold">Sedikit Panduan</span><br>
+            <span class="badge bg-primary me-1 mb-1 mt-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">2</span>
+            <span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">11</span> <b>Galur</b>
+            <span class="me-2"></span>
+            <br><span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">2</span> = Koridor 2
+            <br><span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">11</span> = Halte Galur berada di posisi ke 11 pada koridor 2 (PULO GADUNG - MONAS)
+        </div>
         <input type="text" id="searchInput" class="form-control rounded-input" placeholder="Masukkan nama halte">
 
         <div class="text-center mt-4">
@@ -119,14 +129,15 @@
     </div>
 
     <div class="text-center mt-4">
-        <a href="index.html" class="btn btn-outline-secondary btn-custom">Kembali ke Beranda</a>
+        <a href="index.html" class="btn btn-outline-dark rounded-5">Kembali ke Beranda</a>
     </div>
 
-    <div class="text-center mt-5">
-        <img id="light" alt="logo muhfhri">
+    <div class="container text-center mt-5">
+        <img id="light">
     </div>
 
     <script src="js/tije.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     <script src="js/dark-mode-switch.js"></script>
 </body>
 
