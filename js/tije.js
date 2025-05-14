@@ -337,7 +337,8 @@ function getJurusan(koridorNumber, service) {
         >${koridorNumber}</span>
     </div>
     <div class="pt-sans-narrow-bold fw-bold">${halteAwal} - ${halteAkhir}</div>
-    <div class="pt-sans-narrow-bold mt-2">Operator : ${operator}</div>
+    <hr>
+    <div class="pt-sans-narrow-bold mt-2"><span class="fw-bold" style="color:${getKoridorBadgeColor(koridorNumber)};">${operator}</span></div>
 `;
 }
 
