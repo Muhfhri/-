@@ -42,6 +42,48 @@
         #hasilRute, #searchResults, #koridorResults {
             margin-top: 1rem;
         }
+
+        .text-slider {
+            min-height: 60px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        .text-slider h2 {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transform: translateY(30px);
+            margin: 0;
+            line-height: 1.2;
+            text-align: center;
+            transition: opacity 0.5s, transform 0.5s;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .text-slider h2.active {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 2;
+        }
+        .text-slider h2.out {
+            opacity: 0;
+            transform: translateY(-30px);
+            z-index: 1;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .text-slider,
+        .text-slider * {
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -62,9 +104,20 @@
         </div>
     </div>
 
+    <div class="text-slider mb-3" style="height:60px;">
+        <h2 class="fw-bold">Connecting the Life of Jakarta</h2>
+        <h2 class="fw-bold">#INTEGRASI</h2>
+        <h2 class="fw-bold">#KINILEBIHBAIK</h2>
+        <h2 class="fw-bold">Smart Mobility for Smart City</h2>
+        <h2 class="fw-bold">PT Transportasi Jakarta</h2>
+        <h2 class="fw-bold">JakLingko Indonesia</h2>
+        <h2 class="fw-bold">#MenemaniPerjalanan</h2>
+        <h2 class="fw-bold">Dibuat Oleh <img id="light" class="img-fluid" width="70"></h2>
+    </div>
+
     <div class="section-box bg-light">
         <div class="alert alert-warning alert-dismissible fade show py-2 small mb-2" style="font-size:0.95em;" role="alert">
-            ⚠️ Fitur <b>Cari Rute</b> masih bersifat <b>eksperimental</b>. Untuk kepastian rute, silakan konfirmasi ke petugas halte.
+            ⚠️ Fitur <b>Cari Rute</b> masih bersifat <b>eksperimental</b>. Kalo kamu ga mau nyasar atau bingung, mendingan tanya petugas di halte yaa!<br>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
         </div>
         <h3 class="fw-bold text-center">Mau pergi kemana?</h3>
@@ -109,21 +162,21 @@
     <div class="section-box bg-light">
         <label for="searchInput" class="form-label">Cari Halte:</label>
         <div class="mb-2 small text-muted">
-            <span class="text-muted fw-bold">Sedikit Panduan</span>
-            <span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">2</span>
+            <span class="text-muted fw-bold">Sedikit Panduan</span><br>
+            <span class="badge bg-primary mt-2 me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">2</span>
             <span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">11</span> <b>Galur</b>
             <span class="me-2"></span>
-            <br><span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">2</span> = Koridor 2
-            <br><span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">11</span> = Halte Galur berada di posisi ke 11 pada koridor 2 (PULO GADUNG - MONAS)
+            <br><span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">2</span> = Badge pertama menunjukan <b>Koridor 2</b>
+            <br><span class="badge bg-primary me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">11</span> =  Badge kedua menunjukan posisi halte <b>Galur</b> berada di urutan ke <b>11</b> pada <b>Koridor 2</b> (Pulo Gadung - Monumen Nasional)
         </div>
         <input type="text" id="searchInput" class="form-control rounded-input" placeholder="Masukkan nama halte">
 
         <div class="text-center mt-4">
             <h5>Hasil Pencarian:</h5>
-            <ul id="searchResults" class="list-group fw-bold"></ul>
+            <ul id="searchResults" class="list-group fw-bold">Hasil Pencarian kamu akan muncul disini</ul>
 
             <h5 class="mt-4">Daftar Halte:</h5>
-            <h3 id="jurusan"></h3>
+            <h3 id="jurusan">Cari koridor yang kamu mau dulu yaa, soalnya masih kosong nih...</h3>
             <ul id="koridorResults" class="list-group fw-bold"></ul>
         </div>
     </div>
@@ -132,14 +185,49 @@
         <a href="index.html" class="btn btn-outline-dark rounded-5">Kembali ke Beranda</a>
     </div>
 
-    <div class="container text-center mt-5">
-        <img id="light">
+    <center>
+    </center>
+    <div class="container text-center text-muted mt-5">
+        <h5 class="fw-bold">Sumber Informasi</h5>
+        <a href="https://transjakarta.co.id/" class="link-none">Transjakarta</a> |
+        <a href="https://jaklingko.id/" class="link-none">JakLingko</a> |
+        <a href="wikipedia.org" class="link-none">Wikipedia</a> |
+        <a href="maps.google.com" class="link-none">Google Maps</a>
     </div>
     
+    <div class="footer mt-2">
+        <div class="text-center fw-bold">
+            Dibuat oleh <a href="index"><img id="light" class="img-fluid" src="image/tije.png" alt="Logo Transjakarta & JakLingko" width="80"></a>
+            <br>2025, Free to Use & Open Source
+        </div>
+    </div>
     <script src="js/tije.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
     <script src="js/dark-mode-switch.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const taglines = document.querySelectorAll('.text-slider h2');
+            let idx = 0;
+            let prevIdx = null;
+            function showTagline(i, prev) {
+                taglines.forEach((el, j) => {
+                    el.classList.remove('active', 'out');
+                    if (j === i) {
+                        el.classList.add('active');
+                    } else if (j === prev) {
+                        el.classList.add('out');
+                    }
+                });
+            }
+            showTagline(idx, null);
+            setInterval(() => {
+                prevIdx = idx;
+                idx = (idx + 1) % taglines.length;
+                showTagline(idx, prevIdx);
+            }, 2000);
+        });
+    </script>
 </body>
 
 </html>
