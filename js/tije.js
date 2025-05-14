@@ -163,13 +163,35 @@ const koridorData = {
 
 const halteKRL = [
     "Manggarai", "Duri", "Stasiun Jatinegara", "Tanah Abang", "Juanda", "Kampung Bandan", "Simpang Buaran", "Stasiun Klender", "Matraman","Kota", "Gambir 2", "Cikoko"
-    // Tambahkan halte lain yang terhubung ke KRL
+    
 ];
 const halteMRT = [
     "Bundaran HI ASTRA", "Dukuh Atas", "Setiabudi", "Bendungan Hilir", "Istora Mandiri", "Senayan", "ASEAN", "Blok M", "Blok A", "Haji Nawi", "Cipete Raya", "Fatmawati", "Lebak Bulus", "CSW"
-    // Tambahkan halte lain yang terhubung ke MRT
+    
 ];
-
+const integrasiBadge = {
+    "Velbak": ["8"],
+    "Kebayoran": ["13"],
+    "Semanggi": ["1"],
+    "Bendungan Hilir": ["9"],
+    "Senen TOYOTA Rangga": ["5"],
+    "Senen Sentral": ["2"],
+    "CSW": ["1"],
+    "ASEAN": ["13"],
+    "Kejaksaan Agung": ["13"],
+    "Cempaka Mas": ["10"],
+    "Simpang Cempaka": ["2"],
+};
+const halteIntegrasi = [
+    // [halte1, halte2, keterangan]
+    ["Velbak", "Kebayoran", "JPO Integrasi"],
+    ["Simpang Cempaka", "Cempaka Mas", "JPO Integrasi"],
+    ["CSW", "ASEAN", "JPO Integrasi"],
+    ["Kejaksaan Agung", "CSW", "JPO Integrasi"],
+    ["Kejaksaan Agung", "ASEAN", "JPO Integrasi"],
+    ["Bendungan Hilir", "Semanggi", "Jalan kaki ±300m"],
+    ["Senen Sentral", "Senen TOYOTA Rangga", "Jalan kaki ±300m"]
+];
 function getKoridorBadgeColor(koridor) {
     const colorMap = {
         "1": "#D02027",    
@@ -354,17 +376,55 @@ function displayKoridorResults(service, koridor) {
     const jurusanDiv = document.createElement('div');
     resultsContainer.appendChild(jurusanDiv);
 
+    // Buat mapping halte ke semua index kemunculannya
+    const halteIndexes = {};
     koridorDataEntry.haltes.forEach((halte, idx) => {
+        if (!halteIndexes[halte]) halteIndexes[halte] = [];
+        halteIndexes[halte].push(idx);
+    });
+
+    // Penomoran khusus untuk Koridor 1: ASEAN & Kejaksaan Agung = 2, Masjid Agung = 3, dst
+    let nomorOverride = {};
+    if (koridor === "1") {
+        const idxAsean = koridorDataEntry.haltes.indexOf("ASEAN");
+        const idxKejagung = koridorDataEntry.haltes.indexOf("Kejaksaan Agung");
+        const idxMasjid = koridorDataEntry.haltes.indexOf("Masjid Agung");
+        if (idxAsean !== -1 && idxKejagung !== -1 && idxMasjid !== -1) {
+            nomorOverride[idxAsean] = 2;
+            nomorOverride[idxKejagung] = 2;
+            nomorOverride[idxMasjid] = 3;
+        }
+    }
+
+    koridorDataEntry.haltes.forEach((halte, idx) => {
+        let nomorUrut;
+        if (koridor === "1" && nomorOverride[idx]) {
+            nomorUrut = nomorOverride[idx];
+        } else {
+            // Default: nomor urut terkecil dari nama halte
+            nomorUrut = Math.min(...halteIndexes[halte]) + 1;
+            // Jika setelah Masjid Agung, tambahkan offset jika perlu
+            if (koridor === "1" && idx > koridorDataEntry.haltes.indexOf("Masjid Agung")) {
+                // Karena dua halte (ASEAN & Kejaksaan Agung) share nomor 2, offset -1
+                nomorUrut = idx; // Karena idx dimulai dari 0, ini sudah benar
+            }
+        }
+
+        // Penanda arah
+        let arah = "";
+        if (halte === "ASEAN") arah = "→ Masjid Agung";
+        if (halte === "Kejaksaan Agung") arah = "→ BLOK M";
+
         const listItem = document.createElement('li');
         listItem.className = 'list-group-item d-flex bg-light align-items-center justify-content-between';
 
-        // Kiri: badge nomor urut + nama halte
+        // Kiri: badge nomor urut + nama halte + arah
         const left = document.createElement('span');
         left.className = "d-flex align-items-center";
 
-        // Badge nomor urut halte (warna sesuai koridor utama)
+        // Badge nomor urut halte
         const nomorBadge = document.createElement('span');
-        nomorBadge.textContent = String(idx + 1).padStart(2, '0'); // <-- dua digit
+        nomorBadge.textContent = String(nomorUrut).padStart(2, '0');
         nomorBadge.style.backgroundColor = getKoridorBadgeColor(koridor);
         nomorBadge.style.color = "#fff";
         nomorBadge.style.width = "24px";
@@ -383,13 +443,9 @@ function displayKoridorResults(service, koridor) {
         halteLink.target = '_blank';
         halteLink.className = 'text-decoration-none text-dark';
         halteLink.innerHTML = halte 
-        + (halteKRL.includes(halte)
-            ? ` <iconify-icon inline icon="jam:train"></iconify-icon>`
-            : '')
-            + (halteMRT.includes(halte)
-        ? ` <iconify-icon inline icon="pepicons-pop:train-circle"></iconify-icon>`
-        : ''
-        );
+            + (arah ? ` <span class="text-secondary small">${arah}</span>` : '')
+            + (halteKRL.includes(halte) ? ` <iconify-icon inline icon="jam:train"></iconify-icon>` : '')
+            + (halteMRT.includes(halte) ? ` <iconify-icon inline icon="pepicons-pop:train-circle"></iconify-icon>` : '');
 
         left.appendChild(nomorBadge);
         left.appendChild(halteLink);
@@ -403,6 +459,15 @@ function displayKoridorResults(service, koridor) {
                 badges.appendChild(badge);
             }
         });
+        // Tambahkan badge integrasi manual jika ada
+        if (integrasiBadge[halte]) {
+            integrasiBadge[halte].forEach(kor => {
+                if (kor !== koridor) {
+                    const badge = createKoridorBadge("BRT", kor);
+                    badges.appendChild(badge);
+                }
+            });
+        }
 
         listItem.appendChild(left);
         listItem.appendChild(badges);
@@ -525,6 +590,14 @@ function displayAutocompleteResults(results) {
 }
 
 function findRoutePanduan(halteAsal, halteTujuan) {
+    // 0. Cek apakah halteAsal dan halteTujuan terhubung langsung via integrasi
+    const isLangsungIntegrasi = halteIntegrasi.some(([h1, h2]) =>
+        (h1 === halteAsal && h2 === halteTujuan) || (h1 === halteTujuan && h2 === halteAsal)
+    );
+    if (isLangsungIntegrasi) {
+        return `Jalan kaki dari ${halteAsal} ke ${halteTujuan}.`;
+    }
+
     // 1. Cari koridor yang langsung menghubungkan kedua halte
     for (const [service, koridors] of Object.entries(koridorData)) {
         for (const [koridor, data] of Object.entries(koridors)) {
@@ -561,6 +634,14 @@ function findRoutePanduan(halteAsal, halteTujuan) {
 }
 
 function findRoutePanduanMultiTransit(halteAsal, halteTujuan) {
+    // Cek apakah halteAsal dan halteTujuan terhubung langsung via integrasi
+    const isLangsungIntegrasi = halteIntegrasi.some(([h1, h2]) =>
+        (h1 === halteAsal && h2 === halteTujuan) || (h1 === halteTujuan && h2 === halteAsal)
+    );
+    if (isLangsungIntegrasi) {
+        return `Jalan kaki dari ${halteAsal} ke ${halteTujuan}.`;
+    }
+
     // Buat graph halte: halte -> [{halteTujuan, service, koridor}]
     const halteGraph = {};
 
@@ -580,6 +661,14 @@ function findRoutePanduanMultiTransit(halteAsal, halteTujuan) {
         }
     }
 
+    // Tambahkan integrasi jalan kaki antar halte
+    halteIntegrasi.forEach(([h1, h2, keterangan]) => {
+        if (!halteGraph[h1]) halteGraph[h1] = [];
+        if (!halteGraph[h2]) halteGraph[h2] = [];
+        halteGraph[h1].push({ halteTujuan: h2, service: "Integrasi", koridor: keterangan || "Integrasi", idx: null });
+        halteGraph[h2].push({ halteTujuan: h1, service: "Integrasi", koridor: keterangan || "Integrasi", idx: null });
+    });
+
     // BFS dengan prioritas: lanjutkan di koridor yang sama selama mungkin
     const queue = [{
         halte: halteAsal,
@@ -592,40 +681,30 @@ function findRoutePanduanMultiTransit(halteAsal, halteTujuan) {
     while (queue.length > 0) {
         const { halte, path, service: currService, koridor: currKoridor } = queue.shift();
         if (halte === halteTujuan) {
-            // Format hasil rute
-            let result = "";
-            for (let i = 1; i < path.length; i++) {
-                const prev = path[i - 1];
-                const curr = path[i];
-                if (
-                    !prev.service ||
-                    prev.service !== curr.service ||
-                    prev.koridor !== curr.koridor
-                ) {
-                    if (result) {
-                        result += ", lanjut naik ";
-                    } else {
-                        result += "Naik ";
-                    }
-                    result += `${curr.service} Koridor ${curr.koridor} dari ${prev.halte} ke `;
-                }
-                if (
-                    i === path.length - 1 ||
-                    curr.service !== path[i + 1]?.service ||
-                    curr.koridor !== path[i + 1]?.koridor
-                ) {
-                    result += `${curr.halte}`;
-                }
-            }
-            result += ".";
-            return result;
+            return formatRute(path);
         }
         for (const next of halteGraph[halte] || []) {
-            // Jika masih di koridor yang sama, prioritaskan lanjut di koridor itu
             let nextKey = `${next.halteTujuan}|${next.service}|${next.koridor}`;
             if (!visited.has(nextKey)) {
-                // Jika masih di koridor yang sama, masukkan ke depan queue (prioritas)
-                if (currService === next.service && currKoridor === next.koridor) {
+                // Cek apakah dari halte sekarang bisa langsung jalan kaki ke tujuan
+                const integrasiLangsung = halteIntegrasi.find(([h1, h2]) =>
+                    (h1 === halte && h2 === halteTujuan) || (h2 === halte && h1 === halteTujuan)
+                );
+                if (integrasiLangsung) {
+                    return (
+                        path.length === 1
+                            ? `Jalan kaki dari ${halte} ke ${halteTujuan}.`
+                            : formatRute(path.concat([{ halte: halteTujuan, service: "Integrasi", koridor: integrasiLangsung[2] || "Integrasi" }]))
+                    );
+                }
+                if (next.service === "Integrasi") {
+                    queue.unshift({
+                        halte: next.halteTujuan,
+                        path: [...path, { halte: next.halteTujuan, service: next.service, koridor: next.koridor }],
+                        service: next.service,
+                        koridor: next.koridor
+                    });
+                } else if (currService === next.service && currKoridor === next.koridor) {
                     queue.unshift({
                         halte: next.halteTujuan,
                         path: [...path, { halte: next.halteTujuan, service: next.service, koridor: next.koridor }],
@@ -707,7 +786,14 @@ function findRouteKoridorUtama(halteAsal, halteTujuan) {
         for (const next of halteGraph[halte] || []) {
             let nextKey = `${next.halteTujuan}|${next.service}|${next.koridor}`;
             if (!visited.has(nextKey)) {
-                if (currService === next.service && currKoridor === next.koridor) {
+                if (next.service === "Integrasi") {
+                    queue.unshift({
+                        halte: next.halteTujuan,
+                        path: [...path, { halte: next.halteTujuan, service: next.service, koridor: next.koridor }],
+                        service: next.service,
+                        koridor: next.koridor
+                    });
+                } else if (currService === next.service && currKoridor === next.koridor) {
                     queue.unshift({
                         halte: next.halteTujuan,
                         path: [...path, { halte: next.halteTujuan, service: next.service, koridor: next.koridor }],
@@ -903,4 +989,37 @@ function peringatanKoridorHurufPadaRute(teksRute, asal, tujuan) {
         <div id="grandAmariResult"></div>`;
     }
     return "";
+}
+
+function formatRute(path) {
+    let result = "";
+    for (let i = 1; i < path.length; i++) {
+        const prev = path[i - 1];
+        const curr = path[i];
+        if (
+            !prev.service ||
+            prev.service !== curr.service ||
+            prev.koridor !== curr.koridor
+        ) {
+            if (curr.service === "Integrasi") {
+                result += (result ? ", lalu " : "") + `Jalan kaki dari ${prev.halte} ke `;
+            } else {
+                if (result) {
+                    result += ", lanjut naik ";
+                } else {
+                    result += "Naik ";
+                }
+                result += `${curr.service} Koridor ${curr.koridor} dari ${prev.halte} ke `;
+            }
+        }
+        if (
+            i === path.length - 1 ||
+            curr.service !== path[i + 1]?.service ||
+            curr.koridor !== path[i + 1]?.koridor
+        ) {
+            result += `${curr.halte}`;
+        }
+    }
+    result += ".";
+    return result;
 }
