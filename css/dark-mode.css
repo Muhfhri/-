@@ -95,15 +95,14 @@ html {
 
 /* Label / tombol untuk darkmode */
 label {
-  background: #eee !important;
+  background: #eeeeee00 !important;
   color: #212529 !important;
   border-color: rgba(0, 0, 0, 0.1);
 }
 [data-theme="dark"] label {
-  background: #212529 !important;
+  background: #21252900 !important;
   color: #eee !important;
   border-color: #eee !important;
-  transition: background 1.3s;
 }
 
 [data-theme="dark"] .text-white {
@@ -186,8 +185,14 @@ label {
 
 [data-theme="dark"] .text-muted {
   color: white !important;
-  opacity: 40%;
+  opacity: 70%;
 }
+[data-theme="dark"]      .section-box {
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 0 10px rgba(229, 229, 229, 0.115);
+            margin-bottom: 2rem;
+        }
 .btn-m3-you-color {
   background: #84AFE0 !important;
   color: white !important;
