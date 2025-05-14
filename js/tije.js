@@ -646,6 +646,88 @@ function findRoutePanduanMultiTransit(halteAsal, halteTujuan) {
     return "Rute tidak ditemukan.";
 }
 
+function findRouteKoridorUtama(halteAsal, halteTujuan) {
+    // Buat graph hanya dari koridor utama (tanpa huruf)
+    const halteGraph = {};
+    for (const [service, koridors] of Object.entries(koridorData)) {
+        for (const [koridor, data] of Object.entries(koridors)) {
+            if (!/^[0-9]+$/.test(koridor)) continue; // Hanya angka saja
+            for (let i = 0; i < data.haltes.length; i++) {
+                const halte = data.haltes[i];
+                if (!halteGraph[halte]) halteGraph[halte] = [];
+                if (i > 0) {
+                    halteGraph[halte].push({ halteTujuan: data.haltes[i - 1], service, koridor });
+                }
+                if (i < data.haltes.length - 1) {
+                    halteGraph[halte].push({ halteTujuan: data.haltes[i + 1], service, koridor });
+                }
+            }
+        }
+    }
+    // BFS
+    const queue = [{
+        halte: halteAsal,
+        path: [{ halte: halteAsal, service: null, koridor: null }],
+        service: null,
+        koridor: null
+    }];
+    const visited = new Set([`${halteAsal}|`]);
+    while (queue.length > 0) {
+        const { halte, path, service: currService, koridor: currKoridor } = queue.shift();
+        if (halte === halteTujuan) {
+            // Format hasil rute
+            let result = "";
+            for (let i = 1; i < path.length; i++) {
+                const prev = path[i - 1];
+                const curr = path[i];
+                if (
+                    !prev.service ||
+                    prev.service !== curr.service ||
+                    prev.koridor !== curr.koridor
+                ) {
+                    if (result) {
+                        result += ", lanjut naik ";
+                    } else {
+                        result += "Naik ";
+                    }
+                    result += `${curr.service} Koridor ${curr.koridor} dari ${prev.halte} ke `;
+                }
+                if (
+                    i === path.length - 1 ||
+                    curr.service !== path[i + 1]?.service ||
+                    curr.koridor !== path[i + 1]?.koridor
+                ) {
+                    result += `${curr.halte}`;
+                }
+            }
+            result += ".";
+            return result;
+        }
+        for (const next of halteGraph[halte] || []) {
+            let nextKey = `${next.halteTujuan}|${next.service}|${next.koridor}`;
+            if (!visited.has(nextKey)) {
+                if (currService === next.service && currKoridor === next.koridor) {
+                    queue.unshift({
+                        halte: next.halteTujuan,
+                        path: [...path, { halte: next.halteTujuan, service: next.service, koridor: next.koridor }],
+                        service: next.service,
+                        koridor: next.koridor
+                    });
+                } else {
+                    queue.push({
+                        halte: next.halteTujuan,
+                        path: [...path, { halte: next.halteTujuan, service: next.service, koridor: next.koridor }],
+                        service: next.service,
+                        koridor: next.koridor
+                    });
+                }
+                visited.add(nextKey);
+            }
+        }
+    }
+    return "Rute utama (tanpa huruf) tidak ditemukan.";
+}
+
 function getAllHalteNames() {
     const halteSet = new Set();
     for (const koridors of Object.values(koridorData)) {
@@ -708,23 +790,49 @@ document.getElementById('cariRuteBtn').addEventListener('click', function () {
     }
 
     // Parsing hasil untuk badge interaktif
-    // Regex: cari "Koridor X" dan ganti X dengan badge
-    let html = hasil;
     const koridorRegex = /([A-Za-z]+) Koridor (\w+)/g;
     let match, lastIndex = 0;
-    hasilDiv.innerHTML = ""; // Kosongkan hasil
+    hasilDiv.innerHTML = "";
 
     while ((match = koridorRegex.exec(hasil)) !== null) {
-        // Teks sebelum badge
         hasilDiv.append(document.createTextNode(hasil.slice(lastIndex, match.index)));
-        // Badge interaktif
         const badge = createKoridorBadge(match[1], match[2]);
         hasilDiv.appendChild(document.createTextNode(`${match[1]} Koridor `));
         hasilDiv.appendChild(badge);
         lastIndex = koridorRegex.lastIndex;
     }
-    // Sisa teks setelah badge terakhir
     hasilDiv.append(document.createTextNode(hasil.slice(lastIndex)));
+
+    // Tambahkan peringatan jika ada koridor huruf di luar jam operasional
+    const warning = peringatanKoridorHurufPadaRute(hasil, asal, tujuan);
+    if (warning) {
+        hasilDiv.insertAdjacentHTML('beforeend', warning);
+        // Tambahkan event listener untuk tombol Grand AMARI
+        setTimeout(() => {
+            const btn = document.getElementById('btnGrandAmari');
+            if (btn) {
+                btn.onclick = function() {
+                    const grandResult = document.getElementById('grandAmariResult');
+                    const hasilGrand = findRouteKoridorUtama(asal, tujuan);
+                    // Parsing badge juga
+                    let html = "";
+                    let match2, lastIdx2 = 0;
+                    const koridorRegex2 = /([A-Za-z]+) Koridor (\w+)/g;
+                    while ((match2 = koridorRegex2.exec(hasilGrand)) !== null) {
+                        html += hasilGrand.slice(lastIdx2, match2.index);
+                        html += `${match2[1]} Koridor `;
+                        // Buat badge
+                        const temp = document.createElement('span');
+                        temp.appendChild(createKoridorBadge(match2[1], match2[2]));
+                        html += temp.innerHTML;
+                        lastIdx2 = koridorRegex2.lastIndex;
+                    }
+                    html += hasilGrand.slice(lastIdx2);
+                    grandResult.innerHTML = html;
+                };
+            }
+        }, 100);
+    }
 });
 
 // Fungsi untuk menentukan warna badge berdasarkan nomor koridor
@@ -765,3 +873,33 @@ updateLiveClock();
 document.addEventListener('DOMContentLoaded', function() {
     updateKoridorOptions();
 });
+
+function isKoridorHuruf(koridor) {
+    // Cek apakah koridor mengandung angka lalu huruf (misal: 2A, 4K, 10D)
+    return /^[0-9]+[A-Z]$/i.test(koridor);
+}
+
+function isWaktuDiluarOperasional() {
+    const now = new Date();
+    const jam = now.getHours() + now.getMinutes()/60;
+    return (jam < 5 || jam >= 22);
+}
+
+// Fungsi untuk mengecek dan memberi peringatan jika ada koridor huruf di luar jam operasional
+function peringatanKoridorHurufPadaRute(teksRute, asal, tujuan) {
+    const koridorRegex = /Koridor\s+([0-9]+[A-Z])/gi;
+    let match, adaKoridorHuruf = false;
+    while ((match = koridorRegex.exec(teksRute)) !== null) {
+        adaKoridorHuruf = true;
+        break;
+    }
+    if (adaKoridorHuruf && isWaktuDiluarOperasional()) {
+        // Tombol custom style
+        return `<div class="alert alert-danger mt-2 py-2 small">
+            ⚠️ <b>Perhatian:</b> Koridor dengan kode huruf di belakang angka (misal 2A, 4K, 5C, 10D, dst) hanya beroperasi pukul <b>05.00–22.00</b>. Pastikan waktu perjalanan Anda!
+        </div>
+        <button id="btnGrandAmari" class="btn btn-outline-warning btn-sm rounded-5 mb-2 px-4 py-2 fw-bold">Gunakan Grand AMARI (Lebih Jauh)</button>
+        <div id="grandAmariResult"></div>`;
+    }
+    return "";
+}
