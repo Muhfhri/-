@@ -83,10 +83,22 @@ const koridorData = {
             operator: "DAMRI (DMR) & Bianglala Metropolitan (BMP), Mayasari Bakti (MYS)",
             haltes: ["Ragunan","Simpang Ragunan Ar-Raudhah","Jati Barat", "Jati Padang", "Pejaten", "Buncit Indah", "Warung Jati", "Warung Buncit", "Duren Tiga", "Mampang Prapatan", "Underpass Kuningan", "Patra Kuningan", "Kuningan", "Rasuna Said", "Karet Kuningan", "Kuningan Madya", "Setiabudi", "Bundaran HI ASTRA", "M.H Thamrin", "Kebon Sirih", "Balai Kota"]
         },
+        "6B" : {
+            start: "Ragunan",
+            end: "Balai Kota via Semanggi",
+            operator: "DAMRI (DMR) & Bianglala Metropolitan (BMP), Mayasari Bakti (MYS)",
+            haltes: ["Ragunan","Simpang Ragunan Ar-Raudhah","Jati Barat", "Jati Padang", "Pejaten", "Buncit Indah", "Warung Jati", "Warung Buncit", "Duren Tiga", "Mampang Prapatan", "Denpasar", "Widya Chandra Telkomsel", "Semanggi", "Karet", "Dukuh Atas", "Tosari", "Bundaran HI ASTRA", "M.H Thamrin", "Kebon Sirih", "Balai Kota"]
+        },
+        "6V" : {
+            start: "Ragunan",
+            end: "Senayan BANK DKI",
+            operator: "DAMRI (DMR) & Bianglala Metropolitan (BMP), Mayasari Bakti (MYS)",
+            haltes: ["Ragunan","Simpang Ragunan Ar-Raudhah","Jati Barat", "Jati Padang", "Pejaten", "Buncit Indah", "Warung Jati", "Warung Buncit", "Duren Tiga", "Mampang Prapatan", "Tegal Mampang", "Rawa Barat", "Pasar Santa", "ASEAN","Masjid Agung", "Bundaran Senayan", "Senayan BANK DKI"]
+        },
         "7": {
             start: "Kampung Melayu",
             end: "Kampung Rambutan",
-            operator: "Mayasari Bakti (MYS) & Steady Safe (SAF)",
+            operator: "Mayasari Bakti (MYS), Steady Safe (SAF), Bianglala Metropolitan (BMP)",
             haltes: ["Kampung Rambutan", "Tanah Merdeka", "Flyover Raya Bogor", "Trikora", "Pasar Induk", "Kramat Jati", "Cililitan", "Cawang Cililitan", "Cawang Sentral", "Cawang", "Cawang Baru", "Gelanggang Remaja", "Bidara Cina", "Kampung Melayu"]
         },
         "7F": {
@@ -104,8 +116,26 @@ const koridorData = {
         "9": {
             start: "Pinang Ranti",
             end: "Pluit",
-            operator: "DAMRI (DMR), Transjakara (TJ) & Mayasari Bakti (MB/MYS)",
+            operator: "DAMRI (DMR), Transjakarta (TJ) & Mayasari Bakti (MB/MYS)",
             haltes: ["Pinang Ranti", "Makasar", "Cawang Sentral", "Cawang", "Ciliwung", "Cikoko", "Tebet Eco Park", "Pancoran Tugu", "Pancoran", "Tegal Parang", "Simpang Kuningan", "Denpasar", "Widya Chandra Telkomsel", "Semanggi", "Gerbang Pemuda", "Petamburan","Kemanggisan","Kota Bambu", "Tanjung Duren", "Grogol Reformasi", "Kali Grogol", "Jembatan Besi", "Jembatan Dua", "Jembatan Tiga", "Penjaringan", "Pluit"]
+        },
+        "9A": {
+            start: "Cililitan",
+            end: "Grogol",
+            operator: "Transjakarta (TJ) & Mayasari Bakti (MB/MYS)",
+            haltes: ["Cililitan", "Cawang Cililitan", "Cawang", "Ciliwung", "Cikoko", "Tebet Eco Park", "Pancoran Tugu", "Pancoran", "Tegal Parang", "Simpang Kuningan", "Denpasar", "Widya Chandra Telkomsel", "Semanggi", "Gerbang Pemuda", "Petamburan","Kemanggisan","Kota Bambu", "Tanjung Duren", "Grogol Reformasi"]
+        },
+        "9C": {
+            start: "Pinang Ranti",
+            end: "Bundaran Senayan",
+            operator: "Transjakarta (TJ) & Mayasari Bakti (MB/MYS)",
+            haltes: ["Pinang Ranti", "Makasar", "Cawang Sentral", "Cawang", "Ciliwung", "Cikoko", "Tebet Eco Park", "Pancoran Tugu", "Pancoran", "Tegal Parang", "Simpang Kuningan", "Denpasar", "Widya Chandra Telkomsel", "Semanggi", "Senayan BANK DKI", "Bundaran Senayan"]
+        },
+        "9N": {
+            start: "Pinang Ranti",
+            end: "Simpang Cawang",
+            operator: "Transjakarta (TJ) & Mayasari Bakti (MB/MYS)",
+            haltes: ["Pinang Ranti", "Makasar", "Cawang Sentral", "Simpang Cawang"]
         },
         "10" : {
             start: "Tanjung Priok",
@@ -140,14 +170,26 @@ const koridorData = {
         "13": {
             start: "Puri Beta 2",
             end: "Tegal Mampang",
-            operator: "Transjakarta (TJ) & Mayasari Bakti (MB/MYS)",
+            operator: "Transjakarta (TJ) & Mayasari Bakti (MYS)",
             haltes: ["Tegal Mampang", "Rawa Barat", "Pasar Santa", "CSW", "Mayestik", "Velbak", "Kebayoran Lama", "Seskoal", "Cipulir", "Swadarma ParagonCorp", "JORR", "Petukangan D'MASIV", "Puri Beta 1", "Puri Beta 2"]
         },
         "13B": {
             start: "Puri Beta 2",
             end: "Pancoran",
-            operator: "Transjakarta (TJ) & Mayasari Bakti (MB/MYS)",
+            operator: "Transjakarta (TJ) & Mayasari Bakti (MYS)",
             haltes: ["Pancoran","Tegal Mampang", "Rawa Barat", "Pasar Santa", "CSW", "Mayestik", "Velbak", "Kebayoran Lama", "Seskoal", "Cipulir", "Swadarma ParagonCorp", "JORR", "Petukangan D'MASIV", "Puri Beta 1", "Puri Beta 2"]
+        },
+        "13E": {
+            start: "Puri Beta 2",
+            end: "Pancoran",
+            operator: "Transjakarta (TJ) & Mayasari Bakti (MYS)",
+            haltes: ["Flyover Kuningan","Setiabudi", "Kuningan Madya","Karet Kuningan","Rasuna Said","Kuningan","Patra Kuningan","Underpass Kuningan","Simpang Kuningan","Tegal Mampang", "Rawa Barat", "Pasar Santa", "CSW", "Mayestik", "Velbak", "Kebayoran Lama", "Seskoal", "Cipulir", "Swadarma ParagonCorp", "JORR", "Petukangan D'MASIV", "Puri Beta 1", "Puri Beta 2"]
+        },
+        "L13E": {
+            start: "Puri Beta",
+            end: "Flyover Kuningan (Express)",
+            operator: "Transjakarta (TJ) & Mayasari Bakti (MYS)",
+            haltes: ["Flyover Kuningan","Setiabudi", "Kuningan Madya","Karet Kuningan","Rasuna Said","Kuningan","Patra Kuningan","Underpass Kuningan","Simpang Kuningan","Tegal Mampang", "CSW", "Velbak", "Petukangan D'MASIV", "Puri Beta 1", "Puri Beta 2"]
         },
         "14": {
             start: "Jakarta International Stadium",
@@ -162,11 +204,11 @@ const koridorData = {
 };
 
 const halteKRL = [
-    "Manggarai", "Duri", "Stasiun Jatinegara", "Tanah Abang", "Juanda", "Kampung Bandan", "Simpang Buaran", "Stasiun Klender", "Matraman","Kota", "Gambir 2", "Cikoko"
+    "Manggarai", "Duri", "Stasiun Jatinegara", "Tanah Abang", "Juanda", "Kampung Bandan", "Simpang Buaran", "Stasiun Klender", "Matraman Baru","Kota", "Gambir 2", "Cikoko"
     
 ];
 const halteMRT = [
-    "Bundaran HI ASTRA", "Dukuh Atas", "Setiabudi", "Bendungan Hilir", "Istora Mandiri", "Senayan", "ASEAN", "Blok M", "Blok A", "Haji Nawi", "Cipete Raya", "Fatmawati", "Lebak Bulus", "CSW"
+    "Bundaran HI ASTRA", "Dukuh Atas", "Setiabudi", "Bendungan Hilir", "Istora Mandiri", "Senayan", "ASEAN", "Blok M", "Blok A", "Haji Nawi", "Cipete Raya", "Fatmawati", "Lebak Bulus", "CSW", "Dukuh Atas","Cikoko","Kejaksaan Agung"
     
 ];
 const integrasiBadge = {
@@ -177,10 +219,12 @@ const integrasiBadge = {
     "Senen TOYOTA Rangga": ["5"],
     "Senen Sentral": ["2"],
     "CSW": ["1"],
-    "ASEAN": ["13"],
-    "Kejaksaan Agung": ["13"],
+    "ASEAN": ["13", "13B","13E"],
+    "Kejaksaan Agung": ["13", "13B","13E" ],
     "Cempaka Mas": ["10"],
     "Simpang Cempaka": ["2"],
+    "Dukuh Atas": ["4"],
+    "Galunggung": ["1"],
 };
 const halteIntegrasi = [
     // [halte1, halte2, keterangan]
@@ -189,6 +233,7 @@ const halteIntegrasi = [
     ["CSW", "ASEAN", "JPO Integrasi"],
     ["Kejaksaan Agung", "CSW", "JPO Integrasi"],
     ["Kejaksaan Agung", "ASEAN", "JPO Integrasi"],
+    ["Galunggung", "Dukuh Atas", "JPO Integrasi"],
     ["Bendungan Hilir", "Semanggi", "Jalan kaki ±300m"],
     ["Senen Sentral", "Senen TOYOTA Rangga", "Jalan kaki ±300m"]
 ];
@@ -206,10 +251,15 @@ function getKoridorBadgeColor(koridor) {
         "5C": "#9CD2C6",   
         "6": "#2FA449",   
         "6A": "#76C18A",
+        "6B": "#99C175",
+        "6V": "#3C9F68",
         "7": "#E2275B",   
         "7F": "#ff326b", 
         "8": "#CC2990", 
         "9": "#3F9593",    
+        "9A": "#8D9F3D",    
+        "9C": "#3C9F68",    
+        "9N": "#3C9F68",    
         "10": "#8F1A1E",   
         "10D": "#9b3337",   
         "10H": "#9c050a",   
@@ -218,6 +268,8 @@ function getKoridorBadgeColor(koridor) {
         "12": "#62BD73",   
         "13": "#5C359D",   
         "13B": "#972489",   
+        "13E": "#761C86",   
+        "L13E": "#761C86",   
         "14": "#FF7F00",
         // Tambahkan mapping lain sesuai kebutuhan
     };
