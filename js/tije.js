@@ -218,7 +218,7 @@ const integrasiBadge = {
     "Bendungan Hilir": ["9"],
     "Senen TOYOTA Rangga": ["5"],
     "Senen Sentral": ["2"],
-    "CSW": ["1"],
+    "CSW": ["1", "4K"],
     "ASEAN": ["13", "13B","13E"],
     "Kejaksaan Agung": ["13", "13B","13E" ],
     "Cempaka Mas": ["10"],
