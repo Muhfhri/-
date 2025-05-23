@@ -149,14 +149,21 @@
     <div class="section-box bg-light">
         <div class="row g-3">
             <div class="col-md-6">
-                <label for="serviceSelect" class="form-label">Layanan</label>
-                <select id="serviceSelect" class="form-select rounded-input">
-                    <option value="BRT" disabled selected>BRT (Bus Rapid Transit)</option>
-                </select>
+                <div class="form-group">
+                    <label for="serviceSelect" class="form-label">Layanan</label>
+                    <select id="serviceSelect" class="form-select rounded-input">
+                        <option value="BRT" selected>BRT</option>
+                        <option value="Non-BRT">Non-BRT</option>
+                    </select>
+                </div>
             </div>
             <div class="col-md-6">
-                <label for="koridorSelect" class="form-label">Koridor</label>
-                <select id="koridorSelect" class="form-select rounded-input"></select>
+                <div class="form-group">
+                    <label for="koridorSelect" class="form-label">Koridor</label>
+                    <select id="koridorSelect" class="form-select rounded-input" disabled>
+                        <option value="" selected>Koridor</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -203,7 +210,7 @@
             <br>2025, Free to Use & Open Source
         </div>
     </div>
-    <script src="js/tije.js"></script>
+    <script type="module" src="js/tije/tije.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
     <script src="js/dark-mode-switch.js"></script>
