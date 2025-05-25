@@ -222,7 +222,7 @@ export const koridorData = {
             start: "Pulo Gebang",
             end: "Kampung Melayu via BKT",
             operator: "PT Transportasi Jakarta (TJ) & DAMRI (DMR) EV",
-            haltes: ["Pulo Gebang", "SMPN 172", "Walikota Jakarta Timur 2", "Penggilingan 2", "Perumnas Klender 1", "Rusun Klender", "Flyover Radin Inten 1", "SMKN 48", "Budhaya Santo Agustinus", "Gedung Senam", "Taman UT Aheme", "Masjid JAmi Al Barkah 2", "RS Duren Sawit", "Komplek Abadi 2", "Komplek Wijaya Kusuma 2", "Jln. Melati Bakti", "Masjid Jami At Taqwa 2", "Cipinang Indah", "Simpang Perintis 2", "SMAN 100", "Nusantara", "Sbr . Ps. Inpres Cipinang Besar", "Mall Basura 2", "Awab Dalam", "Sekolah Cahaya Sakti Otista", "Bidara Cina 1", "Bidara Cina 2", "Term. Kampung Melayu 4", "Rusun Jatinegara Barat", "RS Hermina", "Santa Maria", "Bukit Duri", "SMPN 14", "Jatinegara RS Premier 1", "Masjid Jami Al Inayah", "Mall Basura 1", "Ps. Inpres Cipinang Besar", "Hero Basuki Rahmat", "Simpang Perintis 1", "Cipinang BKT", "Masjid Jami At Taqwa", "Jln. Masjid Abidin", "Komplek Wijaya Kusuma 1", "Komplek Abadi 1", "Baladewa Residence", "Masjid Jami Al Barkah 1", "Jln. Serdang", "Jln. Swadaya Raya", "Masjid Jami Nurul Ain 1", "Jln. H. Aman", "Wisma Atlet Radin Inten", "Dinas Kebersihan Duren Sawit", "Buaran Plaza", "Taman Buaran Indah", "Flyover Radin Inten 2", "Perumnas Klender 2", "Penggilingan 1", "Walikota Jakarta Timur 1", "Pulo Gebang"]
+            haltes: ["Pulo Gebang", "SMPN 172", "Walikota Jakarta Timur 2", "Penggilingan 2", "Perumnas Klender 1", "Rusun Klender", "Flyover Radin Inten 1", "SMKN 48", "Budhaya Santo Agustinus", "Gedung Senam", "Taman UT Aheme", "Masjid Jami Al Barkah 2", "RS Duren Sawit", "Komplek Abadi 2", "Komplek Wijaya Kusuma 2", "Jln. Melati Bakti", "Masjid Jami At Taqwa 2", "Cipinang Indah", "Simpang Perintis 2", "SMAN 100", "Nusantara", "Sbr . Ps. Inpres Cipinang Besar", "Mall Basura 2", "Awab Dalam", "Sekolah Cahaya Sakti Otista", "Bidara Cina 1", "Bidara Cina 2", "Term. Kampung Melayu 4", "Rusun Jatinegara Barat", "RS Hermina", "Santa Maria", "Bukit Duri", "SMPN 14", "Jatinegara RS Premier 1", "Masjid Jami Al Inayah", "Mall Basura 1", "Ps. Inpres Cipinang Besar", "Hero Basuki Rahmat", "Simpang Perintis 1", "Cipinang BKT", "Masjid Jami At Taqwa", "Jln. Masjid Abidin", "Komplek Wijaya Kusuma 1", "Komplek Abadi 1", "Baladewa Residence", "Masjid Jami Al Barkah 1", "Jln. Serdang", "Jln. Swadaya Raya", "Masjid Jami Nurul Ain 1", "Jln. H. Aman", "Wisma Atlet Radin Inten", "Dinas Kebersihan Duren Sawit", "Buaran Plaza", "Taman Buaran Indah", "Flyover Radin Inten 2", "Perumnas Klender 2", "Penggilingan 1", "Walikota Jakarta Timur 1", "Pulo Gebang"]
         },
     }
 };
@@ -249,6 +249,7 @@ export const integrasiBadge = {
     "Simpang Cempaka": ["2"],
     "Dukuh Atas": ["4"],
     "Galunggung": ["1"],
+    "Term. Kampung Melayu 4": ["5", "11"],
 };
 
 export const halteIntegrasi = [
