@@ -162,12 +162,6 @@ export const koridorData = {
             operator: "Steady Safe (SAF) & Bianglala Metropolitan (BMP)",
             haltes: ["Pulo Gebang", "Walikota Jakarta Timur", "Penggilingan", "Flyover Pondok Kopi", "Simpang Buaran", "Buaran", "Kampung Sumur", "Klender", "Stasiun Klender", "Cipinang", "Flyover Cipinang", "Pasar Enjo", "Flyover Jatinegara", "Stasiun Jatinegara", "Jatinegara", "Kampung Melayu"]
         },
-        // "11D": {
-        //     start: "Kampung Melayu",
-        //     end: "Pulo Gebang",
-        //     operator: "Trans Swadaya (TSW)",
-        //     haltes: ["Pulo Gebang", "Walikota Jakarta Timur", "Penggilingan", "Pulo Gadung NON-BRT"]
-        // },
         "12": {
             start: "Tanjung Priok",
             end: "Pluit",
@@ -210,19 +204,31 @@ export const koridorData = {
             start: "Pulo Gadung",
             end: "Kejaksaan Agung",
             operator: "Mayasari Bakti (MYS)",
-            haltes: ["Pulo Gadung NON-BRT", "Flyover Jatinegara", "Pedati Prumpung", "Cawang", "Ciliwung", "Cikoko", "Tebet Eco Park", "Pancoran Tugu", "Pancoran", "Tegal Mampang", "Rawa Barat", "Pasar Santa", "Kejaksaan Agung"]
+            haltes: ["Term. Pulo Gadung", "Flyover Jatinegara", "Pedati Prumpung", "Cawang", "Ciliwung", "Cikoko", "Tebet Eco Park", "Pancoran Tugu", "Pancoran", "Tegal Mampang", "Rawa Barat", "Pasar Santa", "Kejaksaan Agung"]
         },
         "5B": {
             start: "St. Tebet",
             end: "Bidara Cina",
             operator: "Transjakarta (TJ)",
-            haltes: ["St. Tebet 1", "Bali Mester", "Jatinegara", "Kampung Melayu", "Bidara Cina", "Gelanggang Remaja"]
+            haltes: ["Bidara Cina", "Gelanggang Remaja", "Flyover Kampung Melayu", "Kampung Melayu Besar 2", "St. Tebet 1", "Masjid Attahiriyah", "Kampung Melayu Kecil", "Rusun Jatinegara Barat", "RS Hermina", "Santa Maria", "Bukit Duri", "Bali Mester", "Jatinegara", "Kampung Melayu"]
+        },
+        "11D": {
+            start: "Kampung Melayu",
+            end: "Pulo Gebang",
+            operator: "Trans Swadaya (TSW)",
+            haltes: ["Pulo Gebang", "SMPN 172","Walikota Jakarta Timur", "Penggilingan", "Simpang Tiga","At Thahirlah","Simpang Kampung Jembatan","SMK Ristek Kikin", "Pintu Masuk PIK", "Sbr. PGP", "Sbr. Pospol PIK Penggilingan", "Taman PIK Penggilingan", "Pajak & Retribusi Penggilingan", "SDN Penggilingan", "Lapangan PIK Penggilingan", "Romantis PIK Penggilingan", "Sbr. Cagar Budaya Ratu Penggilingan", "Rusun Pulo Jahe", "Cagar Budaya Ratu Penggilingan","Aneka PIK Penggilingan", "Kel. Penggilingan", "Pospol PIK Penggilingan", "PGP", "Gg. Sawo 1", "Gg. Aim 1", "Perum TPI 1", "Taman Elok 1", "Suzuki", "Al Wathoniyah 1", "Jagal 1", "Kampung Padaengan 1", "United Tractors 1", "Raya Penggilingan", "Cakung United Tractors 2", "Tipar Cakung", "IGI", "PTC Pulo Gadung 1", "Makam Wakaf", "Term. Pulo Gadung"]
+        },
+        "11Q": {
+            start: "Pulo Gebang",
+            end: "Kampung Melayu via BKT",
+            operator: "PT Transportasi Jakarta (TJ) & DAMRI (DMR) EV",
+            haltes: ["Pulo Gebang", "SMPN 172", "Walikota Jakarta Timur 2", "Penggilingan 2", "Perumnas Klender 1", "Rusun Klender", "Flyover Radin Inten 1", "SMKN 48", "Budhaya Santo Agustinus", "Gedung Senam", "Taman UT Aheme", "Masjid JAmi Al Barkah 2", "RS Duren Sawit", "Komplek Abadi 2", "Komplek Wijaya Kusuma 2", "Jln. Melati Bakti", "Masjid Jami At Taqwa 2", "Cipinang Indah", "Simpang Perintis 2", "SMAN 100", "Nusantara", "Sbr . Ps. Inpres Cipinang Besar", "Mall Basura 2", "Awab Dalam", "Sekolah Cahaya Sakti Otista", "Bidara Cina 1", "Bidara Cina 2", "Term. Kampung Melayu 4", "Rusun Jatinegara Barat", "RS Hermina", "Santa Maria", "Bukit Duri", "SMPN 14", "Jatinegara RS Premier 1", "Masjid Jami Al Inayah", "Mall Basura 1", "Ps. Inpres Cipinang Besar", "Hero Basuki Rahmat", "Simpang Perintis 1", "Cipinang BKT", "Masjid Jami At Taqwa", "Jln. Masjid Abidin", "Komplek Wijaya Kusuma 1", "Komplek Abadi 1", "Baladewa Residence", "Masjid Jami Al Barkah 1", "Jln. Serdang", "Jln. Swadaya Raya", "Masjid Jami Nurul Ain 1", "Jln. H. Aman", "Wisma Atlet Radin Inten", "Dinas Kebersihan Duren Sawit", "Buaran Plaza", "Taman Buaran Indah", "Flyover Radin Inten 2", "Perumnas Klender 2", "Penggilingan 1", "Walikota Jakarta Timur 1", "Pulo Gebang"]
         },
     }
 };
 
 export const halteKRL = [
-    "Manggarai", "Duri", "Stasiun Jatinegara", "Tanah Abang", "Juanda", "Kampung Bandan", "Simpang Buaran", "Stasiun Klender", "Matraman Baru","Kota", "Gambir 2", "Cikoko"
+    "Manggarai", "Duri", "Stasiun Jatinegara", "Tanah Abang", "Juanda", "Kampung Bandan", "Simpang Buaran", "Stasiun Klender", "Matraman Baru","Kota", "Gambir 2", "Gambir","Cikoko", "Flyover Radin Inten 1", "Flyover Radin Inten 2"
 ];
 
 export const halteMRT = [
@@ -237,7 +243,7 @@ export const integrasiBadge = {
     "Senen TOYOTA Rangga": ["5"],
     "Senen Sentral": ["2"],
     "CSW": ["1", "4K"],
-    "ASEAN": ["13", "13B","13E"],
+    "ASEAN": ["13", "13B","13E", "4K"],
     "Kejaksaan Agung": ["13", "13B","13E" ],
     "Cempaka Mas": ["10"],
     "Simpang Cempaka": ["2"],
