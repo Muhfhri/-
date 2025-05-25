@@ -8,22 +8,24 @@ function getKoridorBadgeColor(koridor) {
         "3": "#FCC81B",    
         "3A": "#b39233",    
         "4": "#562A62",    
+        "4C": "#E7A7CA",    
         "4D": "#E58BBA",    
         "4K": "#9626b5",    
         "5": "#BC5827",   
         "5B": "#905B3A",   
-        "5C": "#9CD2C6",   
+        "5C": "#9CD2C6",    
         "6": "#2FA449",   
         "6A": "#76C18A",
         "6B": "#99C175",
         "6V": "#3C9F68",
         "7": "#E2275B",   
+        "7D": "#53bbb9",   
         "7F": "#ff326b", 
         "8": "#CC2990", 
         "9": "#3F9593",    
         "9A": "#8D9F3D",    
         "9C": "#3C9F68",    
-        "9C": "#4DB748",    
+        "9D": "#4DB748",    
         "9N": "#3C9F68",    
         "10": "#8F1A1E",   
         "10D": "#9b3337",   
@@ -37,7 +39,9 @@ function getKoridorBadgeColor(koridor) {
         "13E": "#761C86",   
         "L13E": "#761C86",   
         "14": "#FF7F00",
-        // Tambahkan mapping lain sesuai kebutuhan
+        "B41": "#A9C498",
+        "T31": "#A9C498",
+        // Tambah Warna TJ Koridor lain
     };
     return colorMap[koridor] || "#adb5bd"; // Default abu-abu jika tidak ada warna
 }
@@ -176,14 +180,15 @@ function getJurusan(koridorNumber, service) {
                 background:${getKoridorBadgeColor(koridorNumber)};
                 color:#fff;
                 display:inline-flex;
-                font-size:1.5rem;
+                font-size:1.3rem;
                 font-weight:bold;
             "
         >${koridorNumber}</span>
-        <br><span class="text-muted fw-bold">${service}</span>
+        <br><span class="text-muted badge fw-bold">${service}</span>
     </div>
-    <div class="pt-sans-narrow-bold fw-bold">${halteAwal} - ${halteAkhir}</div>
+    <div class="pt-sans-narrow-bold fw-bold"><small>${halteAwal} - ${halteAkhir}</small></div>
     <hr>
+    <span class="text-muted fw-bold small">Operator Bus :</span>
     <div class="pt-sans-narrow-bold mt-2"><span class="fw-bold" style="color:${getKoridorBadgeColor(koridorNumber)};">${operator}</span></div>
 `;
 }
@@ -245,18 +250,22 @@ function displayKoridorResults(service, koridor) {
 
         const listItem = document.createElement('li');
         listItem.className = 'list-group-item d-flex bg-light align-items-center justify-content-between';
+        listItem.style.flexWrap = "wrap";
+        listItem.style.gap = "8px";
 
         // Kiri: badge nomor urut + nama halte + arah
-        const left = document.createElement('span');
+        const left = document.createElement('div');
         left.className = "d-flex align-items-center";
+        left.style.flex = "1";
+        left.style.minWidth = "200px"; // Minimum width untuk bagian kiri
 
         // Badge nomor urut halte
         const nomorBadge = document.createElement('span');
         nomorBadge.textContent = String(nomorUrut).padStart(2, '0');
         nomorBadge.style.backgroundColor = getKoridorBadgeColor(koridor);
         nomorBadge.style.color = "#fff";
-        nomorBadge.style.width = "24px";
-        nomorBadge.style.height = "24px";
+        nomorBadge.style.minWidth = "28px";
+        nomorBadge.style.height = "28px";
         nomorBadge.style.display = "inline-flex";
         nomorBadge.style.alignItems = "center";
         nomorBadge.style.justifyContent = "center";
@@ -264,6 +273,7 @@ function displayKoridorResults(service, koridor) {
         nomorBadge.style.fontWeight = "bold";
         nomorBadge.style.fontSize = "0.9rem";
         nomorBadge.style.marginRight = "10px";
+        nomorBadge.style.flexShrink = "0";
 
         // Nama halte (link)
         const halteLink = document.createElement('a');
@@ -279,7 +289,12 @@ function displayKoridorResults(service, koridor) {
         left.appendChild(halteLink);
 
         // Kanan: badge koridor lain (selain koridor utama)
-        const badges = document.createElement('span');
+        const badges = document.createElement('div');
+        badges.className = "d-flex flex-wrap gap-1";
+        badges.style.flexShrink = "0";
+        badges.style.maxWidth = "100%"; // Maksimum width untuk badge container
+        badges.style.justifyContent = "flex-end"; // Rata kanan badge
+
         const servicesAndKoridors = getServicesAndKoridorsByHalte(halte);
         servicesAndKoridors.forEach(({ service: svc, koridor: kor }) => {
             if (kor !== koridor) {
@@ -409,6 +424,11 @@ function displayAutocompleteResults(results) {
             }
         });
 
+        // Tambahkan jenis bus (BRT/Non-BRT)
+        const jenisBus = document.createElement("div");
+        jenisBus.className = "text-muted small";
+        jenisBus.textContent = service; // BRT atau Non-BRT
+
         topRow.appendChild(koridorBadge);
         topRow.appendChild(jurusanText);
 
@@ -445,6 +465,7 @@ function displayAutocompleteResults(results) {
 
         // Gabungkan ke list item
         listItem.appendChild(topRow);
+        listItem.appendChild(jenisBus); // Tambahkan jenis bus
         if (haltesRow) listItem.appendChild(haltesRow);
 
         // Klik: pilih koridor
@@ -982,5 +1003,5 @@ function findRouteKhusus(halteAsal, halteTujuan) {
         }
     }
 
-    return null; // Tidak ada rute khusus yang ditemukan
+    return null;
 }
