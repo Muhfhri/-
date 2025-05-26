@@ -154,7 +154,173 @@ function displaySearchResults(query) {
     });
 }
 
-// Fungsi untuk mendapatkan jurusan berdasarkan nomor koridor
+// Fungsi untuk mendapatkan status operasi berdasarkan hari dan jam
+function getOperationalStatus(koridorNumber, service) {
+    const koridor = koridorData[service]?.[koridorNumber];
+    if (!koridor) return null;
+
+    const now = new Date();
+    const currentDay = now.getDay(); // 0 = Minggu, 1 = Senin, dst
+    const currentHour = now.getHours() + now.getMinutes()/60;
+
+    // Default jam operasi untuk semua koridor
+    const defaultHours = {
+        start: 5,
+        end: 22
+    };
+
+    // Jika koridor memiliki jadwal khusus
+    if (koridor.operationalSchedule) {
+        const schedule = koridor.operationalSchedule;
+        const hours = schedule.weekday?.hours || defaultHours;
+        const days = schedule.weekday?.days || [];
+        
+        // Format hari operasi
+        const dayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const startDay = dayNames[Math.min(...days)];
+        const endDay = dayNames[Math.max(...days)];
+        const dayRange = days.length === 7 ? "Setiap hari" : `${startDay} - ${endDay}`;
+        
+        // Cek apakah hari ini adalah hari operasi
+        const isOperationalDay = days.includes(currentDay);
+        
+        if (!isOperationalDay) {
+            return {
+                isOperational: false,
+                message: "Tidak beroperasi pada hari ini",
+                schedule: {
+                    weekday: { 
+                        hours: hours,
+                        dayRange: dayRange
+                    }
+                }
+            };
+        }
+
+        // Cek apakah dalam jam operasi
+        let isOperational = false;
+        let timeSlots = [];
+
+        // Jika hours adalah array (multiple time slots)
+        if (Array.isArray(hours)) {
+            timeSlots = hours.map(slot => ({
+                start: slot.start,
+                end: slot.end,
+                period: slot.start < 12 ? "Pagi" : "Sore"
+            }));
+            
+            isOperational = hours.some(slot => 
+                currentHour >= slot.start && currentHour < slot.end
+            );
+        } else {
+            // Single time slot
+            timeSlots = [{
+                start: hours.start,
+                end: hours.end,
+                period: ""
+            }];
+            isOperational = currentHour >= hours.start && currentHour < hours.end;
+        }
+
+        if (isOperational) {
+            return {
+                isOperational: true,
+                message: "Sedang beroperasi",
+                schedule: {
+                    weekday: { 
+                        hours: timeSlots,
+                        dayRange: dayRange
+                    }
+                }
+            };
+        } else {
+            return {
+                isOperational: false,
+                message: "Di luar jam operasi",
+                schedule: {
+                    weekday: { 
+                        hours: timeSlots,
+                        dayRange: dayRange
+                    }
+                }
+            };
+        }
+    }
+
+    // Gunakan default schedule jika tidak ada jadwal khusus
+    if (currentHour >= defaultHours.start && currentHour < defaultHours.end) {
+        return {
+            isOperational: true,
+            message: "Sedang beroperasi",
+            schedule: {
+                weekday: { 
+                    hours: [{
+                        start: defaultHours.start,
+                        end: defaultHours.end,
+                        period: ""
+                    }],
+                    dayRange: "Setiap hari"
+                }
+            }
+        };
+    } else {
+        return {
+            isOperational: false,
+            message: "Di luar jam operasi",
+            schedule: {
+                weekday: { 
+                    hours: [{
+                        start: defaultHours.start,
+                        end: defaultHours.end,
+                        period: ""
+                    }],
+                    dayRange: "Setiap hari"
+                }
+            }
+        };
+    }
+}
+
+// Fungsi untuk mendapatkan daftar hari tidak beroperasi
+function getNonOperationalDays(schedule) {
+    const allDays = [0, 1, 2, 3, 4, 5, 6]; // 0 = Minggu, 1 = Senin, dst
+    const operationalDays = new Set([
+        ...(schedule.weekday?.days || []),
+        ...(schedule.weekend?.days || [])
+    ]);
+    
+    return allDays.filter(day => !operationalDays.has(day));
+}
+
+// Fungsi untuk mengecek apakah koridor adalah AMARI
+function isAMARIKoridor(koridorNumber, service) {
+    const koridor = koridorData[service]?.[koridorNumber];
+    return koridor?.isAMARI || false;
+}
+
+// Fungsi untuk mendapatkan tarif berdasarkan jam
+function getTarif() {
+    const now = new Date();
+    const jam = now.getHours() + now.getMinutes()/60;
+    
+    // Tarif 2000 untuk jam 05:00 - 07:00
+    if (jam >= 5 && jam < 7) {
+        return {
+            amount: 2000,
+            period: "05:00 - 07:00",
+            description: "Tarif Awal"
+        };
+    }
+    
+    // Tarif 3500 untuk jam 07:00 - 04:59
+    return {
+        amount: 3500,
+        period: "07:00 - 04:59",
+        description: "Tarif Normal"
+    };
+}
+
+// Update fungsi getJurusan untuk menampilkan status operasi
 function getJurusan(koridorNumber, service) {
     const koridor = koridorData[service]?.[koridorNumber];
     const outputElement = document.getElementById("jurusan");
@@ -167,6 +333,39 @@ function getJurusan(koridorNumber, service) {
     const halteAwal = koridor.start;
     const halteAkhir = koridor.end;
     const operator = koridor.operator || "Operator tidak tersedia";
+    const busTypes = Array.isArray(koridor.busType) ? koridor.busType : (koridor.busType ? [koridor.busType] : []);
+    const isAMARI = isAMARIKoridor(koridorNumber, service);
+    const tarif = getTarif();
+    const operationalStatus = getOperationalStatus(koridorNumber, service);
+
+    // Format jam operasi
+    function formatHours(hours) {
+        if (Array.isArray(hours)) {
+            return hours.map(slot => 
+                slot.period ? `${slot.period}: ${slot.start}:00 - ${slot.end}:00` : `${slot.start}:00 - ${slot.end}:00`
+            ).join(" | ");
+        }
+        return `${hours.start}:00 - ${hours.end}:00`;
+    }
+
+    let busTypeHtml = '';
+    if (busTypes.length > 0) {
+        busTypeHtml = `
+        <span class="text-muted fw-bold small">Jenis Bus :</span>
+        <div class="pt-sans-narrow-bold mt-2">
+            ${busTypes.map(busType => {
+                const isElectric = busType.toLowerCase().includes('ev') || busType.toLowerCase().includes('listrik');
+                return `
+                    <button class="btn btn-sm mb-1 me-1 rounded-5 position-relative" style="background:${getKoridorBadgeColor(koridorNumber)}; color:white; border:none;">
+                        ${busType}
+                        ${isElectric ? '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning" style="font-size:0.5em;"><iconify-icon icon="mdi:lightning-bolt"></iconify-icon></span>' : ''}
+                    </button>
+                `;
+            }).join('')}
+        </div>
+        <hr>
+        `;
+    }
 
     outputElement.innerHTML = `
     <div class="pt-sans-narrow-bold">
@@ -185,12 +384,154 @@ function getJurusan(koridorNumber, service) {
             "
         >${koridorNumber}</span>
         <br><span class="text-muted badge fw-bold">${service}</span>
+        ${isAMARI ? '<br><span class="badge bg-success mt-1">AMARI</span>' : ''}
     </div>
     <div class="pt-sans-narrow-bold fw-bold"><small>${halteAwal} - ${halteAkhir}</small></div>
     <hr>
     <span class="text-muted fw-bold small">Operator Bus :</span>
     <div class="pt-sans-narrow-bold mt-2"><span class="fw-bold" style="color:${getKoridorBadgeColor(koridorNumber)};">${operator}</span></div>
-`;
+    ${busTypeHtml}
+    <span class="text-muted fw-bold small">Tarif :</span>
+    <div class="pt-sans-narrow-bold mt-2">
+        <div class="alert ${tarif.amount === 2000 ? 'alert-info' : 'alert-warning'} py-2 small mb-2">
+            <iconify-icon icon="mdi:cash-multiple"></iconify-icon>
+            <b>Rp ${tarif.amount.toLocaleString('id-ID')}</b> - ${tarif.description}
+            <br>
+            <small>${tarif.period}</small>
+        </div>
+    </div>
+    <hr>
+    <span class="text-muted fw-bold small">Status Operasi :</span>
+    <div class="pt-sans-narrow-bold mt-2">
+        ${isAMARI ? `
+        <div class="alert alert-success py-2 small mb-2">
+            <iconify-icon icon="mdi:bus-clock"></iconify-icon>
+            <b>Grand AMARI</b> - Beroperasi 24 jam nonstop
+        </div>
+        ` : `
+        <div class="alert ${operationalStatus.isOperational ? 'alert-success' : 'alert-danger'} py-2 small mb-2">
+            <iconify-icon icon="mdi:bus-clock"></iconify-icon>
+            <b>${operationalStatus.message}</b>
+        </div>
+        <div class="small">
+            ${operationalStatus.schedule.weekday ? `
+            <div class="mb-1">
+                <b>${operationalStatus.schedule.weekday.dayRange} <br> ${formatHours(operationalStatus.schedule.weekday.hours)}
+            </div>
+            ` : ''}
+        </div>
+        `}
+    </div>
+    ${service === "Non-BRT" ? `
+    <hr>
+    <span class="text-muted fw-bold small">Arah :</span>
+    <div class="pt-sans-narrow-bold mt-2">
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <button class="btn btn-sm rounded-5 direction-btn active" data-direction="forward" style="background:${getKoridorBadgeColor(koridorNumber)}; color:white; border:none; min-width:150px; padding: 8px 16px;">
+                <iconify-icon icon="mdi:arrow-right"></iconify-icon> ${halteAwal}
+            </button>
+            <button class="btn btn-sm rounded-5 direction-btn" data-direction="backward" style="background:transparent; color:${getKoridorBadgeColor(koridorNumber)}; border:2px solid ${getKoridorBadgeColor(koridorNumber)}; min-width:150px; padding: 8px 16px;">
+                <iconify-icon icon="mdi:arrow-left"></iconify-icon> ${halteAkhir}
+            </button>
+        </div>
+        <div id="haltesList-${koridorNumber}" class="mt-3"></div>
+    </div>
+    ` : ''}
+    `;
+
+    // Add event listeners after the HTML is inserted
+    if (service === "Non-BRT") {
+        const buttons = outputElement.querySelectorAll('.direction-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                buttons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.background = 'transparent';
+                    btn.style.color = getKoridorBadgeColor(koridorNumber);
+                    btn.style.border = `2px solid ${getKoridorBadgeColor(koridorNumber)}`;
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                this.style.background = getKoridorBadgeColor(koridorNumber);
+                this.style.color = 'white';
+                this.style.border = 'none';
+
+                const direction = this.getAttribute('data-direction');
+                const halteAwal = koridor.start;
+                const halteAkhir = koridor.end;
+                
+                // Khusus untuk Koridor 11Q, selalu gunakan directions
+                if (koridorNumber === "11Q") {
+                    if (direction === 'forward') {
+                        showHaltes(
+                            koridorNumber,
+                            halteAwal,
+                            halteAkhir,
+                            koridor.directions[halteAwal]
+                        );
+                    } else {
+                        showHaltes(
+                            koridorNumber,
+                            halteAkhir,
+                            halteAwal,
+                            koridor.directions[halteAkhir]
+                        );
+                    }
+                } else {
+                    // Untuk koridor lain, cek apakah ada data directions
+                    const hasDirections = koridor.directions && 
+                        koridor.directions[halteAwal] && 
+                        koridor.directions[halteAkhir] &&
+                        koridor.directions[halteAwal].length > 0 &&
+                        koridor.directions[halteAkhir].length > 0;
+
+                    if (hasDirections) {
+                        // Gunakan data directions jika ada
+                        if (direction === 'forward') {
+                            showHaltes(
+                                koridorNumber,
+                                halteAwal,
+                                halteAkhir,
+                                koridor.directions[halteAwal]
+                            );
+                        } else {
+                            showHaltes(
+                                koridorNumber,
+                                halteAkhir,
+                                halteAwal,
+                                koridor.directions[halteAkhir]
+                            );
+                        }
+                    } else {
+                        // Fallback ke data haltes jika directions tidak ada
+                        if (direction === 'forward') {
+                            showHaltes(
+                                koridorNumber,
+                                halteAwal,
+                                halteAkhir,
+                                koridor.haltes.slice(0, Math.floor(koridor.haltes.length/2))
+                            );
+                        } else {
+                            showHaltes(
+                                koridorNumber,
+                                halteAkhir,
+                                halteAwal,
+                                koridor.haltes.slice(Math.floor(koridor.haltes.length/2)).reverse()
+                            );
+                        }
+                    }
+                }
+            });
+        });
+
+        // Trigger click on forward button by default
+        const forwardButton = outputElement.querySelector('[data-direction="forward"]');
+        if (forwardButton) {
+            forwardButton.click();
+        }
+    }
 }
 
 // Menampilkan daftar halte dalam koridor yang dipilih
@@ -209,6 +550,8 @@ function displayKoridorResults(service, koridor) {
     const jurusanDiv = document.createElement('div');
     resultsContainer.appendChild(jurusanDiv);
 
+    // Show halte list for BRT routes
+    if (serviceType === "BRT") {
     // Buat mapping halte ke semua index kemunculannya
     const halteIndexes = {};
     koridorDataEntry.haltes.forEach((halte, idx) => {
@@ -238,8 +581,7 @@ function displayKoridorResults(service, koridor) {
             nomorUrut = Math.min(...halteIndexes[halte]) + 1;
             // Jika setelah Masjid Agung, tambahkan offset jika perlu
             if (koridor === "1" && idx > koridorDataEntry.haltes.indexOf("Masjid Agung")) {
-                // Karena dua halte (ASEAN & Kejaksaan Agung) share nomor 2, offset -1
-                nomorUrut = idx; // Karena idx dimulai dari 0, ini sudah benar
+                    nomorUrut = idx;
             }
         }
 
@@ -257,7 +599,7 @@ function displayKoridorResults(service, koridor) {
         const left = document.createElement('div');
         left.className = "d-flex align-items-center";
         left.style.flex = "1";
-        left.style.minWidth = "200px"; // Minimum width untuk bagian kiri
+            left.style.minWidth = "200px";
 
         // Badge nomor urut halte
         const nomorBadge = document.createElement('span');
@@ -292,8 +634,8 @@ function displayKoridorResults(service, koridor) {
         const badges = document.createElement('div');
         badges.className = "d-flex flex-wrap gap-1";
         badges.style.flexShrink = "0";
-        badges.style.maxWidth = "100%"; // Maksimum width untuk badge container
-        badges.style.justifyContent = "flex-end"; // Rata kanan badge
+            badges.style.maxWidth = "100%";
+            badges.style.justifyContent = "flex-end";
 
         const servicesAndKoridors = getServicesAndKoridorsByHalte(halte);
         servicesAndKoridors.forEach(({ service: svc, koridor: kor }) => {
@@ -316,12 +658,13 @@ function displayKoridorResults(service, koridor) {
         listItem.appendChild(badges);
         resultsContainer.appendChild(listItem);
     });
+    }
 
     getJurusan(koridor, serviceType);
 }
 
 // Fungsi untuk memilih koridor ketika badge diklik
-function selectKoridor(service, koridor) {
+window.selectKoridor = function(service, koridor) {
     // Update service select to match the selected service
     const serviceSelect = document.getElementById('serviceSelect');
     serviceSelect.value = service;
@@ -935,6 +1278,21 @@ function formatRute(path) {
 }
 
 function findRouteKhusus(halteAsal, halteTujuan) {
+    // Cek apakah kedua halte ada di koridor AMARI
+    const amariKoridors = [];
+    for (const [service, koridors] of Object.entries(koridorData)) {
+        for (const [koridor, data] of Object.entries(koridors)) {
+            if (data.isAMARI && data.haltes.includes(halteAsal) && data.haltes.includes(halteTujuan)) {
+                amariKoridors.push({ service, koridor });
+            }
+        }
+    }
+
+    if (amariKoridors.length > 0) {
+        const { service, koridor } = amariKoridors[0];
+        return `Naik ${service} Koridor ${koridor} (AMARI) langsung dari ${halteAsal} ke ${halteTujuan}.`;
+    }
+
     // Daftar rute khusus dengan patokan halte integrasi
     const ruteKhusus = {
         "Blok M-Pulo Gebang": {
@@ -1004,4 +1362,65 @@ function findRouteKhusus(halteAsal, halteTujuan) {
     }
 
     return null;
+}
+
+// Function to show haltes for a specific direction
+function showHaltes(koridorNumber, start, end, haltes) {
+    const container = document.getElementById(`haltesList-${koridorNumber}`);
+    if (!container) return;
+
+    const halteList = haltes.map((halte, index) => {
+        const isKRL = halteKRL.includes(halte);
+        const isMRT = halteMRT.includes(halte);
+        const halteLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Halte Transjakarta ' + halte)}`;
+        
+        // Get all koridors that pass through this halte
+        const servicesAndKoridors = getServicesAndKoridorsByHalte(halte);
+        
+        return `
+            <tr style="background: transparent; border-left: none; border-right: none;">
+                <td class="align-middle" style="width: 50px; background: transparent; border-left: none; border-right: none;">
+                    <span class="badge rounded-circle" style="background:${getKoridorBadgeColor(koridorNumber)}; color:white; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.9rem; border-radius:50%;">
+                        ${String(index + 1).padStart(2, '0')}
+                    </span>
+                </td>
+                <td class="align-middle" style="width: 100%; background: transparent; border-left: none; border-right: none;">
+                    <a href="${halteLink}" target="_blank" class="text-decoration-none text-dark d-block text-start" style="font-size: 0.875rem;">
+                        ${halte}
+                        ${isKRL ? ' <iconify-icon inline icon="jam:train"></iconify-icon>' : ''}
+                        ${isMRT ? ' <iconify-icon inline icon="pepicons-pop:train-circle"></iconify-icon>' : ''}
+                    </a>
+                </td>
+                <td class="align-middle" style="width: 120px; text-align: right; background: transparent; border-left: none; border-right: none;">
+                    <div class="d-flex flex-wrap gap-1 justify-content-end" style="min-width: 120px;">
+                        ${servicesAndKoridors.map(({ service, koridor }) => {
+                            if (koridor !== koridorNumber) {
+                                return `<span class="badge rounded-circle" style="background:${getKoridorBadgeColor(koridor)}; color:white; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.7rem; border-radius:50%; cursor:pointer;" onclick="window.selectKoridor('${service}', '${koridor}')">${koridor}</span>`;
+                            }
+                            return '';
+                        }).join('')}
+                        ${integrasiBadge[halte] ? integrasiBadge[halte].map(kor => {
+                            if (kor !== koridorNumber) {
+                                return `<span class="badge rounded-circle" style="background:${getKoridorBadgeColor(kor)}; color:white; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.7rem; border-radius:50%; cursor:pointer;" onclick="window.selectKoridor('BRT', '${kor}')">${kor}</span>`;
+                            }
+                            return '';
+                        }).join('') : ''}
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="text-center mb-3">
+            <div class="fw-bold mb-2">Arah: ${start}</div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered mb-0" style="width: 100%; background: transparent; border-left: none; border-right: none;">
+                <tbody style="border-left: none; border-right: none;">
+                    ${halteList}
+                </tbody>
+            </table>
+        </div>
+    `;
 }
