@@ -276,9 +276,12 @@ export const koridorData = {
         "9N": { 
             start: "Pinang Ranti",
             end: "Simpang Cawang",
+            busType: [
+                 "Mercedes-Benz OH 1626",
+            ],
             operator: "Transjakarta (TJ) & Mayasari Bakti (MB/MYS)",operationalSchedule: {
                 weekday: {
-                    days: [0, 6], // Senin-Jumat
+                    days: [6, 0], // Senin-Jumat
                     hours: { start: 5, end: 22 }
                 },
                 },
