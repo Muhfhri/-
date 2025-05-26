@@ -453,8 +453,8 @@ function getJurusan(koridorNumber, service) {
                 type: "BRT Biasa"
             },
             "Hino RK8 R260": {
-                operators: ["Perum DAMRI"],
-                type: "BRT Biasa"
+                operators: ["Perum DAMRI", "Bianglala Metropolitan"],
+                type: "Layanan AMARI Transjakarta"
             },
             
             // Zhongtong Buses

@@ -12,6 +12,7 @@ export const koridorData = {
                 "Mercedes-Benz OH 1626",
                 "Scania K320IA","Scania K3410IB",
                 "Skywell NJL6126BEV",
+                "Hino RK8 R260",
                 "Mercedes-Benz OC 500 RF 2542",
             ],
             haltes: ["Blok M", "ASEAN", "Kejaksaan Agung", "Masjid Agung", "Bundaran Senayan",
@@ -25,6 +26,7 @@ export const koridorData = {
             end: "Monumen Nasional",
             operator: "DAMRI (DMR)",
             busType: [
+                "Hino RK8 R260",
                 "Zhongtong Bus LCK6126EVGRA1", 
                 "Skywell NJL6126BEV",
             ],
@@ -99,10 +101,9 @@ export const koridorData = {
             operator: "Transjakarta (TJ) , DAMRI (DMR)",
             busType: [
                 "Zhongtong Bus LCK6126EVGRA1",
-                "Hino RK1 JSNL",
+                "Hino RK8 R260",
                 "Mercedes-Benz OH 1626",
                 "Mercedes-Benz OH 1526",
-                "Hino RK8 R260",
                 "Skywell NJL6126BEV"
             ],
             isAMARI: true,
