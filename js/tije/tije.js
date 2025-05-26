@@ -162,7 +162,9 @@ function getOperationalStatus(koridorNumber, service) {
 
     const now = new Date();
     const currentDay = now.getDay(); // 0 = Minggu, 1 = Senin, dst
-    const currentHour = now.getHours() + now.getMinutes()/60;
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTime = currentHour + currentMinute/60;
 
     // Default jam operasi untuk semua koridor
     const defaultHours = {
@@ -186,9 +188,16 @@ function getOperationalStatus(koridorNumber, service) {
         const isOperationalDay = days.includes(currentDay);
         
         if (!isOperationalDay) {
+            // Hitung hari sampai operasi berikutnya
+            const nextOperationalDay = days.find(day => day > currentDay) || days[0];
+            const daysUntilNext = nextOperationalDay > currentDay ? 
+                nextOperationalDay - currentDay : 
+                7 - currentDay + nextOperationalDay;
+            
             return {
                 isOperational: false,
                 message: "Tidak beroperasi pada hari ini",
+                timeInfo: `${daysUntilNext} hari lagi`,
                 schedule: {
                     weekday: { 
                         hours: hours,
@@ -211,7 +220,7 @@ function getOperationalStatus(koridorNumber, service) {
             }));
             
             isOperational = hours.some(slot => 
-                currentHour >= slot.start && currentHour < slot.end
+                currentTime >= slot.start && currentTime < slot.end
             );
         } else {
             // Single time slot
@@ -220,13 +229,39 @@ function getOperationalStatus(koridorNumber, service) {
                 end: hours.end,
                 period: ""
             }];
-            isOperational = currentHour >= hours.start && currentHour < hours.end;
+            isOperational = currentTime >= hours.start && currentTime < hours.end;
+        }
+
+        // Hitung waktu tersisa atau waktu mulai
+        let timeInfo = "";
+        if (isOperational) {
+            const nextEnd = timeSlots.find(slot => currentTime >= slot.start && currentTime < slot.end)?.end;
+            if (nextEnd) {
+                const remainingHours = Math.floor(nextEnd - currentTime);
+                const remainingMinutes = Math.round((nextEnd - currentTime - remainingHours) * 60);
+                timeInfo = ` (${remainingHours} jam ${remainingMinutes} menit lagi)`;
+            }
+        } else {
+            // Cari slot operasi berikutnya
+            const nextSlot = timeSlots.find(slot => slot.start > currentTime);
+            if (nextSlot) {
+                const hoursUntilStart = Math.floor(nextSlot.start - currentTime);
+                const minutesUntilStart = Math.round((nextSlot.start - currentTime - hoursUntilStart) * 60);
+                timeInfo = ` (${hoursUntilStart} jam ${minutesUntilStart} menit lagi)`;
+            } else {
+                // Jika tidak ada slot lagi hari ini, hitung sampai besok
+                const firstSlot = timeSlots[0];
+                const hoursUntilStart = Math.floor(24 - currentTime + firstSlot.start);
+                const minutesUntilStart = Math.round((24 - currentTime + firstSlot.start - hoursUntilStart) * 60);
+                timeInfo = ` (${hoursUntilStart} jam ${minutesUntilStart} menit lagi)`;
+            }
         }
 
         if (isOperational) {
             return {
                 isOperational: true,
                 message: "Sedang beroperasi",
+                timeInfo: timeInfo.replace(/[()]/g, ''),
                 schedule: {
                     weekday: { 
                         hours: timeSlots,
@@ -238,6 +273,7 @@ function getOperationalStatus(koridorNumber, service) {
             return {
                 isOperational: false,
                 message: "Di luar jam operasi",
+                timeInfo: timeInfo.replace(/[()]/g, ''),
                 schedule: {
                     weekday: { 
                         hours: timeSlots,
@@ -249,10 +285,13 @@ function getOperationalStatus(koridorNumber, service) {
     }
 
     // Gunakan default schedule jika tidak ada jadwal khusus
-    if (currentHour >= defaultHours.start && currentHour < defaultHours.end) {
+    if (currentTime >= defaultHours.start && currentTime < defaultHours.end) {
+        const remainingHours = Math.floor(defaultHours.end - currentTime);
+        const remainingMinutes = Math.round((defaultHours.end - currentTime - remainingHours) * 60);
         return {
             isOperational: true,
             message: "Sedang beroperasi",
+            timeInfo: `${remainingHours} jam ${remainingMinutes} menit lagi`,
             schedule: {
                 weekday: { 
                     hours: [{
@@ -265,9 +304,13 @@ function getOperationalStatus(koridorNumber, service) {
             }
         };
     } else {
+        // Hitung waktu sampai operasi besok
+        const hoursUntilStart = Math.floor(24 - currentTime + defaultHours.start);
+        const minutesUntilStart = Math.round((24 - currentTime + defaultHours.start - hoursUntilStart) * 60);
         return {
             isOperational: false,
             message: "Di luar jam operasi",
+            timeInfo: `${hoursUntilStart} jam ${minutesUntilStart} menit lagi`,
             schedule: {
                 weekday: { 
                     hours: [{
@@ -302,26 +345,35 @@ function isAMARIKoridor(koridorNumber, service) {
 // Fungsi untuk mendapatkan tarif berdasarkan jam
 function getTarif() {
     const now = new Date();
-    const jam = now.getHours() + now.getMinutes()/60;
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTime = currentHour + currentMinute/60;
     
     // Tarif 2000 untuk jam 05:00 - 07:00
-    if (jam >= 5 && jam < 7) {
+    if (currentTime >= 5 && currentTime < 7) {
+        const remainingMinutes = Math.round((7 - currentTime) * 60);
         return {
             amount: 2000,
-            period: "05:00 - 07:00",
-            description: "Tarif Awal"
+            period: "05:00 - 06:59",
+            description: "Tarif Awal",
+            timeInfo: `Berlaku ${remainingMinutes} menit lagi`
         };
     }
     
     // Tarif 3500 untuk jam 07:00 - 04:59
+    const nextTarifAwal = currentTime < 5 ? 0 : 24 - currentTime + 5;
+    const hoursUntilNext = Math.floor(nextTarifAwal);
+    const minutesUntilNext = Math.round((nextTarifAwal - hoursUntilNext) * 60);
+    
     return {
         amount: 3500,
         period: "07:00 - 04:59",
-        description: "Tarif Normal"
+        description: "Tarif Normal",
+        timeInfo: `Berlaku ${hoursUntilNext} jam ${minutesUntilNext} menit lagi`
     };
 }
 
-// Update fungsi getJurusan untuk menampilkan status operasi
+// Update fungsi getJurusan untuk menampilkan status operasi dan tarif real-time
 function getJurusan(koridorNumber, service) {
     const koridor = koridorData[service]?.[koridorNumber];
     const outputElement = document.getElementById("jurusan");
@@ -351,13 +403,107 @@ function getJurusan(koridorNumber, service) {
 
     let busTypeHtml = '';
     if (busTypes.length > 0) {
+        // Create a mapping of bus types to their specific operators and type
+        const busTypeToOperators = {
+            // Volvo Buses
+            "Volvo B11R": {
+                operators: ["Steady Safe (SAF)"],
+                type: "BRT MAXI"
+            },
+            
+            // Mercedes-Benz Buses
+            "Mercedes-Benz OH 1626": {
+                operators: ["PT Transportasi Jakarta", "Mayasari Bakti", "Bianglala Metropolitan"],
+                type: "BRT Biasa"
+            },
+            "Mercedes-Benz OH 1526": {
+                operators: ["PT Transportasi Jakarta"],
+                type: "BRT Biasa"
+            },
+            "Mercedes-Benz O500U": {
+                operators: ["Transjakarta (TJ)"],
+                type: "Low Deck Non-BRT Swakelola"
+            },
+            "Mercedes-Benz OC 500 RF 2542": {
+                operators: ["Swakelola Transjakarta"],
+                type: "BRT Maxi"
+            },
+            
+            // Scania Buses
+            "Scania K320IA": {
+                operators: ["Mayasari Bakti"],
+                type: "Bus Gandeng"
+            },
+            "Scania K3410IB": {
+                operators: ["Mayasari Bakti"],
+                type: "Bus Gandeng"
+            },
+            "Scania K310IB": {
+                operators: ["Mayasari Bakti"],
+                type: "BRT Maxi"
+            },
+            "Scania K250UB": {
+                operators: ["Transjakarta (TJ)"],
+                type: "Low Deck Non-BRT Swakelola"
+            },
+            
+            // Hino Buses
+            "Hino RK1 JSNL": {
+                operators: ["Swakelola Transjakarta"],
+                type: "BRT Biasa"
+            },
+            "Hino RK8 R260": {
+                operators: ["Perum DAMRI"],
+                type: "BRT Biasa"
+            },
+            
+            // Zhongtong Buses
+            "Zhongtong Bus LCK6180GC": {
+                operators: ["Perum DAMRI"],
+                type: "Bus Gandeng"
+            },
+            "Zhongtong Bus LCK6126EVGRA1": {
+                operators: ["Perum DAMRI"],
+                type: "Bus Listrik BRT"
+            },
+            
+            // Electric Buses
+            "SAG Golden Dragon XML6125JEVJ0C3": {
+                operators: ["Bianglala Metropolitan"],
+                type: "Bus Listrik BRT"
+            },
+            "Skywell NJL6126BEV": {
+                operators: ["Perum DAMRI"],
+                type: "Bus Listrik BRT"
+            },
+            "Skywell NJL6129BEV": {
+                operators: ["Perum DAMRI"],
+                type: "Bus Listrik Low Deck"
+            },
+            "VKTR BYD D9 (EV)": {
+                operators: ["Sinar Jaya Megah Langgeng"],
+                type: "Bus Listrik BRT"
+            }
+        };
+
         busTypeHtml = `
         <span class="text-muted fw-bold small">Jenis Bus :</span>
         <div class="pt-sans-narrow-bold mt-2">
             ${busTypes.map(busType => {
                 const isElectric = busType.toLowerCase().includes('ev') || busType.toLowerCase().includes('listrik');
+                const busInfo = busTypeToOperators[busType] || { operators: [], type: 'Tidak ada data' };
+                const operatorList = busInfo.operators.join(', ');
+                
                 return `
-                    <button class="btn btn-sm mb-1 me-1 rounded-5 position-relative" style="background:${getKoridorBadgeColor(koridorNumber)}; color:white; border:none;">
+                    <button 
+                        class="btn btn-sm mb-1 me-1 rounded-5 position-relative" 
+                        style="background:${getKoridorBadgeColor(koridorNumber)}; color:white; border:none;"
+                        data-bs-toggle="popover"
+                        data-bs-trigger="hover"
+                        data-bs-placement="top"
+                        data-bs-html="true"
+                        data-bs-content="<b>Operator:</b><br>${operatorList || 'Tidak ada data operator'}<br><br><b>Tipe:</b><br>${busInfo.type}"
+                    >
                         ${busType}
                         ${isElectric ? '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning" style="font-size:0.5em;"><iconify-icon icon="mdi:lightning-bolt"></iconify-icon></span>' : ''}
                     </button>
@@ -385,12 +531,18 @@ function getJurusan(koridorNumber, service) {
             "
         >${koridorNumber}</span>
         <br><span class="text-muted badge fw-bold">${service}</span>
-        ${isAMARI ? '<br><span class="badge bg-success mt-1">AMARI</span>' : ''}
+        ${isAMARI ? '<br><span class="badge bg-success rounded-5 mt-1">AMARI</span>' : ''}
     </div>
     <div class="pt-sans-narrow-bold fw-bold"><small>${halteAwal} - ${halteAkhir}</small></div>
     <hr>
     <span class="text-muted fw-bold small">Operator Bus :</span>
-    <div class="pt-sans-narrow-bold mt-2"><span class="fw-bold" style="color:${getKoridorBadgeColor(koridorNumber)};">${operator}</span></div>
+<div class="pt-sans-narrow-bold mt-2">
+    ${
+        (Array.isArray(operator) ? operator : operator.split(',')).map(op => `
+            <span class="badge me-1 shadow-lg rounded-5" style="background:${getKoridorBadgeColor(koridorNumber)};">${op.trim()}</span>
+        `).join('')
+    }
+</div>
     ${busTypeHtml}
     <span class="text-muted fw-bold small">Tarif :</span>
     <div class="pt-sans-narrow-bold mt-2">
@@ -399,6 +551,8 @@ function getJurusan(koridorNumber, service) {
             <b>Rp ${tarif.amount.toLocaleString('id-ID')}</b> - ${tarif.description}
             <br>
             <small>${tarif.period}</small>
+            <br>
+            <small>${tarif.timeInfo}</small>
         </div>
     </div>
     <hr>
@@ -413,6 +567,11 @@ function getJurusan(koridorNumber, service) {
         <div class="alert ${operationalStatus.isOperational ? 'alert-success' : 'alert-danger'} py-2 small mb-2">
             <iconify-icon icon="mdi:bus-clock"></iconify-icon>
             <b>${operationalStatus.message}</b>
+        </div>
+        <div class="small mb-2">
+            <span class="badge rounded-5" style="background:${operationalStatus.isOperational ? '#198754' : '#dc3545'}; color:white;">
+                ${operationalStatus.timeInfo}
+            </span>
         </div>
         <div class="small">
             ${operationalStatus.schedule.weekday ? `
@@ -439,6 +598,10 @@ function getJurusan(koridorNumber, service) {
     </div>
     ` : ''}
     `;
+
+    // Initialize Bootstrap popovers
+    const popoverTriggerList = outputElement.querySelectorAll('[data-bs-toggle="popover"]');
+    [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 
     // Add event listeners after the HTML is inserted
     if (service === "Non-BRT") {
@@ -681,7 +844,7 @@ window.selectKoridor = function(service, koridor) {
         
         // Scroll to halte list section with offset
         const halteSection = document.getElementById('koridorResults');
-        const offset = 350; // Adjust this value to control scroll position
+        const offset = 750; // Adjust this value to control scroll position
         const elementPosition = halteSection.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - offset;
         
