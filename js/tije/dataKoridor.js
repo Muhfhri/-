@@ -367,7 +367,8 @@ export const koridorData = {
             isAMARI: true,
             busType: [
                 "Volvo B11R",
-                "Mercedes-Benz OH 1626"
+                "Mercedes-Benz OH 1626",
+                "Hino RK8 R260",
             ],
             operator: "Steady Safe (SAF) , Bianglala Metropolitan (BMP)",
             haltes: ["Pulo Gebang", "Walikota Jakarta Timur", "Penggilingan", "Flyover Pondok Kopi", "Simpang Buaran", "Buaran", "Kampung Sumur", "Klender", "Stasiun Klender", "Cipinang", "Flyover Cipinang", "Pasar Enjo", "Flyover Jatinegara", "Stasiun Jatinegara", "Jatinegara", "Kampung Melayu"]
