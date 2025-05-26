@@ -30,7 +30,7 @@ export const koridorData = {
                 "Zhongtong Bus LCK6126EVGRA1", 
                 "Skywell NJL6126BEV",
             ],
-            isAmari: true,
+            isAMARI: true,
             haltes: ["Pulo Gadung", "Bermis", "Pulo Mas", "Perintis Kemerdekaan", "Pedongkelan",
                 "Cempaka Mas", "Sumur Batu", "Cempaka Baru", "Pasar Cempaka Putih",
                 "Rawa Selatan", "Galur", "Senen TOYOTA Rangga", "Senen Raya", "RSPAD",
@@ -327,6 +327,7 @@ export const koridorData = {
                 "Zhongtong Bus LCK6180GC",
                 "Volvo B11R",
                 "Mercedes-Benz OH 1626",
+                "Hino RK8 R260",
                 "Scania K320IA","Scania K3410IB",
                 "Skywell NJL6126BEV","VKTR BYD D9 (EV)",
             ],
@@ -425,6 +426,11 @@ export const koridorData = {
             start: "Jakarta International Stadium",
             end: "Senen",
             isAMARI: true,
+            busType: [
+                "Mercedes-Benz OH 1626",
+                "Hino RK8 R260",
+                "Skywell NJL6126BEV","VKTR BYD D9 (EV)",
+            ],
             operator: "Transjakarta (TJ), Sinar Jaya Megah (SJM) , DAMRI (DMR)",
             haltes: ["Senen TOYOTA Rangga", "Senen Raya", "Tanah Tinggi", "Kemayoran", "JIEXPO Kemayoran", "Landasan Pacu", "Danau Agung", "Danau Sunter", "Jembatan Item", "Jakarta International Stadium"]
         },
