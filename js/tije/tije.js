@@ -20,6 +20,7 @@ function getKoridorBadgeColor(koridor) {
         "6B": "#99C175",
         "6V": "#3C9F68",
         "7": "#E2275B",   
+        "L7": "#E2275B",   
         "7D": "#53bbb9",   
         "7F": "#ff326b", 
         "8": "#CC2990", 
@@ -373,6 +374,21 @@ function getTarif() {
     };
 }
 
+// Function to create night service badge
+function createNightServiceBadge() {
+    return '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info" style="font-size:0.5em;"><iconify-icon icon="mdi:moon-waning-crescent"></iconify-icon></span>';
+}
+
+// Function to check if string contains AMARI
+function isAMARIService(str) {
+    return str.toLowerCase().includes('amari');
+}
+
+// Function to remove AMARI text from string
+function removeAMARIText(str) {
+    return str.replace(/\s*amari\s*/i, '').trim();
+}
+
 // Update fungsi getJurusan untuk menampilkan status operasi dan tarif real-time
 function getJurusan(koridorNumber, service) {
     const koridor = koridorData[service]?.[koridorNumber];
@@ -408,13 +424,17 @@ function getJurusan(koridorNumber, service) {
             // Volvo Buses
             "Volvo B11R": {
                 operators: ["Steady Safe (SAF)"],
-                type: "BRT MAXI"
+                type: "BRT Maxi"
             },
             
             // Mercedes-Benz Buses
             "Mercedes-Benz OH 1626": {
-                operators: ["PT Transportasi Jakarta", "Mayasari Bakti", "Bianglala Metropolitan"],
+                operators: ["PT Transportasi Jakarta", "Mayasari Bakti", "Bianglala Metropolitan", "Pahala Kencana Transportation"],
                 type: "BRT Biasa"
+            },
+            "Mercedes-Benz OH 1626 amari": {
+                operators: ["Bianglala Metropolitan"],
+                type: "Layanan AMARI Transjakarta"
             },
             "Mercedes-Benz OH 1526": {
                 operators: ["PT Transportasi Jakarta"],
@@ -446,14 +466,26 @@ function getJurusan(koridorNumber, service) {
                 operators: ["Transjakarta (TJ)"],
                 type: "Low Deck Non-BRT Swakelola"
             },
+            "Scania K250IB": {
+                operators: ["PT Transportasi Jakarta"],
+                type: "BRT Biasa"
+            },
             
             // Hino Buses
             "Hino RK1 JSNL": {
-                operators: ["Swakelola Transjakarta"],
+                operators: ["Swakelola Transjakarta", "Bianglala Metropolitan"],
                 type: "BRT Biasa"
             },
             "Hino RK8 R260": {
                 operators: ["Perum DAMRI", "Bianglala Metropolitan"],
+                type: "BRT Biasa"
+            },
+            "Hino RK1 JSNL amari": {
+                operators: ["Bianglala Metropolitan"],
+                type: "Layanan AMARI  Transjakarta"
+            },
+            "Hino RK8 R260 amari": {
+                operators: ["Bianglala Metropolitan"],
                 type: "Layanan AMARI Transjakarta"
             },
             
@@ -482,7 +514,7 @@ function getJurusan(koridorNumber, service) {
             },
             "VKTR BYD D9 (EV)": {
                 operators: ["Sinar Jaya Megah Langgeng"],
-                type: "Bus Listrik BRT"
+                type: "Bus Listrik BRT E-Cityline 3 Laksana"
             }
         };
 
@@ -491,8 +523,10 @@ function getJurusan(koridorNumber, service) {
         <div class="pt-sans-narrow-bold mt-2">
             ${busTypes.map(busType => {
                 const isElectric = busType.toLowerCase().includes('ev') || busType.toLowerCase().includes('listrik');
+                const isAMARIBus = isAMARIService(busType);
                 const busInfo = busTypeToOperators[busType] || { operators: [], type: 'Tidak ada data' };
                 const operatorList = busInfo.operators.join(', ');
+                const displayBusType = removeAMARIText(busType);
                 
                 return `
                     <button 
@@ -504,8 +538,9 @@ function getJurusan(koridorNumber, service) {
                         data-bs-html="true"
                         data-bs-content="<b>Operator:</b><br>${operatorList || 'Tidak ada data operator'}<br><br><b>Tipe:</b><br>${busInfo.type}"
                     >
-                        ${busType}
+                        ${displayBusType}
                         ${isElectric ? '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning" style="font-size:0.5em;"><iconify-icon icon="mdi:lightning-bolt"></iconify-icon></span>' : ''}
+                        ${isAMARIBus ? createNightServiceBadge() : ''}
                     </button>
                 `;
             }).join('')}
@@ -513,6 +548,19 @@ function getJurusan(koridorNumber, service) {
         <hr>
         `;
     }
+
+    // Process operator string to handle AMARI indicators
+    const operatorHtml = (Array.isArray(operator) ? operator : operator.split(',')).map(op => {
+        const isAMARIOperator = isAMARIService(op);
+        const displayOperator = removeAMARIText(op);
+        
+        return `
+            <span class="badge me-1 shadow-lg rounded-5 position-relative" style="background:${getKoridorBadgeColor(koridorNumber)};">
+                ${displayOperator}
+                ${isAMARIOperator ? createNightServiceBadge() : ''}
+            </span>
+        `;
+    }).join('');
 
     outputElement.innerHTML = `
     <div class="pt-sans-narrow-bold">
@@ -531,18 +579,14 @@ function getJurusan(koridorNumber, service) {
             "
         >${koridorNumber}</span>
         <br><span class="text-muted badge fw-bold">${service}</span>
-        ${isAMARI ? '<br><span class="badge bg-success rounded-5 mt-1">AMARI</span>' : ''}
+        ${isAMARI ? '<br><span class="badge bg-info rounded-5 mt-1"><iconify-icon inline icon="mdi:moon-waning-crescent"></iconify-icon> AMARI</span>' : ''}
     </div>
     <div class="pt-sans-narrow-bold fw-bold"><small>${halteAwal} - ${halteAkhir}</small></div>
     <hr>
     <span class="text-muted fw-bold small">Operator Bus :</span>
-<div class="pt-sans-narrow-bold mt-2">
-    ${
-        (Array.isArray(operator) ? operator : operator.split(',')).map(op => `
-            <span class="badge me-1 shadow-lg rounded-5" style="background:${getKoridorBadgeColor(koridorNumber)};">${op.trim()}</span>
-        `).join('')
-    }
-</div>
+    <div class="pt-sans-narrow-bold mt-2">
+        ${operatorHtml}
+    </div>
     ${busTypeHtml}
     <span class="text-muted fw-bold small">Tarif :</span>
     <div class="pt-sans-narrow-bold mt-2">
@@ -559,7 +603,7 @@ function getJurusan(koridorNumber, service) {
     <span class="text-muted fw-bold small">Status Operasi :</span>
     <div class="pt-sans-narrow-bold mt-2">
         ${isAMARI ? `
-        <div class="alert alert-success py-2 small mb-2">
+        <div class="alert alert-info py-2 small mb-2">
             <iconify-icon icon="mdi:bus-clock"></iconify-icon>
             <b>Grand AMARI</b> - Beroperasi 24 jam nonstop
         </div>
