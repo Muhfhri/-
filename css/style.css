@@ -134,7 +134,24 @@ img {
   font-weight: bold;
   color: white;
 }
+.prism-lang-label {
+  display: block;
+  padding: 0.4em 1em 0.4em 1em;
+  font-size: 0.95em;
+  font-family: inherit;
+  font-weight: 600;
+  background: #282c34; /* ganti sesuai background Prism.js kamu */
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1.5px solid #444;
+  margin-bottom: -0.3em;
+  letter-spacing: 0.04em;
+}
 
+pre[class*="language-"] {
+  border-radius: 0 0 8px 8px;
+  margin-top: 0;
+}
 hr {
   opacity: 0;
 }

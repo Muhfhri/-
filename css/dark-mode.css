@@ -4,21 +4,21 @@
  * Licensed under MIT (https://github.com/coliff/dark-mode-switch/blob/main/LICENSE)
  */
 body {
-  background-color: #F1F0F4 !important;
-  color: #222;
+  background-color: #f9f9ff !important;
+  color: #191c20;
   transition: background 0.5s, color 0.5s ease;
 }
 
-.bg-light {
-  background: #F1F0F4 !important;
+[data-theme="dark"] body {
+  background-color: #0c0e13 !important;
+  color: #eee;
+}
 
+.bg-light {
+  background: #f9f9ff !important;
   transition: background 0.5s;
 }
 
-[data-theme="dark"] body {
-  background-color: #0E1419 !important;
-  color: #eee;
-}
 
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -42,7 +42,7 @@ html {
 }
 
 [data-theme="dark"] .bg-light {
-  background-color: #0E1419 !important;
+  background-color:  #283141 !important;
   color: #ffffff;
 }
 
@@ -148,7 +148,7 @@ label {
   transition: background 1s;
 }
 [data-theme="dark"] #footer {
-  background: #1f2226;
+  background: #191c20;
   color: #fff;
 }
 #copy {
@@ -156,12 +156,12 @@ label {
   transition: background 1s;
 }
 [data-theme="dark"] #copy {
-  background: #171b1c;
+  background: #0c0e13;
   color: #fff;
 }
 [data-theme="dark"] .btn-outline-dark {
-  border-color: white!important;
-  color: #fff !important;
+  border-color: #ffffff !important;
+  color: #aac7ff !important;
 }
 [data-theme="dark"] .btn-outline-dark:hover {
   border-color: white !important;
@@ -174,8 +174,8 @@ label {
   transition: outline 0.15s;
 }
 [data-theme="dark"] .btn-outline-dark.active {
-  background: white !important;
-  color: #212529 !important;
+  background: #aac7ff !important;
+  color: #0a305f !important;
 }
 [data-theme="dark"] .card {
   background: #262626 !important;
@@ -193,56 +193,75 @@ label {
             box-shadow: 0 0 10px rgba(229, 229, 229, 0.115);
             margin-bottom: 2rem;
         }
+
+.page-loader {
+  position:fixed;
+     z-index:9999;
+     inset:0;
+     background:#fff;
+     display:flex;
+     align-items:center;
+     justify-content:center;
+     transition:opacity 0.7s;
+}
+[data-theme="dark"] .page-loader {
+     background:#0c0e13 !important;
+     transition:opacity 0.7s;
+}
+#horizontal-progress {
+  background-color: #284777 !important;
+}
 .btn-m3-you-color {
-  background: #84AFE0 !important;
-  color: white !important;
-  border-color: #84AFE0;
+  background: #d6e3ff !important;
+  color: #284777 !important;
+  border-color: #d6e3ff;
 }
 .btn-m3-you-color:hover, .btn-m3-you-color:focus {
-  background: #D0E4FF !important;
-  color: black !important;
-  border-color: #D0E4FF;
+  background: #284777 !important;
+  color:#d6e3ff !important;
+  border-color: #284777;
 }
+
+[data-theme="dark"] .shadow {
+  /* Contoh shadow ala bootstrap di dark mode */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.541) !important;
+}
+
 [data-theme="dark"] .btn-m3-you-color {
-  background: #D0E4FF !important;
-  color: black !important;
-  border-color: #D0E4FF;
+  background: #284777 !important;
+  color: #d6e3ff !important;
+  border-color: #284777;
 }
 [data-theme="dark"] .btn-m3-you-color:hover, .btn-m3-you-color:focus {
-  background: #84AFE0 !important;
-  color: white !important;
-  border-color: #84AFE0;
+  background: #d6e3ff !important;
+  color: #284777 !important;
+  border-color: #d6e3ff;
 }
 
-.btn-m3-you-color {
-  background: #D0E4FF !important;
-  color: black !important;
-  border-color: #D0E4FF;
+.m3-color {
+  color: #284777 !important;
 }
-.btn-m3-you-color:hover, .btn-m3-you-color:focus {
-  background: lightblue !important;
-  color: black !important;
-  border-color: #D0E4FF;
+[data-theme="dark"] .m3-color {
+  color: #d6e3ff !important;
 }
-
-.btn-outline-m3-you-color {
+.btn-outline-m3 {
   color: #84AFE0 !important;
-  border-color: #84AFE0 !important;
+  border-color: #284777!important;
 }
-.btn-outline-m3-you-color:hover {
+.btn-outline-m3:hover {
   color: white !important;
   border-color: #84AFE0 !important;
-  background: #84AFE0 !important;
+  background: #284777 !important;
   transition: outline 0.15s;
 }
-.btn-outline-m3-you-color:focus {
+.btn-outline-m3:focus {
   outline: 3px solid white !important;
 }
-[data-theme="dark"] .btn-outline-m3-you-color {
+[data-theme="dark"] .btn-outline-m3 {
   color: #D0E4FF !important;
-  border-color: #D0E4FF !important;
+  border-color: #ffffff !important;
 }
-[data-theme="dark"] .btn-outline-m3-you-color:hover, .btn-outline-m3-you-color:focus {
+[data-theme="dark"] .btn-outline-m3:hover, .btn-outline-m3:focus {
   color: black !important;
   border-color: #D0E4FF !important;
   background-color: #D0E4FF !important;
@@ -283,7 +302,7 @@ label {
 .animasi:hover {
   background-color: #0E1419;
   color: white;
- font-size: 1.2em;
+ font-size: 1.1em;
 }
 [data-theme="dark"] .animasi {
   transition: background-color 0.9s, color 1s, font-size 1s;
