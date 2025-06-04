@@ -30,7 +30,6 @@
   <link href="css/nav.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
-  <script src="js/webver.js"></script>
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/dark-mode.css">
   <link rel="stylesheet" href="css/multilevel.css">
@@ -102,7 +101,7 @@
         </div>
     </nav>
     <!-- Navbar End -->
-
+    
   <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content bg-light rounded-4">
@@ -127,7 +126,28 @@
     </div>
   </div>
 
+  <div class="container">
+     <nav aria-label="breadcrumb" class="my-3">
+  <ol class="breadcrumb bg-transparent px-3 py-2">
+    <li class="breadcrumb-item">
+      <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
+    </li>
+    <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
+      <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#" id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Others
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
+        <li><a class="dropdown-item" href="android.html">Android</a></li>
+        <li><a class="dropdown-item active" href="#">Windows</a></li>
+        <!-- Tambahkan halaman HTML lain di sini -->
+      </ul>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Windows</li>
+  </ol>
+</nav>
+  </div>
 
+  
   <div class="container" id="coltop">
     <div class="row text-center" data-aos="fade-in" data-aos-duration="3000">
       <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
@@ -145,8 +165,9 @@
     </div>
   </div>
 
-  <div>
-    <div class="container mt-5">
+         
+    <div class="container mt-4">
+
       <h2 class="fw-bold text-center"><iconify-icon inline
                         icon="mage:microsoft-windows"></iconify-icon> Windows Tools</h2>
     </div>
@@ -175,63 +196,7 @@
   </div>
 
   <!-- Footer Start -->
-  <footer class="p-2" id="footer">
-    <div class="container mb-2 text-center">
-      <a href="https://instagram.com/muhfhri._" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-        role="button"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://github.com/muhfhri" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-        role="button"><i class="fa-brands fa-github"></i></a>
-      <a href="https://www.tiktok.com/@flixpseal" id="footer-icon"
-        class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://discordapp.com/users/899644068697620491" id="footer-icon"
-        class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><iconify-icon inline
-          icon="ic:baseline-discord"></iconify-icon></a>
-    </div>
-    <div class="container small text-center">
-      <div class="row">
-        <div class="col-md-4">
-          <font class="h5 fw-bold">Projects</font>
-          <br>No More Projects, just visit my github...
-          <br><a href="https://github.com/muhfhri" class="link-none">Muhfhri GitHub</a>
-      </div>
-        <div class="col-md-4">
-          <br><br>
-          <blockquote class="h5 text-muted" style="font-family: poppins"><iconify-icon
-              icon="mingcute:quote-left-fill"></iconify-icon>
-            <script language="JavaScript">
-
-              var r_text = new Array();
-              r_text[0] = "who is the first? yess its youu >.<";
-              r_text[1] = "Flixdz To The Top!";
-              r_text[2] = "I'll depend on you...";
-              r_text[3] = "Using Material 3 You design";
-              r_text[4] = "Google Sans";
-              r_text[5] = "It's not living (If it's not with you)";
-              r_text[6] = "Planet Bekasi";;
-              var i = Math.floor(7 * Math.random())
-
-              document.write(r_text[i]);
-
-              //-->
-            </script><iconify-icon icon="mingcute:quote-right-fill"></iconify-icon>
-          </blockquote>
-          <br><br>
-        </div>
-        <div class="col-md-4">
-          <font class="h5 fw-bold">Framework</font>
-          <br>Iconify
-          <br>Font Awesome
-          <br>Bootstrap 5
-          <br><a href="https://github.com/muhfhri/-" class="text-muted link-none">More...</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <div class="text-center small p-3" id="copy"><span id="version"></span>
-    <br><span id="lastupt"></span>
-    <br>Theme by <img src="image/animation.gif" width="30">, Made with <i class="fa fa-heart" style="color: red"></i>
-    for you
-  </div>
+  <div id="footer"></div>
   <!-- Footer End -->
 
   <!-- Tombol ke atas -->
@@ -346,72 +311,6 @@
     }, 1000);
   </script>
 
-  <!-- Script Untuk Versi Dinamis Websiye di footer -->
-  <script>
-    document.getElementById("version").textContent = websiteVersion;
-    document.getElementById("lastupt").textContent = websiteDate;
-  </script>
-  <script>
-    const texts = [
-      "Muhammad Fachri Al Husein",
-      "Flixdz",
-      "@muhfhri._",
-      "Front End Developer",
-      "UI Design",
-      "♡ @nnayas_06 ^•^",
-      "To The Top!",
-      "Junior Web Developer",
-    ];
-
-    const typingSpeed = 100; // Kecepatan typing dalam milidetik
-    const delay = 1500; // Waktu jeda sebelum looping ulang dalam milidetik
-
-    const typingElement = document.getElementById("typing-effect");
-
-    let textIndex = 0;
-    let charIndex = 0;
-
-    function typeText() {
-      if (charIndex < texts[textIndex].length) {
-        typingElement.innerHTML += texts[textIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeText, typingSpeed);
-      } else {
-        setTimeout(eraseText, delay);
-      }
-    }
-
-    function eraseText() {
-      if (charIndex > 0) {
-        typingElement.innerHTML = texts[textIndex].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(eraseText, typingSpeed / 2);
-      } else {
-        textIndex = (textIndex + 1) % texts.length;
-        setTimeout(typeText, typingSpeed / 2);
-      }
-    }
-
-    typeText();
-  </script>
-
-  <script>
-    const clickableElements = document.querySelectorAll(".clickable");
-
-    clickableElements.forEach(element => {
-      element.addEventListener("click", function () {
-        if (!element.textContent.endsWith(" #")) {
-          element.textContent += " #";
-        }
-      });
-
-      document.addEventListener("click", function (event) {
-        if (!element.contains(event.target)) {
-          element.textContent = element.textContent.replace(" #", "");
-        }
-      });
-    });
-  </script>
   <!-- Script Untuk AOS -->
   <script>
     AOS.init({
@@ -424,6 +323,7 @@
   <script src="js/button_top.js"></script>
   <script src="js/dark-mode-switch.js"></script>
   <script src="js/multilevel.js"></script>
+  <script src="js/footer.js"></script>
   <!-- End Script -->
 
 </body>

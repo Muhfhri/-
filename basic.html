@@ -25,7 +25,6 @@
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/nav.css" rel="stylesheet">
-  <script src="js/webver.js"></script>
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/multilevel.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
@@ -33,348 +32,331 @@
 </head>
 
 <body>
-  <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
-    <div class="container-fluid">
-      <a href="#"><img class="navbar-brand" id="light" width="100"></a>
-      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="icon-bar top-bar"></span>
-        <span class="icon-bar middle-bar"></span>
-        <span class="icon-bar bottom-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav text-center">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="index.html">Beranda</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownMenuLink">
-              Belajar Web
-            </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li class="dropdown-submenu text-center">
-                        <a class="dropdown-item dropdown-toggle" href="#"><iconify-icon inline icon="icomoon-free:html-five"></iconify-icon> HTML 5</a>
-                        <ul class="dropdown-menu text-center">
-                        <li><a class="dropdown-item active" href="#">Basic HTML</a></li>
-                        <li><a class="dropdown-item" href="format-text.html">Format Text</a></li>
-                        </ul>
-                        
-                    <li class="dropdown-submenu text-center">
-                        <a class="dropdown-item dropdown-toggle" href="#"><iconify-icon inline icon="mdi:language-php"></iconify-icon> PHP</a>
-                        <ul class="dropdown-menu text-center">
-                        <li><a class="dropdown-item" href="basicphp.html">Basic PHP</a></li>
-                        <li><a class="dropdown-item" href="varphp.html">Variabel</a></li>
-                        </ul>
-                        </ul>
-                            </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Others
-            </a>
-            <ul class="dropdown-menu text-center">
-              <li><a class="dropdown-item" href="windows.html">Windows Tools</a></li>
-              <li><a class="dropdown-item" href="project/index.html">Project Review</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-        <div id="tampil" class="nav-link"></div>
-      </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+   <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
+        <div class="container-fluid">
+            <a href="#"><img class="navbar-brand" id="light" width="100"></a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="icon-bar top-bar"></span>
+                <span class="icon-bar middle-bar"></span>
+                <span class="icon-bar bottom-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="https://github.com/muhfhri"><iconify-icon
+                                inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
+                    </li>
+                </ul>
+                <div class="ms-auto">
+                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
+                    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
+                        data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
 
-  <div class="container" data-aos="fade-up">
-    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch"><iconify-icon id="darkmode"></iconify-icon></label>
-    <font id="tema"></font>
-  </div>
+  <nav aria-label="breadcrumb" class="my-3">
+  <ol class="breadcrumb px-3 py-2">
+    <li class="breadcrumb-item">
+      <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
+    </li>
+    <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
+      <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#" id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        HTML
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
+        <li><a class="dropdown-item active" href="#">Basic HTML</a></li>
+        <li><a class="dropdown-item" href="format-text.html">Format Text</a></li>
+        <!-- Tambahkan halaman HTML lain di sini -->
+      </ul>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Basic HTML</li>
+  </ol>
+</nav>
 
   <div class="container p-3 mb-2">
     <center data-aos="fade-up">
-      <img src="image/html5.png" width="100">
+      <iconify-icon icon="akar-icons:html-fill" inline width="100" class="m3-color"></iconify-icon>
       <br><small>Belajar HTML5</small>
     </center>
 
-    <div class="container" data-aos="zoom-in">
-      <hr>
-      <h3><i class='fa fa-mortar-board'></i> Pendahuluan</h3>
+    <!-- Pendahuluan -->
+    <div class="container py-4" data-aos="zoom-in">
+      <hr class="mb-4">
+      <h3 class="mb-3"><i class="fa fa-mortar-board"></i> Pendahuluan</h3>
       <p>
-        Kalian mau <i>Ngoding</i> tapi masih ngga ngerti konsepnya?
-        <br>Tenang aja! kali ini aku bakal ajarin kalian cara ngoding html.
+        Kalian ingin belajar <i>ngoding</i> tapi masih belum paham konsep dasarnya?
+        <br>Tenang! Kali ini saya akan ajarkan kalian cara menulis kode HTML dengan mudah.
       </p>
     </div>
 
-
-    <div class="container" data-aos="zoom-in">
-      <div class="container">
-        <p><iconify-icon inline icon="line-md:align-right"></iconify-icon>
-          <font class="h4">Isi halaman web</font>
-          <br><a href="#basik" id="daftard">Basic HTML</a>
-          <br><a href="#taghtml" id="daftard">Tag HTML</a>
-          <br><a href="#buatpara" id="daftard">Membuat Paragraf</a>
-          <br><a href="#masukgambar" id="daftard">Memasukkan Gambar</a>
-          <br><a href="#aturfont" id="daftard">Mengatur Font</a>
+    <!-- Daftar Isi -->
+    <div class="container py-4" data-aos="zoom-in">
+      <div class="p-3 border rounded bg-light">
+        <p class="mb-2">
+          <iconify-icon inline icon="line-md:align-right"></iconify-icon>
+          <span class="h5"> Daftar Isi Halaman Web</span>
         </p>
+        <ul class="list-unstyled ms-3">
+          <li><a href="#basik" class="text-decoration-none">🔹 Basic HTML</a></li>
+          <li><a href="#taghtml" class="text-decoration-none">🔹 Tag HTML</a></li>
+          <li><a href="#buatpara" class="text-decoration-none">🔹 Membuat Paragraf</a></li>
+          <li><a href="#masukgambar" class="text-decoration-none">🔹 Memasukkan Gambar</a></li>
+          <li><a href="#aturfont" class="text-decoration-none">🔹 Mengatur Font</a></li>
+        </ul>
       </div>
     </div>
 
 
-    <div class="container" data-aos="zoom-in" id="basik">
-      <hr>
-      <h3><i class='fa fa-question-circle'></i> Basic HTML</h3>
+
+    <div class="container py-4" data-aos="zoom-in" id="basik">
+      <hr class="mb-4">
+      <h3 class="mb-3"><i class="fa fa-question-circle"></i> Basic HTML</h3>
       <p>
-        Pertama siapin dulu nih alat buat ngoding kalian, seperti Komputer, Laptop, ataupun Smartphone yang kalian
-        punya.
-        <br>Aku saranin kalo kalian punya laptop dan komputer kalian bisa pakai aplikasi <a
-          href="https://code.visualstudio.com/download">Visual Studio Code</a> untuk Windows dan MacOS.
-        <br>
-        <br>"Pakai hp bisa ga?" Bisa!, <font class="text-danger">Inget ya kalo pakai hp lebih ribet daripada PC, jadi
-          tergantung niat dari kalian.</font> Jika memang ingin di hp, saya sarankan memakai sebuah aplikasi bernama <a
-          href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" class="text-success">Acode</a>
-        atau bisa cari semacamnya.
-        <br>Oke kalo udah di install dan siap untuk digunakan, ayo kita lanjut ke tahap berikutnya.
+        Pertama, siapkan dulu alat untuk ngoding kalian, seperti komputer, laptop, atau smartphone yang kalian miliki.
+        <br><br>
+        Saya sarankan jika kalian punya laptop atau komputer, gunakan aplikasi <a
+          href="https://code.visualstudio.com/download" target="_blank">Visual Studio Code</a>, tersedia untuk Windows
+        dan MacOS.
+        <br><br>
+        <strong>"Pakai HP bisa nggak?"</strong> Bisa!
+        <span class="text-danger">Tapi ingat, ngoding di HP biasanya lebih ribet dibanding di PC, jadi tergantung niat
+          kalian masing-masing.</span>
+        Kalau ingin coba di HP, saya rekomendasikan aplikasi <a
+          href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" class="text-success"
+          target="_blank">Acode</a>, atau aplikasi sejenis yang bisa kalian cari sendiri.
+        <br><br>
+        Kalau semuanya sudah diinstal dan siap digunakan, ayo kita lanjut ke tahap berikutnya.
       </p>
     </div>
 
-    <div class="container" data-aos="fade-up" id="taghtml">
-      <hr>
-      <h3>Tag html</h3>
-      <p>Pertama yang harus kalian lakuin itu adalah ketik kode <code class="language-html">html:5</code> (khusus Visual
-        Studio) dan nanti kalian akan mendapatkan syntax seperti ini :
+
+    <div class="container py-4" data-aos="fade-up" id="taghtml">
+      <hr class="mb-4">
+      <h3 class="mb-3"><i class="fa fa-code"></i> Tag HTML</h3>
+
+      <p>
+        Langkah pertama yang perlu kalian lakukan adalah mengetik kode <code class="language-html">html:5</code> (khusus
+        pengguna Visual Studio Code).
+        Dengan mengetik itu, editor akan secara otomatis menghasilkan struktur dasar HTML seperti berikut:
       </p>
-      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+
+      <pre class="language-html"><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
-      &lt;head&gt;
-          &lt;meta charset=&quot;UTF-8&quot; /&gt;
-          &lt;meta http-equiv=&quot;X-UA-Compatible&quot;
-          content=&quot;IE=edge&quot; /&gt;
-          &lt;meta name=&quot;viewport&quot; 
-          content=&quot;width=device-width, 
-          initial-scale=1&quot; /&gt;
-          &lt;title&gt;Document&lt;/title&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-      &lt;/body&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+  &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
-      <p>Kalo kalian ngga ada kayak gitu, kalian bisa copy kode diatas kok.
+      <p>
+        Kalau editor kalian tidak secara otomatis menghasilkan struktur seperti itu, tenang saja!
+        Kalian bisa <strong>salin kode di atas</strong> dan tempel di file HTML kalian.
       </p>
     </div>
 
-    <div class="container" data-aos="fade-up" id="buatpara">
-      <hr>
-      <h3>Membuat Paragraf</h3>
-      <p>Didalam HTML kalian bisa membuat tulisan dengan banyak perintah, seperti membuat heading bisa menggunakan tag
-        <code>&lt;h1&gt;</code> sampai <code>&lt;h6&gt;</code>, membuat paragraf kalian bisa menggunakan tag
-        <code>&lt;p&gt;</code>, membuat baris baru menggunakan <code>&lt;br&gt;</code>.
-        <br>Disini saya akan membuat Teks Hello World! dengan heading dan juga paragraf disertai break rule atau garis
-        baru.
+
+    <div class="container py-4" data-aos="fade-up" id="buatpara">
+      <hr class="mb-4">
+      <h3 class="mb-3"><i class="fa fa-paragraph"></i> Membuat Paragraf</h3>
+
+      <p>
+        Di dalam HTML, kalian bisa membuat teks dengan berbagai jenis tag. Misalnya:
+      <ul>
+        <li>Membuat heading menggunakan tag <code>&lt;h1&gt;</code> hingga <code>&lt;h6&gt;</code></li>
+        <li>Membuat paragraf menggunakan tag <code>&lt;p&gt;</code></li>
+        <li>Membuat baris baru menggunakan tag <code>&lt;br&gt;</code></li>
+      </ul>
+      Nah, berikut ini contoh kode untuk menampilkan teks <strong>Hello World!</strong> dengan heading, paragraf, dan
+      baris baru menggunakan HTML:
       </p>
 
       <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
-     &lt;head&gt;
-         &lt;meta charset=&quot;UTF-8&quot; /&gt;
-         &lt;meta http-equiv=&quot;X-UA-Compatible&quot;
-          content=&quot;IE=edge&quot; /&gt;
-         &lt;meta name=&quot;viewport&quot; 
-          content=&quot;width=device-width, 
-          initial-scale=1&quot; /&gt;
-         &lt;title&gt;Document&lt;/title&gt;
-     &lt;/head&gt;
-     &lt;body&gt;
-         &lt;h1&gt;Ini heading 1&lt;/h1&gt;
-         &lt;h6&gt;Ini heading 6&lt;/h6&gt;
-         &lt;p&gt;Ini Paragraf
-            &lt;br&gt;Dan ini Break Rule atau garis baru.
-         &lt;/p&gt;
-     &lt;/body&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Ini heading 1&lt;/h1&gt;
+    &lt;h6&gt;Ini heading 6&lt;/h6&gt;
+    &lt;p&gt;Ini Paragraf
+      &lt;br&gt;Dan ini Break Rule atau garis baru.
+    &lt;/p&gt;
+  &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 
-      <div class="bg-code p-2 rounded-2" data-aos="fade-right">Hasil :
-        <h1>Ini heading 1</h1>
+      <div class="p-3 rounded bg-light border mt-4" data-aos="fade-right">
+        <strong>Hasil:</strong>
+        <h1 class="mt-3">Ini heading 1</h1>
         <h6>Ini heading 6</h6>
-        <p>Ini Paragraf
-          <br>Dan ini break rule atau garis baru.
-        </p>
+        <p>Ini Paragraf<br>Dan ini break rule atau garis baru.</p>
       </div>
+    </div>
 
-      <p>Untuk membuat paragraf seperti dibawah ini yaa :</p>
+
+    <div class="container py-4" data-aos="fade-up">
+      <p>
+        Untuk membuat paragraf seperti contoh di bawah ini, kalian bisa menggunakan tag <code>&lt;p&gt;</code> dan
+        menambahkan <code>&lt;br&gt;</code> jika ingin membuat baris baru dalam paragraf:
+      </p>
+
       <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
-     &lt;head&gt;
-         &lt;meta charset=&quot;UTF-8&quot; /&gt;
-         &lt;meta http-equiv=&quot;X-UA-Compatible&quot;
-          content=&quot;IE=edge&quot; /&gt;
-         &lt;meta name=&quot;viewport&quot; 
-          content=&quot;width=device-width, 
-          initial-scale=1&quot; /&gt;
-         &lt;title&gt;Document&lt;/title&gt;
-     &lt;/head&gt;
-     &lt;body&gt;
-          &lt;p&gt;Lorem Ipsum &lt;!-- Ini adalah Kepala paragraf --&gt;
-          &lt;!-- br dibawah adalah isi atau lanjutan paragraf --&gt;
-            &lt;br&gt;Cupidatat nulla commodo est dolore esse velit ad magna amet sit aliquip duis. Ullamco culpa quis exercitation occaecat pariatur eu amet enim velit magna esse ipsum. In nisi proident eu cillum ex.
-          &lt;/p&gt;
-     &lt;/body&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Lorem Ipsum &lt;!-- Ini adalah kepala paragraf --&gt;
+      &lt;!-- br di bawah ini adalah isi atau lanjutan paragraf --&gt;
+      &lt;br&gt;Cupidatat nulla commodo est dolore esse velit ad magna amet sit aliquip duis. 
+      Ullamco culpa quis exercitation occaecat pariatur eu amet enim velit magna esse ipsum. 
+      In nisi proident eu cillum ex.
+    &lt;/p&gt;
+  &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-      Kalian bisa mencobanya melalui software / website manapun seperti VS Code, Sublime Text, Notepad++ atau jika ingin
-      online kalian bisa mencari website favorit kalian.
-    </div>
-    <div class="container" data-aos="fade-up" id="masukgambar">
-      <hr>
-      <h3>Memasukkan Gambar</h3>
-      <p>Cara memasukkannya adalah yang pertama kalian harus tau dahulu gambar yang ingin kalian taruh di html.
-        <br>Caranya kalian harus menggunakan tag <code>&lt;img&gt;</code>, dan kemudian kalian search gambar yang ingin
-        kalian masukkan, sebagai contoh,
-        <br><code>&lt;img src=&quot;contohgambar.png&quot;&gt;</code>
-        <br>Kode diatas memperintahkan untuk mencari gambar "contohgambar" yang berformat PNG.
-        <br>Untuk mengatur gambar, kalian bisa menambahkan width setelah tanda petik dua dan berikan spasi, atau bisa
-        menggunakan kode ini :
-        <br><code>
-        &lt;img src=&quot;flixdz.png&quot; width=&quot;130&quot;&gt;
-      </code>
-        <br>Kode diatas adalah untuk mengatur panjang dan lebar dari gambar, karena saya atur width 130, maka gambar
-        yang muncul akan seperti ini.
-      <pre><code class="language-html">&lt;img src=&quot;flixdz.png&quot; width=&quot;130&quot;&gt;</code></pre>
-      <div class="bg-code p-2 rounded-2" data-aos="fade-right">
-        Hasil :
-        <br><img src="image/flixdz.png" width="130">
-      </div>
-      <br>Bagaimana jika gambar tidak mau keluar atau ada error?
-      <br>Kalian bisa menambahkan attribute <code>alt</code> fungsinya adalah menggantikan gambar yang tidak muncul
-      menjadi teks pada tag yang kalian pilih.
-      <br>Kode :
-      <pre><code class="language-html">&lt;img src=&quot;flixdz.png&quot; width=&quot;130&quot; alt=&quot;Gambar tidak akan muncul&quot;&gt;</code></pre>
-      Output :
-      <div class="bg-code p-2 mt-2 mb-2 rounded-2" data-aos="fade-right"><img src="flixdz.png" width="130"
-          alt="Gambar tidak akan muncul">
-      </div>
-    </div>
 
-
-    <div class="container" data-aos="fade-up" id="aturfont">
-      <hr>
-      <h3>Mengatur Font</h3>
-      <p>Pertama siapkan dulu teks mana yang ingin kalian atur sesuai selera kalian.
-        <br>disini saya akan menggunakan <code class="language-html">&lt;p&gt;</code> yaitu untuk membuat paragraf.
-        <br>oke langsung ke caranya
-        <br>
-        <br>Jika kalian sudah membuat teks dan ingin mengatur sesuka kalian, maka yang harus kalian lakukan adalah
-        menambahkan CSS inline, yaitu berada dalam tag html tersebut.
-        <br><strong>Ingat kode dibawah ini ya!</strong>
-        <br>Mengatur warna font menggunakan <code>"color: (warna);"</code>
-        <br>Mengatur ukuran font menggunakan <code>"font-size: (ukuran);"</code>
-        <br>Mengatur jenis font menggunakan <code>"font-family: (jenis font);"</code>
-        <br>Contoh disini saya akan membuat font dengan jenis font 'Times New Roman', membuat ukuran 24 pixel, dan juga
-        mewarnainya dengan warna biru muda.
+      <p>
+        Kalian bisa mencoba menuliskan kode ini di berbagai software editor seperti <strong>VS Code</strong>,
+        <strong>Sublime Text</strong>, atau <strong>Notepad++</strong>.
+        Jika ingin langsung mencoba secara online, kalian bisa mencari website editor HTML favorit seperti:
       </p>
-      Kode :
-      <pre><code class="language-html">&lt;p style=&quot;font-family: &#039;Times New Roman&#039;, sans-serif; font-size: 24px; color: lightblue;&quot;&gt;</code></pre>
-      Hasil :
-      <div class="bg-code text-white p-2 mt-2 mb-2 rounded-2" data-aos="fade-right">
-        <font style="font-family: 'Times New Roman', sans-serif; font-size: 24px; color: lightblue;">Halo</font>
+
+      <ul class="list-unstyled">
+        <li><a href="https://codepen.io" class="btn btn-outline-dark mt-2" target="_blank">CodePen</a></li>
+        <li><a href="https://jsfiddle.net" class="btn btn-outline-dark mt-2" target="_blank">JSFiddle</a></li>
+        <li><a href="https://playcode.io" class="btn btn-outline-dark mt-2" target="_blank">PlayCode</a></li>
+      </ul>
+    </div>
+
+    <div class="container py-4" data-aos="fade-up" id="masukgambar">
+      <hr class="mb-4">
+      <h3 class="mb-3"><i class="fa fa-image"></i> Memasukkan Gambar</h3>
+
+      <p>
+        Untuk memasukkan gambar ke dalam HTML, pertama-tama kalian harus mengetahui gambar mana yang ingin digunakan.
+        Gunakan tag <code>&lt;img&gt;</code> untuk menampilkannya.
+        <br><br>
+        Contoh dasar penggunaan:
+      </p>
+
+      <code class="language-html">&lt;img src=&quot;contohgambar.png&quot;&gt;</code>
+
+      <p class="mt-3">
+        Kode di atas akan menampilkan gambar dengan nama <strong>contohgambar.png</strong>. Pastikan file gambar berada
+        dalam folder yang sama dengan file HTML kalian.
+        <br><br>
+        Untuk mengatur ukuran gambar, kalian bisa menambahkan atribut <code>width</code>. Contoh:
+      </p>
+
+      <pre><code class="language-html">&lt;img src=&quot;flixdz.png&quot; width=&quot;130&quot;&gt;</code></pre>
+
+      <div class="bg-light border p-3 rounded" data-aos="fade-right">
+        <strong>Hasil:</strong><br>
+        <img src="image/flixdz.png" width="130" alt="Contoh gambar flixdz">
       </div>
-      <br>Kalian juga bisa menggantinya dengan font sesuai dengan keinginan kalian, jika kalian ingin mengganti/memilih
-      font silahkan menuju ke <a href="https://fonts.google.com">Google Fonts</a> atau website lain yang menyediakan
-      font.
-      <br>
-      <br>Tapi jika kalian ingin mengganti font yang sudah kalian download caranya seperti dibawah ini yaa.
+
+      <p class="mt-4">
+        <strong>Bagaimana jika gambar tidak muncul?</strong>
+        <br>
+        Kalian bisa menggunakan atribut <code>alt</code> untuk menampilkan teks pengganti jika gambar gagal dimuat. Ini
+        sangat berguna untuk meningkatkan aksesibilitas.
+      </p>
+
+      <pre><code class="language-html">&lt;img src=&quot;flixdz.png&quot; width=&quot;130&quot; alt=&quot;Gambar tidak akan muncul&quot;&gt;</code></pre>
+
+      <div class="bg-light border p-3 rounded" data-aos="fade-right">
+        <strong>Output (jika gambar gagal):</strong><br>
+        <img src="flixdz.png" width="130" alt="Gambar tidak akan muncul">
+      </div>
+    </div>
+
+    <div class="container py-4" data-aos="fade-up" id="aturfont">
+      <hr class="mb-4">
+      <h3 class="mb-3"><i class="fa fa-font"></i> Mengatur Font</h3>
+
+      <p>
+        Pertama-tama, tentukan teks mana yang ingin kalian atur tampilannya sesuai keinginan.
+        <br>Dalam contoh ini, kita akan menggunakan tag <code class="language-html">&lt;p&gt;</code> untuk membuat
+        paragraf.
+        <br><br>
+        Untuk mengatur tampilan teks secara langsung di HTML, kita bisa menggunakan <strong>inline CSS</strong> — yaitu
+        CSS yang ditulis langsung di dalam atribut <code>style</code> pada tag HTML.
+      </p>
+
+      <p><strong>Berikut beberapa properti CSS yang bisa kalian gunakan:</strong></p>
+      <ul>
+        <li><code>color</code> → Mengatur warna teks (misalnya: <code>color: lightblue;</code>)</li>
+        <li><code>font-size</code> → Mengatur ukuran teks (misalnya: <code>font-size: 24px;</code>)</li>
+        <li><code>font-family</code> → Mengatur jenis font (misalnya: <code>font-family: 'Times New Roman';</code>)</li>
+      </ul>
+
+      <p>Contoh penggunaan kombinasi ketiga properti tersebut:</p>
+
+      <pre><code class="language-html">&lt;p style=&quot;font-family: 'Times New Roman', sans-serif; font-size: 24px; color: lightblue;&quot;&gt;Halo&lt;/p&gt;</code></pre>
+
+      <div class="bg-dark text-white p-3 mt-3 rounded" data-aos="fade-right">
+        <strong>Hasil:</strong><br>
+        <p style="font-family: 'Times New Roman', sans-serif; font-size: 24px; color: lightblue;">Halo</p>
+      </div>
+
+      <p class="mt-4">
+        Kalian bisa mengganti font sesuai selera. Jika ingin mencari font yang menarik dan gratis, kunjungi <a
+          href="https://fonts.google.com" target="_blank">Google Fonts</a> atau website penyedia font lainnya.
+      </p>
+
+      <p class="mt-4">
+        <strong>Bagaimana jika kalian ingin menggunakan font hasil unduhan sendiri?</strong> Berikut contoh penggunaan
+        <code>@font-face</code> di CSS:
+      </p>
+
       <pre><code class="language-css">@font-face {
-  font-family: Relaxing Sans ; /* Kalian bebas memilih nama fontnya */
-  src: url('relaxingfont-regular.ttf'); /* yang terpenting ini yaa, ini adalah font yang ingin kalian gunakan */
+  font-family: 'Relaxing Sans'; /* Bebas beri nama font */
+  src: url('relaxingfont-regular.ttf'); /* Path ke file font */
 }
 body {
   font-family: 'Relaxing Sans', sans-serif;
 }</code></pre>
-
     </div>
   </div>
 
-  <!-- Footer Start -->
-  <footer class="p-2" id="footer">
-    <div class="container mb-2 text-center">
-      <a href="https://instagram.com/muhfhri._" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-        role="button"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://github.com/muhfhri" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-        role="button"><i class="fa-brands fa-github"></i></a>
-      <a href="https://www.tiktok.com/@flixpseal" id="footer-icon"
-        class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://discordapp.com/users/899644068697620491" id="footer-icon"
-        class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><iconify-icon inline
-          icon="ic:baseline-discord"></iconify-icon></a>
-    </div>
-    <div class="container small text-center">
-      <div class="row">
-        <div class="col-md-4">
-          <font class="h5 fw-bold">Projects</font>
-          <br>No More Projects, just visit my github...
-          <br><a href="https://github.com/muhfhri" class="link-none">Muhfhri GitHub</a>
-      </div>
-        <div class="col-md-4">
-          <br><br>
-          <blockquote class="h5 text-muted" style="font-family: poppins"><iconify-icon
-              icon="mingcute:quote-left-fill"></iconify-icon>
-            <script language="JavaScript">
-
-              var r_text = new Array();
-              r_text[0] = "who is the first? yess its youu >.<";
-              r_text[1] = "Flixdz To The Top!";
-              r_text[2] = "I'll depend on you...";
-              r_text[3] = "Using Material 3 You design";
-              r_text[4] = "Google Sans";
-              r_text[5] = "It's not living (If it's not with you)";
-              r_text[6] = "Planet Bekasi";;
-              var i = Math.floor(7 * Math.random())
-
-              document.write(r_text[i]);
-
-              //-->
-            </script><iconify-icon icon="mingcute:quote-right-fill"></iconify-icon>
-          </blockquote>
-          <br><br>
-        </div>
-        <div class="col-md-4">
-          <font class="h5 fw-bold">Framework</font>
-          <br>Iconify
-          <br>Font Awesome
-          <br>Bootstrap 5
-          <br><a href="https://github.com/muhfhri/-" class="text-muted link-none">More...</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <div class="text-center small p-3" id="copy"><span id="version"></span>
-    <br><span id="lastupdate"></span>
-    <br>Theme by <img src="image/animation.gif" width="30">, Made with <i class="fa fa-heart" style="color: red"></i>
-    for you
-  </div>
-  <!-- Footer End -->
+    <!-- Footer Start -->
+    <div id="footer"></div>
+    <!-- Footer End -->
 
 
-  <!-- Tombol ke atas -->
-  <button type="button" class="btn btn-m3-you-color bg-material btn-floating rounded-4 shadow btn-lg"
-        id="btn-back-to-top"><iconify-icon inline icon="line-md:chevron-up"></iconify-icon>
+    <!-- Tombol ke atas -->
+    <button type="button" class="btn btn-m3-you-color bg-material btn-floating rounded-4 shadow btn-lg"
+      id="btn-back-to-top"><iconify-icon inline icon="line-md:chevron-up"></iconify-icon>
     </button>
-  <!--JAVA SCRIPT FOR AOS-->
-  <script>
-    AOS.init();
-  </script>
-  <script>
-    document.getElementById("version").textContent = websiteVersion;
-    document.getElementById("lastupdate").textContent = websiteDate;
-</script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="js/multilevel.js"></script>
-  <script src="js/button_top.js"></script>
-  <script src="js/dark-mode-switch.js"></script>
+    <!--JAVA SCRIPT FOR AOS-->
+    <script>
+      AOS.init();
+    </script>
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"></script>
+    <script src="js/multilevel.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/button_top.js"></script>
+    <script src="js/dark-mode-switch.js"></script>
 
 </body>
 

@@ -25,7 +25,6 @@
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="css/multilevel.css">
-  <script src="js/webver.js"></script>
   <script src="js/theme.js"></script>
   <link href="css/nav.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
@@ -34,67 +33,53 @@
 
 <body>
   <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
-    <div class="container-fluid">
-      <a href="#"><img class="navbar-brand" id="light" width="100"></a>
-      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="icon-bar top-bar"></span>
-        <span class="icon-bar middle-bar"></span>
-        <span class="icon-bar bottom-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav text-center">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="index.html">Beranda</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbarDropdownMenuLink">
-              Belajar Web
-            </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li class="dropdown-submenu text-center">
-                        <a class="dropdown-item dropdown-toggle" href="#"><iconify-icon inline icon="icomoon-free:html-five"></iconify-icon> HTML 5</a>
-                        <ul class="dropdown-menu text-center">
-                        <li><a class="dropdown-item active" href="#">Basic HTML</a></li>
-                        <li><a class="dropdown-item" href="format-text.html">Format Text</a></li>
-                        </ul>
-                        
-                    <li class="dropdown-submenu text-center">
-                        <a class="dropdown-item dropdown-toggle" href="#"><iconify-icon inline icon="mdi:language-php"></iconify-icon> PHP</a>
-                        <ul class="dropdown-menu text-center">
-                        <li><a class="dropdown-item" href="basicphp.html">Basic PHP</a></li>
-                        <li><a class="dropdown-item" href="varphp.html">Variabel</a></li>
-                        </ul>
-                        </ul>
-                            </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Others
-            </a>
-            <ul class="dropdown-menu text-center">
-              <li><a class="dropdown-item" href="windows.html">Windows Tools</a></li>
-              <li><a class="dropdown-item" href="project/index.html">Project Review</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-        <div id="tampil" class="nav-link"></div>
-      </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+        <div class="container-fluid">
+            <a href="#"><img class="navbar-brand" id="light" width="100"></a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="icon-bar top-bar"></span>
+                <span class="icon-bar middle-bar"></span>
+                <span class="icon-bar bottom-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="https://github.com/muhfhri"><iconify-icon
+                                inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
+                    </li>
+                </ul>
+                <div class="ms-auto">
+                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
+                    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
+                        data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <div class="container" data-aos="fade-up">
-    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch"><iconify-icon id="darkmode"></iconify-icon></label>
-    <font id="tema"></font>
-  </div>
+      <nav aria-label="breadcrumb" class="my-3">
+  <ol class="breadcrumb px-3 py-2">
+    <li class="breadcrumb-item">
+      <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
+    </li>
+    <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
+      <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#" id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        PHP
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
+        <li><a class="dropdown-item active" href="#">Basic PHP</a></li>
+        <li><a class="dropdown-item" href="varphp.html">Variabel PHP</a></li>
+        <!-- Tambahkan halaman HTML lain di sini -->
+      </ul>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Basic PHP</li>
+  </ol>
+</nav>
 
   <div class="container p-3 mb-2">
     <center data-aos="fade-up">
-      <img src="image/php.png" width="100">
+      <iconify-icon icon="akar-icons:php-fill" inline class="m3-color" width="100"></iconify-icon>
       <br><small>Belajar PHP</small>
     </center>
 
@@ -179,46 +164,7 @@
   </div>
 
   <!-- Footer Start -->
-  <footer class="p-2 mt-2" id="footer">
-    <div class="container mb-2 text-center">
-      <a href="https://instagram.com/muhfhri._" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-        role="button"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://github.com/muhfhri" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-        role="button"><i class="fa-brands fa-github"></i></a>
-      <a href="https://twitter.com/flixpseal" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-        role="button"><i class="fa-brands fa-twitter"></i></a>
-      <a href="https://discordapp.com/users/899644068697620491" id="footer-icon"
-        class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><iconify-icon inline
-          icon="ic:baseline-discord"></iconify-icon></a>
-    </div>
-    <div class="container small text-center">
-      <div class="row">
-        <div class="col-md-4">
-          <font class="h5 fw-bold">Projects</font>
-          <br>No More Projects, just visit my github...
-          <br><a href="https://github.com/muhfhri" class="link-none">Muhfhri GitHub</a>
-      </div>
-        <div class="col-md-4">
-          <blockquote class="text-muted mt-3" style="font-family: poppins"><iconify-icon
-              icon="mingcute:quote-left-fill"></iconify-icon>If you believe in yourself, with a tiny pinch of magic all
-            your dreams can come true<iconify-icon icon="mingcute:quote-right-fill"></iconify-icon></blockquote>
-        </div>
-        <div class="col-md-4">
-          <font class="h5 fw-bold">Framework</font>
-          <br>Iconify
-          <br>Font Awesome
-          <br>Bootstrap 5
-          <br><a href="https://github.com/muhfhri/-" class="text-muted link-none">More...</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <div class="text-center small p-3" id="copy"><span id="version"></span>
-    <br><span id="lastupt"></span>
-    <br>Theme by <img src="image/animation.gif" width="30">, Made with <i class="fa fa-heart" style="color: red"></i>
-    for you
-  </div>
-  <!-- Footer End -->
+  <div id="footer"></div>
 
 
   <!-- Tombol ke atas -->
@@ -229,15 +175,12 @@
   <script>
     AOS.init();
   </script>
-    <script>
-      document.getElementById("version").textContent = websiteVersion;
-      document.getElementById("lastupt").textContent = websiteDate;
-  </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
   crossorigin="anonymous"></script>
   <script src="js/multilevel.js"></script>
   <script src="js/button_top.js"></script>
+  <script src="js/footer.js"></script>
   <script src="js/dark-mode-switch.js"></script>
 </body>
 

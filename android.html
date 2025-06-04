@@ -56,7 +56,14 @@
         .iconify {
             font-size: 84px !important;
         }
-        .adsbox { width: 1px; height: 1px; position: absolute; top: -9999px; left: -9999px; }
+
+        .adsbox {
+            width: 1px;
+            height: 1px;
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
     </style>
 </head>
 
@@ -86,15 +93,59 @@
         </div>
     </div>
 
+    <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
+        <div class="container-fluid">
+            <a href="#"><img class="navbar-brand" id="light" width="100"></a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="icon-bar top-bar"></span>
+                <span class="icon-bar middle-bar"></span>
+                <span class="icon-bar bottom-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="https://github.com/muhfhri"><iconify-icon
+                                inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
+                    </li>
+                </ul>
+                <div class="ms-auto">
+                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
+                    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
+                        data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <center>
-            <img class="navbar-brand" id="light" width="150"></a>
-        </center>
+        <nav aria-label="breadcrumb" class="my-3">
+            <ol class="breadcrumb bg-transparent px-3 py-2">
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
+                </li>
+                <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
+                    <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#"
+                        id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Others
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
+                        <li><a class="dropdown-item active" href="#">Android</a></li>
+                        <li><a class="dropdown-item" href="windows.html">Windows</a></li>
+                        <!-- Tambahkan halaman HTML lain di sini -->
+                    </ul>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Android</li>
+            </ol>
+        </nav>
     </div>
-    <div class="container" id="coltop">
+
+    <!-- Navbar End -->
+    <div class="container py-1" id="coltop">
         <div class="row text-center" data-aos="fade-in" data-aos-duration="3000">
             <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-                <div id="lblGreetings" ></div>
+                <div id="lblGreetings"></div>
             </div>
             <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
                 <div id="waktu"></div>
@@ -105,11 +156,6 @@
                     <span id="weather-info">Cerah, 26°C</span> <!-- Informasi cuaca -->
                 </div>
             </div>
-            <div class="container text-center mt-3">
-                <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-                <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
-                    data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
-            </div>
         </div>
     </div>
 
@@ -117,42 +163,47 @@
         <div class="container text-center">
             <img src="image/Android_16.png" width="200px" alt="">
             <h3>Android <iconify-icon icon="material-symbols:android" inline width="24" height="24"></iconify-icon></h3>
-            <h5>Versi Android Saat Ini : <a href="https://developer.android.com/about/versions/16?hl=id" class="btn btn-sm btn-outline-success rounded-5">16</a></h5>
+            <h5>Versi Android Saat Ini : <a href="https://developer.android.com/about/versions/16?hl=id"
+                    class="btn btn-sm btn-outline-success rounded-5">16</a></h5>
             <h5>Kodename Android : Baklava</h5>
-            <a class="btn btn-outline-dark rounded-5 geist-mono position-relative" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn btn-outline-dark rounded-5 geist-mono position-relative" data-bs-toggle="collapse"
+                href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <iconify-icon icon="lineicons:phone" inline></iconify-icon> Spek Hp Sendiri</a>
 
             <div class="collapse" id="collapseExample">
                 <center>
                     <div class="card w-75 card-body rounded-5 mt-2">
-                        <center><img src="https://images-cdn.ubuy.co.id/6351ac4f756a6050cf4cc623-poco-f3-5g-4g-volte-unlocked-global.jpg" width="100px" alt="" class="rounded-3"></center>
-                    <h2 class="fw-bold">POCO F3</h2>
-                    <h5 class="google-sans">Snapdragon 870 5G</h5>
-                    <h5>4520mAh</h5>
-                    <h5 class="manrope">128 GB / 6 GB</h5>
-                    <h5>UFS 3.1 / LPDDR5 2700mhz</h5>
-                    <h5>AnTuTu 920.000</h5>
-                </div>
-            </center>
+                        <center><img
+                                src="https://images-cdn.ubuy.co.id/6351ac4f756a6050cf4cc623-poco-f3-5g-4g-volte-unlocked-global.jpg"
+                                width="100px" alt="" class="rounded-3"></center>
+                        <h2 class="fw-bold">POCO F3</h2>
+                        <h5 class="google-sans">Snapdragon 870 5G</h5>
+                        <h5>4520mAh</h5>
+                        <h5 class="manrope">128 GB / 6 GB</h5>
+                        <h5>UFS 3.1 / LPDDR5 2700mhz</h5>
+                        <h5>AnTuTu 920.000</h5>
+                    </div>
+                </center>
             </div>
 
             <div class="mt-2">
-                <button type="button" class="btn btn-outline-danger rounded-5" data-bs-toggle="modal" data-bs-target="#infoModal">
+                <button type="button" class="btn btn-outline-danger rounded-5" data-bs-toggle="modal"
+                    data-bs-target="#infoModal">
                     Periksa Perangkat
                 </button>
             </div>
         </div>
-    
+
         <!-- Elemen dummy untuk deteksi AdBlock -->
         <div class="adsbox"></div>
-    
+
         <!-- Modal -->
         <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content bg-light rounded-5">
                     <div class="modal-header">
                         <h5 class="modal-title google-sans fw-bold" id="infoModalLabel">Informasi Perangkat</h5>
-                        
+
                     </div>
                     <div class="modal-body">
                         <p><strong>Platform OS:</strong> <span id="modal-platform">Mendeteksi...</span></p>
@@ -164,111 +215,104 @@
                         <p><strong>Status AdBlock:</strong> <span id="modal-adblock">Mendeteksi...</span></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark rounded-5" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-outline-dark rounded-5"
+                            data-bs-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>
         </div>
-    
+
         <!-- Memuat JavaScript Bootstrap 5 dan dependensi Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 
         <div class="row text-center mt-2">
-            <div class="col-md-4">
+            <div class="col-md-4 my-3">
                 <h4>ROOT</h4>
-                <p><a href="https://github.com/topjohnwu/Magisk" class="btn btn-outline-dark rounded-5"><iconify-icon inline icon="simple-icons:magisk" width="15" height="15"></iconify-icon> Magisk</a> | <a href="https://github.com/tiann/KernelSU" class="btn btn-outline-dark rounded-5"><iconify-icon inline icon="arcticons:kernelsu" width="15" height="15"></iconify-icon> KernelSU</a></p> 
+                <a href="https://github.com/topjohnwu/Magisk"
+                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2 position-relative"><iconify-icon
+                            inline icon="simple-icons:magisk" width="15"></iconify-icon>  
+                Magisk
+            </a>
+            <a href="https://github.com/tiann/KernelSU"
+                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2"><iconify-icon
+                            inline icon="arcticons:kernelsu" width="15"></iconify-icon> 
+                KernelSU
                 
-                <p><a href="https://github.com/bmax121/APatch" class="btn btn-outline-dark rounded-5"><iconify-icon inline icon="arcticons:apatch" width="15" height="15"></iconify-icon> APatch</a> | <a href="https://github.com/KernelSU-Next/KernelSU-Next/releases/" class="btn btn-outline-dark rounded-5"><iconify-icon inline icon="arcticons:kernelsu" width="15" height="15"></iconify-icon> KernelSU Next</a></p>
+            </a>
+            <a href="https://github.com/KernelSU-Next/KernelSU-Next/releases/" class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2"><iconify-icon inline icon="mdi:yin-yang"></iconify-icon>
+                KernelSU-Next
+            </a>
+            <a href="https://github.com/bmax121/APatch"
+                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2"><iconify-icon
+                            inline icon="arcticons:apatch" width="15" ></iconify-icon> 
+                APatch
+            </a>
             </div>
-            <div class="col-md-4">
-                <h4>MODULE</h4> 
-                <p><a href="https://github.com/Dr-TSNG/ZygiskNext/releases/" class="btn btn-outline-dark rounded-5">ZygiskNext</a> | <a href="https://github.com/LSPosed/LSPosed.github.io/releases/" class="btn btn-outline-dark rounded-5">Shamiko</a></p>
-                <p> <a href="https://github.com/JingMatrix/LSPosed/releases/" class="btn btn-outline-dark rounded-5">LSPosed</a> | <a href="https://github.com/j-hc/zygisk-detach" class="btn btn-outline-dark rounded-5">Detach</a></p>
-                <p> <a href="https://github.com/chiteroman/PlayIntegrityFix/releases/" class="btn btn-outline-dark rounded-5">Play Integrity Fix</a> | <a href="https://github.com/sidex15/susfs4ksu-module/releases/" class="btn btn-outline-dark rounded-5">SUSFS</a></p>
+            <div class="col-md-4 my-3">
+                <h4>MODULE</h4>
+                
+
+                <p><a href="https://github.com/Dr-TSNG/ZygiskNext/releases/"
+                        class="btn btn-outline-dark rounded-5">ZygiskNext</a> | <a
+                        href="https://github.com/LSPosed/LSPosed.github.io/releases/"
+                        class="btn btn-outline-dark rounded-5">Shamiko</a></p>
+                <p> <a href="https://github.com/JingMatrix/LSPosed/releases/"
+                        class="btn btn-outline-dark rounded-5">LSPosed</a> | <a
+                        href="https://github.com/j-hc/zygisk-detach" class="btn btn-outline-dark rounded-5">Detach</a>
+                </p>
+                <p> <a href="https://github.com/osm0sis/PlayIntegrityFork/releases/"
+                        class="btn btn-outline-dark rounded-5">PIF Fork</a> | <a
+                        href="https://github.com/sidex15/susfs4ksu-module/releases/"
+                        class="btn btn-outline-dark rounded-5">SUSFS</a></p>
+                <p> <a href="https://github.com/chiteroman/PlayIntegrityFix/releases/"
+                        class="btn btn-outline-dark rounded-5">ReVanced</a> | <a
+                        href="https://github.com/5ec1cff/TrickyStore/releases/"
+                        class="btn btn-outline-dark rounded-5">TrickyStore</a></p>
 
             </div>
-            <div class="col-md-4">
-                <h4>ROM</h4> 
-                <p><a class="btn btn-outline-dark rounded-5" href="https://xiaomi.eu">xiaomi eu</a> | <a href="https://miuitn.vercel.app/" class="btn btn-outline-dark rounded-5">MIUI TN</a> 
-                <br><small class="text-danger">* xiaomi eu hanya untuk varian snapdragon</small></p>
-                <p><a class="btn btn-outline-dark rounded-5" href="https://evolution-x.org/">EvolutionX</a> | <a class="btn btn-outline-dark rounded-5" href="https://pixelos.net/">PixelOS</a></p>
-                <p><a class="btn btn-outline-dark rounded-5" href="https://github.com/HorizonDroidLab">HorizonDroid</a> | <a class="btn btn-outline-dark rounded-5" href="https://www.projectmatrixx.org/">Matrixx</a></p>
-                <p><a class="btn btn-outline-dark rounded-5" href="https://crdroid.net/">crDroid</a> | <a class="btn btn-outline-dark rounded-5" href="https://lineageos.org/">LineageOS</a></p>
+            <div class="col-md-4 my-3">
+                <h4>ROM</h4>
+                <p><a class="btn btn-outline-dark rounded-5" href="https://xiaomi.eu">xiaomi eu</a> | <a
+                        href="https://miuitn.vercel.app/" class="btn btn-outline-dark rounded-5">MIUI TN</a>
+                    <br><small class="text-danger">* xiaomi eu hanya untuk varian snapdragon</small>
+                </p>
+                <p><a class="btn btn-outline-dark rounded-5" href="https://evolution-x.org/">EvolutionX</a> | <a
+                        class="btn btn-outline-dark rounded-5" href="https://pixelos.net/">PixelOS</a></p>
+                <p><a class="btn btn-outline-dark rounded-5" href="https://github.com/HorizonDroidLab">HorizonDroid</a>
+                    | <a class="btn btn-outline-dark rounded-5" href="https://www.projectmatrixx.org/">Matrixx</a></p>
+                <p><a class="btn btn-outline-dark rounded-5" href="https://crdroid.net/">crDroid</a> | <a
+                        class="btn btn-outline-dark rounded-5" href="https://lineageos.org/">LineageOS</a></p>
             </div>
         </div>
 
         <div class="container text-center">
             <h4>MUSIC PLAYER</h4>
-            <a href="https://github.com/vfsfitvnm/ViMusic" class="btn btn-sm btn-outline-dark rounded-5">ViMusic</a> <small class="text-danger">* Discotinued</small>
-            <br><a href="https://github.com/fast4x/RiMusic" class="btn btn-sm btn-outline-dark rounded-5 mt-2">RiMusic</a> <small class="text-info">* fork from vimusic</small>
-            <br><a href="https://github.com/25huizengek1/ViTune" class="btn btn-sm btn-outline-dark rounded-5 mt-2">ViTune</a> <small class="text-info">* fork from vimusic</small>
-            <br><a href="https://github.com/z-huang/InnerTune" class="btn btn-sm btn-outline-dark rounded-5 mt-2">InnerTune</a> <small class="text-info">* vimusic inspired</small>
-            <br><a href="https://github.com/Natoune/SpotifyMobileLyricsAPI" class="btn btn-sm btn-outline-dark rounded-5 mt-2">Spotify</a> <small class="text-info">* patch for lyrics</small>
+
+            <a href="https://github.com/z-huang/InnerTune"
+                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2 position-relative">
+                Innertune
+                <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill badge-warning"
+                    style="font-size:1em; right:0.5rem; top:0.2rem; padding: 10px;">
+                    <iconify-icon icon="mdi:bug"></iconify-icon>
+                </span>
+            </a>
+            <a href="https://github.com/mostafaalagamy/Metrolist/releases"
+                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2">
+                Metrolist
+            </a>
+            <a href="https://github.com/fast4x/RiMusic" class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2">
+                RiMusic
+            </a>
+            <a href="https://github.com/chiteroman/PlayIntegrityFix/releases/"
+                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2">
+                Revanced
+            </a>
 
             <br><a href="index.html" class="btn mt-4 btn-outline-dark rounded-5">Kembali</a>
         </div>
     </div>
     <!-- Footer Start -->
-    <footer class="p-2" id="footer">
-        <div class="container mb-2 text-center">
-            <a href="https://instagram.com/muhfhri._" id="footer-icon"
-                class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><i
-                    class="fa-brands fa-instagram"></i></a>
-            <a href="https://github.com/muhfhri" id="footer-icon" class="btn btn-outline-dark rounded-5 btn-floating m-1"
-                role="button"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.tiktok.com/@flixpseal" id="footer-icon"
-                class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><i
-                    class="fa-brands fa-tiktok"></i></a>
-            <a href="https://discordapp.com/users/899644068697620491" id="footer-icon"
-                class="btn btn-outline-dark rounded-5 btn-floating m-1" role="button"><iconify-icon inline
-                    icon="ic:baseline-discord"></iconify-icon></a>
-        </div>
-        <div class="container small text-center">
-            <div class="row">
-                <div class="col-md-4">
-                    <font class="h5 fw-bold">Projects</font>
-                    <br>No More Projects, just visit my github...
-                    <br><a href="https://github.com/muhfhri" class="link-none">Muhfhri GitHub</a>
-                </div>
-                <div class="col-md-4">
-                    <br><br>
-                    <blockquote class="h5 text-muted" style="font-family: poppins"><iconify-icon
-                            icon="mingcute:quote-left-fill"></iconify-icon>
-                        <script language="JavaScript">
-
-                            var r_text = new Array();
-                            r_text[0] = "who is the first? yess its youu >.<";
-                            r_text[1] = "Flixdz To The Top!";
-                            r_text[2] = "I'll depend on you...";
-                            r_text[3] = "Using Material 3 You design";
-                            r_text[4] = "Google Sans";
-                            r_text[5] = "It's not living (If it's not with you)";
-                            r_text[6] = "Planet Bekasi";;
-                            var i = Math.floor(7 * Math.random())
-
-                            document.write(r_text[i]);
-
-                            //-->
-                        </script><iconify-icon icon="mingcute:quote-right-fill"></iconify-icon>
-                    </blockquote>
-                    <br><br>
-                </div>
-                <div class="col-md-4">
-                    <font class="h5 fw-bold">Framework</font>
-                    <br>Iconify
-                    <br>Font Awesome
-                    <br>Bootstrap 5
-                    <br><a href="https://github.com/muhfhri" class="text-muted link-none">More...</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <div class="text-center small p-3" id="copy"><span id="version"></span>
-        <br><span id="lastupt"></span>
-        <br>Theme by <img src="image/animation.gif" width="30">, Made with <i class="fa fa-heart"
-            style="color: red"></i>
-        for you
-    </div>
+    <div id="footer"></div>
     <!-- Footer End -->
 
     <!-- Tombol ke atas -->
@@ -280,132 +324,132 @@
     <!-- JavaScript for functional features this cool website-->
     <script>
         async function detectDevice() {
-    document.getElementById("modal-platform").textContent = getOS();
-    document.getElementById("modal-gpu").textContent = getGPU();
-    document.getElementById("modal-resolution").textContent = getResolution();
-    document.getElementById("modal-browser").textContent = getBrowser();
-    document.getElementById("modal-timezone").textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById("modal-platform").textContent = getOS();
+            document.getElementById("modal-gpu").textContent = getGPU();
+            document.getElementById("modal-resolution").textContent = getResolution();
+            document.getElementById("modal-browser").textContent = getBrowser();
+            document.getElementById("modal-timezone").textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    let localIP = await getIP().catch(() => null);
+            let localIP = await getIP().catch(() => null);
 
-    if (!localIP) {
-        localIP = await getPublicIP();
-    }
+            if (!localIP) {
+                localIP = await getPublicIP();
+            }
 
-    // 🔹 Tampilkan IP (Baik Lokal atau Publik)
-    document.getElementById("modal-ip").textContent = localIP || "Tidak Terdeteksi";
-}
-
-// 📡 Deteksi IP Lokal (WebRTC)
-function getIP() {
-    return new Promise((resolve, reject) => {
-        try {
-            let rtc = new RTCPeerConnection();
-            rtc.createDataChannel("");
-            rtc.createOffer().then(offer => rtc.setLocalDescription(offer));
-            rtc.onicecandidate = event => {
-                if (event && event.candidate) {
-                    let ipMatch = event.candidate.candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
-                    if (ipMatch) {
-                        resolve(ipMatch[1]);
-                    }
-                    rtc.close();
-                }
-            };
-            setTimeout(() => reject("Tidak Terdeteksi"), 3000);
-        } catch (e) {
-            reject("Tidak Terdeteksi");
+            // 🔹 Tampilkan IP (Baik Lokal atau Publik)
+            document.getElementById("modal-ip").textContent = localIP || "Tidak Terdeteksi";
         }
-    });
-}
 
-// 🌎 Ambil IP Publik (Fallback)
-function getPublicIP() {
-    return fetch("https://api64.ipify.org?format=json")
-        .then(response => response.json())
-        .then(data => data.ip)
-        .catch(() => "Tidak Terdeteksi");
-}
+        // 📡 Deteksi IP Lokal (WebRTC)
+        function getIP() {
+            return new Promise((resolve, reject) => {
+                try {
+                    let rtc = new RTCPeerConnection();
+                    rtc.createDataChannel("");
+                    rtc.createOffer().then(offer => rtc.setLocalDescription(offer));
+                    rtc.onicecandidate = event => {
+                        if (event && event.candidate) {
+                            let ipMatch = event.candidate.candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
+                            if (ipMatch) {
+                                resolve(ipMatch[1]);
+                            }
+                            rtc.close();
+                        }
+                    };
+                    setTimeout(() => reject("Tidak Terdeteksi"), 3000);
+                } catch (e) {
+                    reject("Tidak Terdeteksi");
+                }
+            });
+        }
 
-// 📱 Deteksi OS
-function getOS() {
-    let ua = navigator.userAgent.toLowerCase();
-    if (ua.includes("android")) return "Android";
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) return "iOS";
-    if (ua.includes("win")) return "Windows";
-    if (ua.includes("mac")) return "MacOS";
-    if (ua.includes("linux")) return "Linux";
-    return "Tidak Terdeteksi";
-}
+        // 🌎 Ambil IP Publik (Fallback)
+        function getPublicIP() {
+            return fetch("https://api64.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => data.ip)
+                .catch(() => "Tidak Terdeteksi");
+        }
 
-// 🎮 GPU Renderer
-function getGPU() {
-    try {
-        let canvas = document.createElement("canvas");
-        let gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-        let debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
-        return debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : "Tidak Terdeteksi";
-    } catch (e) {
-        return "Tidak Terdeteksi";
-    }
-}
+        // 📱 Deteksi OS
+        function getOS() {
+            let ua = navigator.userAgent.toLowerCase();
+            if (ua.includes("android")) return "Android";
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) return "iOS";
+            if (ua.includes("win")) return "Windows";
+            if (ua.includes("mac")) return "MacOS";
+            if (ua.includes("linux")) return "Linux";
+            return "Tidak Terdeteksi";
+        }
 
-// 🖥️ Resolusi Layar
-function getResolution() {
-    let realWidth = screen.width * window.devicePixelRatio;
-    let realHeight = screen.height * window.devicePixelRatio;
-    return `${realWidth} x ${realHeight} (Asli)`;
-}
+        // 🎮 GPU Renderer
+        function getGPU() {
+            try {
+                let canvas = document.createElement("canvas");
+                let gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+                let debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+                return debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : "Tidak Terdeteksi";
+            } catch (e) {
+                return "Tidak Terdeteksi";
+            }
+        }
 
-// 🌐 Browser
-function getBrowser() {
-    let ua = navigator.userAgent;
-    if (ua.includes("Firefox")) return "Mozilla Firefox";
-    if (ua.includes("Edg")) return "Microsoft Edge";
-    if (ua.includes("Chrome") && !ua.includes("Edg") && !ua.includes("Chromium")) return "Google Chrome";
-    if (ua.includes("Chromium")) return "Chromium";
-    if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
-    if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
-    return "Tidak Terdeteksi";
-}
+        // 🖥️ Resolusi Layar
+        function getResolution() {
+            let realWidth = screen.width * window.devicePixelRatio;
+            let realHeight = screen.height * window.devicePixelRatio;
+            return `${realWidth} x ${realHeight} (Asli)`;
+        }
 
-// 🛑 Deteksi AdBlock
-function detectAdBlock() {
-    let adBlocked = false;
+        // 🌐 Browser
+        function getBrowser() {
+            let ua = navigator.userAgent;
+            if (ua.includes("Firefox")) return "Mozilla Firefox";
+            if (ua.includes("Edg")) return "Microsoft Edge";
+            if (ua.includes("Chrome") && !ua.includes("Edg") && !ua.includes("Chromium")) return "Google Chrome";
+            if (ua.includes("Chromium")) return "Chromium";
+            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+            return "Tidak Terdeteksi";
+        }
 
-    function updateAdStatus(isBlocked) {
-        document.getElementById('modal-adblock').textContent = isBlocked ? 'Aktif' : 'Nonaktif';
-    }
+        // 🛑 Deteksi AdBlock
+        function detectAdBlock() {
+            let adBlocked = false;
 
-    const adElement = document.querySelector('.adsbox');
-    if (!adElement || getComputedStyle(adElement).display === 'none') {
-        adBlocked = true;
-    }
+            function updateAdStatus(isBlocked) {
+                document.getElementById('modal-adblock').textContent = isBlocked ? 'Aktif' : 'Nonaktif';
+            }
 
-    let fetchTimeout = setTimeout(() => {
-        adBlocked = true;
-        updateAdStatus(adBlocked);
-    }, 2000);
+            const adElement = document.querySelector('.adsbox');
+            if (!adElement || getComputedStyle(adElement).display === 'none') {
+                adBlocked = true;
+            }
 
-    fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', { method: 'HEAD' })
-        .then(() => {
-            clearTimeout(fetchTimeout);
-            updateAdStatus(false);
-        })
-        .catch(() => {
-            updateAdStatus(true);
+            let fetchTimeout = setTimeout(() => {
+                adBlocked = true;
+                updateAdStatus(adBlocked);
+            }, 2000);
+
+            fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', { method: 'HEAD' })
+                .then(() => {
+                    clearTimeout(fetchTimeout);
+                    updateAdStatus(false);
+                })
+                .catch(() => {
+                    updateAdStatus(true);
+                });
+
+            setTimeout(() => updateAdStatus(adBlocked), 300);
+        }
+
+        // 🟢 Jalankan saat modal dibuka
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("infoModal").addEventListener("show.bs.modal", () => {
+                detectDevice();
+                detectAdBlock();
+            });
         });
-
-    setTimeout(() => updateAdStatus(adBlocked), 300);
-}
-
-// 🟢 Jalankan saat modal dibuka
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("infoModal").addEventListener("show.bs.modal", () => {
-        detectDevice();
-        detectAdBlock();
-    });
-});
 
     </script>
 
@@ -426,12 +470,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             document.getElementById("waktu").innerHTML = tampilWaktu;
         }, 1000);
-    </script>
-
-    <!-- Script Untuk Versi Dinamis Websiye di footer -->
-    <script>
-        document.getElementById("version").textContent = websiteVersion;
-        document.getElementById("lastupt").textContent = websiteDate;
     </script>
 
     <script>
@@ -461,10 +499,10 @@ document.addEventListener("DOMContentLoaded", () => {
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
     <script src="js/weather.js"></script>
-    <script src="js/webver.js"></script>
     <script src="js/button_top.js"></script>
     <script src="js/dark-mode-switch.js"></script>
     <script src="js/multilevel.js"></script>
+    <script src="js/footer.js"></script>
     <!-- End Script -->
 
 </body>
