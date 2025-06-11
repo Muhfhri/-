@@ -94,7 +94,7 @@
             <iconify-icon id="darkmode"></iconify-icon>
         </label>
     </div>
-
+    
     <div class="text-center mb-4">
         <img src="image/tije.png" width="200" alt="Logo Transjakarta & JakLingko">
         <h2 class="title">Transjakarta Route Finder</h2>
@@ -116,7 +116,8 @@
         <h2 class="fw-bold">100% Data halte berasal dari Map Transjakarta</h2>
         <h2 class="fw-bold">Data Integrasi masih bersifat eksperimental</h2>
     </div>
-
+    <!-- Ganti bagian alert di HTML dengan ini -->
+<div id="tj-info-alert"></div>
     <div class="section-box bg-light">
         <div class="alert alert-warning alert-dismissible fade show py-2 small mb-2" style="font-size:0.95em;" role="alert">
             ⚠️ Fitur <b>Cari Rute</b> masih bersifat <b>eksperimental</b>. Kalo kamu ga mau nyasar atau bingung, mendingan tanya petugas di halte yaa!<br>
@@ -154,6 +155,7 @@
                     <select id="serviceSelect" class="form-select rounded-input">
                         <option value="BRT" selected>BRT</option>
                         <option value="Non-BRT">Non-BRT</option>
+                        <option value="TransJabodetabek">Transjabodetabek</option>
                     </select>
                 </div>
             </div>
@@ -238,6 +240,41 @@
             }, 2000);
         });
     </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Array info unik Transjakarta
+  const infos = [
+    `<div class="alert alert-secondary text-center alert-dismissible fade show py-2 small mb-2" style="font-size:0.95em;" role="alert">
+      <b>ℹ️ Ketahui Bus di sekitar kamu yuk!</b>
+      <br><span class="h2 fw-bold border-white btn btn-primary">DMR-240144</span><br>
+      Huruf <b>DMR</b> berarti bus dari operator <img src="https://www.damri.co.id/frontend/assets/img/logo/logo.png" width="70">,
+      <br>angka <b><span class="text-primary">24</span></b> menandakan tahun 2024,
+      <br>dan <b><span class="text-primary">0144</span></b> adalah bus ke 144.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+    </div>`,
+    `<div class="alert alert-info alert-dismissible fade show py-2 small mb-2" style="font-size:0.95em;" role="alert">
+      <b>🚏 Tahukah kamu?</b>
+      <br>Transjakarta adalah sistem BRT (Bus Rapid Transit) terpanjang di dunia dengan lebih dari 250 km jalur khusus!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+    </div>`,
+    `<div class="alert alert-success alert-dismissible fade show py-2 small mb-2" style="font-size:0.95em;" role="alert">
+      <b>🚌 Fun Fact!</b>
+      <br>Beberapa halte Transjakarta sudah terintegrasi dengan KRL, LRT, dan MRT untuk kemudahan mobilitas warga Jakarta. Gunakan Badge Icon KRL dan LRT serta MRT di samping nama halte untuk mengetahuinya!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+    </div>`,
+    `<div class="alert alert-warning alert-dismissible fade show py-2 small mb-2" style="font-size:0.95em;" role="alert">
+      <b>⚡ Bus Listrik!</b>
+      <br>Transjakarta kini juga mengoperasikan bus listrik ramah lingkungan di beberapa koridor.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+    </div>`
+    // Tambahkan info lain sesuai keinginan
+  ];
+
+  // Pilih satu info secara acak
+  const randomInfo = infos[Math.floor(Math.random() * infos.length)];
+  document.getElementById('tj-info-alert').innerHTML = randomInfo;
+});
+</script>
 </body>
 
 </html>
