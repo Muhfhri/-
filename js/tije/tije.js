@@ -3,6 +3,7 @@ import { koridorData, halteKRL, halteMRT, integrasiBadge, halteIntegrasi } from 
 function getKoridorBadgeColor(koridor) {
     const colorMap = {
         "1": "#D02027",    
+        "1P": "#FF0040",    
         "2": "#264697",   
         "2A": "#4FA8DE",   
         "3": "#FCC81B",    
@@ -41,7 +42,10 @@ function getKoridorBadgeColor(koridor) {
         "13E": "#761C86",   
         "L13E": "#761C86",   
         "14": "#FF7F00",
+        "B11": "#D07C28",
+        "B21": "#3BB59C",
         "B41": "#A9C498",
+        "P11": "#A9C498",
         "T31": "#A9C498",
         // Tambah Warna TJ Koridor lain
     };
@@ -112,7 +116,7 @@ function displaySearchResults(query) {
             const idx = koridorEntry.haltes.indexOf(halte);
 
             const listItem = document.createElement('li');
-            listItem.className = 'list-group-item d-flex bg-light align-items-center';
+            listItem.className = 'list-group-item bg-light d-flex align-items-center';
 
             // Badge koridor
             const koridorBadge = createKoridorBadge(service, koridor);
@@ -626,21 +630,21 @@ function getJurusan(koridorNumber, service) {
         </div>
         `}
     </div>
-    ${service === "Non-BRT" ? `
+    ${ (service === "Non-BRT" || service === "TransJabodetabek") ? `
     <hr>
     <span class="text-muted fw-bold small">Arah :</span>
     <div class="pt-sans-narrow-bold mt-2">
         <div class="d-flex flex-wrap gap-2 justify-content-center">
             <button class="btn btn-sm rounded-5 direction-btn active" data-direction="forward" style="background:${getKoridorBadgeColor(koridorNumber)}; color:white; border:none; min-width:150px; padding: 8px 16px;">
-                <iconify-icon icon="mdi:arrow-right"></iconify-icon> ${halteAwal}
+                 ${halteAwal} <iconify-icon  inline icon="ei:arrow-left"></iconify-icon>
             </button>
             <button class="btn btn-sm rounded-5 direction-btn" data-direction="backward" style="background:transparent; color:${getKoridorBadgeColor(koridorNumber)}; border:2px solid ${getKoridorBadgeColor(koridorNumber)}; min-width:150px; padding: 8px 16px;">
-                <iconify-icon icon="mdi:arrow-left"></iconify-icon> ${halteAkhir}
+                <iconify-icon  inline icon="ei:arrow-right"></iconify-icon> ${halteAkhir}
             </button>
         </div>
         <div id="haltesList-${koridorNumber}" class="mt-3"></div>
     </div>
-    ` : ''}
+    ` : '' }
     `;
 
     // Initialize Bootstrap popovers
@@ -648,7 +652,7 @@ function getJurusan(koridorNumber, service) {
     [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 
     // Add event listeners after the HTML is inserted
-    if (service === "Non-BRT") {
+    if (service === "Non-BRT" || service === "TransJabodetabek") {
         const buttons = outputElement.querySelectorAll('.direction-btn');
         buttons.forEach(button => {
             button.addEventListener('click', function() {
@@ -747,12 +751,16 @@ function displayKoridorResults(service, koridor) {
     const resultsContainer = document.getElementById('koridorResults');
     resultsContainer.innerHTML = '';
 
-    // Check both BRT and Non-BRT
-    const koridorDataEntry = koridorData["BRT"]?.[koridor] || koridorData["Non-BRT"]?.[koridor];
-    if (!koridor || !koridorDataEntry) return;
+    // Check BRT, Non-BRT, dan TransJabodetabek
+const koridorDataEntry = koridorData["BRT"]?.[koridor] 
+    || koridorData["Non-BRT"]?.[koridor] 
+    || koridorData["TransJabodetabek"]?.[koridor];
+if (!koridor || !koridorDataEntry) return;
 
-    // Determine service type
-    const serviceType = koridorData["BRT"]?.[koridor] ? "BRT" : "Non-BRT";
+// Determine service type
+let serviceType = "BRT";
+if (koridorData["Non-BRT"]?.[koridor]) serviceType = "Non-BRT";
+if (koridorData["TransJabodetabek"]?.[koridor]) serviceType = "TransJabodetabek";
 
     // Tampilkan jurusan di atas daftar halte
     const jurusanDiv = document.createElement('div');
@@ -888,7 +896,7 @@ window.selectKoridor = function(service, koridor) {
         
         // Scroll to halte list section with offset
         const halteSection = document.getElementById('koridorResults');
-        const offset = 750; // Adjust this value to control scroll position
+        const offset = 0; // Adjust this value to control scroll position
         const elementPosition = halteSection.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - offset;
         
@@ -1632,3 +1640,5 @@ function showHaltes(koridorNumber, start, end, haltes) {
         </div>
     `;
 }
+
+const transJabodetabekData = koridorData["TransJabodetabek"];
