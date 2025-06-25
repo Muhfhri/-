@@ -922,6 +922,54 @@ function displayKoridorResults(service, koridor, highlightHalte = null) {
             if (idxPenjaringan !== -1) nomorOverride[idxPenjaringan] = 25;
             if (idxBandengan !== -1) nomorOverride[idxBandengan] = 24;
             if (idxKaliBesar !== -1) nomorOverride[idxKaliBesar] = 23;
+
+            const idxManggaDuaRaya = koridorDataEntry.haltes.indexOf("Mangga Dua Raya");
+    if (idxManggaDuaRaya !== -1) nomorOverride[idxManggaDuaRaya] = 7;
+
+    const idxManggaDua = koridorDataEntry.haltes.indexOf("Mangga Dua");
+    if (idxManggaDua !== -1) nomorOverride[idxManggaDua] = 8;
+
+    const idxGunungSahari = koridorDataEntry.haltes.indexOf("Gunung Sahari");
+    if (idxGunungSahari !== -1) nomorOverride[idxGunungSahari] = 9;
+
+    const idxJembatanMerah = koridorDataEntry.haltes.indexOf("Jembatan Merah");
+    if (idxJembatanMerah !== -1) nomorOverride[idxJembatanMerah] = 10;
+
+    const idxLandasanPacu = koridorDataEntry.haltes.indexOf("Landasan Pacu");
+    if (idxLandasanPacu !== -1) nomorOverride[idxLandasanPacu] = 11;
+
+    const idxDanauAgung = koridorDataEntry.haltes.indexOf("Danau Agung");
+    if (idxDanauAgung !== -1) nomorOverride[idxDanauAgung] = 12;
+
+    const idxDanauSunter = koridorDataEntry.haltes.indexOf("Danau Sunter");
+    if (idxDanauSunter !== -1) nomorOverride[idxDanauSunter] = 13;
+
+    const idxSunterUtara = koridorDataEntry.haltes.indexOf("Sunter Utara");
+    if (idxSunterUtara !== -1) nomorOverride[idxSunterUtara] = 14;
+
+    const idxSunterKarya = koridorDataEntry.haltes.indexOf("Sunter Karya");
+    if (idxSunterKarya !== -1) nomorOverride[idxSunterKarya] = 15;
+
+    const idxSunterBoulevardBarat = koridorDataEntry.haltes.indexOf("Sunter Boulevard Barat");
+    if (idxSunterBoulevardBarat !== -1) nomorOverride[idxSunterBoulevardBarat] = 16;
+
+    const idxSunterKelapaGading = koridorDataEntry.haltes.indexOf("Sunter Kelapa Gading");
+    if (idxSunterKelapaGading !== -1) nomorOverride[idxSunterKelapaGading] = 17;
+
+    const idxPlumpang = koridorDataEntry.haltes.indexOf("Plumpang");
+    if (idxPlumpang !== -1) nomorOverride[idxPlumpang] = 18;
+
+    const idxWalikotaJakartaUtara = koridorDataEntry.haltes.indexOf("Walikota Jakarta Utara");
+    if (idxWalikotaJakartaUtara !== -1) nomorOverride[idxWalikotaJakartaUtara] = 19;
+
+    const idxKoja = koridorDataEntry.haltes.indexOf("Koja");
+    if (idxKoja !== -1) nomorOverride[idxKoja] = 20;
+
+    const idxMambo = koridorDataEntry.haltes.indexOf("Mambo");
+    if (idxMambo !== -1) nomorOverride[idxMambo] = 21;
+
+    const idxTanjungPriok = koridorDataEntry.haltes.indexOf("Tanjung Priok");
+    if (idxTanjungPriok !== -1) nomorOverride[idxTanjungPriok] = 22;
         }
         if (koridor === "2") {
             const idxKwitang = koridorDataEntry.haltes.indexOf("Kwitang");
