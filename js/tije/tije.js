@@ -602,6 +602,10 @@ function getJurusan(koridorNumber, service) {
                 operators: ["Perum DAMRI"],
                 type: "Bus Listrik BRT"
             },
+            "Zhongtong Bus LCK6126EVGRA1 amari": {
+                operators: ["Perum DAMRI"],
+                type: "Bus Listrik BRT - Layanan AMARI"
+            },
             
             // Electric Buses
             "SAG Golden Dragon XML6125JEVJ0C3": {
@@ -611,6 +615,10 @@ function getJurusan(koridorNumber, service) {
             "Skywell NJL6126BEV": {
                 operators: ["Perum DAMRI"],
                 type: "Bus Listrik BRT"
+            },
+            "Skywell NJL6126BEV amari": {
+                operators: ["Perum DAMRI"],
+                type: "Bus Listrik BRT - Layanan AMARI"
             },
             "Skywell NJL6129BEV": {
                 operators: ["Perum DAMRI"],
@@ -1002,15 +1010,22 @@ function displayKoridorResults(service, koridor, highlightHalte = null) {
                 if (halte === "Kejaksaan Agung") arah = "→ BLOK M";
             }
             if (koridor === "2") {
-                if (halte === "Kwitang") arah = "ke Senen TOYOTA Rangga";
+                if (halte === "Kwitang") arah = "→ Senen TOYOTA Rangga";
             }
             if (koridor === "7F") {
-                if (halte === "Pasar Induk") arah = "→ Masuk TOL Jagorawi arah Utan Kayu Rawamangun";
+                if (halte === "Pasar Induk") arah = "← Masuk TOL Jagorawi arah Utan Kayu Rawamangun";
+                if (halte === "Juanda") arah = "→ arah Pasar Baru";
+                if (halte === "Pecenongan") arah = "← arah Juanda";
+                if (halte === "Sumur Batu") arah = "→ arah Kampung Rambutan langsung ke Pulomas Bypass";
+                if (halte === "Pecenongan") arah = "← arah Juanda";
+                if (halte === "Cempaka Mas") arah = "← hanya berhenti arah Juanda";
+                if (halte === "Cempaka Putih") arah = "← hanya berhenti arah Juanda";
+                if (halte === "Pasar Baru") arah = "→ Arah Kampung Rambutan langsung ke Kwitang";
                 if (halte === "Utan Kayu Rawamangun") arah = "→ Masuk TOL Jagorawi arah Pasar Induk";
             }
             if (koridor === "L7") {
                 if (halte === "Kampung Rambutan") arah = "→ Masuk TOL Jagorawi arah Cawang Sentral";
-                if (halte === "Cawang Sentral") arah = "→ Masuk TOL Jagorawi arah Kampung Rambutan";
+                if (halte === "Cawang Sentral") arah = "← Masuk TOL Jagorawi arah Kampung Rambutan";
             }
             if (koridor === "8") {
                 if (halte === "Underpass Lebak Bulus") arah = "→ Lebak Bulus";
@@ -1018,7 +1033,7 @@ function displayKoridorResults(service, koridor, highlightHalte = null) {
             }
             if (koridor === "12") {
                 if (["Penjaringan", "Bandengan", "Kali Besar"].includes(halte)) {
-                    arah = "→ Pluit";
+                    arah = "← Pluit";
                 } else if (["Pluit", "Pluit Selatan", "Pakin", "Gedong Panjang", "Museum Sejarah Jakarta", "Kota"].includes(halte)) {
                     arah = "→ Tanjung Priok";
                 }

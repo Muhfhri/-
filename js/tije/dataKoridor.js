@@ -243,9 +243,11 @@ export const koridorData = {
             busType: [
                 "Mercedes-Benz OH 1526",
                 "Hino RK8 R260",
-               "Mercedes-Benz OH 1626"
+               "Mercedes-Benz OH 1626",
+               "Zhongtong Bus LCK6126EVGRA1 amari",
+               "Skywell NJL6126BEV amari",
             ],
-            operator: "Mayasari Bakti (MYS), Steady Safe (SAF), Bianglala Metropolitan (BMP) amari",
+            operator: "Mayasari Bakti (MYS), Steady Safe (SAF), DAMRI (DMR) amari, Bianglala Metropolitan (BMP) amari",
             haltes: ["Kampung Rambutan", "Tanah Merdeka", "Flyover Raya Bogor", "Trikora", "Pasar Induk", "Kramat Jati", "Cililitan", "Cawang Cililitan", "Cawang Sentral", "Cawang", "Cawang Baru", "Gelanggang Remaja", "Bidara Cina", "Kampung Melayu"]
         },
         "L7": {
@@ -279,7 +281,7 @@ export const koridorData = {
                 }
             },
             operator: "DAMRI (DMR), Mayasari Bakti (MYS)",
-            haltes: ["Juanda", "Pecenongan", "Pasar Baru", "Monumen Nasional", "Balai Kota", "Kwitang", "Senen TOYOTA Rangga", "Galur", "Rawa Selatan", "Pasar Cempaka Putih", "Cempaka Baru", "Sumur Batu", "Cempaka Mas", "Pulomas Bypass", "Kayu Putih Rawasari", "Pemuda Pramuka", "Utan Kayu Rawamangun", "Pasar Induk", "Trikora", "Flyover Raya Bogor", "Kampung Rambutan"]
+            haltes: ["Juanda",  "Pasar Baru","Pecenongan", "Monumen Nasional", "Balai Kota", "Kwitang", "Senen TOYOTA Rangga", "Galur", "Rawa Selatan", "Pasar Cempaka Putih", "Cempaka Baru", "Sumur Batu", "Cempaka Mas","Cempaka Putih", "Pulomas Bypass", "Kayu Putih Rawasari", "Pemuda Pramuka", "Utan Kayu Rawamangun", "Pasar Induk", "Trikora", "Flyover Raya Bogor", "Kampung Rambutan"]
         },
         "8": {
             start: "Lebak Bulus",
@@ -400,7 +402,6 @@ export const koridorData = {
             busType: [
                 "Volvo B11R",
                 "Mercedes-Benz OH 1626 amari",
-                "Hino RK8 R260 amari",
             ],
             operator: "Steady Safe (SAF) , Bianglala Metropolitan (BMP) amari",
             haltes: ["Pulo Gebang", "Walikota Jakarta Timur", "Penggilingan", "Flyover Pondok Kopi", "Simpang Buaran", "Buaran", "Kampung Sumur", "Klender", "Stasiun Klender", "Cipinang", "Flyover Cipinang", "Pasar Enjo", "Flyover Jatinegara", "Stasiun Jatinegara", "Jatinegara", "Kampung Melayu"]
@@ -413,6 +414,7 @@ export const koridorData = {
             busType: [
                 "Skywell NJL6126BEV amari", "Zhongtong Bus LCK6126EVGRA1 amari",
                 "Mercedes-Benz OH 1626",
+                "Hino RK8 R260",
                 "Hino RK1 JSNL",
             ],
             haltes: ["Pluit", "Pluit Selatan", "Pakin","Gedong Panjang","Museum Sejarah Jakarta","Kota", "Penjaringan","Bandengan","Kali Besar","Mangga Dua Raya","Mangga Dua","Gunung Sahari","Jembatan Merah","Landasan Pacu","Danau Agung","Danau Sunter","Sunter Utara","Sunter Karya","Sunter Boulevard Barat","Sunter Kelapa Gading","Plumpang","Walikota Jakarta Utara","Koja","Mambo","Tanjung Priok"],
@@ -421,7 +423,8 @@ export const koridorData = {
         "13": {
             start: "CBD Ciledug",
             end: "Tegal Mampang",
-            operator: "Transjakarta (TJ) & Mayasari Bakti (MYS)",
+            isAMARI: true,
+            operator: "Transjakarta (TJ), Mayasari Bakti (MYS)",
              busType: [
                 "Mercedes-Benz OH 1626",
                 "Mercedes-Benz OH 1526", "Scania K310IB"
