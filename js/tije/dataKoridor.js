@@ -419,9 +419,13 @@ export const koridorData = {
 
         },
         "13": {
-            start: "CBD Ciledug / Puri Beta",
+            start: "CBD Ciledug",
             end: "Tegal Mampang",
             operator: "Transjakarta (TJ) & Mayasari Bakti (MYS)",
+             busType: [
+                "Mercedes-Benz OH 1626",
+                "Mercedes-Benz OH 1526", "Scania K310IB"
+            ],
             haltes: ["Tegal Mampang", "Rawa Barat", "Pasar Santa", "CSW", "Mayestik", "Velbak", "Kebayoran Lama", "Seskoal", "Cipulir", "Swadarma ParagonCorp", "JORR", "Petukangan D'MASIV", "Puri Beta 1", "Puri Beta 2", "CBD Ciledug"]
         },
         "13B": {
