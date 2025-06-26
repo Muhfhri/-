@@ -20,6 +20,9 @@
         .bg-2 {
             background-color:#264697 !important;
         }
+        .bg-2a {
+            background-color:#4FA8DE !important;
+        }
 
         .bg-7F {
             background-color:#ff326b !important;
@@ -205,14 +208,47 @@
     </div>
 
    <div class="container my-5">
-    <div class="container text-start">
-        <h3 class="fw-bold">Legenda :</h3>
-            Di setiap kanan halte ada badge seperti <span class="text-muted fw-bold">Galur</span> <span class="badge bg-2 mt-2 me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">2</span><span class="badge bg-7F mt-2 me-1 mb-1" style="width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;">7F</span> dan itu adalah badge integrasi antar Koridor lain yang melewati halte yang sama dan kamu bisa klik badge tersebut untuk mengetahui Informasi Koridor / Bus tersebut.
-            <br>
-            Penanda arah atau hanya melayani sesuai arah seperti <span class="text-muted fw-bold bg-warning">→ arah BLOK M</span> yang berarti hanya melayani arah Blok M. Begitupula dengan <span class="text-muted fw-bold bg-warning">→ ke Masjid Agung</span> yang mengarah langsung ke halte Masjid Agung.
-            <br><iconify-icon inline icon="jam:train"></iconify-icon> KRL | <iconify-icon inline icon="pepicons-pop:train-circle"></iconify-icon> MRT
-           
+  <div class="container text-start">
+    <h3 class="fw-bold">Legenda :</h3>
+
+    <p>Contoh tampilan halte:</p>
+
+    <!-- Baris halte -->
+    <div class="d-flex justify-content-between align-items-center border p-2 mb-2" style="max-width: 400px;">
+      <div class="d-flex align-items-center">
+        <span class="badge bg-2 me-2" style="width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">11</span>
+        <span class="fw-bold">Galur</span>
+      </div>
+      <div>
+        <span class="badge bg-2a me-1" style="width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">2A</span>
+        <span class="badge bg-7F" style="width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">7F</span>
+      </div>
     </div>
+
+    <p>
+      Badge <span class="badge bg-2" style="width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">11</span> menunjukkan nomor halte.
+      <br>
+      Badge di sebelah kanan <span class="badge bg-2a me-1" style="width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">2A</span>
+        <span class="badge bg-7F" style="width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">7F</span> menunjukkan koridor lain yang juga melewati halte tersebut.
+    </p>
+
+    <p>
+      Penanda arah seperti 
+      <span class="text-muted fw-bold bg-warning px-2 py-1 rounded">→ arah BLOK M</span>
+      berarti halte ini hanya melayani perjalanan ke arah Blok M. Contoh lainnya:
+      <span class="text-muted fw-bold bg-warning px-2 py-1 rounded">→ ke Masjid Agung</span>
+    </p>
+
+    <p>
+      Ikon transportasi lainnya:
+      <br>
+      <iconify-icon inline icon="jam:train"></iconify-icon> = KRL &nbsp;&nbsp;|&nbsp;&nbsp;
+      <iconify-icon inline icon="pepicons-pop:train-circle"></iconify-icon> = MRT
+    </p>
+  </div>
+</div>
+
+
     <center>
         <a href="https://transportforjakarta.or.id/wp-content/uploads/2025/04/2025-04a-Peta-Integrasi-Jakarta-FDTJ-Web.pdf" class="btn btn-primary rounded-5">Peta Integrasi</a>
         <br><span class="text-muted">Oleh <a href="https://transportforjakarta.or.id/peta/" class="text-primary link-none fw-bold">FDTJ</a></span>
