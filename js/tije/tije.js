@@ -1006,11 +1006,56 @@ function displayKoridorResults(service, koridor, highlightHalte = null) {
             // Penanda arah
             let arah = "";
             if (koridor === "1") {
-                if (halte === "ASEAN") arah = "→ Masjid Agung";
-                if (halte === "Kejaksaan Agung") arah = "→ BLOK M";
+                if (halte === "ASEAN") arah = "→ ke Masjid Agung";
+                if (halte === "Kejaksaan Agung") arah = "→ ke BLOK M";
+                if (halte === "Museum Sejarah Jakarta") arah = "→ arah BLOK M";
+                if (halte === "Kota") arah = "→ arah BLOK M";
             }
             if (koridor === "2") {
-                if (halte === "Kwitang") arah = "→ Senen TOYOTA Rangga";
+                if (halte === "Kwitang") arah = "→ ke Senen TOYOTA Rangga";
+            }
+            if (koridor === "3F") {
+                if (halte === "Grogol Reformasi") arah = "→ arah Senayan BANK DKI";
+            }
+            if (koridor === "3H") {
+                if (["Kali Besar", "Museum Sejarah Jakarta"].includes(halte)) {
+                    arah = "→ arah Kota";
+                }
+            }
+            if (koridor === "4") {
+                if (["Matraman", "Tegalan", "Kesatrian"].includes(halte)) {
+                    arah = "→ arah Galunggung";
+                }
+                if (halte === "Flyover Pramuka") arah = "← arah Pulo Gadung";
+            }
+            if (koridor === "4D") {
+                if (["Matraman", "Tegalan", "Kesatrian"].includes(halte)) {
+                    arah = "→ arah Galunggung";
+                }
+                else if (["Flyover Pramuka", "Flyover Kuningan"].includes(halte)) {
+                    arah = "← arah Pulo Gadung";
+                }
+            }
+            if (koridor === "5") {
+                if (["Jatinegara", "Bali Mester"].includes(halte)) {
+                    arah = "→ arah Kampung Melayu";
+                }
+            }
+            if (koridor === "5C") {
+                if (["Jatinegara", "Bali Mester"].includes(halte)) {
+                    arah = "→ arah Kampung Melayu";
+                }
+            }
+            if (koridor === "6") {
+                if (["Flyover Kuningan", "Halimun"].includes(halte)) {
+                    arah = "→ arah Galunggung";
+                }
+            }
+            if (koridor === "6B") {
+                if (halte === "Semanggi") arah = "→ arah Balai Kota";
+            }
+            if (koridor === "6V") {
+                if (halte === "ASEAN") arah = "→ arah Senayan BANK DKI";
             }
             if (koridor === "7F") {
                 if (halte === "Pasar Induk") arah = "← Masuk TOL Jagorawi arah Utan Kayu Rawamangun";
@@ -1024,18 +1069,48 @@ function displayKoridorResults(service, koridor, highlightHalte = null) {
                 if (halte === "Utan Kayu Rawamangun") arah = "→ Masuk TOL Jagorawi arah Pasar Induk";
             }
             if (koridor === "L7") {
-                if (halte === "Kampung Rambutan") arah = "→ Masuk TOL Jagorawi arah Cawang Sentral";
-                if (halte === "Cawang Sentral") arah = "← Masuk TOL Jagorawi arah Kampung Rambutan";
+                if (halte === "Kampung Rambutan") arah = "→ Masuk TOL HEK arah Cawang Sentral";
+                if (halte === "Cawang Sentral") arah = "← Masuk TOL HEK arah Kampung Rambutan";
             }
             if (koridor === "8") {
-                if (halte === "Underpass Lebak Bulus") arah = "→ Lebak Bulus";
-                if (halte === "Tanjung Duren") arah = "→ Jelambar";
+                if (halte === "Grogol Reformasi") arah = "→ arah Pasar Baru";
+                if (halte === "Pondok Pinang") arah = "→ arah Pasar Baru";
             }
-            if (koridor === "12") {
+             if (koridor === "9C") {
+                if (halte === "Semanggi") arah = "← arah Pinang Ranti";
+            }
+            if (koridor === "11") {
+                if (halte === "Jatinegara") arah = "→ arah Kampung Melayu";
+                if (halte === "Kampung Melayu") arah = "← ke Stasiun Jatinegara";
+            }
+             if (koridor === "12") {
                 if (["Penjaringan", "Bandengan", "Kali Besar"].includes(halte)) {
                     arah = "← Pluit";
                 } else if (["Pluit", "Pluit Selatan", "Pakin", "Gedong Panjang", "Museum Sejarah Jakarta", "Kota"].includes(halte)) {
                     arah = "→ Tanjung Priok";
+                }
+            }
+
+            if (koridor === "13") {
+                if (halte === "Puri Beta 1") arah = "→ arah Tegal Mampang";
+            }
+             if (koridor === "13B") {
+                if (["Pancoran", "Tegal Mampang"].includes(halte)) {
+                    arah = "→ arah Puri Beta 2";
+                }  if (halte === "Puri Beta 1") arah = "← arah Pancoran";
+            }
+            if (koridor === "13E") {
+                if (["Underpass Kuningan", "Tegal Mampang"].includes(halte)) {
+                    arah = "← Arah Puri Beta 2";
+                } else if (["Simpang Kuningan", "Puri Beta 1"].includes(halte)) {
+                    arah = "→ arah Flyover Kuningan";
+                }
+            }
+            if (koridor === "L13E") {
+                if (["Underpass Kuningan", "Tegal Mampang"].includes(halte)) {
+                    arah = "← Arah Puri Beta 2";
+                } else if (["Simpang Kuningan", "Puri Beta 1"].includes(halte)) {
+                    arah = "→ Flyover Kuningan";
                 }
             }
 
