@@ -184,8 +184,8 @@ label {
 }
 
 [data-theme="dark"] .text-muted {
-  color: white !important;
-  opacity: 70%;
+  color: rgb(141, 141, 141) !important;
+  opacity: 90%;
 }
 [data-theme="dark"]      .section-box {
             padding: 1.5rem;
