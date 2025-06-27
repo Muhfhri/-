@@ -421,7 +421,7 @@ export const koridorData = {
 
         },
         "13": {
-            start: "CBD Ciledug",
+            start: "Ciledug",
             end: "Tegal Mampang",
             isAMARI: true,
             operator: "Transjakarta (TJ), Mayasari Bakti (MYS)",

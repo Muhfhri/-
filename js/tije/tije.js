@@ -72,16 +72,45 @@ function updateKoridorOptions() {
     const serviceSelect = document.getElementById('serviceSelect');
     const selectedService = serviceSelect.value;
     
-    koridorSelect.innerHTML = '<option value="" selected>Koridor</option>';
+    koridorSelect.innerHTML = '<option value="" selected>Pilih Koridor...</option>';
     koridorSelect.disabled = false;
 
-    // Add routes for selected service only
+    // Add routes for selected service only, format: '1 BLOK M - KOTA'
     for (const koridor in koridorData[selectedService]) {
+        const koridorEntry = koridorData[selectedService][koridor];
+        const label = `${koridor} ${koridorEntry.start.toUpperCase()} - ${koridorEntry.end.toUpperCase()}`;
         const option = document.createElement('option');
         option.value = koridor;
-        option.textContent = `Koridor ${koridor}`;
+        option.textContent = label;
         koridorSelect.appendChild(option);
     }
+
+    // Info start/end halte di bawah dropdown (optional, bisa dihapus jika tidak perlu)
+    let infoDiv = document.getElementById('koridorStartEndInfo');
+    if (!infoDiv) {
+        infoDiv = document.createElement('div');
+        infoDiv.id = 'koridorStartEndInfo';
+        infoDiv.className = 'alert alert-info mt-2 d-none';
+        koridorSelect.parentNode.appendChild(infoDiv);
+    } else {
+        infoDiv.classList.add('d-none');
+        infoDiv.innerHTML = '';
+    }
+
+    koridorSelect.addEventListener('change', function() {
+        const koridor = this.value;
+        if (!koridor) {
+            infoDiv.classList.add('d-none');
+            infoDiv.innerHTML = '';
+            return;
+        }
+        const entry = koridorData[selectedService][koridor];
+        infoDiv.classList.remove('d-none');
+        infoDiv.innerHTML = `<b>Start:</b> ${entry.start}<br><b>End:</b> ${entry.end}`;
+    });
+
+    // Render custom dropdown setiap kali update
+    renderCustomKoridorDropdown();
 }
 
 // Mendapatkan daftar layanan dan koridor berdasarkan nama halte
@@ -1157,7 +1186,7 @@ function displayKoridorResults(service, koridor, highlightHalte = null) {
             halteLink.innerHTML = halte 
                 + (arah ? ` <span class=\"text-secondary small\">${arah}</span>` : '')
                 + (halteKRL.includes(halte) ? ` <iconify-icon inline icon=\"jam:train\"></iconify-icon>` : '')
-                + (halteMRT.includes(halte) ? ` <iconify-icon inline icon=\"pepicons-pop:train-circle\"></iconify-icon>` : '');
+                + (halteMRT.includes(halte) ? ` <iconify-icon inline icon=\"pepicons-pop:train-circle"></iconify-icon>` : '');
 
             left.appendChild(nomorBadge);
             left.appendChild(halteLink);
@@ -1372,7 +1401,23 @@ function displayAutocompleteResults(results) {
     });
 }
 
+// Helper: Normalisasi nama halte (case-insensitive, hilangkan spasi ekstra)
+function normalizeHalteName(name) {
+    return name.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+// Helper: Cari nama halte asli dari input user (case-insensitive)
+function findRealHalteName(input) {
+    const normInput = normalizeHalteName(input);
+    for (const halte of getAllHalteNames()) {
+        if (normalizeHalteName(halte) === normInput) return halte;
+    }
+    return input; // fallback, biar error handling tetap jalan
+}
+
 function findRoutePanduan(halteAsal, halteTujuan) {
+    halteAsal = findRealHalteName(halteAsal);
+    halteTujuan = findRealHalteName(halteTujuan);
     // 0. Cek apakah halteAsal dan halteTujuan terhubung langsung via integrasi
     const isLangsungIntegrasi = halteIntegrasi.some(([h1, h2]) =>
         (h1 === halteAsal && h2 === halteTujuan) || (h1 === halteTujuan && h2 === halteAsal)
@@ -1417,6 +1462,8 @@ function findRoutePanduan(halteAsal, halteTujuan) {
 }
 
 function findRoutePanduanMultiTransit(halteAsal, halteTujuan) {
+    halteAsal = findRealHalteName(halteAsal);
+    halteTujuan = findRealHalteName(halteTujuan);
     // Cek apakah halteAsal dan halteTujuan terhubung langsung via integrasi
     const isLangsungIntegrasi = halteIntegrasi.some(([h1, h2]) =>
         (h1 === halteAsal && h2 === halteTujuan) || (h1 === halteTujuan && h2 === halteAsal)
@@ -1832,6 +1879,8 @@ function formatRute(path) {
 }
 
 function findRouteKhusus(halteAsal, halteTujuan) {
+    halteAsal = findRealHalteName(halteAsal);
+    halteTujuan = findRealHalteName(halteTujuan);
     // Cek apakah kedua halte ada di koridor AMARI
     const amariKoridors = [];
     for (const [service, koridors] of Object.entries(koridorData)) {
@@ -2004,3 +2053,207 @@ window.addEventListener('DOMContentLoaded', function() {
         window.selectKoridor(koridorState.service, koridorState.koridor);
     }
 });
+
+// Custom dropdown koridor dengan badge dan jurusan
+function renderCustomKoridorDropdown() {
+    const koridorSelect = document.getElementById('koridorSelect');
+    const serviceSelect = document.getElementById('serviceSelect');
+    if (!koridorSelect || !serviceSelect) return;
+
+    // Sembunyikan <select> asli
+    koridorSelect.style.display = 'none';
+
+    // Hapus dropdown custom lama jika ada
+    let old = document.getElementById('customKoridorDropdown');
+    if (old) old.remove();
+
+    // Buat container
+    const container = document.createElement('div');
+    container.className = 'dropdown w-100';
+    container.id = 'customKoridorDropdown';
+
+    // Tombol utama
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-outline-dark dropdown-toggle w-100';
+    btn.type = 'button';
+    btn.setAttribute('data-bs-toggle', 'dropdown');
+    btn.style.textAlign = 'left';
+    btn.style.whiteSpace = 'normal';
+    btn.style.wordBreak = 'break-word';
+    btn.style.maxWidth = '400px';
+    // Default text
+    btn.innerHTML = '<span class="text-truncate">Pilih Koridor...</span>';
+    container.appendChild(btn);
+
+    // List koridor
+    const ul = document.createElement('ul');
+    ul.className = 'dropdown-menu w-100';
+    ul.style.maxHeight = '350px';
+    ul.style.overflowY = 'auto';
+    ul.style.wordBreak = 'break-word';
+    ul.style.whiteSpace = 'normal';
+    ul.style.minWidth = '250px';
+    ul.style.maxWidth = '400px';
+
+    const selectedService = serviceSelect.value;
+    for (const koridor in koridorData[selectedService]) {
+        const entry = koridorData[selectedService][koridor];
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.className = 'dropdown-item d-flex align-items-start';
+        a.href = '#';
+        a.style.wordBreak = 'break-word';
+        a.style.whiteSpace = 'normal';
+        a.style.alignItems = 'flex-start';
+        a.style.fontWeight = 'bold';
+        // Compose dropdown item (NO operator codes, NO jam operasi)
+        a.innerHTML = `<span class=\"badge me-2 flex-shrink-0\" style=\"background:${getKoridorBadgeColor(koridor)};width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:0.9rem;border-radius:50%;\">${koridor}</span> <span style='display:block;white-space:normal;word-break:break-word;max-width:320px;font-weight:bold;'>${entry.start.toUpperCase()} - ${entry.end.toUpperCase()}</span>`;
+        a.onclick = function(e) {
+            e.preventDefault();
+            // Extract operator codes in parentheses (allow slashes)
+            let operatorStr = entry.operator || '';
+            let operatorCodes = [];
+            if (Array.isArray(operatorStr)) {
+                operatorStr = operatorStr.join(', ');
+            }
+            const regex = /\(([A-Z0-9 /]+)\)/g;
+            let match;
+            while ((match = regex.exec(operatorStr)) !== null) {
+                operatorCodes.push(match[1]);
+            }
+            // Get operational time
+            let jamOperasi = '05:00 - 22:00';
+            if (entry.isAMARI) {
+                jamOperasi = '24 Jam';
+            } else if (entry.operationalSchedule && entry.operationalSchedule.weekday && entry.operationalSchedule.weekday.hours) {
+                const h = entry.operationalSchedule.weekday.hours;
+                if (Array.isArray(h)) {
+                    jamOperasi = h.map(slot => `${String(slot.start).padStart(2,'0')}:00 - ${String(slot.end).padStart(2,'0')}:00`).join(' | ');
+                } else {
+                    jamOperasi = `${String(h.start).padStart(2,'0')}:00 - ${String(h.end).padStart(2,'0')}:00`;
+                }
+            }
+            // Set button text with operator codes BELOW jurusan, only after selection
+            btn.innerHTML = `
+                <span class=\"badge me-2 flex-shrink-0\" style=\"background:${getKoridorBadgeColor(koridor)};width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:0.9rem;border-radius:50%;\">${koridor}</span>
+                <span style='display:block;white-space:normal;word-break:break-word;max-width:320px;font-weight:bold;'>${entry.start.toUpperCase()} - ${entry.end.toUpperCase()}</span>
+                <span class='d-block fw-bold text-muted mt-1' style='font-size:1em;margin-top:2px;'>${operatorCodes.map(code => `(${code})`).join(' ')}${operatorCodes.length ? ' - ' : ''}${jamOperasi}</span>
+            `;
+            koridorSelect.value = koridor;
+            saveKoridorState(selectedService, koridor);
+            displayKoridorResults(selectedService, koridor);
+            // Scroll ke daftar halte
+            setTimeout(() => {
+                const koridorTitle = document.getElementById('jurusan');
+                if (koridorTitle) {
+                    koridorTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+            btn.click();
+        };
+        li.appendChild(a);
+        ul.appendChild(li);
+    }
+    container.appendChild(ul);
+
+    // Sisipkan setelah <select>
+    koridorSelect.parentNode.insertBefore(container, koridorSelect.nextSibling);
+
+    // Restore pilihan terakhir jika ada
+    const koridorState = loadKoridorState();
+    if (koridorState && koridorState.service === selectedService && koridorState.koridor && koridorData[selectedService][koridorState.koridor]) {
+        const entry = koridorData[selectedService][koridorState.koridor];
+        // Extract operator codes in parentheses (allow slashes)
+        let operatorStr = entry.operator || '';
+        let operatorCodes = [];
+        if (Array.isArray(operatorStr)) {
+            operatorStr = operatorStr.join(', ');
+        }
+        const regex = /\(([A-Z0-9 /]+)\)/g;
+        let match;
+        while ((match = regex.exec(operatorStr)) !== null) {
+            operatorCodes.push(match[1]);
+        }
+        // Get operational time
+        let jamOperasi = '05:00 - 22:00';
+        if (entry.isAMARI) {
+            jamOperasi = '24 Jam';
+        } else if (entry.operationalSchedule && entry.operationalSchedule.weekday && entry.operationalSchedule.weekday.hours) {
+            const h = entry.operationalSchedule.weekday.hours;
+            if (Array.isArray(h)) {
+                jamOperasi = h.map(slot => `${String(slot.start).padStart(2,'0')}:00 - ${String(slot.end).padStart(2,'0')}:00`).join(' | ');
+            } else {
+                jamOperasi = `${String(h.start).padStart(2,'0')}:00 - ${String(h.end).padStart(2,'0')}:00`;
+            }
+        }
+        btn.innerHTML = `
+            <span class=\"badge me-2 flex-shrink-0\" style=\"background:${getKoridorBadgeColor(koridorState.koridor)};width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:0.9rem;border-radius:50%;\">${koridorState.koridor}</span>
+            <span style='display:block;white-space:normal;word-break:break-word;max-width:320px;font-weight:bold;'>${entry.start.toUpperCase()} - ${entry.end.toUpperCase()}</span>
+            <span class='d-block fw-bold text-muted mt-1' style='font-size:1em;margin-top:2px;'>${operatorCodes.map(code => `(${code})`).join(' ')}${operatorCodes.length ? ' - ' : ''}${jamOperasi}</span>
+        `;
+        koridorSelect.value = koridorState.koridor;
+        displayKoridorResults(selectedService, koridorState.koridor);
+        setTimeout(() => {
+    const koridorResults = document.getElementById('koridorResults');
+    if (koridorResults) {
+        // Cari data koridor
+        const entry = koridorData[selectedService][koridor];
+        // Ambil operator bus (dalam kurung saja)
+        let operatorStr = entry.operator || '';
+        let operatorCodes = [];
+        if (Array.isArray(operatorStr)) {
+            operatorStr = operatorStr.join(', ');
+        }
+        const regex = /\(([A-Z0-9 /]+)\)/g;
+        let match;
+        while ((match = regex.exec(operatorStr)) !== null) {
+            operatorCodes.push(match[1]);
+        }
+        // Info AMARI
+        let jamOperasi = '';
+        if (entry.isAMARI) {
+            jamOperasi = '<span class="badge bg-info ms-2">24 Jam (AMARI)</span>';
+        } else {
+            jamOperasi = '<span class="badge bg-secondary ms-2">05.00 - 22.00</span>';
+            if (entry.operationalSchedule && entry.operationalSchedule.weekday && entry.operationalSchedule.weekday.hours) {
+                const h = entry.operationalSchedule.weekday.hours;
+                if (Array.isArray(h)) {
+                    jamOperasi = h.map(slot => `<span class='badge bg-secondary ms-2'>${String(slot.start).padStart(2,'0')}:00 - ${String(slot.end).padStart(2,'0')}:00</span>`).join('');
+                } else {
+                    jamOperasi = `<span class='badge bg-secondary ms-2'>${String(h.start).padStart(2,'0')}:00 - ${String(h.end).padStart(2,'0')}:00</span>`;
+                }
+            }
+        }
+        // Sisipkan info di atas daftar halte
+        let infoDiv = document.getElementById('koridorOperatorInfo');
+        if (!infoDiv) {
+            infoDiv = document.createElement('div');
+            infoDiv.id = 'koridorOperatorInfo';
+            infoDiv.className = 'mb-2';
+            koridorResults.parentNode.insertBefore(infoDiv, koridorResults);
+        }
+        infoDiv.innerHTML =
+            (operatorCodes.length ? `<span class='badge bg-warning text-dark me-2'>${operatorCodes.join(', ')}</span>` : '') +
+            jamOperasi;
+    }
+    // Scroll ke judul koridor
+    const koridorTitle = document.getElementById('jurusan');
+    if (koridorTitle) {
+        koridorTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}, 100);
+    }
+
+    // Hapus info start/end jika ada
+    let infoDiv = document.getElementById('koridorStartEndInfo');
+    if (infoDiv) infoDiv.remove();
+    let halteListDiv = document.getElementById('customKoridorHalteList');
+    if (halteListDiv) halteListDiv.remove();
+}
+
+// Panggil custom dropdown saat halaman dimuat
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateKoridorOptions);
+} else {
+    updateKoridorOptions();
+}
