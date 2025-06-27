@@ -3,7 +3,29 @@ import { koridorData, halteKRL, halteMRT, integrasiBadge, halteIntegrasi } from 
 // Tambahkan di awal file (atau sebelum fungsi getJurusan)
 (function() {
     const style = document.createElement('style');
-    style.innerHTML = `.popover .bus-popover-img { max-width:100%; max-height:70px; object-fit:contain; background:#f8f9fa; border-radius:8px; padding:2px; display:block; margin:auto; }`;
+    style.innerHTML = `.popover .bus-popover-img { max-width:100%; max-height:120px; object-fit:contain; background:#f8f9fa; border-radius:8px; padding:2px; display:block; margin:auto; }`;
+    document.head.appendChild(style);
+})();
+
+// Tambahkan style global untuk efek hover/klik badge koridor interaktif
+(function() {
+    const style = document.createElement('style');
+    style.innerHTML = `
+    .badge-koridor-interaktif {
+        transition: box-shadow 0.18s, transform 0.18s, filter 0.18s;
+    }
+    .badge-koridor-interaktif:hover {
+        box-shadow: 0 0 0 2px #26469744;
+        transform: scale(1.12);
+        filter: brightness(1.13);
+        cursor: pointer;
+        z-index: 2;
+    }
+    .badge-koridor-interaktif:active {
+        transform: scale(0.96);
+        filter: brightness(0.95);
+    }
+    `;
     document.head.appendChild(style);
 })();
 
@@ -268,6 +290,67 @@ function getOperationalStatus(koridorNumber, service) {
         end: 22
     };
 
+    // Special handling for PRJ1 and PRJ2
+    if ((koridorNumber === 'PRJ1' || koridorNumber === 'PRJ2' || koridorNumber === '2C') && koridor.operationalSchedule) {
+        const schedule = koridor.operationalSchedule;
+        let isOperational = false;
+        let timeInfo = '';
+        let hours = null;
+        let dayRange = '';
+        let isWeekend = false;
+        // Gunakan properti 'type' untuk label hari
+        if (schedule.weekend && schedule.weekend.days.includes(currentDay)) {
+            hours = schedule.weekend.hours;
+            dayRange = schedule.weekend.type === 'weekend' ? 'Sabtu - Minggu' : '';
+            isWeekend = true;
+        } else if (schedule.weekday && schedule.weekday.days.includes(currentDay)) {
+            hours = schedule.weekday.hours;
+            dayRange = schedule.weekday.type === 'weekday' ? 'Senin - Jumat' : '';
+        }
+        // Format jam operasi
+        let timeSlots = Array.isArray(hours) ? hours : [hours];
+        isOperational = timeSlots.some(slot => currentTime >= slot.start && currentTime < slot.end);
+        // Hitung waktu tersisa atau waktu mulai
+        if (isOperational) {
+            const nextEnd = timeSlots.find(slot => currentTime >= slot.start && currentTime < slot.end)?.end;
+            if (nextEnd) {
+                const remainingHours = Math.floor(nextEnd - currentTime);
+                const remainingMinutes = Math.round((nextEnd - currentTime - remainingHours) * 60);
+                timeInfo = `${remainingHours} jam ${remainingMinutes} menit lagi`;
+            }
+        } else {
+            // Cari slot operasi berikutnya
+            const nextSlot = timeSlots.find(slot => slot.start > currentTime);
+            if (nextSlot) {
+                let diff = (nextSlot.start - currentTime + 24) % 24;
+                let hoursUntilStart = Math.floor(diff);
+                let minutesUntilStart = Math.round((diff - hoursUntilStart) * 60);
+                timeInfo = ` (${hoursUntilStart} jam ${minutesUntilStart} menit lagi)`;
+            } else {
+                // Jika tidak ada slot lagi hari ini, hitung sampai besok
+                const firstSlot = timeSlots[0];
+                let diff = (24 - currentTime + firstSlot.start) % 24;
+                let hoursUntilStart = Math.floor(diff);
+                let minutesUntilStart = Math.round((diff - hoursUntilStart) * 60);
+                timeInfo = ` (${hoursUntilStart} jam ${minutesUntilStart} menit lagi)`;
+            }
+        }
+        // Format jam operasi string
+        let jamOperasiStr = timeSlots.map(slot => `${String(slot.start).padStart(2,'0')}:00 - ${String(slot.end).padStart(2,'0')}:00`).join(' | ');
+        return {
+            isOperational,
+            message: isOperational ? 'Sedang beroperasi' : 'Di luar jam operasi',
+            timeInfo,
+            schedule: {
+                weekday: {
+                    hours: timeSlots,
+                    dayRange: dayRange,
+                    jamOperasiStr: jamOperasiStr
+                }
+            }
+        };
+    }
+
     // Jika koridor memiliki jadwal khusus
     if (koridor.operationalSchedule) {
         const schedule = koridor.operationalSchedule;
@@ -276,9 +359,13 @@ function getOperationalStatus(koridorNumber, service) {
         
         // Format hari operasi
         const dayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        const startDay = dayNames[Math.min(...days)];
-        const endDay = dayNames[Math.max(...days)];
-        const dayRange = days.length === 7 ? "Setiap hari" : `${startDay} - ${endDay}`;
+        let startDay = dayNames[Math.min(...days)];
+        let endDay = dayNames[Math.max(...days)];
+        let dayRange = days.length === 7 ? "Setiap hari" : `${startDay} - ${endDay}`;
+        // Special case: if days is [6,0] or [0,6], force 'Sabtu - Minggu'
+        if (days.length === 2 && days.includes(0) && days.includes(6)) {
+            dayRange = 'Sabtu - Minggu';
+        }
         
         // Cek apakah hari ini adalah hari operasi
         const isOperationalDay = days.includes(currentDay);
@@ -341,14 +428,16 @@ function getOperationalStatus(koridorNumber, service) {
             // Cari slot operasi berikutnya
             const nextSlot = timeSlots.find(slot => slot.start > currentTime);
             if (nextSlot) {
-                const hoursUntilStart = Math.floor(nextSlot.start - currentTime);
-                const minutesUntilStart = Math.round((nextSlot.start - currentTime - hoursUntilStart) * 60);
+                let diff = (nextSlot.start - currentTime + 24) % 24;
+                let hoursUntilStart = Math.floor(diff);
+                let minutesUntilStart = Math.round((diff - hoursUntilStart) * 60);
                 timeInfo = ` (${hoursUntilStart} jam ${minutesUntilStart} menit lagi)`;
             } else {
                 // Jika tidak ada slot lagi hari ini, hitung sampai besok
                 const firstSlot = timeSlots[0];
-                const hoursUntilStart = Math.floor(24 - currentTime + firstSlot.start);
-                const minutesUntilStart = Math.round((24 - currentTime + firstSlot.start - hoursUntilStart) * 60);
+                let diff = (24 - currentTime + firstSlot.start) % 24;
+                let hoursUntilStart = Math.floor(diff);
+                let minutesUntilStart = Math.round((diff - hoursUntilStart) * 60);
                 timeInfo = ` (${hoursUntilStart} jam ${minutesUntilStart} menit lagi)`;
             }
         }
@@ -401,8 +490,9 @@ function getOperationalStatus(koridorNumber, service) {
         };
     } else {
         // Hitung waktu sampai operasi besok
-        const hoursUntilStart = Math.floor(24 - currentTime + defaultHours.start);
-        const minutesUntilStart = Math.round((24 - currentTime + defaultHours.start - hoursUntilStart) * 60);
+        let diff = (24 - currentTime + defaultHours.start) % 24;
+        let hoursUntilStart = Math.floor(diff);
+        let minutesUntilStart = Math.round((diff - hoursUntilStart) * 60);
         return {
             isOperational: false,
             message: "Di luar jam operasi",
@@ -518,10 +608,10 @@ function getJurusan(koridorNumber, service) {
     function formatHours(hours) {
         if (Array.isArray(hours)) {
             return hours.map(slot => 
-                slot.period ? `${slot.period}: ${slot.start}:00 - ${slot.end}:00` : `${slot.start}:00 - ${slot.end}:00`
+                slot.period ? `${slot.period}: ${String(slot.start).padStart(2,'0')}:00 - ${String(slot.end).padStart(2,'0')}:00` : `${String(slot.start).padStart(2,'0')}:00 - ${String(slot.end).padStart(2,'0')}:00`
             ).join(" | ");
         }
-        return `${hours.start}:00 - ${hours.end}:00`;
+        return `${String(hours.start).padStart(2,'0')}:00 - ${String(hours.end).padStart(2,'0')}:00`;
     }
 
     let busTypeHtml = '';
@@ -729,7 +819,7 @@ function getJurusan(koridorNumber, service) {
         <br><span class="text-muted badge fw-bold">${service}</span>
         ${isAMARI ? '<br><span class="badge bg-info rounded-5 mt-1"><iconify-icon inline icon="mdi:moon-waning-crescent"></iconify-icon> AMARI</span>' : ''}
     </div>
-    <div class="pt-sans-narrow-bold fw-bold"><small>${halteAwal} - ${halteAkhir}</small></div>
+    <div class="pt-sans-narrow-bold fw-bold">${halteAwal} - ${halteAkhir}</div>
     <hr>
     <span class="text-muted fw-bold small">Operator Bus :</span>
     <div class="pt-sans-narrow-bold mt-2">
@@ -753,7 +843,7 @@ function getJurusan(koridorNumber, service) {
         ${isAMARI ? `
         <div class="alert alert-info py-2 small mb-2">
             <iconify-icon icon="mdi:bus-clock"></iconify-icon>
-            <b>Grand AMARI</b> - Beroperasi 24 jam nonstop
+            <b>AMARI</b> - Beroperasi 24 jam
         </div>
         ` : `
         <div class="alert ${operationalStatus.isOperational ? 'alert-success' : 'alert-danger'} py-2 small mb-2">
@@ -768,7 +858,7 @@ function getJurusan(koridorNumber, service) {
         <div class="small">
             ${operationalStatus.schedule.weekday ? `
             <div class="mb-1">
-                <b>${operationalStatus.schedule.weekday.dayRange} <br> ${formatHours(operationalStatus.schedule.weekday.hours)}
+                <b>${operationalStatus.schedule.weekday.dayRange} <br> ${operationalStatus.schedule.weekday.jamOperasiStr || formatHours(operationalStatus.schedule.weekday.hours)}
             </div>
             ` : ''}
         </div>
@@ -1790,6 +1880,7 @@ function createKoridorBadge(service, koridor) {
     badge.style.fontSize = "0.7rem";
     badge.style.cursor = "pointer";
     badge.style.margin = "0 4px";
+    badge.classList.add('badge-koridor-interaktif');
     badge.onclick = () => selectKoridor(service, koridor);
     return badge;
 }
@@ -1997,13 +2088,13 @@ function showHaltes(koridorNumber, start, end, haltes, highlightHalte = null) {
                     <div class="d-flex flex-wrap gap-1 justify-content-end" style="min-width: 120px;">
                         ${servicesAndKoridors.map(({ service, koridor }) => {
                             if (koridor !== koridorNumber) {
-                                return `<span class="badge rounded-circle" style="background:${getKoridorBadgeColor(koridor)}; color:white; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.7rem; border-radius:50%; cursor:pointer;" onclick="window.selectKoridor('${service}', '${koridor}')">${koridor}</span>`;
+                                return `<span class="badge rounded-circle badge-koridor-interaktif" style="background:${getKoridorBadgeColor(koridor)}; color:white; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.7rem; border-radius:50%; cursor:pointer;" onclick="window.selectKoridor('${service}', '${koridor}')">${koridor}</span>`;
                             }
                             return '';
                         }).join('')}
                         ${integrasiBadge[halte] ? integrasiBadge[halte].map(kor => {
                             if (kor !== koridorNumber) {
-                                return `<span class="badge rounded-circle" style="background:${getKoridorBadgeColor(kor)}; color:white; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.7rem; border-radius:50%; cursor:pointer;" onclick="window.selectKoridor('BRT', '${kor}')">${kor}</span>`;
+                                return `<span class="badge rounded-circle badge-koridor-interaktif" style="background:${getKoridorBadgeColor(kor)}; color:white; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.7rem; border-radius:50%; cursor:pointer;" onclick="window.selectKoridor('BRT', '${kor}')">${kor}</span>`;
                             }
                             return '';
                         }).join('') : ''}
@@ -2074,7 +2165,7 @@ function renderCustomKoridorDropdown() {
 
     // Tombol utama
     const btn = document.createElement('button');
-    btn.className = 'btn btn-outline-dark dropdown-toggle w-100';
+    btn.className = 'btn btn-outline-m3 rounded-4 dropdown-toggle w-100';
     btn.type = 'button';
     btn.setAttribute('data-bs-toggle', 'dropdown');
     btn.style.textAlign = 'left';
