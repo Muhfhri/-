@@ -10,7 +10,9 @@ import { koridorData, halteKRL, halteMRT, integrasiBadge, halteIntegrasi } from 
 function getKoridorBadgeColor(koridor) {
     const colorMap = {
         "1": "#D02027",    
+        "1A": "#93C3A4",    
         "1P": "#FF0040",    
+        "1R": "#FC8DA9",    
         "2": "#264697",   
         "2A": "#4FA8DE",   
         "3": "#FCC81B",    
