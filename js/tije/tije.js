@@ -3,7 +3,7 @@ import { koridorData, halteKRL, halteMRT, integrasiBadge, halteIntegrasi } from 
 // Tambahkan di awal file (atau sebelum fungsi getJurusan)
 (function() {
     const style = document.createElement('style');
-    style.innerHTML = `.popover .bus-popover-img { max-width:100%; max-height:120px; object-fit:contain; background:#f8f9fa; border-radius:8px; padding:2px; display:block; margin:auto; }`;
+    style.innerHTML = `.popover { max-width:220px !important; word-break:break-word; overflow-wrap:break-word; } .popover .bus-popover-img { max-width:100%; max-height:120px; object-fit:contain; background:#f8f9fa; border-radius:8px; padding:2px; display:block; margin:auto; }`;
     document.head.appendChild(style);
 })();
 
@@ -534,7 +534,16 @@ function getTarif() {
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
     const currentTime = currentHour + currentMinute/60;
-    
+    // --- TARIF KHUSUS TANGGAL TERTENTU ---
+    // Contoh: 1 Juli (bulan 6, karena bulan di JS dimulai dari 0)
+    if ((now.getDate() === 1 && now.getMonth() === 6)) {
+        return {
+            amount: 1,
+            period: "Tarif Spesial",
+            description: "Tarif Spesial Hari Bhayangkara",
+            timeInfo: "Tarif hanya berlaku hari ini"
+        };
+    }
     // Tarif 2000 untuk jam 05:00 - 07:00
     if (currentTime >= 5 && currentTime < 7) {
         const remainingMinutes = Math.round((7 - currentTime) * 60);
@@ -618,26 +627,26 @@ function getJurusan(koridorNumber, service) {
     if (busTypes.length > 0) {
         // Mapping gambar bus (bisa ditambah sesuai kebutuhan)
         const busTypeToImage = {
-            "Volvo B11R": "https://www.volvobuses.com/content/dam/volvo-buses/markets/malaysia/classic/1860x1050-BRT-buses-2020-4.jpg",
+            "Volvo B11R": "https://live.staticflickr.com/874/41008899292_7698081274_b.jpg",
             "Mercedes-Benz OH 1626": "https://pbs.twimg.com/media/EMfDLRrUYAU5wAZ.jpg",
             "Mercedes-Benz OH 1526": "https://pbs.twimg.com/media/EhuPuokU4AAniIJ.jpg",
             "Mercedes-Benz O500U": "https://live.staticflickr.com/851/28967921207_220cc5117c_b.jpg",
             "Mercedes-Benz OC 500 RF 2542": "https://live.staticflickr.com/1825/42375369745_d59b0db737_b.jpg",
             "Scania K320IA": "https://mobilkomersial.com/wp-content/uploads/2023/04/Bus-TJ-Gandeng.jpg",
-            "Scania K310IB": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Transjakarta_MYS_18116_at_Gambir.jpg/250px-Transjakarta_MYS_18116_at_Gambir.jpg",
+            "Scania K310IB": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Transjakarta_MYS_18116_at_Gambir.jpg/1100px-Transjakarta_MYS_18116_at_Gambir.jpg",
             "Scania K250UB": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Transjakarta_-_TJ632_Scania_K250UB.jpg/250px-Transjakarta_-_TJ632_Scania_K250UB.jpg",
             "Hino RK1 JSNL": "https://live.staticflickr.com/4624/39561244554_fc5cf21761_b.jpg",
             "Hino RK8 R260": "https://live.staticflickr.com/1937/45752656441_bf9489a0bb_b.jpg",
-            "Zhongtong Bus LCK6180GC": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/TransJakarta%27s_Zhongtong_articulated_bus_%281%29.jpg/250px-TransJakarta%27s_Zhongtong_articulated_bus_%281%29.jpg",
+            "Zhongtong Bus LCK6180GC": "https://redigest.web.id/wp-content/uploads/2019/10/IMG_20191011_104316_HDR.jpg",
             "Zhongtong Bus LCK6126EVGRA1": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Transjakarta_-_DMR-240127_01.jpg/250px-Transjakarta_-_DMR-240127_01.jpg",
-            "SAG Golden Dragon XML6125JEVJ0C3": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Transjakarta_-_BMP-240327.jpg/250px-Transjakarta_-_BMP-240327.jpg",
-            "Skywell NJL6126BEV": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Transjakarta_DMR-240184.jpg",
-            "Skywell NJL6129BEV": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Transjakarta_Metrotrans_Skywell_Electric_Bus.jpg/250px-Transjakarta_Metrotrans_Skywell_Electric_Bus.jpg",
-            "VKTR BYD D9 (EV)": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Transjakarta_SJM-240012.jpg/250px-Transjakarta_SJM-240012.jpg",
+            "SAG Golden Dragon XML6125JEVJ0C3": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Transjakarta_-_BMP-240327.jpg/1100px-Transjakarta_-_BMP-240327.jpg",
+            "Skywell NJL6126BEV": "https://www.transgo.co.id/wp-content/uploads/2024/11/002.png",
+            "Skywell NJL6129BEV": "https://mobilkomersial.com/wp-content/uploads/2024/11/Snapinsta.app_466929837_870028668268355_8248708680309915930_n_1080.jpg",
+            "VKTR BYD D9 (EV)": "https://asset.kompas.com/crops/G33-Spk3Y_p-AZPaLFIgdLT1bd0=/13x164:1080x875/1200x800/data/photo/2024/12/03/674e9cfae21a3.jpg",
             "Hino GB 150": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Bus_Minitrans_melayani_penumpang_di_rute_6W.jpg/250px-Bus_Minitrans_melayani_penumpang_di_rute_6W.jpg",
-            "VKTR BYD B12 (EV)": "https://img.era.id/Rn-aMA9r1CyiZ97K2fp8jvUQITRjUFbHfBTnbPMTsTA/rs:fill:1200:675/g:sm/wm:1:nowe:0:0:1/bG9jYWw6Ly8vcHVibGlzaGVycy85NjEzOS8yMDIyMDYwOTE4NTQtbWFpbi5jcm9wcGVkXzE2NTQ3NzU2OTMuanBlZw.jpg",
-            "Mitsubishi Colt FE 84G": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/MiniTrans.jpg/250px-MiniTrans.jpg",
-            "Hino RN8 285" : "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BHL_TJ_Kampung_Rambutan_bus_terminal_20220715.jpg/250px-BHL_TJ_Kampung_Rambutan_bus_terminal_20220715.jpg"
+            "VKTR BYD B12 (EV)": "https://mobilkomersial.com/wp-content/uploads/2023/07/904275434704_493450525478316_422167581136174078_n.jpg",
+            "Mitsubishi Colt FE 84G": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/MiniTrans.jpg/1100px-MiniTrans.jpg",
+            "Hino RN8 285" : "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/BHL_TJ_Kampung_Rambutan_bus_terminal_20220715.jpg/1100px-BHL_TJ_Kampung_Rambutan_bus_terminal_20220715.jpg"
         };
         // Create a mapping of bus types to their specific operators and type
         const busTypeToOperators = {
@@ -661,11 +670,11 @@ function getJurusan(koridorNumber, service) {
                 type: "BRT Biasa"
             },
             "Mercedes-Benz O500U": {
-                operators: ["Transjakarta (TJ)"],
+                operators: ["PT Transportasi Jakarta"],
                 type: "Low Deck Non-BRT Swakelola"
             },
             "Mercedes-Benz OC 500 RF 2542": {
-                operators: ["Swakelola Transjakarta"],
+                operators: ["PT Transportasi Jakarta"],
                 type: "BRT Maxi"
             },
             
@@ -679,13 +688,13 @@ function getJurusan(koridorNumber, service) {
                 type: "BRT Maxi"
             },
             "Scania K250UB": {
-                operators: ["Transjakarta (TJ)"],
+                operators: ["PT Transportasi Jakarta"],
                 type: "Low Deck Non-BRT Swakelola"
             },
             
             // Hino Buses
             "Hino RK1 JSNL": {
-                operators: ["Swakelola Transjakarta"],
+                operators: ["PT Transportasi Jakarta"],
                 type: "BRT Biasa"
             },
             "Hino RK8 R260": {
@@ -772,9 +781,9 @@ function getJurusan(koridorNumber, service) {
                         style="background:${getKoridorBadgeColor(koridorNumber)}; color:white; border:none;"
                         data-bs-toggle="popover"
                         data-bs-trigger="hover"
-                        data-bs-placement="top"
+                        data-bs-placement="auto"
                         data-bs-html="true"
-                        data-bs-content="<div style='width:140px;display:flex;justify-content:center;align-items:center;'><img src='${imgSrc}' alt='${displayBusType}' class='bus-popover-img'></div><b>Operator:</b><br>${operatorList || 'Tidak ada data operator'}<br><br><b>Tipe:</b><br>${busInfo.type}\"
+                        data-bs-content="<div style='width:140px;display:flex;justify-content:center;align-items:center;'><a href='${imgSrc}' target='_blank' tabindex='-1'><img src='${imgSrc}' alt='${displayBusType}' class='bus-popover-img'></a></div><b>Operator:</b><br>${operatorList || 'Tidak ada data operator'}<br><br><b>Tipe:</b><br>${busInfo.type}"
                     >
                         ${displayBusType}
                         ${isElectric ? '<span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning\" style=\"font-size:0.5em;\"><iconify-icon icon=\"mdi:lightning-bolt\"></iconify-icon></span>' : ''}
@@ -859,6 +868,12 @@ function getJurusan(koridorNumber, service) {
             ${operationalStatus.schedule.weekday ? `
             <div class="mb-1">
                 <b>${operationalStatus.schedule.weekday.dayRange} <br> ${operationalStatus.schedule.weekday.jamOperasiStr || formatHours(operationalStatus.schedule.weekday.hours)}
+            </div>
+            ` : ''}
+            ${(koridorNumber === 'PRJ1' || koridorNumber === 'PRJ2' || koridorNumber === '2C') ? `
+            <div class="alert alert-warning py-1 small mb-1">
+                <iconify-icon inline icon="mdi:calendar-clock"></iconify-icon>
+                <b>Sampai 14 Juli 2025</b>
             </div>
             ` : ''}
         </div>

@@ -483,16 +483,18 @@ export const koridorData = {
             start: "Kampung Melayu",
             end: "JIEXPO Kemayoran",
             operationalSchedule: {
-                weekend:{
+                weekend: {
+                    type: "weekend",
                     days: [0,6],
                     hours: [
-                        { start: 8, end:  24},    // Pagi: 05:00 - 09:00
+                        { start: 8, end: 24 }
                     ]
                 },
                 weekday: {
-                    days: [1, 2, 3, 4, 5],
+                    type: "weekday",
+                    days: [1,2,3,4,5],
                     hours: [
-                        { start: 14, end: 23 }   // Sore: 15:00 - 21:00
+                        { start: 14, end: 23 }
                     ]
                 }
             },
@@ -506,16 +508,18 @@ export const koridorData = {
             start: "Pulo Gadung",
             end: "JIEXPO Kemayoran",
             operationalSchedule: {
-                weekend:{
+                weekend: {
+                    type: "weekend",
                     days: [0,6],
                     hours: [
-                        { start: 8, end:  24},    // Pagi: 05:00 - 09:00
+                        { start: 8, end: 24 }
                     ]
                 },
                 weekday: {
-                    days: [1, 2, 3, 4, 5],
+                    type: "weekday",
+                    days: [1,2,3,4,5],
                     hours: [
-                        { start: 14, end: 23 }   // Sore: 15:00 - 21:00
+                        { start: 14, end: 23 }
                     ]
                 }
             },
@@ -531,16 +535,18 @@ export const koridorData = {
             start: "Balai Kota",
             end: "JIEXPO Kemayoran",
             operationalSchedule: {
-                weekend:{
+                weekend: {
+                    type: "weekend",
                     days: [0,6],
                     hours: [
-                        { start: 8, end:  24},    // Pagi: 05:00 - 09:00
+                        { start: 8, end: 24 }
                     ]
                 },
                 weekday: {
-                    days: [1, 2, 3, 4, 5],
+                    type: "weekday",
+                    days: [1,2,3,4,5],
                     hours: [
-                        { start: 14, end: 23 }   // Sore: 15:00 - 21:00
+                        { start: 14, end: 23 }
                     ]
                 }
             },
@@ -678,7 +684,7 @@ export const koridorData = {
         "5N": {
             start: "Kampung Melayu",
             end: "Ragunan",
-            operator: "Jewa Dian Mitra",
+            operator: "Jewa Dian Mitra (JDM)",
             busType: "Hino GB 150",
             directions : {
                 "Ragunan" :[
