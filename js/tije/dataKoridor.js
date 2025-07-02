@@ -111,9 +111,9 @@ export const koridorData = {
                 "Zhongtong Bus LCK6126EVGRA1",
                 "Hino RK8 R260 amari",
                 "Hino RK1 JSNL",
-                "Mercedes-Benz OH 1626",
                 "Mercedes-Benz OH 1526",
-                "Skywell NJL6126BEV"
+                "Skywell NJL6126BEV",
+                "Zhongtong Bus LCK6126EVGRA2"
             ],
             isAMARI: true,
             haltes: ["Pulo Gadung", "Pemuda Merdeka", "Layur", "Pemuda Rawamangun", "Velodrome", "Kayu Jati", "Rawamangun", "Simpang Pramuka", "Pramuka Sari", "Utan Kayu", "Pasar Genjing", "Flyover Pramuka", "Matraman", "Tegalan", "Kesatrian", "Manggarai", "Pasar Rumput", "Halimun", "Galunggung"]
@@ -141,7 +141,7 @@ export const koridorData = {
             end: "Ancol",
             isAMARI: true,
             busType: [
-                "Zhongtong Bus LCK6126EVGRA1 amari",
+                "Zhongtong Bus LCK6126EVGRA2",
                 "Volvo B11R","Scania K310IB",
                 "Mercedes-Benz OH 1626",
                 "Zhongtong Bus LCK6180GC",
@@ -159,6 +159,7 @@ export const koridorData = {
                 "Volvo B11R","Scania K310IB",
                 "Mercedes-Benz OH 1626",
                 "Zhongtong Bus LCK6180GC",
+                "Zhongtong Bus LCK6126EVGRA2"
             ],
             operationalSchedule: {
                 weekday: {
@@ -177,7 +178,7 @@ export const koridorData = {
                 "SAG Golden Dragon XML6125JEVJ0C3",
                 "Skywell NJL6126BEV",
                "Zhongtong Bus LCK6126EVGRA1",
-               "Mercedes-Benz OH 1626",
+               "Zhongtong Bus LCK6126EVGRA2",
                "Hino RK8 R260 amari"
             ],
             haltes: ["Ragunan","Simpang Ragunan Ar-Raudhah","Jati Barat", "Jati Padang", "Pejaten", "Buncit Indah", "Warung Jati", "Warung Buncit", "Duren Tiga", "Mampang Prapatan", "Underpass Kuningan", "Patra Kuningan", "Kuningan", "Rasuna Said", "Karet Kuningan", "Kuningan Madya", "Setiabudi", "Flyover Kuningan", "Halimun", "Galunggung"]
@@ -189,7 +190,7 @@ export const koridorData = {
                 "SAG Golden Dragon XML6125JEVJ0C3",
                 "Skywell NJL6126BEV",
                "Zhongtong Bus LCK6126EVGRA1",
-               "Mercedes-Benz OH 1626"
+               "Zhongtong Bus LCK6126EVGRA2",
             ],
             operator: "DAMRI (DMR) , Bianglala Metropolitan (BMP), Mayasari Bakti (MYS)",
             operationalSchedule: {
@@ -207,7 +208,7 @@ export const koridorData = {
                 "SAG Golden Dragon XML6125JEVJ0C3",
                 "Skywell NJL6126BEV",
                "Zhongtong Bus LCK6126EVGRA1",
-               "Mercedes-Benz OH 1626"
+               "Zhongtong Bus LCK6126EVGRA2",
             ],
             operationalSchedule: {
                 weekday: {
@@ -225,7 +226,6 @@ export const koridorData = {
                 "SAG Golden Dragon XML6125JEVJ0C3",
                 "Skywell NJL6126BEV",
                "Zhongtong Bus LCK6126EVGRA1",
-               "Mercedes-Benz OH 1626"
             ],
             operator: "DAMRI (DMR) , Bianglala Metropolitan (BMP), Mayasari Bakti (MYS)",
             operationalSchedule: {
@@ -287,11 +287,11 @@ export const koridorData = {
             start: "Lebak Bulus",
             end: "Pasar Baru",
             isAMARI: true,
-            operator: "Bianglala Metropolitan (BMP) , Transjakarta (TJ)",
+            operator: "Bianglala Metropolitan (BMP),Transjakarta (TJ),DAMRI (DMR)",
             busType: [
                 "SAG Golden Dragon XML6125JEVJ0C3",
                 "Mercedes-Benz OH 1626",
-                "Mercedes-Benz OH 1526",
+                "Zhongtong Bus LCK6126EVGRA2",
                 "Hino RK8 R260 amari",
             ],
             haltes: ["Lebak Bulus", "Pondok Pinang", "Underpass Lebak Bulus", "Pondok Indah", "Tanah Kusir", "Bungur", "Kebayoran", "Simprug", "Permata Hijau", "Arteri", "Pos Pengumben", "Kelapa Dua Sasak", "Kebon Jeruk", "Duri Kepa", "Kedoya Panjang", "Kedoya", "Damai", "Jelembar", "Grogol Reformasi", "Tanjung Duren", "Tomang Raya", "Tarakan", "Petojo", "Pecenongan", "Juanda", "Pasar Baru"]
@@ -359,13 +359,13 @@ export const koridorData = {
             isAMARI: true,
             busType: [
                 "Zhongtong Bus LCK6180GC",
-                "Volvo B11R",
                 "Mercedes-Benz OH 1626",
                 "Hino RK8 R260 amari",
-                "Scania K320IA","Scania K310IB",
+                "Scania K310IB",
+                "Scania K320IA","Zhongtong Bus LCK6126EVGRA2",
                 "Skywell NJL6126BEV", "VKTR BYD D9 (EV)",
             ],
-            operator: "Steady Safe (SAF), Mayasari Bakti (MB), DAMRI (DMR) , Sinar Jaya Megah (SJM), Bianglala Metropolitan (BMP) amari",
+            operator: "Transjakarta (TJ), Mayasari Bakti (MB/MYS), DAMRI (DMR) , Sinar Jaya Megah (SJM), Bianglala Metropolitan (BMP) amari",
             haltes: ["Tanjung Priok", "Mambo", "Koja", "Walikota Jakarta Utara", "Plumpang", "Sunter Kelapa Gading", "Kodamar", "Simpang Cempaka", "Cempaka Putih", "Pulomas Bypass", "Kayu Putih Rawasari", "Pemuda Pramuka", "Utan Kayu Rawamangun", "Pisangan", "Flyover Jatinegara", "Pedati Perumpung", "Kebon Nanas", "Halim", "Simpang Cawang", "Cawang Sentral", "Cawang Cililitan", "PGC"]
         },
         "10D" : {
@@ -561,10 +561,11 @@ export const koridorData = {
         "1A": {
             start: "Pantai Maju",
             end: "Balai Kota",
-            operator: "Mayasari Bakti (MYS), Steady Safe (SAF)",
+            operator: "Mayasari Bakti (MYS), DAMRI (DMR)",
             busType: [
                 "Mercedes-Benz OH 1626",
-                "Volvo B11R"
+                "Hino RK8 R260",
+                "Zhongtong Bus LCK6126EVGRA2"
             ],
              operationalSchedule: {
                 weekday: {
@@ -637,9 +638,10 @@ export const koridorData = {
         "4K": {
             start: "Pulo Gadung",
             end: "Kejaksaan Agung",
-            operator: "Mayasari Bakti (MYS)",
+            operator: "Mayasari Bakti (MYS), DAMRI (DMR)",
             busType: [
-                "Mercedes-Benz OH 1626"
+                "Mercedes-Benz OH 1626",
+                "Zhongtong Bus LCK6126EVGRA2"
             ],
             directions: {
                 "Kejaksaan Agung": ["Term. Pulo Gadung","Gg. Suzuki","Ananda Pulo Gadung","Ps. Pulo Gadung 1","Pintu Kawasan 1","TU Gas 1","Kantor Pos Jaktim","Layur 1","Jln. Sunan Drajad","Arion Mall","Velodrome 1","Sunan Giri 2","UNJ 2","Utan Kayu Rawamangun 2","SMP Pelita Tiga","Ahmad Yani Bea Cukai 1", "Flyover Jatinegara", "Pedati Prumpung", "Pedati 4","Samsat Jakarta Timur", "Cipinang Kb. Nanas 2", "SPBU Jln. DI Panjaitan 2","Penas Kalimalang 2","Halim PK", "Cawang Soetoyo 2", "Cawang", "Ciliwung", "Cikoko", "Tebet Eco Park", "Pancoran Tugu", "Pancoran", "Tegal Mampang", "Rawa Barat", "Pasar Santa", "Kejaksaan Agung"],

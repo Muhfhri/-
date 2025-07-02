@@ -639,6 +639,7 @@ function getJurusan(koridorNumber, service) {
             "Hino RK8 R260": "https://live.staticflickr.com/1937/45752656441_bf9489a0bb_b.jpg",
             "Zhongtong Bus LCK6180GC": "https://redigest.web.id/wp-content/uploads/2019/10/IMG_20191011_104316_HDR.jpg",
             "Zhongtong Bus LCK6126EVGRA1": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Transjakarta_-_DMR-240127_01.jpg/250px-Transjakarta_-_DMR-240127_01.jpg",
+            "Zhongtong Bus LCK6126EVGRA2": "https://img.okezone.com/content/2025/06/20/1/3148864/bus_listrik_damri-peyD_large.jpg",
             "SAG Golden Dragon XML6125JEVJ0C3": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Transjakarta_-_BMP-240327.jpg/1100px-Transjakarta_-_BMP-240327.jpg",
             "Skywell NJL6126BEV": "https://www.transgo.co.id/wp-content/uploads/2024/11/002.png",
             "Skywell NJL6129BEV": "https://mobilkomersial.com/wp-content/uploads/2024/11/Snapinsta.app_466929837_870028668268355_8248708680309915930_n_1080.jpg",
@@ -735,6 +736,10 @@ function getJurusan(koridorNumber, service) {
             "Zhongtong Bus LCK6126EVGRA1 amari": {
                 operators: ["Perum DAMRI"],
                 type: "Bus Listrik BRT - Layanan AMARI"
+            },
+            "Zhongtong Bus LCK6126EVGRA2": {
+                operators: ["Perum DAMRI"],
+                type: "Bus Listrik BRT Zhongtong Batch 2"
             },
             
             // Electric Buses
