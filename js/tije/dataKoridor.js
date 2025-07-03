@@ -609,6 +609,19 @@ export const koridorData = {
             },
             haltes : ["Transjakarta Tanah Abang 2", "Jln. Taman Jatibaru Timur","Tanah Abang 2","SMKN 38","Jembatan Serong","Kementrian ESDM","Masjid Ar Rayyan Kementrian BUMN","Dewan Pers","DPRD DKI Jakarta","Sbr. MNC Center","Panti Perwira","Apartemen Capitol Kwitang","Atrium 1","RSPAD 1", "Wahidin 1","Sekolah Penabur Gunung Sahari","Gg. Buaya Senen","Terminal Senen","Kel. Senen","Bangau VI","Simpang Gunung Sahari III","Sekolah Penabur Gunung Sahari","Gg. Buaya Senen","Ps. Senen Raya","Jln. Kramat Kwitang","Gunung Agung","Telkom Grapari","Balai Kota 1","Perpustakaan Nasional","Dana Reksa","Wisma Mandiri 2","Kementrian Agama","Sbr. Jembatan Serong","Jln. Taman Kb. Sirih","JPO Blok E","Pharmin","Explorer Tanah Abang","Blok F","Pospol Jati Bunder","JPO Blok G","Transjakarta Tanah Abang 2"]
         },
+        "1F": {
+            start: "Stasiun Palmerah",
+            end: "Bundaran Senayan",
+            operator: "Transjakarta (TJ), Mayasari Bakti (MYS)",
+            busType: [
+                "Mercedes-Benz OH 1626"
+            ],
+            directions: {
+                "Stasiun Palmerah": ["Bundaran Senayan","Senayan BANK DKI","Gerbang Pemuda","DPR MPR 1","DPR MPR 2","Manggala Wanabakti","Stasiun Palmerah"],
+                "Bundaran Senayan": ["Stasiun Palmerah","Graha Kemenpora","Taman Ria","Gerbang Pemuda","Senayan BANK DKI","Bundaran Senayan"]
+            },
+            haltes : ["Stasiun Palmerah","Graha Kemenpora","Taman Ria","Gerbang Pemuda","Senayan BANK DKI","Bundaran Senayan","Senayan BANK DKI","Gerbang Pemuda","DPR MPR 1","DPR MPR 2","Manggala Wanabakti","Stasiun Palmerah"]
+        },
         "4C": {
             start: "JIEP",
             end: "Bundaran Senayan",
@@ -783,6 +796,18 @@ export const koridorData = {
                 "Cawang": ["Bulak Kapal 3","Pom Bensin Mulyadi","Masjid Amar Maruf 1","Jln. Kunang Kunang","BTC 1","Gp Mall 1","Grand Dhika City","Tol Bekasi Timur 1","Jatibening 1","Pool Taksi Cawang","BNN 2"]
 },
             haltes: ["Bulak Kapal 3","Pom Bensin Mulyadi","Masjid Amar Maruf 1","Jln. Kunang Kunang","BTC 1","Gp Mall 1","Grand Dhika City","Tol Bekasi Timur 1","Jatibening 1","Pool Taksi Cawang","BNN 2","Jatibening 2","Tol Bekasi Timur 2","Gp Mall 2","BTC 2","Jln. Kunang Kunang 2", "Masjid Amar Maruf 2","Kemensos Bekasi Timur","Bulak Kapal 4","Superindo Bulak Kapal 2","Taman Margahayu 2","Groserindo","Terminal Bekasi", "Jln. Bakti","Taman Margahayu 1","Superindo Bulak Kapal 1", "Bulak Kapal 3"]
+        },
+        "B25": {
+            start: "Bekasi",
+            end: "Galunggung",
+            busType: ["Mercedes-Benz OH 1526",
+                "Mercedes-Benz OH 1626"],
+            operator: "Transjakarta (TJ), Mayasari Bakti (MYS)",
+            directions: {
+                "Bekasi": ["Galunggung", "Halimun","Pasar Rumput","Manggarai","Timur St. Manggarai","Matraman Baru","Stasiun Jatinegara","Flyover Jatinegara","Jln. MM Hasibuan Bekasi","Melati Cut Mutia","Sbr. GOR Betos Cut Mutia","Terminal Bekasi"],
+                "Galunggung": ["Terminal Bekasi","GOR Betos Cut Mutia", "Rawa Baru Cut Mutia","Unisma","Sbr. Unisma","Chairil Anwar 1","Sbr. Jln. MM Hasibuan Bekasi","Pedati Prumpung","Stasiun Jatinegara","Jatinegara","Kampung Melayu","Matraman Baru","Plaza St. Manggarai","Manggarai","Pasar Rumput","Halimun","Galunggung"]
+},
+            haltes: ["Terminal Bekasi","GOR Betos Cut Mutia", "Rawa Baru Cut Mutia","Unisma","Sbr. Unisma","Chairil Anwar 1","Sbr. Jln. MM Hasibuan Bekasi","Pedati Prumpung","Stasiun Jatinegara","Jatinegara","Kampung Melayu","Matraman Baru","Plaza St. Manggarai","Manggarai","Pasar Rumput","Halimun","Galunggung", "Halimun","Pasar Rumput","Manggarai","Timur St. Manggarai","Matraman Baru","Stasiun Jatinegara","Flyover Jatinegara","Jln. MM Hasibuan Bekasi","Melati Cut Mutia","Sbr. GOR Betos Cut Mutia","Terminal Bekasi"]
         },
     "B41": {
             start: "Vida Bekasi",

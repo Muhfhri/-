@@ -33,6 +33,7 @@ function getKoridorBadgeColor(koridor) {
     const colorMap = {
         "1": "#D02027",    
         "1A": "#93C3A4",    
+        "1F": "#ff7465",    
         "1P": "#FF0040",    
         "1R": "#FC8DA9",    
         "2": "#264697",   
@@ -77,6 +78,7 @@ function getKoridorBadgeColor(koridor) {
         "14": "#FF7F00",
         "B11": "#D07C28",
         "B21": "#3BB59C",
+        "B25": "#A9C498",
         "B41": "#A9C498",
         "P11": "#A9C498",
         "T31": "#A9C498",
