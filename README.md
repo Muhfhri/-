@@ -1,17 +1,31 @@
-![1734263516946](css/image/light.gif)
+# 🌐 Website Portofolio Muhfhri
+![Preview](css/image/light.gif)
 
-## Website Portofolio Muhfhri.
+![Version](https://img.shields.io/badge/version-4.0-yellow)
+[![Website](https://img.shields.io/badge/Muhfhri%20Main%20Website-blue)](https://muhfhri.github.io/-)
 
-Beberapa fitur di dalam website ini :
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0-blue?logo=bootstrap&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-1. Menggunakan [Bootstrap 5](https://getbootstrap.com) dengan beberapa konfigurasi CSS & JS agar lebih maksimal.
-2. Website Serbaguna untuk mencari informasi seputar dunia elektronik.
-3. Mengintergrasikan API yang berguna untuk website ini seperti seputar cuaca menggunakan [AccuWeather](https://https://www.accuweather.com/) (Hanya Wilayah Jakarta)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Muhfhri&repo=--main&layout=compact)
 
-TODO / Pengerjaan Kedepannya :
+Website serbaguna untuk mencari informasi seputar dunia elektronik, Transjakarta, dan tips untuk pengguna Xiaomi.
 
-* [X]  Mengintergrasikan Sistem Transjakarta ke dalam website ini (Karena saya suka Transjakarta 😄)
-* [ ]  Membuat Algoritma Untuk Pelajaran Matematika
-* [X]  Membuat Website ini berguna bagi pengguna Xiaomi terutama Custom ROM user atau ROOT user (awal)
+## ✨ Fitur Utama
 
-Versi Website  : **3.9.7**
+- 🚀 Menggunakan [Bootstrap 5](https://getbootstrap.com) dengan konfigurasi CSS & JS custom.
+- 🔎 Informasi dunia elektronik.
+- ☁️ Integrasi API cuaca [AccuWeather](https://www.accuweather.com/) (Wilayah Jakarta).
+- 🚌 Sistem Transjakarta interaktif.
+- 📱 Tips & trik untuk pengguna Xiaomi (Custom ROM/ROOT).
+
+## 🛠️ Roadmap
+
+- [X] Integrasi Sistem Transjakarta
+- [X] Fitur untuk pengguna Xiaomi (Custom ROM/ROOT)
+
+---
+
+> Dibuat dengan ❤️ oleh [Muhfhri](https://github.com/Muhfhri)
