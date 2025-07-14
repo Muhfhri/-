@@ -21,8 +21,8 @@ function loadFooter() {
         <div class="row">
           <div class="col-md-4">
             <font class="h5 fw-bold">Projects</font>
-            <br><a href="tije" class="link-none">Transjakarta Route</a>
-            <br><a href="tije" class="link-none">Material 3 Website</a><br>
+            <br><a href="https://muhfhri.github.io/tj" class="link-none">Transjakarta Route</a>
+            <br><a href="https://flixdz.github.io/minecraft" class="link-none">Material 3 Website</a><br>
             <font class="text-muted">For more project visit my GitHub</font>
             <br><a href="https://github.com/muhfhri" class="link-none">Muhfhri GitHub</a>
           </div>
@@ -48,7 +48,7 @@ function loadFooter() {
       Website ini dibuat dengan <i class="fa fa-code" style="color: #00bcd4"></i>
       <br> <a href="index" class="text-decoration-none"><img id="light" width="70px"></a> &copy; 2025
       <br>v4.0 <span class="text-warning fw-bold">Experimental</span>
-      <br>Updated at 00.21 05/06/2025
+      <br>Updated at 08.49 14/07/2025
     </div>
   `;
 }
