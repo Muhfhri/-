@@ -144,19 +144,6 @@
   box-shadow: 0 4px 24px rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.06);
 }
-#scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 4px;
-  background: linear-gradient(90deg, #033264, #002880);
-  z-index: 99999;
-  transition: width 0.2s cubic-bezier(0.4,0,0.2,1);
-}
-[data-theme="dark"] #scroll-progress {
-  background: linear-gradient(90deg, #0053be, #007aff);
-}
     </style>
     <script src="js/navbar-shadow.js"></script>
 </head>
@@ -267,6 +254,7 @@
                         class="btn btn-m3-you-color shadow rounded-pill px-4 py-2 mt-2">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
+                    <div id="yt-subs-count" class="mt-2"></div>
                     <a href="https://twitter.com/flixpseal" class="btn btn-m3-you-color shadow rounded-pill px-4 py-2 mt-2">
                         <i class="fa-brands fa-x-twitter"></i>
                     </a>
@@ -281,6 +269,14 @@ Saya adalah seseorang yang sangat tertarik dengan dunia teknologi terutama Softw
                 </p>
                 <sup><small class="fw-bold fira-code text-danger" data-i18n="whoami_note">*sebenernya kurang suka karna kompleks, tapi kenapa enggak?</small></sup>
             </div>
+            <!-- YouTube Channel Section Start -->
+            <div class="container mt-4 mb-4 p-3 text-center" id="yt-channel-section" style="max-width:420px;border-radius:1.5rem;box-shadow:none;background:none;">
+                <img src="https://socialcounts.org/_next/image?url=https%3A%2F%2Fyt3.ggpht.com%2FVHlK_2JACt8C8ZLd4UJ5bC_ltTJ9_BshTI0RFT8XjWLgC70GNN1LcFguNnRmC--JuIXZ3__w%3Ds240-c-k-c0x00ffffff-no-rj&w=256&q=75" alt="Flixdz Channel" style="width:100px;height:100px;border-radius:1rem;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                <h4 class="fw-bold mt-2 mb-1">Flixdz <span style="font-size:1.1rem;vertical-align:middle;"><i class="fa-brands fa-youtube text-danger"></i></span></h4>
+                <div id="yt-channel-stats" class="mb-1"></div>
+                <a href="https://youtube.com/channel/UCzU0mlmLis0p2XOvRL1r0-Q" target="_blank" class="btn btn-outline-danger btn-sm rounded-pill mt-2"><i class="fa-brands fa-youtube"></i> Visit Channel</a>
+            </div>
+            <!-- YouTube Channel Section End -->
             <div class="container mt-5 text-center">
                 <h3 class="fw-bold" data-i18n="achievements_title">Achievements</h3>
                 <div id="rotatingAchievement" class="achievement-box google-sans-mono">🎓 Loading achievements...</div>
@@ -821,6 +817,28 @@ Saya adalah seseorang yang sangat tertarik dengan dunia teknologi terutama Softw
       scrollProgress.style.width = scrolled + '%';
     });
     </script>
+    <script>
+// SocialCounts API untuk subscriber YouTube
+const channelId = "UCzU0mlmLis0p2XOvRL1r0-Q";
+fetch(`https://api.socialcounts.org/youtube-live-subscriber-count/${channelId}`)
+  .then(res => res.json())
+  .then(data => {
+    const count = data.API_sub || data.est_sub || "N/A";
+    let views = "", videos = "";
+    if(Array.isArray(data.table)) {
+      let viewsObj = data.table.find(x => x.name === "Channel Views");
+      let videosObj = data.table.find(x => x.name === "Videos");
+      views = viewsObj ? `${viewsObj.count.toLocaleString()} views` : '';
+      videos = videosObj ? `${videosObj.count} videos` : '';
+    }
+    document.getElementById("yt-channel-stats").innerHTML =
+      `<div class='fw-bold' style='font-size:1.15rem;'>${count.toLocaleString()} subscribers</div>` +
+      `<div class='small text-secondary'>${[views, videos].filter(Boolean).join(' <span style=\"font-size:1.2em;vertical-align:middle;\">&bull;</span> ')}</div>`;
+  })
+  .catch(() => {
+    document.getElementById("yt-channel-stats").innerHTML = "<div>Channel stats unavailable</div>";
+  });
+</script>
 </body>
 
 </html>
