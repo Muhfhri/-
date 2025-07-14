@@ -63,7 +63,8 @@ const translations = {
         project3_title: "Hexa Team Developer",
         project3_desc: "Kontributor dan developer di <b>Hexa Team</b>, komunitas pengembang yang berfokus pada kolaborasi dan pengembangan aplikasi/website open-source.",
         project3_btn: "Lihat Portofolio",
-        skills_title: "Bahasa & Framework yang dipelajari"
+        skills_title: "Bahasa & Framework yang dipelajari",
+        pendidikan_title: "Riwayat Pendidikan",
     },
     en: {
         dynamic_version: "Dynamic Version",
@@ -128,7 +129,8 @@ const translations = {
         project3_title: "Hexa Team Developer",
         project3_desc: "Contributor and developer at <b>Hexa Team</b>, a developer community focused on collaboration and open-source app/website development.",
         project3_btn: "View Portfolio",
-        skills_title:"Languanges & Framework Learned"
+        skills_title:"Languanges & Framework Learned",
+        pendidikan_title: "Educational Background"
     }
 };
 
