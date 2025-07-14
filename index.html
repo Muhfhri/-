@@ -39,6 +39,63 @@
             display: block;
             opacity: 1;
         }
+        .lang-switch {
+            cursor: pointer;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            user-select: none;
+        }
+        .lang-switch.active {
+            filter: grayscale(0);
+        }
+        .lang-switch.inactive {
+            filter: grayscale(1);
+            opacity: 0.5;
+        }
+        #lang-float-switch .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #b6d4fe;
+  }
+  #lang-dropdown {
+    border: none;
+    margin-bottom: 4px;
+    animation: fadeInLang 0.18s;
+    background: transparent;
+    box-shadow: none;
+    min-width: 56px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  #lang-dropdown .dropdown-item:hover {
+    background: #f1f3f7;
+  }
+  @keyframes fadeInLang {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+    /* Tambahan: Fade carousel lebih mulus */
+    .carousel.carousel-fade .carousel-item {
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: 1.2s;
+        transition-timing-function: ease-in-out;
+    }
+    .carousel.carousel-fade .carousel-item.active,
+    .carousel.carousel-fade .carousel-item-next.carousel-item-start,
+    .carousel.carousel-fade .carousel-item-prev.carousel-item-end {
+        opacity: 1;
+        z-index: 1;
+    }
+    .carousel.carousel-fade .carousel-item:not(.active) {
+        z-index: 0;
+    }
+    /* Optional: fade out image itself for even smoother effect */
+    .carousel.carousel-fade .carousel-item img {
+        transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
     </style>
     <script src="js/navbar-shadow.js"></script>
 </head>
@@ -63,8 +120,8 @@
                                 inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
                     </li>
                 </ul>
-                <div class="ms-auto">
-                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
+                <div class="ms-auto d-flex align-items-center justify-content-center">
+                    <input type="checkbox" class="btn-check ms-3" id="darkSwitch" checked autocomplete="off">
                     <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
                         data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
                 </div>
@@ -76,7 +133,7 @@
     <div class="container mt-4" id="coltop">
         <div class="row text-center" data-aos="fade-in" data-aos-duration="3000">
             <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-                <div class="fw-bold">Dynamic Version</div>
+                <div class="fw-bold" data-i18n="dynamic_version">Dynamic Version</div>
             </div>
             <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
                 <div id="waktu"></div>
@@ -84,7 +141,9 @@
             <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
                 <div id="weather">
                     <i id="weather-icon" class=""></i> <!-- Ikon cuaca -->
-                    <span id="weather-info">Cerah, 26°C</span> <!-- Informasi cuaca -->
+                    <span id="weather-info" class="google-sans-mono">Cerah, 26°C</span> <!-- Informasi cuaca -->
+                    <button id="weather-edit-btn" class="btn btn-link btn-sm p-0 ms-0" style="vertical-align:middle; font-size:0.9em; height:auto; width:auto; margin-left:4px;" title="Edit lokasi"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <span id="weather-edit-box" style="display:none;"></span>
                 </div>
             </div>
         </div>
@@ -102,8 +161,7 @@
                     </div>
                 </div>
                 <small class="user-select-none"><a href="https://www.github.com/muhfhri" class="link-none"
-                        onclick="return confirm('Website ini dibuat dengan GitHub Repositories, ingin mengunjungi Halaman web GitHub saya?')">GitHub
-                        Page <iconify-icon inline icon="line-md:github-loop"></iconify-icon></a></small>
+                        onclick="return confirm('Website ini dibuat dengan GitHub Repositories, ingin mengunjungi Halaman web GitHub saya?')" data-i18n="github_page">GitHub Page <iconify-icon inline icon="line-md:github-loop"></iconify-icon></a></small>
             </div>
         </center>
     </div>
@@ -112,9 +170,9 @@
 
     <div class="container my-3 text-center">
         <div class="btn-group" role="group" aria-label="Navigation Buttons">
-            <button class="btn btn-outline-dark" onclick="navigate('home')" id="btn-home">About</button>
-            <button class="btn btn-outline-dark" onclick="navigate('website')" id="btn-website">Web</button>
-            <button class="btn btn-outline-dark" onclick="navigate('others')" id="btn-others">Others</button>
+            <button class="btn btn-outline-dark" onclick="navigate('home')" id="btn-home" data-i18n="about">About</button>
+            <button class="btn btn-outline-dark" onclick="navigate('website')" id="btn-website" data-i18n="web">Web</button>
+            <button class="btn btn-outline-dark" onclick="navigate('others')" id="btn-others" data-i18n="others">Others</button>
         </div>
     </div>
 
@@ -123,12 +181,11 @@
         <div class="container mt-3">
             <div class="text-center" data-aos="zoom-in">
                 <h3 class="text-center"><a class="link-none fw-bolder clickable" href="#perkenalan"
-                        id="perkenalan">Muhammad Fachri Al Husein</a></h3>
+                        id="perkenalan" data-i18n="nama">Muhammad Fachri Al Husein</a></h3>
                 <div data-aos="zoom-in">
-                    <h5 class="fw-bold manrope text-center">know as @flixpseal or @muhfhri._</h5>
-                    <h5 class="fw-bold manrope text-center">begginer developer</h5>
-                    <small class="fw-bold fira-code text-danger">*try to be a dev, cuz being a dev is really hard
-                        af</small>
+                    <h5 class="fw-bold manrope text-center" data-i18n="nickname">know as @flixpseal or @muhfhri._</h5>
+                    <h5 class="fw-bold manrope text-center" data-i18n="dev_level">begginer developer</h5>
+                    <small class="fw-bold fira-code text-danger" data-i18n="dev_note">*try to be a dev, cuz being a dev is really hard af</small>
                 </div>
                     <a href="https://instagram.com/muhfhri._"
                         class="btn btn-m3-you-color shadow rounded-pill px-4 py-2 mt-2">
@@ -155,18 +212,34 @@
                 </div>
             </div>
             <div class="container mt-5 text-center" data-aos="fade-in">
-                <h3><a class="fw-bold link-none clickable" href="#pendidikan" id="pendidikan">Who am i?</a></h3>
-                <h4 class="fw-bold">I love programing like a android and website</h4>
-                <sup><small class="fw-bold fira-code text-danger">*not really but i like it, why not?</small></sup>
+                <img src="image/muhfhri.png" width="100px" class="rounded-circle alt="">
+                <h3 class="fw-bold" data-i18n="whoami_title">Tentang Saya</h3>
+                <p class="google-sans-mono" data-i18n="whoami_desc">
+Saya adalah seseorang yang sangat tertarik dengan dunia teknologi terutama Software, Website ataupun Android sudah menjadi kesukaan saya sejak lama.<br>
+<span class="geist-mono">Alumni SMK Nurul Islam Jakarta ke-35 Jurusan Rekayasa Perangkat Lunak</span>
+                </p>
+                <sup><small class="fw-bold fira-code text-danger" data-i18n="whoami_note">*sebenernya kurang suka karna kompleks, tapi kenapa enggak?</small></sup>
             </div>
             <div class="container mt-5 text-center">
-                <h3 class="fw-bold">Achievements</h3>
-                <div id="rotatingAchievement" class="achievement-box">🎓 Loading achievements...</div>
+                <h3 class="fw-bold" data-i18n="achievements_title">Achievements</h3>
+                <div id="rotatingAchievement" class="achievement-box google-sans-mono">🎓 Loading achievements...</div>
             </div>
             <div class="container mt-5" data-aos="fade-up">
-                <h2 class="fw-bold text-center"><a href="#cool" id="cool" class="link-none clickable">Cool Stuff</a>
+                <h2 class="fw-bold text-center"><a href="#cool" id="cool" class="link-none clickable" data-i18n="cool_stuff">Logo</a>
                 </h2>
                 <center><img id="light" alt="animasi_logo"></center>
+                <div class="mt-3 text-start mx-auto" style="max-width: 600px;">
+                   <div data-i18n="logo_desc">
+                     <h5 class="fw-bold mb-2">Makna Logo</h5>
+                     <ul class="mb-2" style="padding-left: 1.2em;">
+                       <li><b>Bentuk Geometris Kiri:</b> Melambangkan pondasi hidup yang kuat dan sederhana.</li>
+                       <li><b>Teks <span class='geist-mono'>Muhfhri</span>:</b> Titik dan garis pada teks menggambarkan arah dan perjalanan hidup.</li>
+                       <li><b>Panah ke Kanan:</b> Simbol semangat untuk terus maju ke depan.</li>
+                       <li><b>Panah ke Kiri:</b> Mengingatkan untuk tidak melupakan pengalaman masa lalu.</li>
+                       <li><b>Desain Minimalis:</b> Mencerminkan siklus hidup antara masa lalu dan masa depan, serta semangat untuk terus berkembang menjadi lebih baik.</li>
+                     </ul>
+                     <div class="fst-italic text-secondary small">Logo ini adalah refleksi perjalanan hidup yang sederhana, penuh makna, dan selalu berproses.</div>
+                   </div>
                 <div class="typing-container">
                     <center>
                         <h2 id="typing-effect"></h2>
@@ -181,30 +254,30 @@
         <div class="container mt-3" data-aos="fade-in">
             <h3 class="manrope text-center fw-bold"><iconify-icon inline icon="svg-spinners:blocks-shuffle-3" width="24"
                     height="24"></iconify-icon> <a class="fw-bold link-none clickable" href="#pendidikan"
-                    id="pendidikan">Framework & Code Editor</a></h3>
+                    id="pendidikan" data-i18n="framework_title">Framework & Code Editor</a></h3>
             <div class="container text-center">
-                <small class="manrope fw-bold">* All framework are Open-Source and free to use</small>
-                <h4 class="mt-3">Bootstrap 5 <sup class="manrope rounded-2 btn-outline-m3">&nbsp;<iconify-icon
+                <small class="manrope fw-bold" data-i18n="framework_note">* All framework are Open-Source and free to use</small>
+                <h4 class="mt-3" data-i18n="framework_bootstrap">Bootstrap 5 <sup class="manrope rounded-2 btn-outline-m3">&nbsp;<iconify-icon
                             inline icon="carbon:fork"></iconify-icon>main&nbsp;</sup> <a href="https://getbootstrap.com"
                         class="btn btn-sm btn-outline-m3 rounded-5"><iconify-icon inline
                             icon="ri:bootstrap-fill"></iconify-icon></a></h4>
-                <h4>Iconify <sup class="manrope rounded-2 bg-warning">&nbsp;HTML | CSS&nbsp;</sup> <a
+                <h4 data-i18n="framework_iconify">Iconify <sup class="manrope rounded-2 bg-warning">&nbsp;HTML | CSS&nbsp;</sup> <a
                         href="https://iconify.com" class="btn btn-sm btn-outline-m3 rounded-5"><iconify-icon
                             inline icon="line-md:iconify1"></iconify-icon></a></h4>
-                <h4>AOS Library <sup class="manrope rounded-2 bg-primary">&nbsp;CSS&nbsp;</sup> <a
+                <h4 data-i18n="framework_aos">AOS Library <sup class="manrope rounded-2 bg-primary">&nbsp;CSS&nbsp;</sup> <a
                         href="https://michalsnik.github.io/aos/"
                         class="btn btn-sm btn-outline-m3 rounded-5"><iconify-icon inline
                             icon="pajamas:scroll-down"></iconify-icon></a></h4>
-                <h4>VS Code <a href="https://code.visualstudio.com/"
+                <h4 data-i18n="framework_vscode">VS Code <a href="https://code.visualstudio.com/"
                         class="btn btn-sm btn-outline-m3 rounded-5"><iconify-icon icon="uim:visual-studio"
                             inline></iconify-icon></a></h4>
-                <h4>Acode <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acode"
+                <h4 data-i18n="framework_acode">Acode <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acode"
                         class="btn btn-sm btn-outline-m3 rounded-5"><iconify-icon icon="arcticons:acode"
                             inline></iconify-icon></a></h4>
 
                 <a class="btn btn-outline-dark rounded-5 geist-mono position-relative" data-bs-toggle="collapse"
                     href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    <iconify-icon inline icon="vscode-icons:file-type-font"></iconify-icon> Fonts Used
+                    <iconify-icon inline icon="vscode-icons:file-type-font"></iconify-icon> <span data-i18n="fonts_used">Fonts Used</span>
                     <span
                         class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle">5</span>
                 </a>
@@ -225,19 +298,17 @@
 
             <div class="container mt-3">
                 <h2 class="text-center fw-bold" data-aos="fade-in"> <a href="#collab" id="collab"
-                        class="link-none clickable">Want some collaboration?</a></h2>
-                <p class="text-center" data-aos="fade-right">Jika kalian ingin mengembangkan website ini atau
-                    berkolaborasi
-                    dengan projek lain, silahkan kirim pesan melalui sosial media saya atau bisa kirim email ke :
-                    <br><i class="fa fa-envelope" style="color: #0077be;"></i> <small><a
-                            href="mailto:frezzcraft109@gmail.com"
-                            style="text-decoration: none; color: green;">frezzcraft109@gmail.com</a></small>
-                    <br>atau langsung menuju <a class="btn btn-outline-secondary btn-sm rounded-5"
-                        href="https://github.com/flixdz"><i class="fa-brands fa-github"></i> GitHub</a>
+                        class="link-none clickable" data-i18n="collab_title">Want some collaboration?</a></h2>
+                <p class="text-center" data-aos="fade-right" data-i18n="collab_desc">
+                  Jika kalian ingin mengembangkan website ini atau berkolaborasi dengan projek lain, silakan hubungi saya:
+                  <br>
+                </p>
+               <p class="text-center"> <a href="mailto:frezzcraft109@gmail.com" class="btn btn-outline-primary btn-sm rounded-5 mx-1 my-1"><i class="fa fa-envelope"></i> frezzcraft109@gmail.com</a>
+                <a href="https://github.com/muhfhri" class="btn btn-outline-dark btn-sm rounded-5 mx-1 my-1"><i class="fa-brands fa-github"></i> github.com/muhfhri</a>
                 </p>
             </div>
 
-            <h4 class="mt-3 text-center">Code Editor by <iconify-icon inline
+            <h4 class="mt-3 text-center" data-i18n="editor_by">Code Editor by <iconify-icon inline
                     icon="meteor-icons:visual-studio-code"></iconify-icon>
             </h4>
         </div>
@@ -249,29 +320,199 @@
         <div class="container mt-3 text-center">
             <p>
                 <a href="android" class="rounded-5 link-none animasi"><iconify-icon inline
-                        icon="material-symbols:android"></iconify-icon> Android</a> |
+                        icon="material-symbols:android"></iconify-icon> <span data-i18n="android">Android</span></a> |
                 <a href="windows" class="rounded-5 link-none animasi"><iconify-icon inline
-                        icon="mage:microsoft-windows"></iconify-icon> Windows</a></h5>
+                        icon="mage:microsoft-windows"></iconify-icon> <span data-i18n="windows">Windows</span></a></h5>
             </p>
-            <h3 class="fw-bold">Lainnya :</h3>
+            <h3 class="fw-bold" data-i18n="others_title">Lainnya :</h3>
             <h4 class="fw-bold">HTML <iconify-icon inline icon="flowbite:html-solid"></iconify-icon></h4>
             <p>
-                <a href="basic" class="rounded-5 link-none animasi">Basic HTML</a></h5>
-                | <a href="format-text" class="rounded-5 link-none animasi mt-2">Format Teks</a></h5>
+                <a href="basic" class="rounded-5 link-none animasi" data-i18n="basic_html">Basic HTML</a></h5>
+                | <a href="format-text" class="rounded-5 link-none animasi mt-2" data-i18n="format_text">Format Teks</a></h5>
             </p>
             <!-- Php -->
             <h4 class="fw-bold">php <iconify-icon inline icon="akar-icons:php-fill"></iconify-icon></h4>
             <p>
-                <a href="basicphp" class="rounded-5 link-none animasi">Basic PHP</a></h5>
-                | <a href="varphp" class="rounded-5 link-none animasi mt-2">Variabel PHP</a></h5>
+                <a href="basicphp" class="rounded-5 link-none animasi" data-i18n="basic_php">Basic PHP</a></h5>
+                | <a href="varphp" class="rounded-5 link-none animasi mt-2" data-i18n="var_php">Variabel PHP</a></h5>
             </p>
             <h4 class="fw-bold">Projek <iconify-icon inline icon="simple-icons:polymerproject"></iconify-icon></h4>
             <p>
-                <a href="tije.html" class="rounded-5 link-none animasi">Transjakarta</a> |
-                <a href="https://flixdz.github.io/minecraft" class="rounded-5 link-none animasi">Material 3 Web</a></h5>
+                <a href="https://muhfhri.github.io/tj" class="rounded-5 link-none animasi" data-i18n="tj">Transjakarta</a> |
+                <a href="https://flixdz.github.io/minecraft" class="rounded-5 link-none animasi" data-i18n="material3">Material 3 Web</a></h5>
             </p>
         </div>
     </div>
+
+    <script>
+        // Bahasa data
+        const translations = {
+            id: {
+                dynamic_version: "Versi Dinamis",
+                github_page: "Halaman GitHub <iconify-icon inline icon=\"line-md:github-loop\"></iconify-icon>",
+                about: "Tentang",
+                web: "Web",
+                others: "Lainnya",
+                nama: "Muhammad Fachri Al Husein",
+                nickname: "dikenal sebagai @flixpseal atau @muhfhri._",
+                dev_level: "pengembang pemula (aku mah pemula)",
+                dev_note: "*berusaha jadi pengembang website, walaupun ribet",
+                whoami_title: "Tentang Saya",
+                whoami_desc: `Saya adalah seseorang yang sangat tertarik dengan dunia teknologi terutama Software, Website ataupun Android sudah menjadi kesukaan saya sejak lama.<br><span class='geist-mono'>Alumni SMK Nurul Islam Jakarta ke-35 Jurusan Rekayasa Perangkat Lunak</span>`,
+                whoami_note: "*Ga juga sih, tapi emang suka aja, kenapa nggak?",
+                achievements_title: "Pencapaian",
+                cool_stuff: "Logo",
+                logo_desc: `<h5 class="fw-bold mb-2">Makna Logo</h5>
+                  <ul class="mb-2" style="padding-left: 1.2em;">
+                    <li><b>Bentuk Geometris Kiri:</b> Melambangkan pondasi hidup yang kuat dan sederhana.</li>
+                    <li><b>Teks <span class='geist-mono'>Muhfhri</span>:</b> Titik dan garis pada teks menggambarkan arah dan perjalanan hidup.</li>
+                    <li><b>Panah ke Kanan:</b> Simbol semangat untuk terus maju ke depan.</li>
+                    <li><b>Panah ke Kiri:</b> Mengingatkan untuk tidak melupakan pengalaman masa lalu.</li>
+                    <li><b>Desain Minimalis:</b> Mencerminkan siklus hidup antara masa lalu dan masa depan, serta semangat untuk terus berkembang menjadi lebih baik.</li>
+                  </ul>
+                  <div class="fst-italic text-secondary small">Logo ini adalah refleksi perjalanan hidup yang sederhana, penuh makna, dan selalu berproses.</div>`,
+                framework_title: "Framework & Editor Kode",
+                framework_note: "* Semua framework bersifat open-source dan gratis dipakai",
+                framework_bootstrap: "Bootstrap 5 <sup class=\"manrope rounded-2 btn-outline-m3\">&nbsp;<iconify-icon inline icon=\"carbon:fork\"></iconify-icon>main&nbsp;</sup>",
+                framework_iconify: "Iconify <sup class=\"manrope rounded-2 bg-warning\">&nbsp;HTML | CSS&nbsp;</sup>",
+                framework_aos: "AOS Library <sup class=\"manrope rounded-2 bg-primary\">&nbsp;CSS&nbsp;</sup>",
+                framework_vscode: "VS Code",
+                framework_acode: "Acode",
+                fonts_used: "Font yang Dipakai",
+                collab_title: "Mau kolaborasi?",
+                collab_desc: "Jika kamu ingin mengembangkan website ini atau kolaborasi projek lain, silakan hubungi saya lewat sosial media atau email:",
+                editor_by: "Editor Kode oleh <iconify-icon inline icon=\"meteor-icons:visual-studio-code\"></iconify-icon>",
+                android: "Android",
+                windows: "Windows",
+                others_title: "Lainnya :",
+                basic_html: "HTML Dasar",
+                format_text: "Format Teks",
+                basic_php: "PHP Dasar",
+                var_php: "Variabel PHP",
+                tj: "Transjakarta",
+                material3: "Material 3 Web"
+            },
+            en: {
+                dynamic_version: "Dynamic Version",
+                github_page: "GitHub Page <iconify-icon inline icon=\"line-md:github-loop\"></iconify-icon>",
+                about: "About",
+                web: "Web",
+                others: "Others",
+                nama: "Muhammad Fachri Al Husein",
+                nickname: "know as @flixpseal or @muhfhri._",
+                dev_level: "beginner developer (I'm just a newbie)",
+                dev_note: "*trying to be a web developer, even though it's complicated",
+                whoami_title: "About Me",
+                whoami_desc: `I am someone who is very interested in the world of technology, especially Software, Websites, and Android, which have been my passion for a long time.<br><span class='geist-mono'>Alumnus of SMK Nurul Islam Jakarta 35, Software Engineering Major</span>`,
+                whoami_note: "*actually not a big fan because it's complex, but why not?",
+                achievements_title: "Achievements",
+                cool_stuff: "Logo",
+                logo_desc: `<h5 class="fw-bold mb-2">Logo Meaning</h5>
+                  <ul class="mb-2" style="padding-left: 1.2em;">
+                    <li><b>Left Geometric Shape:</b> Represents a strong and simple foundation in life.</li>
+                    <li><b>Text <span class='geist-mono'>Muhfhri</span>:</b> The dots and lines in the text symbolize direction and the journey of life.</li>
+                    <li><b>Right Arrow:</b> Symbolizes the spirit to always move forward.</li>
+                    <li><b>Left Arrow:</b> Reminds us not to forget past experiences.</li>
+                    <li><b>Minimalist Design:</b> Reflects the life cycle between past and future, and the spirit to keep growing and improving.</li>
+                  </ul>
+                  <div class="fst-italic text-secondary small">This logo is a reflection of a simple, meaningful, and ever-evolving life journey.</div>`,
+                framework_title: "Framework & Code Editor",
+                framework_note: "* All framework are Open-Source and free to use",
+                framework_bootstrap: "Bootstrap 5 <sup class=\"manrope rounded-2 btn-outline-m3\">&nbsp;<iconify-icon inline icon=\"carbon:fork\"></iconify-icon>main&nbsp;</sup>",
+                framework_iconify: "Iconify <sup class=\"manrope rounded-2 bg-warning\">&nbsp;HTML | CSS&nbsp;</sup>",
+                framework_aos: "AOS Library <sup class=\"manrope rounded-2 bg-primary\">&nbsp;CSS&nbsp;</sup>",
+                framework_vscode: "VS Code",
+                framework_acode: "Acode",
+                fonts_used: "Fonts Used",
+                collab_title: "Want some collaboration?",
+                collab_desc: "If you want to develop this website or collaborate on other projects, please contact me via social media or email:",
+                editor_by: "Code Editor by <iconify-icon inline icon=\"meteor-icons:visual-studio-code\"></iconify-icon>",
+                android: "Android",
+                windows: "Windows",
+                others_title: "Others :",
+                basic_html: "Basic HTML",
+                format_text: "Format Text",
+                basic_php: "Basic PHP",
+                var_php: "PHP Variables",
+                tj: "Transjakarta",
+                material3: "Material 3 Web"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            // Ganti semua teks
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                let html = translations[lang][key];
+                if (html) {
+                    el.innerHTML = html;
+                }
+            });
+            if (typeof window.setAchievementsLang === 'function') {
+                window.setAchievementsLang(lang);
+            }
+        }
+        // Language switch logic
+        let currentLang = 'en';
+        function updateLangButton(lang) {
+          const flagIcon = lang === 'id' ? '<iconify-icon icon="twemoji:flag-indonesia" style="font-size:1.5rem;"></iconify-icon>' : '<iconify-icon icon="twemoji:flag-united-states" style="font-size:1.5rem;"></iconify-icon>';
+          document.getElementById('lang-main-flag').innerHTML = flagIcon;
+          // Hide current lang from dropdown
+          document.getElementById('lang-option-id').style.display = lang === 'id' ? 'none' : 'flex';
+          document.getElementById('lang-option-en').style.display = lang === 'en' ? 'none' : 'flex';
+        }
+        function closeDropdown() {
+          document.getElementById('lang-dropdown').style.display = 'none';
+          // Tidak perlu caret
+        }
+        function openDropdown() {
+          document.getElementById('lang-dropdown').style.display = 'block';
+          // Tidak perlu caret
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+          // Pastikan tombol utama benar-benar bisa diklik
+          const langMainBtn = document.getElementById('lang-main-btn');
+          langMainBtn.style.pointerEvents = 'auto';
+          langMainBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('lang-dropdown');
+            if (dropdown.style.display === 'block') {
+              closeDropdown();
+            } else {
+              openDropdown();
+            }
+          });
+          document.getElementById('lang-option-id').onclick = function() {
+            setLanguage('id');
+            currentLang = 'id';
+            updateLangButton('id');
+            localStorage.setItem('lang', 'id');
+            closeDropdown();
+          };
+          document.getElementById('lang-option-en').onclick = function() {
+            setLanguage('en');
+            currentLang = 'en';
+            updateLangButton('en');
+            localStorage.setItem('lang', 'en');
+            closeDropdown();
+          };
+          document.addEventListener('click', function(e) {
+            if (!document.getElementById('lang-float-switch').contains(e.target)) {
+              closeDropdown();
+            }
+          });
+          // Set default language to last used or EN
+          const savedLang = localStorage.getItem('lang') || 'en';
+          setLanguage(savedLang);
+          updateLangButton(savedLang);
+        });
+        // Pastikan dropdown bahasa selalu disembunyikan saat load awal
+        window.addEventListener('DOMContentLoaded', function() {
+          var langDropdown = document.getElementById('lang-dropdown');
+          if (langDropdown) langDropdown.style.display = 'none';
+        });
+    </script>
 
     <script>
         function navigate(page) {
@@ -303,6 +544,23 @@
         };
     </script>
 
+    <!-- Floating Language Switch -->
+<div id="lang-float-switch" style="position: fixed; bottom: 30px; left: 30px; z-index: 9999; pointer-events: auto;">
+  <div style="position: relative;">
+    <button id="lang-main-btn" class="btn btn-m3-you-color shadow rounded-circle d-flex align-items-center justify-content-center p-0" style="width:56px;height:56px;font-size:1.7rem;" title="Change Language">
+      <span id="lang-main-flag" style="font-size:1.7rem;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"></span>
+    </button>
+    <div id="lang-dropdown" style="display:none; position:absolute; bottom:60px; right:0; background:transparent; border-radius:12px; box-shadow:none; min-width:56px; overflow:visible; flex-direction:column; align-items:flex-end; gap:8px;">
+      <button class="dropdown-item btn btn-m3-you-color rounded-circle d-flex align-items-center justify-content-center my-1" id="lang-option-id" style="width:44px;height:44px;font-size:1.7rem;min-width:44px;min-height:44px;padding:0;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.10);">
+        <iconify-icon inline icon="twemoji:flag-indonesia" style="font-size:1.7rem;"></iconify-icon>
+      </button>
+      <button class="dropdown-item btn btn-m3-you-color rounded-circle d-flex align-items-center justify-content-center my-1" id="lang-option-en" style="width:44px;height:44px;font-size:1.7rem;min-width:44px;min-height:44px;padding:0;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.10);">
+        <iconify-icon inline icon="twemoji:flag-united-states" style="font-size:1.7rem;"></iconify-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
     <!-- Footer Start -->
     <div id="footer"></div>
     <!-- Footer End -->
@@ -314,7 +572,18 @@
 
 
     <script>
-        const achievements = [
+        const achievements_id = [
+            "🎓 Ranking 2 Semester 1 Kelas 10",
+            "🚀 Ranking 1 Semester 2 Kelas 10",
+            "🎓 Ranking 1 Semester 1 Kelas 11",
+            "🥈 Ranking 2 Semester 2 Kelas 11",
+            "🎓 Ranking 3 Semester 1 Kelas 12",
+            "🚀 Ranking 1 Semester 2 Kelas 12",
+            "🩺 Ketua PMR sekolah tahun ajaran 2022–2023",
+            "💻 Anggota aktif OSIS Divisi IT 2022–2024",
+            "🏆 Nilai tertinggi di jurusan Rekayasa Perangkat Lunak dan nilai teratas di seluruh jurusan akademik sekolah",
+        ];
+        const achievements_en = [
             "🎓 Achieved 2nd place in Semester 1 Grade 10",
             "🚀 Achieved 1st place in Semester 2 Grade 10",
             "🎓 Achieved 1st place in Semester 1 Grade 11",
@@ -324,23 +593,31 @@
             "🩺 Served as the Head of the School Red Cross Youth (PMR) for the 2022–2023 academic year",
             "💻 Served as an active member of the Student Council (OSIS), IT Division, from 2022 to 2024",
             "🏆 Earned the highest academic performance in the Software Engineering major and ranked top across all academic majors at the school",
-
         ];
-
         let index = 0;
+        let currentAchievements = achievements_en;
         const box = document.getElementById("rotatingAchievement");
 
         function showNextAchievement() {
             box.style.opacity = 0;
             setTimeout(() => {
-                box.innerHTML = achievements[index];
+                box.innerHTML = currentAchievements[index];
                 box.style.opacity = 1;
-                index = (index + 1) % achievements.length;
+                index = (index + 1) % currentAchievements.length;
             }, 300);
+        }
+
+        function setAchievementsLang(lang) {
+            currentAchievements = lang === 'id' ? achievements_id : achievements_en;
+            index = 0;
+            showNextAchievement();
         }
 
         showNextAchievement();
         setInterval(showNextAchievement, 3500);
+
+        // Integrasi dengan switch bahasa
+        window.setAchievementsLang = setAchievementsLang;
     </script>
 
     <script>
@@ -430,7 +707,6 @@
     <script src="js/weather.js"></script>
     <script src="js/dark-mode-switch.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/progress.js"></script>
 </body>
 
 </html>
