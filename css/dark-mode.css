@@ -92,7 +92,24 @@ html {
 [data-theme="dark"] .dropdown-item:hover {
   color: #212529 !important;
 }
-
+.achievement-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #bbb;
+  transition: background 0.3s;
+  margin: 0 3px;
+}
+.achievement-dot.active {
+  background: #333;
+}
+[data-theme="dark"] .achievement-dot {
+  background: #555;
+}
+[data-theme="dark"] .achievement-dot.active {
+  background: #fff;
+}
 /* Label / tombol untuk darkmode */
 label {
   background: #eeeeee00 !important;
