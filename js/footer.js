@@ -47,7 +47,7 @@ function loadFooter() {
     <div class="text-center small p-3" id="copy">
       Website ini dibuat dengan <i class="fa fa-code" style="color: #00bcd4"></i>
       <br> <a href="index" class="text-decoration-none"><img id="light" width="70px"></a> &copy; 2025
-      <br>v4.0 <span class="text-warning fw-bold">Experimental</span>
+      <br>v5.0 <span class="text-danger fw-bold">New UI</span>
       <br>Updated at 08.49 14/07/2025
     </div>
   `;
