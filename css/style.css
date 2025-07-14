@@ -26,6 +26,10 @@
 body {
   font-family: 'Google Sans Text', sans-serif;
 }
+.google-sans-mono {
+  font-family: "Google Sans Mono", monospace;
+  font-optical-sizing: auto;
+}
 .geist-mono {
   font-family: "Geist Mono", monospace;
   font-optical-sizing: auto;
@@ -265,4 +269,46 @@ footer {
 }
 .hastag:hover, .hastag:focus {
   opacity: 100%;
+}
+/* Fade carousel lebih mulus dan fade out benar-benar smooth dan tidak tertindih */
+.carousel.carousel-fade .carousel-item {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    z-index: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.carousel.carousel-fade .carousel-item.active {
+    opacity: 1;
+    z-index: 2;
+    position: relative;
+    pointer-events: auto;
+}
+.carousel.carousel-fade .carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+}
+.carousel.carousel-fade .carousel-item-next.carousel-item-start,
+.carousel.carousel-fade .carousel-item-prev.carousel-item-end {
+    opacity: 1;
+    z-index: 3;
+    pointer-events: none;
+}
+.carousel.carousel-fade .carousel-item.active.carousel-item-start,
+.carousel.carousel-fade .carousel-item.active.carousel-item-end {
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+.carousel.carousel-fade .carousel-item img {
+    transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
 }
