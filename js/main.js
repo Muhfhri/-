@@ -282,10 +282,18 @@ function renderIndicators() {
 }
 
 let achievementInterval;
+function setAchievementBoxHeight() {
+  const box = document.getElementById('rotatingAchievement');
+  if (!box) return;
+  box.style.height = 'auto';
+  const newHeight = box.scrollHeight + 'px';
+  box.style.height = newHeight;
+}
 function showNextAchievement(manual = false) {
     box.style.opacity = 0;
     setTimeout(() => {
         box.innerHTML = currentAchievements[index];
+        setAchievementBoxHeight();
         box.style.opacity = 1;
         renderIndicators();
         if (!manual) index = (index + 1) % currentAchievements.length;
@@ -381,25 +389,68 @@ const clickableElements = document.querySelectorAll(".clickable");
         });
 
 // YouTube API fetch
-const channelId = "UCzU0mlmLis0p2XOvRL1r0-Q";
-fetch(`https://api.socialcounts.org/youtube-live-subscriber-count/${channelId}`)
-  .then(res => res.json())
-  .then(data => {
-    const count = data.API_sub || data.est_sub || "N/A";
-    let views = "", videos = "";
-    if(Array.isArray(data.table)) {
-      let viewsObj = data.table.find(x => x.name === "Channel Views");
-      let videosObj = data.table.find(x => x.name === "Videos");
-      views = viewsObj ? `${viewsObj.count.toLocaleString()} views` : '';
-      videos = videosObj ? `${videosObj.count} videos` : '';
+window.addEventListener('DOMContentLoaded', function() {
+  const ytStatsEl = document.getElementById("yt-channel-stats");
+  if (ytStatsEl) ytStatsEl.innerHTML = "Loading...";
+
+  fetch(`https://api.socialcounts.org/youtube-live-subscriber-count/UCzU0mlmLis0p2XOvRL1r0-Q`)
+    .then(res => res.json())
+    .then(data => {
+      const count = data.API_sub || data.est_sub || 0;
+      let views = '-', videos = '-';
+      if (Array.isArray(data.table)) {
+        let viewsObj = data.table.find(x => x.name === "Channel Views");
+        let videosObj = data.table.find(x => x.name === "Videos");
+        views = viewsObj && viewsObj.count ? `${viewsObj.count.toLocaleString()} views` : '-';
+        videos = videosObj && videosObj.count ? `${videosObj.count} videos` : '-';
+      }
+      ytStatsEl.innerHTML =
+        `<div class='fw-bold' style='font-size:1.15rem;'>${count ? count.toLocaleString() : '-' } subscribers</div>` +
+        `<div class='small text-secondary'>${[views, videos].join(' <span style="font-size:1.2em;vertical-align:middle;">&bull;</span> ')}</div>`;
+    })
+    .catch(() => {
+      ytStatsEl.innerHTML = "<div>Channel stats unavailable</div>";
+    });
+});
+
+function animateSubscriberCount(target, endValue, duration = 2000, views, videos) {
+  const el = document.getElementById(target);
+  if (!el) return;
+  let start = 0;
+  const increment = endValue / (duration / 16);
+  function update() {
+    start += increment;
+    if (start < endValue) {
+      el.innerHTML = `<div class='fw-bold' style='font-size:1.15rem;'>${Math.floor(start).toLocaleString()} subscribers</div>` +
+        `<div class='small text-secondary'>${[views, videos].filter(Boolean).join(' <span style=\"font-size:1.2em;vertical-align:middle;\">&bull;</span> ')}</div>`;
+      requestAnimationFrame(update);
+    } else {
+      el.innerHTML = `<div class='fw-bold' style='font-size:1.15rem;'>${endValue.toLocaleString()} subscribers</div>` +
+        `<div class='small text-secondary'>${[views, videos].filter(Boolean).join(' <span style=\"font-size:1.2em;vertical-align:middle;\">&bull;</span> ')}</div>`;
     }
-    document.getElementById("yt-channel-stats").innerHTML =
-      `<div class='fw-bold' style='font-size:1.15rem;'>${count.toLocaleString()} subscribers</div>` +
-      `<div class='small text-secondary'>${[views, videos].filter(Boolean).join(' <span style=\"font-size:1.2em;vertical-align:middle;\">&bull;</span> ')}</div>`;
-  })
-  .catch(() => {
-    document.getElementById("yt-channel-stats").innerHTML = "<div>Channel stats unavailable</div>";
-  });
+  }
+  update();
+}
+function updateYTStats(val) {
+  const el = document.getElementById('yt-channel-stats');
+  if (!el) return;
+  el.innerHTML = `<div class='fw-bold' style='font-size:1.15rem;'>${val.toLocaleString()} subscribers</div>` +
+    `<div class='small text-secondary'>${[ytViews, ytVideos].filter(Boolean).join(' <span style=\"font-size:1.2em;vertical-align:middle;\">&bull;</span> ')}</div>`;
+}
+
+function triggerYTSubsAnimationIfInView() {
+  if (ytSubsAnimated) return;
+  const section = document.getElementById('yt-channel-section');
+  if (!section) return;
+  const rect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  if (rect.top <= windowHeight - 120) {
+    ytSubsAnimated = true;
+    animateSubscriberCount('yt-channel-stats', ytSubsCount, 1800, ytViews, ytVideos);
+    window.removeEventListener('scroll', triggerYTSubsAnimationIfInView);
+  }
+}
+window.addEventListener('scroll', triggerYTSubsAnimationIfInView);
 
 // scroll progress
   window.addEventListener('scroll', function() {

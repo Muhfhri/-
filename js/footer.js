@@ -48,7 +48,7 @@ function loadFooter() {
       Website ini dibuat dengan <i class="fa fa-code" style="color: #00bcd4"></i>
       <br> <a href="index" class="text-decoration-none"><img id="light" width="70px"></a> &copy; 2025
       <br>v5.0 <span class="text-danger fw-bold">New UI</span>
-      <br>Updated at 08.49 14/07/2025
+      <br>Updated at 00.17 15/07/2025
     </div>
   `;
 }
