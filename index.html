@@ -5,6 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhfhri Home</title>
+    <meta name="description" content="Personal website of Muhammad Fachri Al Husein (Flixdz / muhfhri._) - beginner developer, portfolio, projects, and more.">
+    <meta name="keywords" content="Muhammad Fachri Al Husein, Flixdz, muhfhri, portfolio, web developer, personal website, projek, transjakarta, material3, SMK Nurul Islam, IT, software, android, website, github">
+    <meta name="author" content="Muhammad Fachri Al Husein">
+    <meta property="og:title" content="Muhfhri Home">
+    <meta property="og:description" content="Personal website of Muhammad Fachri Al Husein (Flixdz / muhfhri._) - beginner developer, portfolio, projects, and more.">
+    <meta property="og:image" content="https://socialcounts.org/_next/image?url=https%3A%2F%2Fyt3.ggpht.com%2FVHlK_2JACt8C8ZLd4UJ5bC_ltTJ9_BshTI0RFT8XjWLgC70GNN1LcFguNnRmC--JuIXZ3__w%3Ds240-c-k-c0x00ffffff-no-rj&w=256&q=75">
+    <meta property="og:url" content="https://muhfhri.github.io/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhfhri Home">
+    <meta name="twitter:description" content="Personal website of Muhammad Fachri Al Husein (Flixdz / muhfhri._) - beginner developer, portfolio, projects, and more.">
+    <meta name="twitter:image" content="https://socialcounts.org/_next/image?url=https%3A%2F%2Fyt3.ggpht.com%2FVHlK_2JACt8C8ZLd4UJ5bC_ltTJ9_BshTI0RFT8XjWLgC70GNN1LcFguNnRmC--JuIXZ3__w%3Ds240-c-k-c0x00ffffff-no-rj&w=256&q=75">
+    <link rel="icon" type="image/png" href="image/flixdz_top.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dark-mode.css">
@@ -144,6 +157,18 @@
   box-shadow: 0 4px 24px rgba(0,0,0,0.18);
   border: 1px solid rgba(255,255,255,0.06);
 }
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #4671a0, #003daf);
+  z-index: 99999;
+  transition: width 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
     </style>
     <script src="js/navbar-shadow.js"></script>
 </head>
@@ -270,17 +295,17 @@ Saya adalah seseorang yang sangat tertarik dengan dunia teknologi terutama Softw
                 <sup><small class="fw-bold fira-code text-danger" data-i18n="whoami_note">*sebenernya kurang suka karna kompleks, tapi kenapa enggak?</small></sup>
             </div>
             <!-- YouTube Channel Section Start -->
-            <div class="container mt-4 mb-4 p-3 text-center" id="yt-channel-section" style="max-width:420px;border-radius:1.5rem;box-shadow:none;background:none;">
-                <img src="https://socialcounts.org/_next/image?url=https%3A%2F%2Fyt3.ggpht.com%2FVHlK_2JACt8C8ZLd4UJ5bC_ltTJ9_BshTI0RFT8XjWLgC70GNN1LcFguNnRmC--JuIXZ3__w%3Ds240-c-k-c0x00ffffff-no-rj&w=256&q=75" alt="Flixdz Channel" style="width:100px;height:100px;border-radius:1rem;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-                <h4 class="fw-bold mt-2 mb-1">Flixdz <span style="font-size:1.1rem;vertical-align:middle;"><i class="fa-brands fa-youtube text-danger"></i></span></h4>
-                <div id="yt-channel-stats" class="mb-1"></div>
-                <a href="https://youtube.com/channel/UCzU0mlmLis0p2XOvRL1r0-Q" target="_blank" class="btn btn-outline-danger btn-sm rounded-pill mt-2"><i class="fa-brands fa-youtube"></i> Visit Channel</a>
+            <div class="container mt-4 mb-4 p-3 text-center" id="yt-channel-section" style="max-width:420px;border-radius:1.5rem;box-shadow:none;background:none;" data-aos="fade-in">
+                <img src="https://socialcounts.org/_next/image?url=https%3A%2F%2Fyt3.ggpht.com%2FVHlK_2JACt8C8ZLd4UJ5bC_ltTJ9_BshTI0RFT8XjWLgC70GNN1LcFguNnRmC--JuIXZ3__w%3Ds240-c-k-c0x00ffffff-no-rj&w=256&q=75" alt="Flixdz Channel" style="width:100px;height:100px;border-radius:1rem;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,0.08);" data-aos="fade-in">
+                <h4 class="fw-bold mt-2 mb-1" data-aos="fade-in">Flixdz <span style="font-size:1.1rem;vertical-align:middle;"><i class="fa-brands fa-youtube text-danger"></i></span></h4>
+                <div id="yt-channel-stats" class="mb-1" data-aos="fade-in"></div>
+                <a href="https://youtube.com/channel/UCzU0mlmLis0p2XOvRL1r0-Q" target="_blank" class="btn btn-outline-danger btn-sm rounded-pill mt-2" data-aos="fade-in"><i class="fa-brands fa-youtube"></i> Visit Channel</a>
             </div>
             <!-- YouTube Channel Section End -->
-            <div class="container mt-5 text-center">
+            <div class="container mt-5 text-center" data-aos="fade-in">
                 <h3 class="fw-bold" data-i18n="achievements_title">Achievements</h3>
-                <div id="rotatingAchievement" class="achievement-box google-sans-mono">🎓 Loading achievements...</div>
-                <div id="achievement-indicators" class="d-flex justify-content-center gap-2 mt-2"></div>
+                <div id="rotatingAchievement" class="achievement-box google-sans-mono" data-aos="fade-in">🎓 Loading achievements...</div>
+                <div id="achievement-indicators" class="d-flex justify-content-center gap-2 mt-2" data-aos="fade-in"></div>
             </div>
             <div class="container mt-5" data-aos="fade-up">
                 <h2 class="fw-bold text-center"><a href="#cool" id="cool" class="link-none clickable" data-i18n="cool_stuff">Logo</a>
@@ -374,7 +399,7 @@ Saya adalah seseorang yang sangat tertarik dengan dunia teknologi terutama Softw
     </div>
     <!-- End About Website -->
     <!-- Start Others -->
-    <div id="others" class="page container">
+    <div id="others" class="page container" data-aos="fade-in">
         <div class="container mt-3 text-center">
             <p>
                 <a href="android" class="rounded-5 link-none animasi"><iconify-icon inline
