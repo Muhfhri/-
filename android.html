@@ -1,348 +1,712 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="id" data-theme="forest">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Website Muhammad Fachri Al Husein, dibuat menggunakan GitHub Pages">
-    <title>Android</title>
-    <link rel="icon" type="image/png" href="image/flixdz_top.png">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <!-- AOS PLUGIN -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- CUSTOM CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/nav.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-    <script src="js/theme.js"></script>
-    <link rel="stylesheet" href="css/dark-mode.css">
-    <link rel="stylesheet" href="css/multilevel.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Tools - Muhfhri</title>
+    <meta name="description" content="Android Tools and Resources by Muhammad Fachri Al Husein">
+    
+    <!-- DaisyUI + Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Local Google Sans Fonts -->
     <style>
-        .carousel-item img {
-            width: 360px !important;
+        @font-face {
+            font-family: 'Google Sans';
+            font-weight: 400;
+            src: url('css/font/GoogleSansText-Regular.ttf') format('truetype');
         }
-
-        @media(max-width:1440px) {
-            .carousel-item img {
-                width: 340px !important;
-            }
+        @font-face {
+            font-family: 'Google Sans';
+            font-weight: 500;
+            src: url('css/font/GoogleSans-Regular.ttf') format('truetype');
         }
-
-        @media(max-width:1080px) {
-            .carousel-item img {
-                width: 300px !important;
-            }
+        @font-face {
+            font-family: 'Google Sans Mono';
+            font-weight: 400;
+            src: url('css/font/GoogleSansMono-Regular.ttf') format('truetype');
         }
-
-        @media(max-width:850px) {
-            .carousel-item img {
-                width: 260px !important;
-            }
+        
+        body { 
+            font-family: 'Google Sans', 'Inter', sans-serif;
         }
-
-        .iconify {
-            font-size: 84px !important;
+        
+        .mono { font-family: 'Google Sans Mono', 'JetBrains Mono', monospace; }
+        
+        /* Smooth transitions */
+        .smooth-transition {
+            transition: all 0.3s ease;
         }
-
-        .adsbox {
-            width: 1px;
-            height: 1px;
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
+        
+        /* Card hover effect - Default for light mode */
+        .card-hover:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Clean scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: hsl(var(--bc) / 0.2); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: hsl(var(--bc) / 0.3); }
+        
+        /* Custom rounded buttons - more rounded */
+        .btn {
+            border-radius: 1rem !important;
+        }
+        
+        .btn-circle {
+            border-radius: 50% !important;
+        }
+        
+        .badge {
+            border-radius: 1rem !important;
+        }
+        
+        .card {
+            border-radius: 1rem !important;
+        }
+        
+        .rounded-lg, .rounded-xl {
+            border-radius: 1rem !important;
+        }
+        
+        /* Dark mode card improvements */
+        [data-theme="forest"] .card {
+            background-color: #2a2e37 !important;
+            border: 1px solid #3d4451 !important;
+        }
+        
+        [data-theme="forest"] .card-hover:hover {
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+            transform: translateY(-4px);
+        }
+        
+        [data-theme="forest"] .bg-base-200\/50,
+        [data-theme="forest"] .bg-base-200\/30 {
+            background-color: #1f2937 !important;
+            border: 1px solid #374151 !important;
+        }
+        
+        /* Light mode shadows */
+        [data-theme="light"] .card-hover:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        /* Dark mode collapse and modal improvements */
+        [data-theme="forest"] .collapse {
+            background-color: #2a2e37 !important;
+            border: 1px solid #3d4451 !important;
+        }
+        
+        [data-theme="forest"] .modal-box {
+            background-color: #2a2e37 !important;
+            border: 1px solid #3d4451 !important;
+        }
+        
+        [data-theme="forest"] .alert {
+            background-color: #1f2937 !important;
+            border: 1px solid #374151 !important;
+            color: #f9fafb !important;
+        }
+        
+        [data-theme="forest"] .alert span,
+        [data-theme="forest"] .alert .text-xs {
+            color: #f9fafb !important;
+        }
+        
+        [data-theme="forest"] .alert-warning {
+            background-color: #92400e !important;
+            border-color: #d97706 !important;
+            color: #fef3c7 !important;
+        }
+        
+        [data-theme="forest"] .alert-warning span,
+        [data-theme="forest"] .alert-warning .text-xs {
+            color: #fef3c7 !important;
+        }
+        
+        [data-theme="forest"] .alert-info {
+            background-color: #1e40af !important;
+            border-color: #3b82f6 !important;
+            color: #dbeafe !important;
+        }
+        
+        [data-theme="forest"] .alert-info span,
+        [data-theme="forest"] .alert-info .text-xs {
+            color: #dbeafe !important;
+        }
+        
+        /* Dark mode navbar improvements */
+        [data-theme="forest"] .navbar {
+            background-color: #1f2937 !important;
+            border-bottom: 1px solid #374151 !important;
+        }
+        
+        [data-theme="forest"] .bg-base-200\/50 {
+            background-color: #1f2937 !important;
+        }
+        
+        /* Fix text visibility in dark mode */
+        [data-theme="forest"] .opacity-70,
+        [data-theme="forest"] .opacity-60 {
+            color: #d1d5db !important;
+        }
+        
+        [data-theme="forest"] .text-xs.opacity-70 {
+            color: #d1d5db !important;
         }
     </style>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    
+    <!-- Prevent Theme Flash -->
+    <script>
+        (function() {
+            // Load saved theme immediately to prevent flash
+            let savedTheme = localStorage.getItem('selectedTheme') || 'forest';
+            
+            // Convert old themes to valid ones
+            if (savedTheme === 'cupcake' || savedTheme === 'dark' || savedTheme === 'dracula') {
+                savedTheme = 'forest';
+            } else if (savedTheme !== 'light' && savedTheme !== 'forest') {
+                savedTheme = 'forest';
+            }
+            
+            // Set theme immediately
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
 
 <body>
-
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content bg-light rounded-4">
-
-                <div class="modal-header">
-                    <h4 class="modal-title bg-light ">Buat username..</h4>
+    <!-- Simplified Navigation -->
+    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-50 px-4">
+        <div class="navbar-start">
+            <a href="index.html" class="btn btn-ghost">
+                <img src="css/image/dark.gif" alt="Logo" class="h-8 w-auto" id="navbar-logo">
+            </a>
+        </div>
+        
+        <div class="navbar-center">
+            <h1 class="text-xl font-bold">Android Tools</h1>
+        </div>
+        
+        <div class="navbar-end gap-2">
+            <!-- Time Display -->
+            <div class="hidden lg:flex bg-base-200 rounded-lg px-3 py-1.5">
+                <div class="text-center">
+                    <div class="text-sm font-medium mono" id="time-display">00:00</div>
+                    <div class="text-xs opacity-60" id="date-display">Loading...</div>
                 </div>
-
-                <div class="modal-body">
-                    <input type="text" id="name" class="form-control">
-                </div>
-
-                <div class="modal-footer">
-                    <p class="text-success">ⓘ Tenang! Username kamu ga bakal dipake buat apa apa kok. Karena website ini
-                        masih bersifat statis
-                        <br><small class="text-muted"><b>|</b> tekan area kosong untuk membatalkan</small>
-                    </p>
-                    <button type="button" class="btn rounded-5 btn-m3-you-color" onclick="saveName()">Lanjut..</button>
-                </div>
-
             </div>
+            
+            <!-- Simple Theme Toggle -->
+            <label class="swap swap-rotate btn btn-circle btn-ghost">
+                <input type="checkbox" id="theme-toggle" />
+                <iconify-icon icon="material-symbols:light-mode" class="swap-on text-xl"></iconify-icon>
+                <iconify-icon icon="material-symbols:dark-mode" class="swap-off text-xl"></iconify-icon>
+            </label>
         </div>
     </div>
-
-    <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
-        <div class="container-fluid">
-            <a href="#"><img class="navbar-brand" id="light" width="100"></a>
-            <button class="navbar-toggler collapsed border-0 shadow-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation" style="box-shadow:none; outline:none;">
-                <span class="icon-bar top-bar"></span>
-                <span class="icon-bar middle-bar"></span>
-                <span class="icon-bar bottom-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav text-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="https://github.com/muhfhri"><iconify-icon
-                                inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
-                    </li>
+    
+    <!-- Breadcrumb Bar -->
+    <div class="bg-base-200/50 border-b border-base-300">
+        <div class="container mx-auto px-4 py-2">
+            <div class="breadcrumbs text-sm">
+                <ul>
+                    <li><a href="index.html" class="text-primary hover:text-primary-focus">🏠 Home</a></li>
+                    <li><span class="text-base-content/70">📱 Android Tools</span></li>
                 </ul>
-                <div class="ms-auto">
-                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-                    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
-                        data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <nav aria-label="breadcrumb" class="my-3">
-            <ol class="breadcrumb bg-transparent px-3 py-2">
-                <li class="breadcrumb-item">
-                    <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
-                </li>
-                <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
-                    <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#"
-                        id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Others
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
-                        <li><a class="dropdown-item active" href="#">Android</a></li>
-                        <li><a class="dropdown-item" href="windows.html">Windows</a></li>
-                        <!-- Tambahkan halaman HTML lain di sini -->
-                    </ul>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Android</li>
-            </ol>
-        </nav>
-    </div>
-
-    <!-- Navbar End -->
-    <div class="container py-1" id="coltop">
-        <div class="row text-center" data-aos="fade-in" data-aos-duration="3000">
-            <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-                <div id="lblGreetings"></div>
-            </div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-                <div id="waktu"></div>
-            </div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-                <div id="weather">
-                    <i id="weather-icon" class=""></i> <!-- Ikon cuaca -->
-                    <span id="weather-info">Cerah, 26°C</span> <!-- Informasi cuaca -->
-                    <button id="weather-edit-btn" class="btn btn-link btn-sm p-0 ms-1" style="vertical-align:middle; font-size:1em;" title="Edit lokasi"><i class="fa-regular fa-pen-to-square"></i></button>
-                    <span id="weather-edit-box" style="display:none;"></span>
-                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="container text-center">
-            <img src="image/Android_16.png" width="200px" alt="">
-            <h3>Android <iconify-icon icon="material-symbols:android" inline width="24" height="24"></iconify-icon></h3>
-            <h5>Versi Android Saat Ini : <a href="https://developer.android.com/about/versions/16?hl=id"
-                    class="btn btn-sm btn-outline-success rounded-5">16</a></h5>
-            <h5>Kodename Android : Baklava</h5>
-            <a class="btn btn-outline-dark rounded-5 geist-mono position-relative" data-bs-toggle="collapse"
-                href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <iconify-icon icon="lineicons:phone" inline></iconify-icon> Spek Hp Sendiri</a>
-
-            <div class="collapse" id="collapseExample">
-                <center>
-                    <div class="card w-75 card-body rounded-5 mt-2">
-                        <center><img
-                                src="https://rukminim2.flixcart.com/image/704/844/xif0q/mobile/e/7/c/f5-5g-mzb0e7lin-poco-original-imagpep3w5zmcdcd.jpeg?q=20&crop=false"
-                                width="100px" alt="" class="rounded-3"></center>
-                        <h2 class="fw-bold">POCO F5</h2>
-                        <h5 class="google-sans">Snapdragon 7+ Gen 2</h5>
-                        <h5>5000mAh</h5>
-                        <h5 class="manrope">256 GB / 12 GB</h5>
-                        <h5>UFS 3.1 / LPDDR5 3200mhz</h5>
-                        <h5>AnTuTu 1.100.000</h5>
-                    </div>
-                </center>
-            </div>
-
-            <div class="mt-2">
-                <button type="button" class="btn btn-outline-danger rounded-5" data-bs-toggle="modal"
-                    data-bs-target="#infoModal">
-                    Periksa Perangkat
-                </button>
-            </div>
-        </div>
-
-        <!-- Elemen dummy untuk deteksi AdBlock -->
-        <div class="adsbox"></div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content bg-light rounded-5">
-                    <div class="modal-header">
-                        <h5 class="modal-title google-sans fw-bold" id="infoModalLabel">Informasi Perangkat</h5>
-
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Platform OS:</strong> <span id="modal-platform">Mendeteksi...</span></p>
-                        <p><strong>GPU:</strong> <span id="modal-gpu">Mendeteksi...</span></p>
-                        <p><strong>Resolusi Layar Asli:</strong> <span id="modal-resolution">Mendeteksi...</span></p>
-                        <p><strong>Browser:</strong> <span id="modal-browser">Mendeteksi...</span></p>
-                        <p><strong>IP Lokal:</strong> <span id="modal-ip">Mendeteksi IP...</span></p>
-                        <p><strong>Zona Waktu:</strong> <span id="modal-timezone">Mendeteksi...</span></p>
-                        <p><strong>Status AdBlock:</strong> <span id="modal-adblock">Mendeteksi...</span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark rounded-5"
-                            data-bs-dismiss="modal">Tutup</button>
-                    </div>
+    <!-- Clean Hero Section -->
+    <div class="hero bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50 py-20">
+        <div class="hero-content text-center max-w-4xl">
+            <div>
+                <!-- Android Image -->
+                <div class="mb-8">
+                    <img src="image/Android_16.png" alt="Android 16" 
+                         class="w-32 h-32 mx-auto rounded-2xl shadow-lg">
                 </div>
-            </div>
-        </div>
-
-        <!-- Memuat JavaScript Bootstrap 5 dan dependensi Popper.js -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-
-        <div class="row text-center mt-2">
-            <div class="col-md-4 my-3">
-                <h4>ROOT</h4>
-                <a href="https://github.com/topjohnwu/Magisk"
-                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2 position-relative"><iconify-icon
-                            inline icon="simple-icons:magisk" width="15"></iconify-icon>  
-                Magisk
-            </a>
-            <a href="https://github.com/tiann/KernelSU"
-                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2"><iconify-icon
-                            inline icon="arcticons:kernelsu" width="15"></iconify-icon> 
-                KernelSU
                 
-            </a>
-            <a href="https://github.com/KernelSU-Next/KernelSU-Next/releases/" class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2"><iconify-icon inline icon="mdi:yin-yang"></iconify-icon>
-                KernelSU-Next
-            </a>
-            <a href="https://github.com/bmax121/APatch"
-                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2"><iconify-icon
-                            inline icon="arcticons:apatch" width="15" ></iconify-icon> 
-                APatch
-            </a>
+                <!-- Title & Info -->
+                <div class="space-y-6">
+                    <div class="flex items-center justify-center gap-3">
+                        <h1 class="text-4xl md:text-5xl font-bold text-base-content">Android</h1>
+                        <iconify-icon icon="material-symbols:android" class="text-4xl text-green-600"></iconify-icon>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="text-lg">
+                            Versi Android Saat Ini: 
+                            <a href="https://developer.android.com/about/versions/16?hl=id" 
+                               class="badge badge-success badge-lg font-bold smooth-transition hover:scale-105">
+                                <strong>Android 16</strong>
+                            </a>
+                        </div>
+                        <p class="text-base opacity-70">
+                            Codename: <span class="font-medium text-green-600">Baklava 🧁</span>
+                        </p>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                        <button class="btn btn-primary btn-lg gap-2 smooth-transition" onclick="toggleDeviceSpecs()">
+                            <iconify-icon icon="lineicons:phone" class="text-xl"></iconify-icon>
+                            Spek HP Sendiri
+                        </button>
+                        <button class="btn btn-outline btn-lg gap-2 smooth-transition" onclick="openDeviceModal()">
+                            <iconify-icon icon="material-symbols:info" class="text-xl"></iconify-icon>
+                            Periksa Perangkat
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4 my-3">
-                <h4>MODULE</h4>
-                
-
-                <p><a href="https://github.com/Dr-TSNG/ZygiskNext/releases/"
-                        class="btn btn-outline-dark rounded-5">ZygiskNext</a> | <a
-                        href="https://github.com/LSPosed/LSPosed.github.io/releases/"
-                        class="btn btn-outline-dark rounded-5">Shamiko</a></p>
-                <p> <a href="https://github.com/JingMatrix/LSPosed/releases/"
-                        class="btn btn-outline-dark rounded-5">LSPosed</a> | <a
-                        href="https://github.com/j-hc/zygisk-detach" class="btn btn-outline-dark rounded-5">Detach</a>
-                </p>
-                <p> <a href="https://github.com/osm0sis/PlayIntegrityFork/releases/"
-                        class="btn btn-outline-dark rounded-5">PIF Fork</a> | <a
-                        href="https://github.com/sidex15/susfs4ksu-module/releases/"
-                        class="btn btn-outline-dark rounded-5">SUSFS</a></p>
-                <p> <a href="https://github.com/chiteroman/PlayIntegrityFix/releases/"
-                        class="btn btn-outline-dark rounded-5">ReVanced</a> | <a
-                        href="https://github.com/5ec1cff/TrickyStore/releases/"
-                        class="btn btn-outline-dark rounded-5">TrickyStore</a></p>
-
-            </div>
-            <div class="col-md-4 my-3">
-                <h4>ROM</h4>
-                <p><a class="btn btn-outline-dark rounded-5" href="https://xiaomi.eu">xiaomi eu</a> | <a
-                        href="https://miuitn.vercel.app/" class="btn btn-outline-dark rounded-5">MIUI TN</a>
-                    <br><small class="text-danger">* xiaomi eu hanya untuk varian snapdragon</small>
-                </p>
-                <p><a class="btn btn-outline-dark rounded-5" href="https://evolution-x.org/">EvolutionX</a> | <a
-                        class="btn btn-outline-dark rounded-5" href="https://pixelos.net/">PixelOS</a></p>
-                <p><a class="btn btn-outline-dark rounded-5" href="https://github.com/HorizonDroidLab">HorizonDroid</a>
-                    | <a class="btn btn-outline-dark rounded-5" href="https://www.projectmatrixx.org/">Matrixx</a></p>
-                <p><a class="btn btn-outline-dark rounded-5" href="https://crdroid.net/">crDroid</a> | <a
-                        class="btn btn-outline-dark rounded-5" href="https://lineageos.org/">LineageOS</a></p>
-            </div>
-        </div>
-
-        <div class="container text-center">
-            <h4>MUSIC PLAYER</h4>
-
-            <a href="https://github.com/z-huang/InnerTune"
-                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2 position-relative">
-                Innertune
-                <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill badge-warning"
-                    style="font-size:1em; right:0.5rem; top:0.2rem; padding: 10px;">
-                    <iconify-icon icon="mdi:bug"></iconify-icon>
-                </span>
-            </a>
-            <a href="https://github.com/mostafaalagamy/Metrolist/releases"
-                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2">
-                Metrolist
-            </a>
-            <a href="https://github.com/fast4x/RiMusic" class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2">
-                RiMusic
-            </a>
-            <a href="https://github.com/chiteroman/PlayIntegrityFix/releases/"
-                class="btn btn-m3-you-color shadow rounded-pill px-3 py-2 mt-2">
-                Revanced
-            </a>
-
-            <br><a href="index.html" class="btn mt-4 btn-outline-dark rounded-5">Kembali</a>
         </div>
     </div>
-    <!-- Footer Start -->
-    <div id="footer"></div>
-    <!-- Footer End -->
 
-    <!-- Tombol ke atas -->
-    <button type="button" class="btn btn-m3-you-color bg-material btn-floating rounded-4 shadow btn-lg"
-        id="btn-back-to-top"><iconify-icon inline icon="line-md:chevron-up"></iconify-icon>
-    </button>
-    <!-- End Of Body HTML -->
+    <!-- Device Specs Section -->
+    <div class="bg-base-100 border-t">
+        <div class="container mx-auto px-4 py-8">
+            <div id="device-specs" class="collapse collapse-arrow bg-base-200/50 rounded-lg shadow-sm">
+                <input type="checkbox" id="specs-toggle" />
+                <div class="collapse-title text-lg font-medium flex items-center gap-2">
+                    <iconify-icon icon="material-symbols:smartphone" class="text-xl text-primary"></iconify-icon>
+                    Spesifikasi Device
+                </div>
+                <div class="collapse-content bg-base-100 rounded-b-lg">
+                    <div class="p-6">
+                        <!-- Device Info Header -->
+                        <div class="flex items-center gap-4 mb-6 p-4 bg-base-200/50 rounded-lg">
+                            <img src="https://rukminim2.flixcart.com/image/704/844/xif0q/mobile/e/7/c/f5-5g-mzb0e7lin-poco-original-imagpep3w5zmcdcd.jpeg?q=20&crop=false" 
+                                 alt="POCO F5" class="w-16 h-20 rounded-lg shadow-sm object-cover">
+                            <div>
+                                <h3 class="text-xl font-bold">POCO F5</h3>
+                                <p class="text-sm opacity-70">Gaming Smartphone</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Specs Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                                <iconify-icon icon="material-symbols:memory" class="text-2xl text-primary mb-2"></iconify-icon>
+                                <div class="text-xs opacity-70 mb-1">Processor</div>
+                                <div class="font-medium text-sm">Snapdragon 7+ Gen 2</div>
+                            </div>
+                            
+                            <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                                <iconify-icon icon="material-symbols:battery-full" class="text-2xl text-secondary mb-2"></iconify-icon>
+                                <div class="text-xs opacity-70 mb-1">Battery</div>
+                                <div class="font-medium text-sm">5000mAh</div>
+                            </div>
+                            
+                            <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                                <iconify-icon icon="material-symbols:storage" class="text-2xl text-accent mb-2"></iconify-icon>
+                                <div class="text-xs opacity-70 mb-1">Storage/RAM</div>
+                                <div class="font-medium text-sm">256GB/12GB</div>
+                            </div>
+                            
+                            <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                                <iconify-icon icon="material-symbols:trending-up" class="text-2xl text-info mb-2"></iconify-icon>
+                                <div class="text-xs opacity-70 mb-1">AnTuTu Score</div>
+                                <div class="font-medium text-sm">1.1M+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- JavaScript for functional features this cool website-->
+    <!-- Main Content -->
+    <div class="bg-base-200/20">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Android Tools & Resources</h2>
+                <p class="text-lg opacity-70 max-w-2xl mx-auto">
+                    Kumpulan tools dan aplikasi terbaik untuk Android development, modifikasi, dan customization
+                </p>
+            </div>
+
+            <!-- Tools Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                
+                <!-- ROOT Tools -->
+                <div class="card bg-base-100 shadow-sm border border-base-300 smooth-transition card-hover">
+                    <div class="card-body">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-error/10 flex items-center justify-center">
+                                <iconify-icon icon="material-symbols:security" class="text-2xl text-error"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">ROOT Tools</h3>
+                                <p class="text-sm opacity-60">Akses super user</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <a href="https://github.com/topjohnwu/Magisk" 
+                               class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                <div class="flex items-center gap-3">
+                                    <iconify-icon icon="simple-icons:magisk" class="text-lg"></iconify-icon>
+                                    <span class="font-medium">Magisk</span>
+                                </div>
+                                <div class="badge badge-success badge-sm">Popular</div>
+                            </a>
+                            <a href="https://github.com/tiann/KernelSU" 
+                               class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                <div class="flex items-center gap-3">
+                                    <iconify-icon icon="arcticons:kernelsu" class="text-lg"></iconify-icon>
+                                    <span class="font-medium">KernelSU</span>
+                                </div>
+                            </a>
+                            <a href="https://github.com/KernelSU-Next/KernelSU-Next/releases/" 
+                               class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                <div class="flex items-center gap-3">
+                                    <iconify-icon icon="mdi:yin-yang" class="text-lg"></iconify-icon>
+                                    <span class="font-medium">KernelSU-Next</span>
+                                </div>
+                            </a>
+                            <a href="https://github.com/bmax121/APatch" 
+                               class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                <div class="flex items-center gap-3">
+                                    <iconify-icon icon="arcticons:apatch" class="text-lg"></iconify-icon>
+                                    <span class="font-medium">APatch</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modules -->
+                <div class="card bg-base-100 shadow-sm border border-base-300 smooth-transition card-hover">
+                    <div class="card-body">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+                                <iconify-icon icon="material-symbols:extension" class="text-2xl text-secondary"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Modules</h3>
+                                <p class="text-sm opacity-60">Modifikasi sistem</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex flex-wrap gap-2">
+                                <a href="https://github.com/Dr-TSNG/ZygiskNext/releases/" class="btn btn-outline btn-sm">ZygiskNext</a>
+                                <a href="https://github.com/LSPosed/LSPosed.github.io/releases/" class="btn btn-outline btn-sm">Shamiko</a>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="https://github.com/JingMatrix/LSPosed/releases/" class="btn btn-outline btn-sm">LSPosed</a>
+                                <a href="https://github.com/j-hc/zygisk-detach" class="btn btn-outline btn-sm">Detach</a>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="https://github.com/osm0sis/PlayIntegrityFork/releases/" class="btn btn-outline btn-sm">PIF Fork</a>
+                                <a href="https://github.com/sidex15/susfs4ksu-module/releases/" class="btn btn-outline btn-sm">SUSFS</a>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="https://github.com/chiteroman/PlayIntegrityFix/releases/" class="btn btn-outline btn-sm">ReVanced</a>
+                                <a href="https://github.com/5ec1cff/TrickyStore/releases/" class="btn btn-outline btn-sm">TrickyStore</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom ROMs -->
+                <div class="card bg-base-100 shadow-sm border border-base-300 smooth-transition card-hover">
+                    <div class="card-body">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                                <iconify-icon icon="material-symbols:system-update" class="text-2xl text-accent"></iconify-icon>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Custom ROMs</h3>
+                                <p class="text-sm opacity-60">Firmware alternatif</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex flex-wrap gap-2 items-center">
+                                <a class="btn btn-outline btn-sm" href="https://xiaomi.eu/">xiaomi eu</a>
+                                <a class="btn btn-outline btn-sm" href="https://miuitn.vercel.app/">MIUI TN</a>
+                                <span class="text-xs text-error">* xiaomi eu hanya untuk varian snapdragon</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <a class="btn btn-outline btn-sm" href="https://evolution-x.org/">EvolutionX</a>
+                                <a class="btn btn-outline btn-sm" href="https://pixelos.net/">PixelOS</a>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <a class="btn btn-outline btn-sm" href="https://github.com/HorizonDroidLab">HorizonDroid</a>
+                                <a class="btn btn-outline btn-sm" href="https://www.projectmatrixx.org/">Matrixx</a>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <a class="btn btn-outline btn-sm" href="https://crdroid.net/">crDroid</a>
+                                <a class="btn btn-outline btn-sm" href="https://lineageos.org/">LineageOS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Players Section -->
+    <div class="bg-base-100 border-t">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">🎵 Music Players</h2>
+                <p class="text-lg opacity-70 max-w-xl mx-auto">
+                    Aplikasi pemutar musik terbaik untuk Android dengan fitur lengkap
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="https://github.com/z-huang/InnerTune" 
+                   class="card bg-base-100 border border-base-300 shadow-sm hover:shadow-md smooth-transition card-hover">
+                    <div class="card-body text-center p-6">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <iconify-icon icon="material-symbols:music-note" class="text-2xl text-purple-600"></iconify-icon>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">InnerTune</h3>
+                        <p class="text-sm opacity-70 mb-3">YouTube Music client</p>
+                        <div class="badge badge-warning badge-sm">Beta</div>
+                    </div>
+                </a>
+                
+                <a href="https://github.com/mostafaalagamy/Metrolist/releases" 
+                   class="card bg-base-100 border border-base-300 shadow-sm hover:shadow-md smooth-transition card-hover">
+                    <div class="card-body text-center p-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <iconify-icon icon="material-symbols:library-music" class="text-2xl text-blue-600"></iconify-icon>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Metrolist</h3>
+                        <p class="text-sm opacity-70 mb-3">Modern music player</p>
+                        <div class="badge badge-success badge-sm">Stable</div>
+                    </div>
+                </a>
+                
+                <a href="https://github.com/fast4x/RiMusic" 
+                   class="card bg-base-100 border border-base-300 shadow-sm hover:shadow-md smooth-transition card-hover">
+                    <div class="card-body text-center p-6">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <iconify-icon icon="material-symbols:queue-music" class="text-2xl text-green-600"></iconify-icon>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">RiMusic</h3>
+                        <p class="text-sm opacity-70 mb-3">Feature-rich player</p>
+                        <div class="badge badge-info badge-sm">Popular</div>
+                    </div>
+                </a>
+                
+                <a href="https://github.com/chiteroman/PlayIntegrityFix/releases/" 
+                   class="card bg-base-100 border border-base-300 shadow-sm hover:shadow-md smooth-transition card-hover">
+                    <div class="card-body text-center p-6">
+                        <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <iconify-icon icon="material-symbols:refresh" class="text-2xl text-orange-600"></iconify-icon>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">ReVanced</h3>
+                        <p class="text-sm opacity-70 mb-3">Patched apps</p>
+                        <div class="badge badge-secondary badge-sm">Modded</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Back to Home -->
+            <div class="text-center mt-16">
+                <a href="index.html" class="btn btn-primary btn-lg gap-3 smooth-transition">
+                    <iconify-icon icon="material-symbols:home" class="text-xl"></iconify-icon>
+                    Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Device Info Modal -->
+    <dialog id="device_modal" class="modal">
+        <div class="modal-box max-w-3xl">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            
+            <h3 class="font-bold text-xl mb-6 flex items-center gap-2">
+                <iconify-icon icon="material-symbols:smartphone" class="text-2xl text-primary"></iconify-icon>
+                Informasi Perangkat
+            </h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                    <iconify-icon icon="material-symbols:public" class="text-2xl text-primary mb-2"></iconify-icon>
+                    <div class="text-xs opacity-70 mb-1">IP Address</div>
+                    <div class="font-medium text-sm" id="device-ip">Detecting...</div>
+                </div>
+                
+                <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                    <iconify-icon icon="material-symbols:memory" class="text-2xl text-secondary mb-2"></iconify-icon>
+                    <div class="text-xs opacity-70 mb-1">GPU</div>
+                    <div class="font-medium text-sm" id="device-gpu">Detecting...</div>
+                </div>
+                
+                <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                    <iconify-icon icon="material-symbols:computer" class="text-2xl text-accent mb-2"></iconify-icon>
+                    <div class="text-xs opacity-70 mb-1">Operating System</div>
+                    <div class="font-medium text-sm" id="device-os">Detecting...</div>
+                </div>
+                
+                <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                    <iconify-icon icon="material-symbols:schedule" class="text-2xl text-info mb-2"></iconify-icon>
+                    <div class="text-xs opacity-70 mb-1">Timezone</div>
+                    <div class="font-medium text-sm" id="device-timezone">Detecting...</div>
+                </div>
+                
+                <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                    <iconify-icon icon="material-symbols:block" class="text-2xl text-warning mb-2"></iconify-icon>
+                    <div class="text-xs opacity-70 mb-1">AdBlock Status</div>
+                    <div class="font-medium text-sm" id="device-adblock">Detecting...</div>
+                </div>
+                
+                <div class="bg-base-200/30 rounded-lg p-4 text-center">
+                    <iconify-icon icon="material-symbols:monitor" class="text-2xl text-success mb-2"></iconify-icon>
+                    <div class="text-xs opacity-70 mb-1">Screen Resolution</div>
+                    <div class="font-medium text-sm" id="device-resolution">Detecting...</div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Simple Theme Toggle & Scroll to Top -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2">
+        <!-- Theme Toggle FAB -->
+        <div class="tooltip tooltip-left" data-tip="Ganti ke Mode Terang" id="theme-tooltip">
+            <button class="btn btn-circle btn-primary shadow-md hover:shadow-lg smooth-transition" onclick="toggleTheme()">
+                <iconify-icon icon="material-symbols:light-mode" class="text-lg" id="theme-icon"></iconify-icon>
+            </button>
+        </div>
+        
+        <!-- Scroll to Top -->
+        <button class="btn btn-circle btn-neutral shadow-md opacity-0 smooth-transition" 
+                id="scroll-to-top" onclick="scrollToTop()">
+            <iconify-icon icon="material-symbols:keyboard-arrow-up" class="text-lg"></iconify-icon>
+        </button>
+    </div>
+
+    <!-- Clean JavaScript -->
     <script>
-        async function detectDevice() {
-            document.getElementById("modal-platform").textContent = getOS();
-            document.getElementById("modal-gpu").textContent = getGPU();
-            document.getElementById("modal-resolution").textContent = getResolution();
-            document.getElementById("modal-browser").textContent = getBrowser();
-            document.getElementById("modal-timezone").textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-            let localIP = await getIP().catch(() => null);
-
-            if (!localIP) {
-                localIP = await getPublicIP();
-            }
-
-            // 🔹 Tampilkan IP (Baik Lokal atau Publik)
-            document.getElementById("modal-ip").textContent = localIP || "Tidak Terdeteksi";
+        // Time and Date Update
+        function updateTime() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+            const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            
+            document.getElementById('time-display').textContent = now.toLocaleTimeString('id-ID', timeOptions);
+            document.getElementById('date-display').textContent = now.toLocaleDateString('id-ID', dateOptions);
         }
 
-        // 📡 Deteksi IP Lokal (WebRTC)
+        // Simple Theme Management (Light & Forest only)
+        function setTheme(theme) {
+            // Pastikan hanya light atau forest
+            if (theme !== 'light' && theme !== 'forest') {
+                theme = 'forest'; // default ke forest (tema gelap) jika tema tidak dikenal
+            }
+            
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('selectedTheme', theme);
+            updateLogo(theme);
+            updateThemeToggle(theme);
+            updateThemeIcon(theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('selectedTheme') || 'forest';
+            const newTheme = currentTheme === 'forest' ? 'light' : 'forest';
+            setTheme(newTheme);
+        }
+
+        function updateLogo(theme) {
+            const logo = document.getElementById('navbar-logo');
+            if (logo) {
+                logo.src = theme === 'forest' ? 'css/image/dark.gif' : 'css/image/light.gif';
+            }
+        }
+
+        function updateThemeToggle(theme) {
+            const toggle = document.getElementById('theme-toggle');
+            if (toggle) {
+                toggle.checked = theme === 'forest';
+            }
+        }
+
+        function updateThemeIcon(theme) {
+            const themeIcon = document.getElementById('theme-icon');
+            const themeTooltip = document.getElementById('theme-tooltip');
+            if (themeIcon && themeTooltip) {
+                if (theme === 'forest') {
+                    themeIcon.setAttribute('icon', 'material-symbols:light-mode');
+                    themeTooltip.setAttribute('data-tip', 'Ganti ke Mode Terang');
+                } else {
+                    themeIcon.setAttribute('icon', 'material-symbols:dark-mode');
+                    themeTooltip.setAttribute('data-tip', 'Ganti ke Mode Gelap');
+                }
+            }
+        }
+
+        // Device Specs Toggle
+        function toggleDeviceSpecs() {
+            const toggle = document.getElementById('specs-toggle');
+            if (toggle) {
+                toggle.checked = !toggle.checked;
+                if (toggle.checked) {
+                    setTimeout(() => {
+                        document.getElementById('device-specs').scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 150);
+                }
+            }
+        }
+
+        // Device Info Modal
+        function openDeviceModal() {
+            const modal = document.getElementById('device_modal');
+            if (modal) {
+                modal.showModal();
+                detectDevice();
+            }
+        }
+
+        // Advanced Device Detection (from android_backup.html)
+        async function detectDevice() {
+            // Deteksi OS
+            document.getElementById('device-os').textContent = getOS();
+            
+            // Deteksi GPU
+            document.getElementById('device-gpu').textContent = getGPU();
+            
+            // Resolusi layar dengan device pixel ratio
+            document.getElementById('device-resolution').textContent = getResolution();
+            
+            // Timezone
+            document.getElementById('device-timezone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            // IP Detection (coba local dulu, kalo gagal pake public)
+            try {
+                let localIP = await getIP().catch(() => null);
+                if (!localIP) {
+                    localIP = await getPublicIP();
+                }
+                document.getElementById('device-ip').textContent = localIP || "Tidak Terdeteksi";
+            } catch {
+                document.getElementById('device-ip').textContent = 'Tidak Terdeteksi';
+            }
+
+            // AdBlock detection
+            detectAdBlock();
+        }
+
+        // IP Detection via WebRTC
         function getIP() {
             return new Promise((resolve, reject) => {
                 try {
@@ -354,26 +718,29 @@
                             let ipMatch = event.candidate.candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
                             if (ipMatch) {
                                 resolve(ipMatch[1]);
+                                rtc.close();
                             }
-                            rtc.close();
                         }
                     };
-                    setTimeout(() => reject("Tidak Terdeteksi"), 3000);
+                    setTimeout(() => reject("Timeout"), 3000);
                 } catch (e) {
-                    reject("Tidak Terdeteksi");
+                    reject(e);
                 }
             });
         }
 
-        // 🌎 Ambil IP Publik (Fallback)
-        function getPublicIP() {
-            return fetch("https://api64.ipify.org?format=json")
-                .then(response => response.json())
-                .then(data => data.ip)
-                .catch(() => "Tidak Terdeteksi");
+        // Public IP Detection
+        async function getPublicIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch {
+                return null;
+            }
         }
 
-        // 📱 Deteksi OS
+        // OS Detection
         function getOS() {
             let ua = navigator.userAgent.toLowerCase();
             if (ua.includes("android")) return "Android";
@@ -384,7 +751,7 @@
             return "Tidak Terdeteksi";
         }
 
-        // 🎮 GPU Renderer
+        // GPU Detection
         function getGPU() {
             try {
                 let canvas = document.createElement("canvas");
@@ -396,117 +763,70 @@
             }
         }
 
-        // 🖥️ Resolusi Layar
+        // Resolution Detection with pixel ratio
         function getResolution() {
             let realWidth = screen.width * window.devicePixelRatio;
             let realHeight = screen.height * window.devicePixelRatio;
-            return `${realWidth} x ${realHeight} (Asli)`;
+            return `${realWidth} × ${realHeight} (Real)`;
         }
 
-        // 🌐 Browser
-        function getBrowser() {
-            let ua = navigator.userAgent;
-            if (ua.includes("Firefox")) return "Mozilla Firefox";
-            if (ua.includes("Edg")) return "Microsoft Edge";
-            if (ua.includes("Chrome") && !ua.includes("Edg") && !ua.includes("Chromium")) return "Google Chrome";
-            if (ua.includes("Chromium")) return "Chromium";
-            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
-            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
-            return "Tidak Terdeteksi";
-        }
-
-        // 🛑 Deteksi AdBlock
+        // AdBlock Detection
         function detectAdBlock() {
-            let adBlocked = false;
+            // Buat elemen dummy untuk test adblock
+            const testAd = document.createElement('div');
+            testAd.innerHTML = '&nbsp;';
+            testAd.className = 'adsbox ads advertisement';
+            testAd.style.cssText = 'position: absolute; left: -10000px; width: 1px; height: 1px;';
+            document.body.appendChild(testAd);
+            
+            setTimeout(() => {
+                const isBlocked = testAd.offsetHeight === 0 || window.getComputedStyle(testAd).display === 'none';
+                document.getElementById('device-adblock').textContent = isBlocked ? 'Terdeteksi Aktif' : 'Tidak Aktif';
+                document.body.removeChild(testAd);
+            }, 100);
+        }
 
-            function updateAdStatus(isBlocked) {
-                document.getElementById('modal-adblock').textContent = isBlocked ? 'Aktif' : 'Nonaktif';
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll Button Visibility
+        window.addEventListener('scroll', () => {
+            const scrollBtn = document.getElementById('scroll-to-top');
+            if (scrollBtn) {
+                if (window.scrollY > 300) {
+                    scrollBtn.classList.remove('opacity-0');
+                    scrollBtn.classList.add('opacity-100');
+                } else {
+                    scrollBtn.classList.add('opacity-0');
+                    scrollBtn.classList.remove('opacity-100');
+                }
             }
+        });
 
-            const adElement = document.querySelector('.adsbox');
-            if (!adElement || getComputedStyle(adElement).display === 'none') {
-                adBlocked = true;
-            }
-
-            let fetchTimeout = setTimeout(() => {
-                adBlocked = true;
-                updateAdStatus(adBlocked);
-            }, 2000);
-
-            fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', { method: 'HEAD' })
-                .then(() => {
-                    clearTimeout(fetchTimeout);
-                    updateAdStatus(false);
-                })
-                .catch(() => {
-                    updateAdStatus(true);
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme sudah di-set di inline script, hanya perlu update UI elements
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'forest';
+            updateLogo(currentTheme);
+            updateThemeToggle(currentTheme);
+            updateThemeIcon(currentTheme);
+            
+            // Start time updates
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Theme toggle event (navbar toggle)
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('change', (e) => {
+                    setTheme(e.target.checked ? 'forest' : 'light');
                 });
-
-            setTimeout(() => updateAdStatus(adBlocked), 300);
-        }
-
-        // 🟢 Jalankan saat modal dibuka
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("infoModal").addEventListener("show.bs.modal", () => {
-                detectDevice();
-                detectAdBlock();
-            });
-        });
-
-    </script>
-
-    <script src="js/greetings.js"></script>
-
-    <script>
-        // fungsi satuaku adalah membuat angka 0 menjadi 00
-        var satuaku = n => {
-            return ('0' + n).slice(-2);
-        }
-
-        setInterval(() => {
-            var date = new Date();
-            var jam = satuaku(date.getHours());
-            var menit = satuaku(date.getMinutes());
-            var detik = satuaku(date.getSeconds());
-            var tampilWaktu = jam + ":" + menit + ":" + detik;
-
-            document.getElementById("waktu").innerHTML = tampilWaktu;
-        }, 1000);
-    </script>
-
-    <script>
-        const clickableElements = document.querySelectorAll(".clickable");
-
-        clickableElements.forEach(element => {
-            element.addEventListener("click", function () {
-                if (!element.textContent.endsWith(" #")) {
-                    element.textContent += " #";
-                }
-            });
-
-            document.addEventListener("click", function (event) {
-                if (!element.contains(event.target)) {
-                    element.textContent = element.textContent.replace(" #", "");
-                }
-            });
+            }
+            
+            console.log('✅ Android Tools - Mode Terang (Light) & Mode Gelap (Forest) loaded!');
         });
     </script>
-    <!-- Script Untuk AOS -->
-    <script>
-        AOS.init({
-            once: false,
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="js/weather.js"></script>
-    <script src="js/button_top.js"></script>
-    <script src="js/dark-mode-switch.js"></script>
-    <script src="js/multilevel.js"></script>
-    <script src="js/footer.js"></script>
-    <!-- End Script -->
-
 </body>
-
 </html>

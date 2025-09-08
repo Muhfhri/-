@@ -1,247 +1,589 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="id" data-theme="forest">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Website Muhammad Fachri Al Husein, dibuat menggunakan GitHub Pages">
-  <title>Windows Tools</title>
-  <link rel="icon" type="image/png" href="image/flixdz_top.png">
-  <!-- Prism JS -->
-  <link rel="stylesheet" href="css/prism.css">
-  <script src="js/prism.js"></script>
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-  <!-- AOS PLUGIN -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/nav.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
-  <script src="js/theme.js"></script>
-  <link rel="stylesheet" href="css/dark-mode.css">
-  <link rel="stylesheet" href="css/multilevel.css">
-  <script>
-    (function() {
-      var darkThemeSelected = localStorage.getItem("darkSwitch") === "dark";
-      if (darkThemeSelected) {
-        document.documentElement.setAttribute("data-theme", "dark");
-      }
-    })();
-  </script>
-  <style>
-    .carousel-item img {
-      width: 360px !important;
-    }
-
-    @media(max-width:1440px) {
-      .carousel-item img {
-        width: 340px !important;
-      }
-    }
-
-    @media(max-width:1080px) {
-      .carousel-item img {
-        width: 300px !important;
-      }
-    }
-
-    @media(max-width:850px) {
-      .carousel-item img {
-        width: 260px !important;
-      }
-    }
-
-    #windows {
-      background: url('https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_11_logo.svg') center/50% no-repeat, rgba(0, 0, 0, 0.5);
-      background-size: 50%;
-      /* Mengatur ukuran gambar menjadi 50% dari ukuran aslinya */
-      background-position: center;
-      /* Pusatkan gambar */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Tools - Muhfhri</title>
+    <meta name="description" content="Windows Tools and Resources by Muhammad Fachri Al Husein">
+    
+    <!-- DaisyUI + Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Local Google Sans Fonts -->
+    <style>
+        @font-face {
+            font-family: 'Google Sans';
+            font-weight: 400;
+            src: url('css/font/GoogleSansText-Regular.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Google Sans';
+            font-weight: 500;
+            src: url('css/font/GoogleSans-Regular.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Google Sans Mono';
+            font-weight: 400;
+            src: url('css/font/GoogleSansMono-Regular.ttf') format('truetype');
+        }
+        
+        body { 
+            font-family: 'Google Sans', 'Inter', sans-serif;
+        }
+        
+        .mono { font-family: 'Google Sans Mono', 'JetBrains Mono', monospace; }
+        
+        /* Smooth transitions */
+        .smooth-transition {
+            transition: all 0.3s ease;
+        }
+        
+        /* Card hover effect - Default for light mode */
+        .card-hover:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Clean scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: hsl(var(--bc) / 0.2); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: hsl(var(--bc) / 0.3); }
+        
+        /* Custom rounded buttons - more rounded */
+        .btn {
+            border-radius: 1rem !important;
+        }
+        
+        .btn-circle {
+            border-radius: 50% !important;
+        }
+        
+        .badge {
+            border-radius: 1rem !important;
+        }
+        
+        .card {
+            border-radius: 1rem !important;
+        }
+        
+        .rounded-lg, .rounded-xl {
+            border-radius: 1rem !important;
+        }
+        
+        /* Windows gradient */
+        .windows-gradient {
+            background: linear-gradient(135deg, #0078d4 0%, #1ba1e2 100%);
+        }
+        
+        /* Dark mode card improvements */
+        [data-theme="forest"] .card {
+            background-color: #2a2e37 !important;
+            border: 1px solid #3d4451 !important;
+        }
+        
+        [data-theme="forest"] .card-hover:hover {
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+            transform: translateY(-4px);
+        }
+        
+        [data-theme="forest"] .bg-base-200\/50,
+        [data-theme="forest"] .bg-base-200\/30 {
+            background-color: #1f2937 !important;
+            border: 1px solid #374151 !important;
+        }
+        
+        [data-theme="forest"] .mockup-code {
+            background-color: #1f2937 !important;
+            border: 1px solid #374151 !important;
+        }
+        
+        /* Light mode shadows */
+        [data-theme="light"] .card-hover:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        /* Dark mode collapse and modal improvements */
+        [data-theme="forest"] .collapse {
+            background-color: #2a2e37 !important;
+            border: 1px solid #3d4451 !important;
+        }
+        
+        [data-theme="forest"] .modal-box {
+            background-color: #2a2e37 !important;
+            border: 1px solid #3d4451 !important;
+        }
+        
+        [data-theme="forest"] .alert {
+            background-color: #1f2937 !important;
+            border: 1px solid #374151 !important;
+            color: #f9fafb !important;
+        }
+        
+        [data-theme="forest"] .alert span,
+        [data-theme="forest"] .alert .text-xs {
+            color: #f9fafb !important;
+        }
+        
+        [data-theme="forest"] .alert-warning {
+            background-color: #92400e !important;
+            border-color: #d97706 !important;
+            color: #fef3c7 !important;
+        }
+        
+        [data-theme="forest"] .alert-warning span,
+        [data-theme="forest"] .alert-warning .text-xs {
+            color: #fef3c7 !important;
+        }
+        
+        [data-theme="forest"] .alert-info {
+            background-color: #1e40af !important;
+            border-color: #3b82f6 !important;
+            color: #dbeafe !important;
+        }
+        
+        [data-theme="forest"] .alert-info span,
+        [data-theme="forest"] .alert-info .text-xs {
+            color: #dbeafe !important;
+        }
+        
+        /* Dark mode navbar improvements */
+        [data-theme="forest"] .navbar {
+            background-color: #1f2937 !important;
+            border-bottom: 1px solid #374151 !important;
+        }
+        
+        [data-theme="forest"] .bg-base-200\/50 {
+            background-color: #1f2937 !important;
+        }
+        
+        /* Fix text visibility in dark mode */
+        [data-theme="forest"] .opacity-70,
+        [data-theme="forest"] .opacity-60 {
+            color: #d1d5db !important;
+        }
+        
+        [data-theme="forest"] .text-xs.opacity-70 {
+            color: #d1d5db !important;
+        }
+    </style>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    
+    <!-- Prevent Theme Flash -->
+    <script>
+        (function() {
+            // Load saved theme immediately to prevent flash
+            let savedTheme = localStorage.getItem('selectedTheme') || 'forest';
+            
+            // Convert old themes to valid ones
+            if (savedTheme === 'cupcake' || savedTheme === 'dark' || savedTheme === 'dracula') {
+                savedTheme = 'forest';
+            } else if (savedTheme !== 'light' && savedTheme !== 'forest') {
+                savedTheme = 'forest';
+            }
+            
+            // Set theme immediately
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
 
 <body>
-  <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
-        <div class="container-fluid">
-            <a href="#"><img class="navbar-brand" id="light" width="100"></a>
-            <button class="navbar-toggler collapsed border-0 shadow-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation" style="box-shadow:none; outline:none;">
-                <span class="icon-bar top-bar"></span>
-                <span class="icon-bar middle-bar"></span>
-                <span class="icon-bar bottom-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav text-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="https://github.com/muhfhri"><iconify-icon
-                                inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
-                    </li>
+    <!-- Simplified Navigation -->
+    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-50 px-4">
+        <div class="navbar-start">
+            <a href="index.html" class="btn btn-ghost">
+                <img src="css/image/dark.gif" alt="Logo" class="h-8 w-auto" id="navbar-logo">
+            </a>
+        </div>
+        
+        <div class="navbar-center">
+            <h1 class="text-xl font-bold">Windows Tools</h1>
+        </div>
+        
+        <div class="navbar-end gap-2">
+            <!-- Time Display -->
+            <div class="hidden lg:flex bg-base-200 rounded-lg px-3 py-1.5">
+                <div class="text-center">
+                    <div class="text-sm font-medium mono" id="time-display">00:00</div>
+                    <div class="text-xs opacity-60" id="date-display">Loading...</div>
+                </div>
+            </div>
+            
+            <!-- Simple Theme Toggle -->
+            <label class="swap swap-rotate btn btn-circle btn-ghost">
+                <input type="checkbox" id="theme-toggle" />
+                <iconify-icon icon="material-symbols:light-mode" class="swap-on text-xl"></iconify-icon>
+                <iconify-icon icon="material-symbols:dark-mode" class="swap-off text-xl"></iconify-icon>
+            </label>
+        </div>
+    </div>
+    
+    <!-- Breadcrumb Bar -->
+    <div class="bg-base-200/50 border-b border-base-300">
+        <div class="container mx-auto px-4 py-2">
+            <div class="breadcrumbs text-sm">
+                <ul>
+                    <li><a href="index.html" class="text-primary hover:text-primary-focus">🏠 Home</a></li>
+                    <li><span class="text-base-content/70">🪟 Windows Tools</span></li>
                 </ul>
-                <div class="ms-auto">
-                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-                    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
-                        data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clean Hero Section -->
+    <div class="hero windows-gradient py-20 text-white">
+        <div class="hero-content text-center max-w-4xl">
+            <div>
+                <!-- Windows Logo -->
+                <div class="mb-8">
+                    <div class="w-32 h-32 mx-auto bg-white/20 rounded-2xl flex items-center justify-center">
+                        <iconify-icon icon="mage:microsoft-windows" class="text-6xl text-white"></iconify-icon>
+                    </div>
+                </div>
+                
+                <!-- Title & Info -->
+                <div class="space-y-6">
+                    <div class="flex items-center justify-center gap-3">
+                        <h1 class="text-4xl md:text-5xl font-bold">Windows Tools</h1>
+                        <iconify-icon icon="material-symbols:build" class="text-4xl"></iconify-icon>
+                    </div>
+                    
+                    <p class="text-xl opacity-90 max-w-2xl mx-auto">
+                        Koleksi tools dan resources untuk Windows 10/11, termasuk Media Creation Tools, Office, dan utilities lainnya
+                    </p>
+                    
+                    <!-- Quick Links -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                        <a href="#installation" class="btn btn-lg bg-white text-blue-600 hover:bg-white/90 smooth-transition">
+                            <iconify-icon icon="material-symbols:download" class="text-xl"></iconify-icon>
+                            Windows Installation
+                        </a>
+                        <a href="#office" class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-blue-600 smooth-transition">
+                            <iconify-icon icon="material-symbols:work" class="text-xl"></iconify-icon>
+                            Microsoft Office
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
-    <!-- Navbar End -->
-    
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content bg-light rounded-4">
+    </div>
 
-        <div class="modal-header">
-          <h4 class="modal-title bg-light ">Buat username..</h4>
+    <!-- Main Content -->
+    <div class="bg-base-200/20">
+        <div class="container mx-auto px-4 py-16">
+            
+            <!-- Installation Tools Section -->
+            <div id="installation" class="mb-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4">💿 Media Creation Tools</h2>
+                    <p class="text-lg opacity-70 max-w-xl mx-auto">
+                        Download tools untuk instalasi Windows 10 dan Windows 11
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Official Microsoft -->
+                    <div class="card bg-base-100 shadow-sm border border-base-300 smooth-transition card-hover">
+                        <div class="card-body">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                    <iconify-icon icon="simple-icons:microsoft" class="text-2xl text-blue-600"></iconify-icon>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Official Microsoft</h3>
+                                    <p class="text-sm opacity-60">Original dari Microsoft</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <a href="https://www.microsoft.com/en-us/software-download/windows11" 
+                                   class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                    <div class="flex items-center gap-3">
+                                        <iconify-icon icon="mage:microsoft-windows" class="text-lg"></iconify-icon>
+                                        <span class="font-medium">Windows 11</span>
+                                    </div>
+                                    <div class="badge badge-primary badge-sm">Latest</div>
+                                </a>
+                                
+                                <a href="https://www.microsoft.com/en-us/software-download/windows10" 
+                                   class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                    <div class="flex items-center gap-3">
+                                        <iconify-icon icon="mage:microsoft-windows" class="text-lg"></iconify-icon>
+                                        <span class="font-medium">Windows 10</span>
+                                    </div>
+                                    <div class="badge badge-secondary badge-sm">LTS</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lite Versions -->
+                    <div class="card bg-base-100 shadow-sm border border-base-300 smooth-transition card-hover">
+                        <div class="card-body">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                                    <iconify-icon icon="material-symbols:speed" class="text-2xl text-purple-600"></iconify-icon>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Lite Versions</h3>
+                                    <p class="text-sm opacity-60">Optimized untuk performa</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <a href="https://pixeldrain.com/u/hKktymeC" 
+                                   class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                    <div class="flex items-center gap-3">
+                                        <iconify-icon icon="material-symbols:flash-on" class="text-lg"></iconify-icon>
+                                        <span class="font-medium">Ghost Spectre</span>
+                                    </div>
+                                    <div class="badge badge-warning badge-sm">Modded</div>
+                                </a>
+                                
+                                <a href="https://atlasos.net" 
+                                   class="flex items-center justify-between p-3 rounded-lg bg-base-200/50 hover:bg-base-200 smooth-transition">
+                                    <div class="flex items-center gap-3">
+                                        <iconify-icon icon="material-symbols:rocket-launch" class="text-lg"></iconify-icon>
+                                        <span class="font-medium">Atlas OS</span>
+                                    </div>
+                                    <div class="badge badge-success badge-sm">Gaming</div>
+                                </a>
+                            </div>
+                            
+                            <div class="alert alert-info py-2 mt-4">
+                                <iconify-icon icon="material-symbols:info" class="text-sm"></iconify-icon>
+                                <span class="text-xs">Versi modifikasi untuk gaming & performa</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Office Section -->
+            <div id="office" class="mb-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4">📄 Microsoft Office</h2>
+                    <p class="text-lg opacity-70 max-w-xl mx-auto">
+                        Download dan aktivasi Microsoft Office 365, 2021, 2019 & 2016
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Office Download -->
+                    <div class="card bg-base-100 shadow-sm border border-base-300 smooth-transition card-hover">
+                        <div class="card-body">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                                    <iconify-icon icon="material-symbols:work" class="text-2xl text-orange-600"></iconify-icon>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Office Installer</h3>
+                                    <p class="text-sm opacity-60">Download langsung dari Microsoft</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <a href="https://gravesoft.dev/office_c2r_links" 
+                                   class="btn btn-primary btn-block">
+                                    <iconify-icon icon="material-symbols:download" class="text-xl"></iconify-icon>
+                                    Office C2R Installer
+                                </a>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <div class="badge badge-outline">Office 365</div>
+                                <div class="badge badge-outline">Office 2021</div>
+                                <div class="badge badge-outline">Office 2019</div>
+                                <div class="badge badge-outline">Office 2016</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Office Activation -->
+                    <div class="card bg-base-100 shadow-sm border border-base-300 smooth-transition card-hover">
+                        <div class="card-body">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                    <iconify-icon icon="material-symbols:key" class="text-2xl text-green-600"></iconify-icon>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Office Activation</h3>
+                                    <p class="text-sm opacity-60">Script otomatis aktivasi</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-base-200/50 rounded-lg p-4">
+                                <div class="text-xs opacity-70 mb-2">Copy dan paste di PowerShell sebagai Admin:</div>
+                                <div class="bg-neutral text-neutral-content rounded-lg p-4 border border-base-300">
+                                    <pre class="text-sm mono overflow-x-auto text-white"><code>irm https://get.activated.win | iex</code></pre>
+                                </div>
+                                <button class="btn btn-sm btn-outline mt-2 w-full" onclick="copyToClipboard()">
+                                    <iconify-icon icon="material-symbols:content-copy"></iconify-icon>
+                                    Copy Command
+                                </button>
+                            </div>
+                            
+                            <div class="alert alert-warning py-2 mt-4">
+                                <iconify-icon icon="material-symbols:warning" class="text-sm"></iconify-icon>
+                                <span class="text-xs">Jalankan PowerShell sebagai Administrator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back to Home -->
+            <div class="text-center">
+                <a href="index.html" class="btn btn-primary btn-lg gap-3 smooth-transition">
+                    <iconify-icon icon="material-symbols:home" class="text-xl"></iconify-icon>
+                    Kembali ke Beranda
+                </a>
+            </div>
         </div>
+    </div>
 
-        <div class="modal-body">
-          <input type="text" id="name" class="form-control">
+    <!-- Simple Theme Toggle & Scroll to Top -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2">
+        <!-- Theme Toggle FAB -->
+        <div class="tooltip tooltip-left" data-tip="Ganti ke Mode Terang" id="theme-tooltip">
+            <button class="btn btn-circle btn-primary shadow-md hover:shadow-lg smooth-transition" onclick="toggleTheme()">
+                <iconify-icon icon="material-symbols:light-mode" class="text-lg" id="theme-icon"></iconify-icon>
+            </button>
         </div>
-
-        <div class="modal-footer">
-          <p class="text-success">ⓘ Tenang! Username kamu ga bakal dipake buat apa apa kok. Karena website ini masih
-            bersifat statis
-            <br><small class="text-muted"><b>|</b> tekan area kosong untuk membatalkan</small>
-          </p>
-          <button type="button" class="btn rounded-5 btn-m3-you-color" onclick="saveName()">Lanjut..</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-     <nav aria-label="breadcrumb" class="my-3">
-  <ol class="breadcrumb bg-transparent px-3 py-2">
-    <li class="breadcrumb-item">
-      <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
-    </li>
-    <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
-      <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#" id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Others
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
-        <li><a class="dropdown-item" href="android.html">Android</a></li>
-        <li><a class="dropdown-item active" href="#">Windows</a></li>
-        <!-- Tambahkan halaman HTML lain di sini -->
-      </ul>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Windows</li>
-  </ol>
-</nav>
-  </div>
-
-  
-  <div class="container" id="coltop">
-    <div class="row text-center" data-aos="fade-in" data-aos-duration="3000">
-      <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-        <div id="lblGreetings"></div>
-      </div>
-      <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-        <div id="waktu"></div>
-      </div>
-      <div class="col-md-4" data-aos="zoom-in" data-aos-duration="3000">
-        <div id="weather">
-          <i id="weather-icon" class=""></i> <!-- Ikon cuaca -->
-          <span id="weather-info">Cerah, 26°C</span> <!-- Informasi cuaca -->
-          <button id="weather-edit-btn" class="btn btn-link btn-sm p-0 ms-1" style="vertical-align:middle; font-size:1em;" title="Edit lokasi"><i class="fa-regular fa-pen-to-square"></i></button>
-          <span id="weather-edit-box" style="display:none;"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-         
-    <div class="container mt-4">
-
-      <h2 class="fw-bold text-center"><iconify-icon inline
-                        icon="mage:microsoft-windows"></iconify-icon> Windows Tools</h2>
-    </div>
-    <div class="container text-center">
-      <h4 class="fw-bold">Media Creation Tools</h4>
-      <sup class="text-success">*for installation Windows 10 or 11</sup>
-      <br><code class="fira-code">Original Microsoft</code>
-      <h5 class="mt-3"><a class="link-none animasi rounded-5"
-          href="https://www.microsoft.com/en-us/software-download/windows11">Windows 11</a></h5>
-      <h5><a class="link-none animasi rounded-5"
-          href="https://www.microsoft.com/en-us/software-download/windows10">Windows 10</a></h5>
-      <br><code class="fira-code">Lite Version</code>
-      <h5><a href="https://pixeldrain.com/u/hKktymeC" class="link-none rounded-5 animasi">Ghost Spectre,  Windows 11 AIO</a></h5>
-      <h5><a href="https://atlasos.net" class="link-none rounded-5 animasi">Atlas OS AIO</a></h5>
-      <br><code class="fira-code">Office 365, 2021, 2019, & 2016</code>
-      <h5><a href="https://gravesoft.dev/office_c2r_links" class="link-none rounded-5 animasi">Office C2R Installer</a></h5>
-      <code class="fira-code">*Copy and paste on powershell as admin to activate</code>
-      <pre class="text-center"><code class="language-shell">irm https://get.activated.win | iex
-</code></pre>
+        
+        <!-- Scroll to Top -->
+        <button class="btn btn-circle btn-neutral shadow-md opacity-0 smooth-transition" 
+                id="scroll-to-top" onclick="scrollToTop()">
+            <iconify-icon icon="material-symbols:keyboard-arrow-up" class="text-lg"></iconify-icon>
+        </button>
     </div>
 
-    <div class="container text-center mt-5">
-      <a href="index" class="btn btn-outline-dark rounded-5">Kembali</a>
-    </div>
+    <!-- Clean JavaScript -->
+    <script>
+        // Time and Date Update
+        function updateTime() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+            const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            
+            document.getElementById('time-display').textContent = now.toLocaleTimeString('id-ID', timeOptions);
+            document.getElementById('date-display').textContent = now.toLocaleDateString('id-ID', dateOptions);
+        }
 
-  </div>
+        // Simple Theme Management (Light & Forest only)
+        function setTheme(theme) {
+            // Pastikan hanya light atau forest
+            if (theme !== 'light' && theme !== 'forest') {
+                theme = 'forest'; // default ke forest (tema gelap) jika tema tidak dikenal
+            }
+            
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('selectedTheme', theme);
+            updateLogo(theme);
+            updateThemeToggle(theme);
+            updateThemeIcon(theme);
+        }
 
-  <!-- Footer Start -->
-  <div id="footer"></div>
-  <!-- Footer End -->
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('selectedTheme') || 'forest';
+            const newTheme = currentTheme === 'forest' ? 'light' : 'forest';
+            setTheme(newTheme);
+        }
 
-  <!-- Tombol ke atas -->
-  <button type="button" class="btn btn-m3-you-color bg-material btn-floating rounded-4 shadow btn-lg"
-    id="btn-back-to-top"><iconify-icon inline icon="line-md:chevron-up"></iconify-icon>
-  </button>
-  <!-- End Of Body HTML -->
+        function updateLogo(theme) {
+            const logo = document.getElementById('navbar-logo');
+            if (logo) {
+                logo.src = theme === 'forest' ? 'css/image/dark.gif' : 'css/image/light.gif';
+            }
+        }
 
-  <!-- JavaScript for functional features this cool website-->
+        function updateThemeToggle(theme) {
+            const toggle = document.getElementById('theme-toggle');
+            if (toggle) {
+                toggle.checked = theme === 'forest';
+            }
+        }
 
-  <script>
-    // fungsi satuaku adalah membuat angka 0 menjadi 00
-    var satuaku = n => {
-      return ('0' + n).slice(-2);
-    }
+        function updateThemeIcon(theme) {
+            const themeIcon = document.getElementById('theme-icon');
+            const themeTooltip = document.getElementById('theme-tooltip');
+            if (themeIcon && themeTooltip) {
+                if (theme === 'forest') {
+                    themeIcon.setAttribute('icon', 'material-symbols:light-mode');
+                    themeTooltip.setAttribute('data-tip', 'Ganti ke Mode Terang');
+                } else {
+                    themeIcon.setAttribute('icon', 'material-symbols:dark-mode');
+                    themeTooltip.setAttribute('data-tip', 'Ganti ke Mode Gelap');
+                }
+            }
+        }
 
-    setInterval(() => {
-      var date = new Date();
-      var jam = satuaku(date.getHours());
-      var menit = satuaku(date.getMinutes());
-      var detik = satuaku(date.getSeconds());
-      var tampilWaktu = jam + ":" + menit + ":" + detik;
+        // Copy to clipboard function
+        function copyToClipboard() {
+            const command = 'irm https://get.activated.win | iex';
+            navigator.clipboard.writeText(command).then(() => {
+                // Show toast notification
+                const toast = document.createElement('div');
+                toast.className = 'toast toast-top toast-center';
+                toast.innerHTML = `
+                    <div class="alert alert-success">
+                        <iconify-icon icon="material-symbols:check"></iconify-icon>
+                        <span>Command copied to clipboard!</span>
+                    </div>
+                `;
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 3000);
+            });
+        }
 
-      document.getElementById("waktu").innerHTML = tampilWaktu;
-    }, 1000);
-  </script>
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-  <!-- Script Untuk AOS -->
-  <script>
-    AOS.init({
-      once: false,
-    });
-  </script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="js/button_top.js"></script>
-  <script src="js/dark-mode-switch.js"></script>
-  <script src="js/multilevel.js"></script>
-  <script src="js/footer.js"></script>
-  <script src="js/weather.js"></script>
-  <!-- End Script -->
+        // Scroll Button Visibility
+        window.addEventListener('scroll', () => {
+            const scrollBtn = document.getElementById('scroll-to-top');
+            if (scrollBtn) {
+                if (window.scrollY > 300) {
+                    scrollBtn.classList.remove('opacity-0');
+                    scrollBtn.classList.add('opacity-100');
+                } else {
+                    scrollBtn.classList.add('opacity-0');
+                    scrollBtn.classList.remove('opacity-100');
+                }
+            }
+        });
 
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme sudah di-set di inline script, hanya perlu update UI elements
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'forest';
+            updateLogo(currentTheme);
+            updateThemeToggle(currentTheme);
+            updateThemeIcon(currentTheme);
+            
+            // Start time updates
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Theme toggle event (navbar toggle)
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('change', (e) => {
+                    setTheme(e.target.checked ? 'forest' : 'light');
+                });
+            }
+            
+            console.log('✅ Windows Tools - Mode Terang (Light) & Mode Gelap (Forest) loaded!');
+        });
+    </script>
 </body>
-
 </html>

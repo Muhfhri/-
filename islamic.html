@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramadhan 1447H - Countdown & Bimbingan Islami</title>
+  <link rel="icon" type="image/png" href="image/flixdz_top.png">
+  
+  <!-- Prevent theme flash (set theme before CSS paints) -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        if (t !== 'dark' && t !== 'light') t = 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var s = document.createElement('style');
+        s.textContent = t === 'dark' ? 'html{background:#131318;color:#E6E0E9;}' : 'html{background:#FFFBFE;color:#1C1B1F;}';
+        document.head.appendChild(s);
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <!-- Islamic Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Material 3 CSS -->
+  <link rel="stylesheet" href="css/material3-redesign.css">
+  
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    /* Islamic Material Design 3 Theme */
+    :root {
+      /* Islamic Green Palette */
+      --islamic-primary: #2E7D32;
+      --islamic-primary-container: #C8E6C9;
+      --islamic-secondary: #8BC34A;
+      --islamic-tertiary: #FFC107;
+      --islamic-surface-tint: #4CAF50;
+      
+      /* Ramadhan Gold Palette */
+      --ramadhan-gold: #FFB300;
+      --ramadhan-gold-light: #FFF3C4;
+      --ramadhan-gold-dark: #FF8F00;
+      
+      /* Prayer time colors */
+      --dawn-gradient: linear-gradient(135deg, #1A237E 0%, #3F51B5 50%, #9C27B0 100%);
+      --sunset-gradient: linear-gradient(135deg, #FF5722 0%, #FF9800 50%, #FFC107 100%);
+    }
+    
+    body {
+      font-family: 'Amiri', serif;
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      transition: all 0.3s ease;
+    }
+    
+    /* Hero section with Islamic design */
+    .hero-ramadhan {
+      background: linear-gradient(135deg, var(--islamic-primary-container) 0%, var(--ramadhan-gold-light) 100%);
+      padding: 48px 24px;
+      text-align: center;
+      margin-bottom: 32px;
+      border-radius: var(--md-sys-shape-corner-large);
+      position: relative;
+      overflow: hidden;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-ramadhan::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="islamic-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23islamic-pattern)"/></svg>');
+      opacity: 0.3;
+    }
+    
+    .islamic-icon {
+      font-size: 72px;
+      margin-bottom: 16px;
+      animation: glow 3s ease-in-out infinite;
+      background: var(--sunset-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    @keyframes glow {
+      0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 20px rgba(255, 179, 0, 0.5)); }
+      50% { transform: scale(1.05) rotate(2deg); filter: drop-shadow(0 0 30px rgba(255, 179, 0, 0.8)); }
+    }
+    
+    .countdown-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 16px;
+      max-width: 600px;
+      margin: 24px auto;
+    }
+    
+    .countdown-item {
+      background: var(--md-sys-color-primary-container);
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: 16px 8px;
+      text-align: center;
+      border: 1px solid var(--islamic-primary);
+      box-shadow: var(--md-sys-elevation-2);
+      transition: all 0.3s ease;
+    }
+    
+    .countdown-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--md-sys-elevation-4);
+    }
+    
+    .countdown-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--islamic-primary);
+      display: block;
+      font-family: 'Google Sans Mono', monospace;
+    }
+    
+    .countdown-label {
+      font-size: 12px;
+      color: var(--md-sys-color-on-primary-container);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    
+    /* Prayer times card */
+    .prayer-card {
+      background: var(--dawn-gradient);
+      color: white;
+      border-radius: var(--md-sys-shape-corner-large);
+      padding: 24px;
+      margin: 24px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .prayer-card.maghrib {
+      background: var(--sunset-gradient);
+    }
+    
+    .prayer-time-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    
+    .prayer-time-item {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: 16px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .prayer-name {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+    
+    .prayer-time {
+      font-size: 20px;
+      font-weight: 600;
+      font-family: 'Google Sans Mono', monospace;
+    }
+    
+    /* Quran verse display */
+    .quran-card {
+      background: var(--md-sys-color-surface-container-low);
+      border-radius: var(--md-sys-shape-corner-large);
+      padding: 32px 24px;
+      margin: 32px 0;
+      text-align: center;
+      border: 2px solid var(--ramadhan-gold);
+      position: relative;
+    }
+    
+    .quran-arabic {
+      font-family: 'Amiri Quran', serif;
+      font-size: 28px;
+      line-height: 2.2;
+      color: var(--islamic-primary);
+      margin: 24px 0;
+      text-align: right;
+      direction: rtl;
+    }
+    
+    .quran-translation {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--md-sys-color-on-surface);
+      font-style: italic;
+      margin: 20px 0;
+    }
+    
+    .quran-source {
+      font-size: 14px;
+      color: var(--md-sys-color-on-surface-variant);
+      font-weight: 500;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--md-sys-color-outline-variant);
+    }
+    
+    /* Reminders section */
+    .reminder-card {
+      background: var(--ramadhan-gold-light);
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: 20px;
+      margin: 16px 0;
+      border-left: 4px solid var(--ramadhan-gold);
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .reminder-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--md-sys-color-on-surface);
+      text-align: center;
+    }
+    
+    /* Status badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--md-sys-shape-corner-full);
+      font-weight: 500;
+      font-size: 14px;
+      margin: 8px;
+    }
+    
+    .status-badge.pre-ramadhan {
+      background: var(--md-sys-color-tertiary-container);
+      color: var(--md-sys-color-on-tertiary-container);
+    }
+    
+    .status-badge.during-ramadhan {
+      background: var(--islamic-primary);
+      color: white;
+    }
+    
+    /* Phase-specific displays */
+    .pre-ramadhan-phase {
+      display: block;
+    }
+    
+    .during-ramadhan-phase {
+      display: none;
+    }
+    
+    .ramadhan-active .pre-ramadhan-phase {
+      display: none;
+    }
+    
+    .ramadhan-active .during-ramadhan-phase {
+      display: block;
+    }
+    
+    /* Islamic decorative elements */
+    .decorative-divider {
+      text-align: center;
+      margin: 32px 0;
+      position: relative;
+    }
+    
+    .decorative-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--islamic-primary) 50%, transparent 100%);
+    }
+    
+    .decorative-divider .icon {
+      background: var(--md-sys-color-surface);
+      color: var(--islamic-primary);
+      padding: 8px;
+      font-size: 24px;
+    }
+    
+    /* Day counter for during Ramadhan */
+    .ramadhan-day-counter {
+      background: var(--islamic-primary);
+      color: white;
+      border-radius: var(--md-sys-shape-corner-large);
+      padding: 24px;
+      text-align: center;
+      margin: 24px 0;
+    }
+    
+    .day-number {
+      font-size: 48px;
+      font-weight: 700;
+      font-family: 'Google Sans Mono', monospace;
+    }
+    
+    .day-label {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .hero-ramadhan {
+        padding: 32px 16px;
+        min-height: 250px;
+      }
+      
+      .islamic-icon {
+        font-size: 48px;
+      }
+      
+      .countdown-container {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 12px;
+      }
+      
+      .countdown-number {
+        font-size: 24px;
+      }
+      
+      .quran-arabic {
+        font-size: 22px;
+      }
+      
+      .quran-translation {
+        font-size: 16px;
+      }
+    }
+    
+    /* Dark mode adjustments */
+    [data-theme="dark"] .hero-ramadhan {
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(255, 179, 0, 0.2) 100%);
+    }
+    
+    [data-theme="dark"] .countdown-item {
+      background: var(--md-sys-color-surface-container);
+      border-color: var(--islamic-primary);
+    }
+    
+    [data-theme="dark"] .reminder-card {
+      background: var(--md-sys-color-surface-container);
+      border-left-color: var(--ramadhan-gold);
+    }
+    
+    /* Loading animation for API content */
+    .loading-shimmer {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Location Settings Styling */
+    .location-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: var(--md-sys-shape-corner-small);
+      transition: background-color 0.2s ease;
+      user-select: none;
+    }
+
+    .location-toggle:hover {
+      background-color: rgba(var(--md-ref-palette-primary40), 0.08);
+    }
+
+    .location-toggle input[type="radio"] {
+      display: none;
+    }
+
+    .location-toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface-variant);
+      transition: color 0.2s ease;
+    }
+
+    .location-toggle input[type="radio"]:checked + .location-toggle-label {
+      color: var(--md-sys-color-primary);
+    }
+
+    .location-toggle input[type="radio"]:checked + .location-toggle-label .material-symbols-outlined {
+      color: var(--md-sys-color-primary);
+    }
+
+    /* Text Field Styling */
+    .md3-text-field {
+      background: var(--md-sys-color-surface-variant);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--md-sys-shape-corner-small);
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: var(--md-sys-typescale-body-medium-font);
+      color: var(--md-sys-color-on-surface);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .md3-text-field:focus {
+      border-color: var(--md-sys-color-primary);
+      box-shadow: 0 0 0 2px rgba(var(--md-ref-palette-primary40), 0.12);
+    }
+
+    .md3-text-field::placeholder {
+      color: var(--md-sys-color-on-surface-variant);
+      opacity: 0.7;
+    }
+
+    /* Quick City Buttons */
+    .quick-city-btn {
+      background: var(--md-sys-color-surface-variant);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--md-sys-shape-corner-small);
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--md-sys-color-on-surface-variant);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .quick-city-btn:hover {
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .quick-city-btn.selected {
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      border-color: var(--md-sys-color-primary);
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+
+  <!-- Material 3 App Bar -->
+  <header class="md3-top-app-bar">
+    <button class="md3-icon-button" id="menu-toggle">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <h1 class="md3-top-app-bar-title">Ramadhan 1447H</h1>
+    <button class="md3-icon-button" id="theme-toggle">
+      <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+    </button>
+    <button class="md3-icon-button" onclick="location.reload()">
+      <span class="material-symbols-outlined">refresh</span>
+    </button>
+  </header>
+
+  <!-- Navigation Rail -->
+  <nav class="md3-navigation-rail" id="navigation-rail">
+    <a href="index.html" class="md3-navigation-rail-item">
+      <span class="material-symbols-outlined">home</span>
+    </a>
+    <a href="#countdown" class="md3-navigation-rail-item active">
+      <span class="material-symbols-outlined">schedule</span>
+    </a>
+    <a href="#prayer-times" class="md3-navigation-rail-item">
+      <span class="material-symbols-outlined">mosque</span>
+    </a>
+    <a href="quran.html" class="md3-navigation-rail-item">
+      <span class="material-symbols-outlined">menu_book</span>
+    </a>
+    <a href="#reminders" class="md3-navigation-rail-item">
+      <span class="material-symbols-outlined">notifications</span>
+    </a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="md3-content">
+    <div class="md3-container">
+
+      <!-- Hero Section -->
+      <section class="hero-ramadhan" data-aos="zoom-in">
+        <div class="islamic-icon">☪️</div>
+        <h1 class="md3-display-large" style="margin-bottom: 8px; color: var(--islamic-primary);">
+          رمضان كريم
+        </h1>
+        <h2 class="md3-headline-medium" style="margin-bottom: 16px;">Ramadhan Kareem</h2>
+        
+        <!-- Status badge -->
+        <div id="ramadhan-status" class="status-badge pre-ramadhan">
+          <span class="material-symbols-outlined">schedule</span>
+          <span id="status-text">Menuju Ramadhan 1447H</span>
+        </div>
+        
+        <p class="md3-body-large" style="max-width: 600px; margin: 16px auto 0 auto; opacity: 0.8;">
+          <span class="pre-ramadhan-phase">
+            Mari bersiap menyambut bulan suci Ramadhan dengan persiapan yang matang secara rohani dan jasmani.
+          </span>
+          <span class="during-ramadhan-phase">
+            Selamat menjalankan ibadah puasa. Semoga Allah menerima amal ibadah kita di bulan yang mulia ini.
+          </span>
+        </p>
+
+        <!-- Countdown Timer -->
+        <div id="countdown-section">
+          <div class="pre-ramadhan-phase">
+            <h3 class="md3-headline-small" style="margin-top: 32px; margin-bottom: 16px;">
+              Countdown Menuju Ramadhan 1447H
+            </h3>
+            <div class="countdown-container" id="countdown-timer">
+              <div class="countdown-item">
+                <span class="countdown-number" id="days">0</span>
+                <div class="countdown-label">Hari</div>
+              </div>
+              <div class="countdown-item">
+                <span class="countdown-number" id="hours">0</span>
+                <div class="countdown-label">Jam</div>
+              </div>
+              <div class="countdown-item">
+                <span class="countdown-number" id="minutes">0</span>
+                <div class="countdown-label">Menit</div>
+              </div>
+              <div class="countdown-item">
+                <span class="countdown-number" id="seconds">0</span>
+                <div class="countdown-label">Detik</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="during-ramadhan-phase">
+            <div class="ramadhan-day-counter">
+              <div class="day-number" id="ramadhan-day">1</div>
+              <div class="day-label">Hari Ke- Ramadhan 1447H</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prayer Times Section -->
+      <section id="prayer-times" data-aos="fade-up">
+        <div class="md3-section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <h2 class="md3-headline-large">
+            <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">mosque</span>
+            Waktu Sholat Hari Ini
+          </h2>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <button class="md3-button md3-button-outlined" onclick="toggleLocationSettings()" style="margin: 4px 0;">
+              <span class="material-symbols-outlined">settings</span>
+              Pengaturan
+            </button>
+            <button class="md3-button md3-button-outlined" onclick="loadPrayerTimes()" style="margin: 4px 0;">
+              <span class="material-symbols-outlined">refresh</span>
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Location Settings Panel (Hidden by default) -->
+        <div id="location-settings" class="md3-card" style="display: none; margin-bottom: 16px; padding: 20px;">
+          <h3 class="md3-headline-small" style="margin-bottom: 16px;">
+            <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">location_searching</span>
+            Pengaturan Lokasi
+          </h3>
+          
+          <!-- Location Mode Toggle -->
+          <div style="margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+              <label class="location-toggle">
+                <input type="radio" name="location-mode" value="auto" id="auto-location" checked onchange="handleLocationModeChange()">
+                <span class="location-toggle-label">
+                  <span class="material-symbols-outlined">my_location</span>
+                  Otomatis (GPS)
+                </span>
+              </label>
+              <label class="location-toggle">
+                <input type="radio" name="location-mode" value="manual" id="manual-location" onchange="handleLocationModeChange()">
+                <span class="location-toggle-label">
+                  <span class="material-symbols-outlined">edit_location</span>
+                  Manual
+                </span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Manual Location Input -->
+          <div id="manual-location-panel" style="display: none;">
+            <div style="margin-bottom: 16px;">
+              <label class="md3-body-medium" style="display: block; margin-bottom: 8px; color: var(--md-sys-color-on-surface-variant);">
+                Masukkan Nama Kota:
+              </label>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <input 
+                  type="text" 
+                  id="city-input" 
+                  placeholder="Contoh: Jakarta, Bandung, Surabaya..." 
+                  class="md3-text-field"
+                  style="flex: 1; min-width: 200px;"
+                  onkeypress="handleCityInputEnter(event)"
+                >
+                <button class="md3-button md3-button-filled" onclick="searchCityAndSetLocation()" style="white-space: nowrap;">
+                  <span class="material-symbols-outlined">search</span>
+                  Cari
+                </button>
+              </div>
+            </div>
+            
+            <!-- Quick City Selection -->
+            <div style="margin-bottom: 16px;">
+              <label class="md3-body-medium" style="display: block; margin-bottom: 8px; color: var(--md-sys-color-on-surface-variant);">
+                Atau pilih kota populer:
+              </label>
+              <div id="quick-cities" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <!-- Will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Action Buttons -->
+          <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px;">
+            <button class="md3-button md3-button-text" onclick="toggleLocationSettings()">
+              Tutup
+            </button>
+            <button class="md3-button md3-button-filled" onclick="applyLocationSettings()">
+              <span class="material-symbols-outlined">done</span>
+              Terapkan
+            </button>
+          </div>
+        </div>
+
+        <div class="prayer-card" id="current-prayer">
+          <h3 class="md3-headline-medium" style="margin-bottom: 8px;">
+            <span id="prayer-status">Menuju Maghrib</span>
+          </h3>
+          <p id="next-prayer-countdown" class="md3-body-large" style="opacity: 0.9; margin-bottom: 16px;">
+            Sisa waktu: Loading...
+          </p>
+          
+          <div class="prayer-time-grid" id="prayer-schedule">
+            <div class="prayer-time-item">
+              <div class="prayer-name">Imsak</div>
+              <div class="prayer-time" id="imsak-time">04:32</div>
+            </div>
+            <div class="prayer-time-item">
+              <div class="prayer-name">Subuh</div>
+              <div class="prayer-time" id="subuh-time">04:42</div>
+            </div>
+            <div class="prayer-time-item">
+              <div class="prayer-name">Dzuhur</div>
+              <div class="prayer-time" id="dzuhur-time">12:05</div>
+            </div>
+            <div class="prayer-time-item">
+              <div class="prayer-name">Ashar</div>
+              <div class="prayer-time" id="ashar-time">15:23</div>
+            </div>
+            <div class="prayer-time-item">
+              <div class="prayer-name">Maghrib</div>
+              <div class="prayer-time" id="maghrib-time">18:14</div>
+            </div>
+            <div class="prayer-time-item">
+              <div class="prayer-name">Isya</div>
+              <div class="prayer-time" id="isya-time">19:24</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Decorative Divider -->
+      <div class="decorative-divider">
+        <span class="material-symbols-outlined icon">auto_awesome</span>
+      </div>
+
+      <!-- Quran Verse Section -->
+      <section id="quran" data-aos="fade-up">
+        <div class="md3-section-header">
+          <h2 class="md3-headline-large">
+            <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">menu_book</span>
+            Ayat Hari Ini
+          </h2>
+        </div>
+
+        <div class="quran-card">
+          <div class="loading-shimmer" id="quran-loading" style="height: 100px; border-radius: 8px; margin: 20px 0;"></div>
+          <div id="quran-content" style="display: none;">
+            <div class="quran-arabic" id="quran-arabic">
+              Loading ayat Al-Quran...
+            </div>
+            <div class="quran-translation" id="quran-translation">
+              Loading terjemahan...
+            </div>
+            <div class="quran-source" id="quran-source">
+              Loading sumber...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reminders Section -->
+      <section id="reminders" data-aos="fade-up">
+        <div class="md3-section-header">
+          <h2 class="md3-headline-large">
+            <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">notifications</span>
+            <span class="pre-ramadhan-phase">Persiapan Ramadhan</span>
+            <span class="during-ramadhan-phase">Pengingat Ramadhan</span>
+          </h2>
+        </div>
+
+        <div class="reminder-card">
+          <div class="reminder-text" id="typed-reminder">
+            Loading pengingat islami...
+          </div>
+        </div>
+
+        <!-- Additional reminders for different phases -->
+        <div class="pre-ramadhan-phase">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 24px;">
+            <div class="md3-card md3-card-outlined">
+              <div class="md3-card-content">
+                <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 12px;">
+                  📖 Persiapan Rohani
+                </h3>
+                <ul class="md3-body-medium" style="margin: 0; padding-left: 20px;">
+                  <li>Memperbanyak membaca Al-Quran</li>
+                  <li>Berlatih puasa sunnah (Senin-Kamis)</li>
+                  <li>Memperbaiki sholat 5 waktu</li>
+                  <li>Berdoa dan beristighfar</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="md3-card md3-card-outlined">
+              <div class="md3-card-content">
+                <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 12px;">
+                  🏥 Persiapan Jasmani
+                </h3>
+                <ul class="md3-body-medium" style="margin: 0; padding-left: 20px;">
+                  <li>Mengatur pola makan dan tidur</li>
+                  <li>Menjaga kesehatan tubuh</li>
+                  <li>Mengurangi kebiasaan buruk</li>
+                  <li>Olahraga ringan secara teratur</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="during-ramadhan-phase">
+          <div class="md3-card md3-card-filled" style="margin-top: 24px;">
+            <div class="md3-card-content">
+              <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 12px;">
+                ⭐ Amalan Utama Ramadhan
+              </h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                <div>
+                  <strong>Siang Hari:</strong>
+                  <ul style="margin: 8px 0 0 20px;">
+                    <li>Membaca Al-Quran</li>
+                    <li>Berdzikir dan bertasbih</li>
+                    <li>Menjaga lisan dan pandangan</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Malam Hari:</strong>
+                  <ul style="margin: 8px 0 0 20px;">
+                    <li>Sholat Tarawih</li>
+                    <li>Qiyamul Lail</li>
+                    <li>Mencari Lailatul Qadar</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Floating Action Button -->
+  <button class="md3-fab" id="scroll-to-top">
+    <span class="material-symbols-outlined">keyboard_arrow_up</span>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="js/material3-interactions.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true
+    });
+
+    // Ramadhan date: 18 February 2026
+    const RAMADHAN_START_DATE = new Date('2026-02-18T04:42:00');
+    const RAMADHAN_END_DATE = new Date('2026-03-20T18:15:00'); // Approximate end date
+    
+    // Check if we're currently in Ramadhan
+    function isRamadhanActive() {
+      const now = new Date();
+      return now >= RAMADHAN_START_DATE && now <= RAMADHAN_END_DATE;
+    }
+    
+    // Update body class based on Ramadhan status
+    function updateRamadhanPhase() {
+      const body = document.body;
+      if (isRamadhanActive()) {
+        body.classList.add('ramadhan-active');
+        document.getElementById('status-text').textContent = 'Ramadhan Mubarak';
+        const statusBadge = document.getElementById('ramadhan-status');
+        statusBadge.classList.remove('pre-ramadhan');
+        statusBadge.classList.add('during-ramadhan');
+        
+        // Update day counter
+        const now = new Date();
+        const dayOfRamadhan = Math.floor((now - RAMADHAN_START_DATE) / (1000 * 60 * 60 * 24)) + 1;
+        document.getElementById('ramadhan-day').textContent = dayOfRamadhan;
+      }
+    }
+    
+    // Countdown timer function
+    function updateCountdown() {
+      const now = new Date();
+      const targetDate = isRamadhanActive() ? RAMADHAN_END_DATE : RAMADHAN_START_DATE;
+      const timeDiff = targetDate - now;
+      
+      if (timeDiff <= 0) {
+        updateRamadhanPhase();
+        return;
+      }
+      
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // Prayer times object (will be updated from API)
+    let prayerTimes = {
+      imsak: '04:32',
+      subuh: '04:42',
+      dzuhur: '12:05',
+      ashar: '15:23',
+      maghrib: '18:14',
+      isya: '19:24'
+    };
+    
+    let currentLocation = 'Jakarta, Indonesia'; // Default location
+    let locationMode = 'auto'; // 'auto' or 'manual'
+    let selectedCity = '';
+    let selectedCoordinates = null;
+    
+    // Popular Indonesian cities with coordinates
+    const popularCities = [
+      { name: 'Jakarta', lat: -6.2088, lng: 106.8456 },
+      { name: 'Bandung', lat: -6.9175, lng: 107.6191 },
+      { name: 'Surabaya', lat: -7.2575, lng: 112.7521 },
+      { name: 'Yogyakarta', lat: -7.7956, lng: 110.3695 },
+      { name: 'Semarang', lat: -6.9665, lng: 110.4203 },
+      { name: 'Denpasar', lat: -8.6500, lng: 115.2167 },
+      { name: 'Makassar', lat: -5.1477, lng: 119.4327 },
+      { name: 'Medan', lat: 3.5952, lng: 98.6722 },
+      { name: 'Palembang', lat: -2.9761, lng: 104.7754 },
+      { name: 'Balikpapan', lat: -1.2379, lng: 116.8529 }
+    ];
+    
+    // Toggle location settings panel
+    function toggleLocationSettings() {
+      const panel = document.getElementById('location-settings');
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        initializeLocationSettings();
+      } else {
+        panel.style.display = 'none';
+      }
+    }
+    
+    // Initialize location settings when panel is opened
+    function initializeLocationSettings() {
+      // Load saved preferences
+      loadLocationPreferences();
+      
+      // Populate quick cities
+      populateQuickCities();
+      
+      // Set UI state
+      updateLocationModeUI();
+    }
+    
+    // Load location preferences from localStorage
+    function loadLocationPreferences() {
+      const savedMode = localStorage.getItem('prayer-location-mode');
+      const savedCity = localStorage.getItem('prayer-selected-city');
+      const savedCoordinates = localStorage.getItem('prayer-selected-coordinates');
+      
+      if (savedMode) {
+        locationMode = savedMode;
+        // Only update UI if elements exist
+        const autoEl = document.getElementById('auto-location');
+        const manualEl = document.getElementById('manual-location');
+        if (autoEl && manualEl) {
+          document.getElementById(savedMode === 'auto' ? 'auto-location' : 'manual-location').checked = true;
+        }
+      }
+      
+      if (savedCity && savedCoordinates) {
+        selectedCity = savedCity;
+        selectedCoordinates = JSON.parse(savedCoordinates);
+        // Only update UI if element exists
+        const cityInput = document.getElementById('city-input');
+        if (cityInput) {
+          cityInput.value = selectedCity;
+        }
+      }
+    }
+    
+    // Save location preferences to localStorage
+    function saveLocationPreferences() {
+      localStorage.setItem('prayer-location-mode', locationMode);
+      if (selectedCity && selectedCoordinates) {
+        localStorage.setItem('prayer-selected-city', selectedCity);
+        localStorage.setItem('prayer-selected-coordinates', JSON.stringify(selectedCoordinates));
+      }
+    }
+    
+    // Handle location mode change (auto/manual)
+    function handleLocationModeChange() {
+      locationMode = document.querySelector('input[name="location-mode"]:checked').value;
+      updateLocationModeUI();
+    }
+    
+    // Update UI based on location mode
+    function updateLocationModeUI() {
+      const manualPanel = document.getElementById('manual-location-panel');
+      manualPanel.style.display = locationMode === 'manual' ? 'block' : 'none';
+    }
+    
+    // Populate quick city buttons
+    function populateQuickCities() {
+      const container = document.getElementById('quick-cities');
+      container.innerHTML = '';
+      
+      popularCities.forEach(city => {
+        const button = document.createElement('button');
+        button.className = 'quick-city-btn';
+        button.textContent = city.name;
+        button.onclick = () => selectQuickCity(city);
+        
+        // Highlight if currently selected
+        if (selectedCity === city.name) {
+          button.classList.add('selected');
+        }
+        
+        container.appendChild(button);
+      });
+    }
+    
+    // Select a quick city
+    function selectQuickCity(city) {
+      selectedCity = city.name;
+      selectedCoordinates = { lat: city.lat, lng: city.lng };
+      document.getElementById('city-input').value = city.name;
+      
+      // Update button selection
+      document.querySelectorAll('.quick-city-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.textContent === city.name);
+      });
+    }
+    
+    // Handle Enter key in city input
+    function handleCityInputEnter(event) {
+      if (event.key === 'Enter') {
+        searchCityAndSetLocation();
+      }
+    }
+    
+    // Search city using geocoding API
+    async function searchCityAndSetLocation() {
+      const cityInput = document.getElementById('city-input');
+      const cityName = cityInput.value.trim();
+      
+      if (!cityName) {
+        alert('Silakan masukkan nama kota');
+        return;
+      }
+      
+      try {
+        // Show loading state
+        const searchBtn = document.querySelector('button[onclick="searchCityAndSetLocation()"]');
+        const originalHTML = searchBtn.innerHTML;
+        searchBtn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span>Mencari...';
+        searchBtn.disabled = true;
+        
+        // Use Nominatim API for geocoding (free and reliable)
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(cityName)}&format=json&limit=1&addressdetails=1`);
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+          const result = data[0];
+          selectedCity = result.display_name.split(',')[0]; // Get just the city name
+          selectedCoordinates = {
+            lat: parseFloat(result.lat),
+            lng: parseFloat(result.lon)
+          };
+          
+          // Clear quick city selections
+          document.querySelectorAll('.quick-city-btn').forEach(btn => {
+            btn.classList.remove('selected');
+          });
+          
+          alert(`Lokasi ditemukan: ${result.display_name}`);
+        } else {
+          alert('Kota tidak ditemukan. Coba dengan nama yang lebih spesifik.');
+        }
+        
+        // Restore button
+        searchBtn.innerHTML = originalHTML;
+        searchBtn.disabled = false;
+        
+      } catch (error) {
+        console.error('Error searching city:', error);
+        alert('Terjadi kesalahan saat mencari kota. Silakan coba lagi.');
+        
+        // Restore button
+        const searchBtn = document.querySelector('button[onclick="searchCityAndSetLocation()"]');
+        searchBtn.innerHTML = '<span class="material-symbols-outlined">search</span>Cari';
+        searchBtn.disabled = false;
+      }
+    }
+    
+    // Apply location settings
+    function applyLocationSettings() {
+      if (locationMode === 'manual' && !selectedCoordinates) {
+        alert('Silakan pilih atau cari lokasi terlebih dahulu');
+        return;
+      }
+      
+      // Save preferences
+      saveLocationPreferences();
+      
+      // Close panel
+      toggleLocationSettings();
+      
+      // Reload prayer times with new settings
+      loadPrayerTimes();
+    }
+    
+    // Get user's location and fetch prayer times
+    async function loadPrayerTimes() {
+      try {
+        // Show loading state
+        document.getElementById('prayer-schedule').style.opacity = '0.5';
+        
+        // Update button state
+        const updateBtn = document.querySelector('button[onclick="loadPrayerTimes()"]');
+        if (updateBtn) {
+          updateBtn.disabled = true;
+          updateBtn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span>Loading...';
+        }
+        
+        // Check location mode
+        if (locationMode === 'manual' && selectedCoordinates) {
+          // Use manual coordinates
+          await fetchPrayerTimesFromAPI(selectedCoordinates.lat, selectedCoordinates.lng, true);
+          resetUpdateButton();
+        } else if (locationMode === 'auto' && 'geolocation' in navigator) {
+          // Try to get user's location using GPS
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+              await fetchPrayerTimesFromAPI(latitude, longitude, false);
+              resetUpdateButton();
+            },
+            async (error) => {
+              console.log('Geolocation failed, using default location (Jakarta)');
+              // Fallback to Jakarta coordinates
+              await fetchPrayerTimesFromAPI(-6.2088, 106.8456, false);
+              resetUpdateButton();
+            },
+            {
+              timeout: 10000, // 10 seconds timeout
+              enableHighAccuracy: true
+            }
+          );
+        } else {
+          // Fallback to Jakarta if geolocation not supported or no manual location set
+          await fetchPrayerTimesFromAPI(-6.2088, 106.8456, false);
+          resetUpdateButton();
+        }
+      } catch (error) {
+        console.error('Error loading prayer times:', error);
+        updatePrayerTimesDisplay(); // Use default times
+        resetUpdateButton();
+      }
+    }
+    
+    // Reset update button state
+    function resetUpdateButton() {
+      const updateBtn = document.querySelector('button[onclick="loadPrayerTimes()"]');
+      if (updateBtn) {
+        updateBtn.disabled = false;
+        updateBtn.innerHTML = '<span class="material-symbols-outlined">refresh</span>Refresh';
+      }
+    }
+    
+    // Reverse geocode coordinates to get location name
+    async function reverseGeocode(latitude, longitude) {
+      try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`);
+        const data = await response.json();
+        
+        if (data && data.address) {
+          const address = data.address;
+          const city = address.city || address.town || address.village || address.suburb || address.county;
+          const country = address.country;
+          
+          if (city && country) {
+            return `${city}, ${country}`;
+          } else if (city) {
+            return city;
+          } else if (country) {
+            return country;
+          }
+        }
+        return null;
+      } catch (error) {
+        console.error('Reverse geocoding failed:', error);
+        return null;
+      }
+    }
+
+    // Fetch prayer times from Aladhan API
+    async function fetchPrayerTimesFromAPI(latitude, longitude, isManual = false) {
+      try {
+        const today = new Date();
+        const timestamp = Math.floor(today.getTime() / 1000);
+        
+        // Aladhan API endpoint
+        const apiUrl = `https://api.aladhan.com/v1/timings/${timestamp}?latitude=${latitude}&longitude=${longitude}&method=20&school=0`;
+        
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        
+        if (data.code === 200 && data.data) {
+          const timings = data.data.timings;
+          const location = data.data.meta;
+          
+          // Update prayer times object
+          prayerTimes = {
+            imsak: timings.Imsak,
+            subuh: timings.Fajr,
+            dzuhur: timings.Dhuhr,
+            ashar: timings.Asr,
+            maghrib: timings.Maghrib,
+            isya: timings.Isha
+          };
+          
+          // Update location info with better parsing
+          console.log('API Response location data:', location);
+          
+          let locationName = '';
+          
+          // For manual location, use the selected city name if available
+          if (isManual && selectedCity) {
+            locationName = selectedCity;
+            currentLocation = selectedCity;
+          } else {
+            // Try to get location name from reverse geocoding for better accuracy
+            const reverseGeoResult = await reverseGeocode(latitude, longitude);
+            
+            if (reverseGeoResult) {
+              locationName = reverseGeoResult;
+              currentLocation = reverseGeoResult;
+            } else {
+              // Fallback to API meta data
+              let city = 'Unknown';
+              let country = 'Unknown';
+              
+              // Try different possible keys from Aladhan API
+              if (location.city) {
+                city = location.city;
+              } else if (location.region) {
+                city = location.region;
+              } else if (location.latitude && location.longitude) {
+                // If we have coordinates but no city name, use coordinates as reference
+                city = `${parseFloat(location.latitude).toFixed(2)}, ${parseFloat(location.longitude).toFixed(2)}`;
+              }
+              
+              if (location.country) {
+                country = location.country;
+              } else if (location.countryName) {
+                country = location.countryName;
+              } else if (location.countryCode) {
+                country = location.countryCode;
+              }
+              
+              currentLocation = `${city}, ${country}`;
+              locationName = currentLocation;
+            }
+          }
+          
+          const method = location.method?.name || 'Islamic Society of North America';
+          
+          // Update display
+          updatePrayerTimesDisplay();
+          updateLocationDisplay(method);
+          
+          console.log('Prayer times loaded successfully for:', currentLocation);
+          console.log('Calculation method:', method);
+          console.log('Location mode:', locationMode);
+        } else {
+          throw new Error('Invalid API response');
+        }
+      } catch (error) {
+        console.error('Error fetching prayer times from API:', error);
+        
+        // If this was an auto location attempt, try to get location name from reverse geocoding
+        if (!isManual) {
+          try {
+            const reverseGeoResult = await reverseGeocode(latitude, longitude);
+            if (reverseGeoResult) {
+              currentLocation = reverseGeoResult;
+              updateLocationDisplay('Islamic Society of North America');
+            }
+          } catch (geoError) {
+            console.error('Reverse geocoding also failed:', geoError);
+          }
+        }
+        
+        // Use default times as fallback
+        updatePrayerTimesDisplay();
+      }
+    }
+    
+    // Update prayer times display
+    function updatePrayerTimesDisplay() {
+      Object.keys(prayerTimes).forEach(prayer => {
+        const element = document.getElementById(`${prayer}-time`);
+        if (element) {
+          // Format time to HH:MM
+          let timeString = prayerTimes[prayer];
+          if (timeString && timeString.includes('(')) {
+            timeString = timeString.split(' (')[0]; // Remove timezone info
+          }
+          element.textContent = timeString;
+        }
+      });
+      
+      // Remove loading state
+      document.getElementById('prayer-schedule').style.opacity = '1';
+    }
+    
+    // Update location display
+    function updateLocationDisplay(method = 'ISNA Method') {
+      // Create or update location display
+      let locationElement = document.getElementById('current-location');
+      if (!locationElement) {
+        locationElement = document.createElement('div');
+        locationElement.id = 'current-location';
+        locationElement.style.cssText = `
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: var(--md-sys-shape-corner-small);
+          padding: 12px;
+          margin-bottom: 16px;
+          font-size: 13px;
+          opacity: 0.9;
+          line-height: 1.4;
+        `;
+        
+        const prayerCard = document.getElementById('current-prayer');
+        prayerCard.insertBefore(locationElement, prayerCard.firstChild);
+      }
+      
+      const modeIcon = locationMode === 'auto' ? 'my_location' : 'edit_location';
+      const modeText = locationMode === 'auto' ? 'GPS' : 'Manual';
+      
+      locationElement.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+          <span class="material-symbols-outlined" style="font-size: 16px;">location_on</span>
+          <span><strong>Lokasi:</strong> ${currentLocation}</span>
+          <span style="display: flex; align-items: center; gap: 4px; font-size: 12px; background: rgba(255, 255, 255, 0.2); padding: 2px 6px; border-radius: 8px; margin-left: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 12px;">${modeIcon}</span>
+            ${modeText}
+          </span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; opacity: 0.8;">
+          <span class="material-symbols-outlined" style="font-size: 14px;">calculate</span>
+          <span>Metode: ${method}</span>
+        </div>
+      `;
+    }
+    
+    // Get next prayer time
+    function getNextPrayer() {
+      const now = new Date();
+      const currentTime = now.getHours() * 60 + now.getMinutes();
+      
+      const prayers = [
+        { name: 'Subuh', time: prayerTimes.subuh },
+        { name: 'Dzuhur', time: prayerTimes.dzuhur },
+        { name: 'Ashar', time: prayerTimes.ashar },
+        { name: 'Maghrib', time: prayerTimes.maghrib },
+        { name: 'Isya', time: prayerTimes.isya }
+      ];
+      
+      for (let prayer of prayers) {
+        // Clean time string (remove timezone info if present)
+        let timeString = prayer.time;
+        if (timeString && timeString.includes('(')) {
+          timeString = timeString.split(' (')[0];
+        }
+        
+        const [hours, minutes] = timeString.split(':').map(Number);
+        const prayerTime = hours * 60 + minutes;
+        
+        if (currentTime < prayerTime) {
+          return {
+            name: prayer.name,
+            time: prayerTime,
+            timeString: timeString
+          };
+        }
+      }
+      
+      // If no prayer left today, return tomorrow's Subuh
+      let subuhTimeString = prayerTimes.subuh;
+      if (subuhTimeString && subuhTimeString.includes('(')) {
+        subuhTimeString = subuhTimeString.split(' (')[0];
+      }
+      
+      const [subuhHours, subuhMinutes] = subuhTimeString.split(':').map(Number);
+      
+      return {
+        name: 'Subuh',
+        time: subuhHours * 60 + subuhMinutes,
+        timeString: subuhTimeString,
+        tomorrow: true
+      };
+    }
+    
+    // Update next prayer countdown
+    function updateNextPrayerCountdown() {
+      const nextPrayer = getNextPrayer();
+      const now = new Date();
+      const currentTime = now.getHours() * 60 + now.getMinutes();
+      
+      let targetTime = nextPrayer.time;
+      if (nextPrayer.tomorrow) {
+        targetTime += 24 * 60; // Add 24 hours in minutes
+      }
+      
+      const timeDiff = targetTime - currentTime;
+      const hours = Math.floor(timeDiff / 60);
+      const minutes = timeDiff % 60;
+      
+      document.getElementById('prayer-status').textContent = `Menuju ${nextPrayer.name}`;
+      document.getElementById('next-prayer-countdown').textContent = 
+        `Sisa waktu: ${hours} jam ${minutes} menit`;
+      
+      // Update prayer card class based on time of day
+      const prayerCard = document.getElementById('current-prayer');
+      if (nextPrayer.name === 'Maghrib' || nextPrayer.name === 'Isya') {
+        prayerCard.classList.add('maghrib');
+      } else {
+        prayerCard.classList.remove('maghrib');
+      }
+    }
+    
+    // Islamic reminders for different phases
+    const preRamadhanReminders = [
+      'Mari bersiap menyambut Ramadhan dengan memperbanyak amalan sunnah',
+      'Latihan puasa Senin-Kamis membantu mempersiapkan tubuh untuk Ramadhan',
+      'Perbanyak membaca Al-Quran sebelum Ramadhan tiba',
+      'Bersihkan hati dari dosa-dosa dengan istighfar yang tulus',
+      'Siapkan mental dan spiritual untuk menyambut bulan penuh berkah',
+      'Mulai memperbaiki sholat 5 waktu dengan khusyuk',
+      'Berdoa agar Allah mengizinkan kita bertemu dengan Ramadhan',
+      'Persiapkan fisik dengan menjaga pola makan dan tidur yang sehat'
+    ];
+    
+    const duringRamadhanReminders = [
+      'Puasa bukan hanya menahan lapar dan haus, tapi juga menjaga hati dan lisan',
+      'Berdoa saat berbuka puasa adalah waktu yang mustajab',
+      'Lailatul Qadar adalah malam yang lebih baik dari seribu bulan',
+      'Shalat tarawih memberikan pahala besar dan menghapus dosa-dosa',
+      'Bersedekah di bulan Ramadhan dapat melipatgandakan pahala',
+      'Sahur adalah sunnah yang penuh berkah, jangan sampai terlewat',
+      'Menjaga wudhu sepanjang hari membantu menjaga kesucian diri',
+      'Berbuka dengan yang manis bisa mengembalikan energi tubuh lebih cepat',
+      'Menolong orang berbuka puasa mendapatkan pahala seperti orang yang berpuasa',
+      'Menahan amarah dan emosi adalah bagian dari kesempurnaan puasa'
+    ];
+    
+    // Initialize Typed.js for reminders
+    function initReminders() {
+      const reminders = isRamadhanActive() ? duringRamadhanReminders : preRamadhanReminders;
+      
+      new Typed("#typed-reminder", {
+        strings: reminders,
+        typeSpeed: 40,
+        backSpeed: 25,
+        backDelay: 3000,
+        startDelay: 1000,
+        loop: true,
+        cursorChar: '|',
+        smartBackspace: false,
+        shuffle: true
+      });
+    }
+    
+    // Fetch Quran verse
+    async function loadQuranVerse() {
+      try {
+        // Show loading
+        document.getElementById('quran-loading').style.display = 'block';
+        document.getElementById('quran-content').style.display = 'none';
+        
+        // Get random surah
+        const response = await fetch('https://api.alquran.cloud/v1/surah');
+        const data = await response.json();
+        
+        if (data.data && data.data.length > 0) {
+          const randomSurah = data.data[Math.floor(Math.random() * data.data.length)];
+          
+          // Get verses from the surah
+          const versesResponse = await fetch(`https://api.alquran.cloud/v1/surah/${randomSurah.number}`);
+          const versesData = await versesResponse.json();
+          
+          if (versesData.data && versesData.data.ayahs.length > 0) {
+            const randomVerse = versesData.data.ayahs[Math.floor(Math.random() * versesData.data.ayahs.length)];
+            
+            // Get Indonesian translation
+            const translationResponse = await fetch(
+              `https://api.quran.com/api/v4/quran/translations/33?verse_key=${randomSurah.number}:${randomVerse.numberInSurah}`
+            );
+            const translationData = await translationResponse.json();
+            
+            // Update display
+            document.getElementById('quran-arabic').textContent = randomVerse.text;
+            
+            if (translationData.translations && translationData.translations.length > 0) {
+              document.getElementById('quran-translation').textContent = 
+                translationData.translations[0].text;
+            } else {
+              document.getElementById('quran-translation').textContent = 
+                'Terjemahan tidak tersedia';
+            }
+            
+            document.getElementById('quran-source').textContent = 
+              `QS. ${randomSurah.englishName} (${randomSurah.number}):${randomVerse.numberInSurah}`;
+            
+            // Hide loading, show content
+            document.getElementById('quran-loading').style.display = 'none';
+            document.getElementById('quran-content').style.display = 'block';
+          }
+        }
+      } catch (error) {
+        console.error('Error loading Quran verse:', error);
+        document.getElementById('quran-loading').style.display = 'none';
+        document.getElementById('quran-content').style.display = 'block';
+        document.getElementById('quran-arabic').textContent = 'Gagal memuat ayat Al-Quran';
+        document.getElementById('quran-translation').textContent = 'Silakan refresh halaman';
+        document.getElementById('quran-source').textContent = 'Error loading';
+      }
+    }
+    
+    // Theme Toggle - Fixed version
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+    const root = document.documentElement;
+
+    function updateTheme(isDark) {
+      const theme = isDark ? 'dark' : 'light';
+      
+      // Save current scroll position
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Update both body and root element
+      body.setAttribute('data-theme', theme);
+      root.setAttribute('data-theme', theme);
+      
+      // Update icon
+      if (isDark) {
+        themeIcon.textContent = 'light_mode';
+      } else {
+        themeIcon.textContent = 'dark_mode';
+      }
+      
+      // Save to localStorage
+      localStorage.setItem('theme', theme);
+      
+      // Force CSS update without affecting scroll position
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollPosition);
+      });
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      updateTheme(savedTheme === 'dark');
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      updateTheme(prefersDark);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || root.getAttribute('data-theme');
+      const isDark = currentTheme !== 'dark';
+      updateTheme(isDark);
+    });
+
+    // Scroll to top functionality
+    const scrollButton = document.getElementById('scroll-to-top');
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollButton.style.opacity = '1';
+        scrollButton.style.visibility = 'visible';
+      } else {
+        scrollButton.style.opacity = '0';
+        scrollButton.style.visibility = 'hidden';
+      }
+    });
+
+    // Mobile navigation
+    const menuToggle = document.getElementById('menu-toggle');
+    const navRail = document.getElementById('navigation-rail');
+    let isNavOpen = false;
+
+    menuToggle.addEventListener('click', () => {
+      isNavOpen = !isNavOpen;
+      if (window.innerWidth <= 768) {
+        navRail.style.display = isNavOpen ? 'flex' : 'none';
+      }
+    });
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load saved location preferences
+      loadLocationPreferences();
+      
+      updateRamadhanPhase();
+      loadPrayerTimes(); // Load prayer times from API based on location
+      updateCountdown();
+      updateNextPrayerCountdown();
+      initReminders();
+      loadQuranVerse();
+      
+      // Update countdown every second
+      setInterval(() => {
+        updateCountdown();
+        updateNextPrayerCountdown();
+      }, 1000);
+      
+      // Initial scroll button state
+      scrollButton.style.opacity = '0';
+      scrollButton.style.visibility = 'hidden';
+      scrollButton.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
+    });
+  </script>
+
+</body>
+</html>

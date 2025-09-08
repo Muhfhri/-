@@ -1,187 +1,1920 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Basic PHP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar PHP - Material Design 3</title>
   <link rel="icon" type="image/png" href="image/flixdz_top.png">
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-    crossorigin="anonymous"></script>
-  <!-- Prism JS -->
+  
+  <!-- Prevent theme flash (set theme before CSS paints) -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var s = document.createElement('style');
+        s.textContent = t === 'dark' ? 'html{background:#131318;color:#E6E0E9;}' : 'html{background:#FFFBFE;color:#1C1B1F;}';
+        document.head.appendChild(s);
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Local fonts are loaded via CSS @font-face -->
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <!-- Material 3 CSS -->
+  <link rel="stylesheet" href="css/material3-redesign.css">
+  
+  <!-- Prism CSS for Code Highlighting -->
   <link rel="stylesheet" href="css/prism.css">
-  <script src="js/prism.js"></script>
-  <!-- Dark Mode -->
-  <link rel="stylesheet" href="css/dark-mode.css">
-  <!-- AOS PLUGIN -->
+  
+  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/multilevel.css">
-  <script src="js/theme.js"></script>
-  <link href="css/nav.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+  
+  <style>
+    /* Enhanced Navigation Rail - Centered and Fixed */
+    .nav-section {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .nav-section-title {
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 12px;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    
+    .md3-navigation-rail-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      margin: 2px 0;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--md-sys-color-on-surface-variant);
+      transition: all 0.2s ease;
+      gap: 4px;
+      width: 72px;
+      min-height: 56px;
+    }
+    
+    .md3-navigation-rail-item:hover {
+      background-color: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+    }
+    
+    .md3-navigation-rail-item.active {
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+    }
+    
+    .nav-label {
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 64px;
+    }
+
+    /* Additional custom styles for PHP tutorial */
+    .hero-section {
+      background: linear-gradient(135deg, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-tertiary-container) 100%);
+      padding: 56px 24px 48px 24px;
+      text-align: center;
+      margin-bottom: 32px;
+      border-radius: var(--md-sys-shape-corner-large);
+      position: relative;
+      overflow: visible;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-icon {
+      font-size: 64px;
+      color: var(--md-sys-color-primary);
+      margin-bottom: 16px;
+      margin-top: 16px;
+      padding: 16px 0;
+      animation: phpFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes phpFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(1deg); }
+    }
+    
+    /* Installation steps */
+    .step-card {
+      position: relative;
+      margin: 24px 0;
+      padding-left: 60px;
+    }
+    
+    .step-number {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    .step-content {
+      background: var(--md-sys-color-surface-container-low);
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: 20px;
+      border-left: 4px solid var(--md-sys-color-primary);
+    }
+    
+    /* Code showcase sections */
+    .code-showcase {
+      background: linear-gradient(145deg, var(--md-sys-color-surface-container-low), var(--md-sys-color-surface-container));
+      border-radius: var(--md-sys-shape-corner-large);
+      padding: 24px;
+      margin: 24px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .code-showcase::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+    }
+    
+    /* XAMPP Status Indicators */
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--md-sys-shape-corner-medium);
+      font-weight: 500;
+      margin: 4px;
+    }
+    
+    .status-running {
+      background-color: #E8F5E8;
+      color: #2E7D32;
+      border: 1px solid #4CAF50;
+    }
+    
+    .status-stopped {
+      background-color: #FFEBEE;
+      color: #C62828;
+      border: 1px solid #F44336;
+    }
+    
+    .status-icon {
+      font-size: 16px;
+    }
+    
+    /* PHP Syntax highlighting cards */
+    .syntax-card {
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--md-sys-shape-corner-medium);
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    
+    .syntax-header {
+      background: var(--md-sys-color-surface-container-highest);
+      padding: 12px 16px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    }
+    
+    .syntax-body {
+      padding: 16px;
+    }
+    
+    /* Image containers */
+    .image-container {
+      background: var(--md-sys-color-surface-container-low);
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: 16px;
+      margin: 24px 0;
+      text-align: center;
+      border: 1px solid var(--md-sys-color-outline-variant);
+    }
+    
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--md-sys-shape-corner-small);
+      box-shadow: var(--md-sys-elevation-2);
+    }
+    
+    .image-caption {
+      margin-top: 12px;
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 14px;
+    }
+    
+    /* Warning/Info boxes */
+    .info-box {
+      padding: 16px;
+      border-radius: var(--md-sys-shape-corner-medium);
+      margin: 16px 0;
+      border-left: 4px solid;
+    }
+    
+    .info-box.warning {
+      background: #FFF8E1;
+      border-color: #FF9800;
+      color: #E65100;
+    }
+    
+    .info-box.tip {
+      background: #E3F2FD;
+      border-color: #2196F3;
+      color: #0D47A1;
+    }
+    
+    .info-box.success {
+      background: #E8F5E8;
+      border-color: #4CAF50;
+      color: #1B5E20;
+    }
+    
+    /* Feature comparison table */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: var(--md-sys-shape-corner-medium);
+      box-shadow: var(--md-sys-elevation-1);
+    }
+    
+    .comparison-table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      background: var(--md-sys-color-surface);
+      border-radius: var(--md-sys-shape-corner-medium);
+      overflow: hidden;
+    }
+    
+    .comparison-table th {
+      background: var(--md-sys-color-surface-container-highest);
+      color: var(--md-sys-color-on-surface);
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    
+    .comparison-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    }
+    
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    /* Output examples */
+    .output-example {
+      background: #1A1A1A;
+      color: #00FF00;
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: 24px 20px 20px 20px;
+      margin: 24px 0 16px 0;
+      font-family: 'Google Sans Mono', 'Courier New', monospace;
+      position: relative;
+      border: 1px solid #333;
+      overflow-x: auto;
+    }
+    
+    .output-example::before {
+      content: 'Output';
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      background: #1A1A1A;
+      color: #00FF00;
+      padding: 2px 12px;
+      border-radius: var(--md-sys-shape-corner-small);
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid #333;
+      z-index: 2;
+    }
+    
+    /* Practice exercise boxes */
+    .exercise-box {
+      background: var(--md-sys-color-surface-container-low);
+      color: var(--md-sys-color-on-surface);
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: 20px;
+      margin: 24px 0;
+      border: 1px solid var(--md-sys-color-outline-variant);
+      box-shadow: var(--md-sys-elevation-1);
+    }
+    
+    [data-theme="dark"] .exercise-box {
+      background: var(--md-sys-color-surface-container);
+      border-color: var(--md-sys-color-outline);
+    }
+    
+    .exercise-title {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .step-card {
+        padding-left: 50px;
+      }
+      
+      .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+      }
+      
+      .hero-section {
+        padding: 40px 16px 32px 16px;
+        min-height: 180px;
+      }
+      
+      .hero-icon {
+        font-size: 48px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+        padding: 12px 0;
+      }
+      
+      .code-showcase {
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
 
-<body>
-  <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
-        <div class="container-fluid">
-            <a href="#"><img class="navbar-brand" id="light" width="100"></a>
-            <button class="navbar-toggler collapsed border-0 shadow-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation" style="box-shadow:none; outline:none;">
-                <span class="icon-bar top-bar"></span>
-                <span class="icon-bar middle-bar"></span>
-                <span class="icon-bar bottom-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav text-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="https://github.com/muhfhri"><iconify-icon
-                                inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
-                    </li>
-                </ul>
-                <div class="ms-auto">
-                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-                    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
-                        data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body data-theme="light">
 
-      <nav aria-label="breadcrumb" class="my-3">
-  <ol class="breadcrumb px-3 py-2">
-    <li class="breadcrumb-item">
-      <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
-    </li>
-    <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
-      <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#" id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        PHP
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
-        <li><a class="dropdown-item active" href="#">Basic PHP</a></li>
-        <li><a class="dropdown-item" href="varphp.html">Variabel PHP</a></li>
-        <!-- Tambahkan halaman HTML lain di sini -->
-      </ul>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Basic PHP</li>
-  </ol>
-</nav>
-
-  <div class="container p-3 mb-2">
-    <center data-aos="fade-up">
-      <iconify-icon icon="akar-icons:php-fill" inline class="m3-color" width="100"></iconify-icon>
-      <br><small>Belajar PHP</small>
-    </center>
-
-    <div class="container" data-aos="zoom-in">
-      <hr>
-      <h3><i class='fa fa-mortar-board'></i> Pendahuluan</h3>
-      <p>
-        Kalian mau <i>Ngoding</i> tapi masih ngga ngerti konsepnya?
-        <br>Tenang aja! kali ini aku bakal ajarin kalian cara ngoding sebuah bahasa pemograman yang bernama PHP.
-      </p>
-    </div>
-
-
-    <div class="container" data-aos="zoom-in">
-      <div class="container">
-        <p><iconify-icon inline icon="line-md:align-right"></iconify-icon>
-          <font class="h4">Isi halaman web</font>
-          <br><a href="#basik" id="daftard">Basic PHP</a>
-          <br><a href="#buka" id="daftard">Membuka Sever</a>
-          <br><a href="#taghtml" id="daftard">Deklarasi PHP</a>
-        </p>
-      </div>
-    </div>
-
-
-
-    <div class="container" data-aos="zoom-in" id="basik">
-      <hr>
-      <h3><i class='fa fa-question-circle'></i> Basic HTML</h3>
-      <p>
-        Pertama siapin dulu nih alat buat ngoding kalian, seperti Komputer, dan Laptop.
-        <br>Alat alat yang harus kalian siapin yaitu : <a href="https://code.visualstudio.com/download">Visual Studio
-          Code</a> untuk Windows dan MacOS. | <a href="https://www.apachefriends.org/download.html">XAMPP</a> untuk
-        membuka server php di browser.
-        <br>
-        <br>Oke kalo udah di install dan siap untuk digunakan, ayo kita lanjut ke tahap berikutnya.
-      </p>
-    </div>
-
-    <div class="container" data-aos="zoom-in" id="buka">
-      <hr>
-      <h3><i class="fa-solid fa-server"></i> Membuka server</h3>
-      <p>
-        Cara membuka servernya adalah :
-        <br> Kalian Buka terlebih dahulu XAMPP kalian
-        <br> Dan Nyalakan Server Apache seperti pada gambar ini
-        <br> <img src="image/bukaserverxampp.png" alt="" width="100%">
-        <br> Jika sudah membuka server apache, kita lanjut membuat folder didalam htdocs.
-        <br> Untuk direktori htdocs kalian bisa lihat kode dibawah ini
-      </p>
-      <pre><code class="language-html">C:\xampp\htdocs</code></pre>
-      <p>Kenapa C?, karena saya menaruh file installasi XAMPP di direktori C
-        <br>Jika Kalian menaruh di direktori D atau E kalian bisa mengganti nya ke direktori yang kalian pilih.
-      </p>
-    </div>
-
-    <div class="container" data-aos="fade-up" id="taghtml">
-      <hr>
-      <h3>Deklarasi PHP</h3>
-      <p>Syntax ini mungkin sama dengan HTML biasa, tetapi ada bahasa php didalamnya. Kalian bisa melihat atau mengikuti
-        cara dibawah ini.
-      </p>
-      <pre><code class="language-php">&lt;!DOCTYPE html&gt;
-  &lt;html lang="en"&gt;
-      &lt;head&gt;
-          &lt;title&gt;Belajar PHP&lt;/title&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-          &lt;p&gt;Kalimat Ini digunakan menggunakan HTML&lt;/p&gt;
-          &lt;?php
-            echo "&lt;p&gt;Kalimat Ini dibuat menggunakan PHP&lt;/p&gt;";
-          ?&gt;
-      &lt;/body&gt;
-  &lt;/html&gt;</code></pre>
-
-      <h3>Output
-        <br><img src="image/bukaserver.png" alt="Output" width="100%">
-      </h3>
-      <p>Btw kalian bisa copy contoh diatas kok.
-      </p>
-    </div>
-  </div>
-
-  <!-- Footer Start -->
-  <div id="footer"></div>
-
-
-  <!-- Tombol ke atas -->
-  <button type="button" class="btn btn-m3-you-color bg-material btn-floating rounded-4 shadow btn-lg"
-        id="btn-back-to-top"><iconify-icon inline icon="line-md:chevron-up"></iconify-icon>
+  <!-- Material 3 App Bar -->
+  <header class="md3-top-app-bar">
+    <button class="md3-icon-button" id="menu-toggle">
+      <span class="material-symbols-outlined">menu</span>
     </button>
-  <!--JAVA SCRIPT FOR AOS-->
-  <script>
-    AOS.init();
-  </script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-  crossorigin="anonymous"></script>
-  <script src="js/multilevel.js"></script>
-  <script src="js/button_top.js"></script>
-  <script src="js/footer.js"></script>
-  <script src="js/dark-mode-switch.js"></script>
-</body>
+    <h1 class="md3-top-app-bar-title">Belajar PHP</h1>
+    <button class="md3-icon-button" id="theme-toggle">
+      <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+    </button>
+    <a href="https://github.com/muhfhri" target="_blank" class="md3-icon-button">
+      <span class="material-symbols-outlined">code</span>
+    </a>
+  </header>
 
+  <!-- Navigation Rail -->
+  <nav class="md3-navigation-rail" id="navigation-rail">
+    <div class="nav-section">
+      <div class="nav-section-title">Navigation</div>
+      <a href="index.html" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">home</span>
+        <span class="nav-label">Home</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">PHP Tutorial</div>
+      <a href="basicphp.html" class="md3-navigation-rail-item active">
+        <span class="material-symbols-outlined">terminal</span>
+        <span class="nav-label">Basic PHP</span>
+      </a>
+      <a href="varphp.html" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">data_object</span>
+        <span class="nav-label">Variables</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Bagian Halaman</div>
+      <a href="#basik" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">play_circle</span>
+        <span class="nav-label">Intro</span>
+      </a>
+      <a href="#installation" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">download</span>
+        <span class="nav-label">Install</span>
+      </a>
+      <a href="#server-setup" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">dns</span>
+        <span class="nav-label">Server</span>
+      </a>
+      <a href="#php-syntax" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">code</span>
+        <span class="nav-label">Syntax</span>
+      </a>
+      <a href="#variables" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">data_object</span>
+        <span class="nav-label">Variables</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="md3-content">
+    <div class="md3-container">
+      
+      <!-- Breadcrumb -->
+      <nav class="md3-breadcrumb" data-aos="fade-in">
+        <a href="index.html" class="md3-breadcrumb-item">Home</a>
+        <span class="md3-breadcrumb-separator material-symbols-outlined">chevron_right</span>
+        <span class="md3-breadcrumb-item">PHP</span>
+        <span class="md3-breadcrumb-separator material-symbols-outlined">chevron_right</span>
+        <span class="md3-breadcrumb-item current">Basic PHP</span>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section md3-card" data-aos="zoom-in">
+        <div class="hero-icon">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 6px; line-height: 1; height: auto;">
+            <span style="font-size: 0.9em; font-weight: 700; color: var(--md-sys-color-primary); text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">&lt;?</span>
+            <span style="font-size: 1em; font-weight: 800; background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));">PHP</span>
+            <span style="font-size: 0.9em; font-weight: 700; color: var(--md-sys-color-primary); text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">?&gt;</span>
+          </div>
+        </div>
+        <h1 class="md3-display-large" style="margin-bottom: 16px;">Belajar PHP</h1>
+        <p class="md3-body-large" style="max-width: 700px; margin: 0 auto;">
+          PHP (PHP: Hypertext Preprocessor) adalah bahasa pemrograman server-side yang powerful dan mudah dipelajari.
+          Mari mulai perjalanan programming kalian dari dasar sampai mahir!
+        </p>
+        
+        <!-- Quick Stats -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          <div style="text-align: center; min-width: 120px; flex: 1; max-width: 150px;">
+            <div style="font-size: 24px; font-weight: 600; color: var(--md-sys-color-primary);">8+</div>
+            <div style="font-size: 14px; color: var(--md-sys-color-on-surface-variant);">Topik Bahasan</div>
+          </div>
+          <div style="text-align: center; min-width: 120px; flex: 1; max-width: 150px;">
+            <div style="font-size: 24px; font-weight: 600; color: var(--md-sys-color-primary);">25+</div>
+            <div style="font-size: 14px; color: var(--md-sys-color-on-surface-variant);">Contoh Kode</div>
+          </div>
+          <div style="text-align: center; min-width: 120px; flex: 1; max-width: 150px;">
+            <div style="font-size: 24px; font-weight: 600; color: var(--md-sys-color-primary);">100%</div>
+            <div style="font-size: 14px; color: var(--md-sys-color-on-surface-variant);">Praktis</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Introduction -->
+      <section class="md3-section" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">school</span>
+                Pendahuluan
+              </h2>
+            </div>
+            <p class="md3-body-large">
+              Kalian mau <em>ngoding</em> tapi masih belum ngerti konsepnya? Tenang aja! 
+              Kali ini saya akan ajarin kalian cara ngoding dengan bahasa pemrograman PHP dari dasar sampai bisa buat aplikasi web sederhana.
+            </p>
+            
+            <div class="info-box tip">
+              <strong>💡 Kenapa Belajar PHP?</strong>
+              <ul style="margin: 8px 0 0 20px;">
+                <li>Mudah dipelajari untuk pemula</li>
+                <li>Banyak digunakan di industri (WordPress, Facebook, Wikipedia)</li>
+                <li>Gratis dan open source</li>
+                <li>Dokumentasi lengkap dan komunitas besar</li>
+                <li>Perfect untuk web development</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Table of Contents -->
+      <section class="md3-section" data-aos="fade-up">
+        <div class="md3-toc md3-card">
+          <div class="md3-toc-title">
+            <span class="material-symbols-outlined">list</span>
+            Daftar Isi Tutorial
+          </div>
+          <ul class="md3-toc-list">
+            <li class="md3-toc-item">
+              <a href="#basik" class="md3-toc-link">
+                <span class="material-symbols-outlined">play_circle</span>
+                Persiapan dan Tools
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#installation" class="md3-toc-link">
+                <span class="material-symbols-outlined">download</span>
+                Instalasi XAMPP
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#server-setup" class="md3-toc-link">
+                <span class="material-symbols-outlined">dns</span>
+                Setup Server Apache
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#php-syntax" class="md3-toc-link">
+                <span class="material-symbols-outlined">code</span>
+                PHP Syntax Dasar
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#variables" class="md3-toc-link">
+                <span class="material-symbols-outlined">data_object</span>
+                Variabel & Tipe Data
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#control-structures" class="md3-toc-link">
+                <span class="material-symbols-outlined">account_tree</span>
+                Control Structures
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#functions" class="md3-toc-link">
+                <span class="material-symbols-outlined">functions</span>
+                Functions & Include
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#database" class="md3-toc-link">
+                <span class="material-symbols-outlined">database</span>
+                Database Connection
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Tools & Preparation Section -->
+      <section class="md3-section" id="basik" data-aos="fade-up">
+        <div class="md3-card md3-card-outlined">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">construction</span>
+                Persiapan Tools & Environment
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Sebelum mulai coding, kita perlu menyiapkan tools yang diperlukan untuk development PHP:
+            </p>
+
+            <!-- Tools Comparison -->
+            <div class="table-responsive">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Tool</th>
+                    <th>Fungsi</th>
+                    <th>Platform</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Visual Studio Code</strong></td>
+                  <td>Code Editor dengan PHP extensions</td>
+                  <td>Windows, macOS, Linux</td>
+                  <td><span class="md3-chip selected">Recommended</span></td>
+                </tr>
+                <tr>
+                  <td><strong>XAMPP</strong></td>
+                  <td>Local server (Apache + MySQL + PHP)</td>
+                  <td>Windows, macOS, Linux</td>
+                  <td><span class="md3-chip selected">Required</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Browser Modern</strong></td>
+                  <td>Testing aplikasi web</td>
+                  <td>Any</td>
+                  <td><span class="md3-chip">Required</span></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+
+            <!-- Download Links -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 24px 0;">
+              <div class="md3-card md3-card-filled">
+                <div class="md3-card-content" style="text-align: center;">
+                  <span class="material-symbols-outlined" style="font-size: 48px; color: var(--md-sys-color-primary);">code</span>
+                  <h3 class="md3-body-large" style="margin: 12px 0 8px 0; font-weight: 500;">VS Code</h3>
+                  <p class="md3-body-medium" style="margin-bottom: 16px;">Free code editor dengan PHP support</p>
+                  <a href="https://code.visualstudio.com/download" target="_blank" class="md3-button md3-button-filled">
+                    <span class="material-symbols-outlined">download</span>
+                    Download
+                  </a>
+                </div>
+              </div>
+              
+              <div class="md3-card md3-card-filled">
+                <div class="md3-card-content" style="text-align: center;">
+                  <span class="material-symbols-outlined" style="font-size: 48px; color: var(--md-sys-color-secondary);">dns</span>
+                  <h3 class="md3-body-large" style="margin: 12px 0 8px 0; font-weight: 500;">XAMPP</h3>
+                  <p class="md3-body-medium" style="margin-bottom: 16px;">Local development server</p>
+                  <a href="https://www.apachefriends.org/download.html" target="_blank" class="md3-button md3-button-filled">
+                    <span class="material-symbols-outlined">download</span>
+                    Download
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box warning">
+              <strong>⚠️ Perhatian:</strong> Pastikan kalian download versi XAMPP yang sesuai dengan sistem operasi kalian (Windows, macOS, atau Linux).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- XAMPP Installation Guide -->
+      <section class="md3-section" id="installation" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">download</span>
+                Instalasi XAMPP Step-by-Step
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              XAMPP adalah package lengkap yang berisi Apache web server, MySQL database, dan PHP interpreter. 
+              Ikuti langkah-langkah berikut untuk instalasi:
+            </p>
+
+            <!-- Installation Steps -->
+            <div class="step-card" data-aos="fade-right">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 8px;">Download XAMPP</h3>
+                <p class="md3-body-medium">
+                  Kunjungi website resmi XAMPP dan download versi terbaru untuk sistem operasi kalian.
+                  Pilih versi dengan PHP 8.x untuk fitur terbaru.
+                </p>
+                <div class="info-box tip">
+                  <strong>💡 Tips:</strong> Download selalu dari website resmi untuk menghindari malware.
+                </div>
+              </div>
+            </div>
+
+            <div class="step-card" data-aos="fade-right">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 8px;">Jalankan Installer</h3>
+                <p class="md3-body-medium">
+                  Buka file installer yang sudah di-download. Di Windows, run as Administrator untuk menghindari masalah permission.
+                </p>
+                <ul class="md3-body-medium" style="margin: 8px 0 0 20px;">
+                  <li>Pilih drive instalasi (default: C:\xampp)</li>
+                  <li>Pilih komponen: Apache, MySQL, PHP, phpMyAdmin</li>
+                  <li>Tunggu proses instalasi selesai</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step-card" data-aos="fade-right">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 8px;">Verifikasi Instalasi</h3>
+                <p class="md3-body-medium">
+                  Setelah instalasi selesai, buka XAMPP Control Panel dan cek apakah semua service bisa dijalankan.
+                </p>
+                <div class="info-box success">
+                  <strong>✅ Berhasil jika:</strong> Apache dan MySQL bisa di-start tanpa error
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Server Setup Section -->
+      <section class="md3-section" id="server-setup" data-aos="fade-up">
+        <div class="md3-card md3-card-outlined">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">dns</span>
+                Setup & Menjalankan Server
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Setelah XAMPP berhasil diinstall, saatnya menjalankan server Apache untuk development:
+            </p>
+
+            <!-- XAMPP Control Panel Image -->
+            <div class="image-container">
+              <img src="image/bukaserverxampp.png" alt="XAMPP Control Panel" style="max-width: 100%; border-radius: 8px;">
+              <div class="image-caption">
+                <strong>XAMPP Control Panel</strong> - Interface untuk mengelola services
+              </div>
+            </div>
+
+            <!-- Service Status Explanation -->
+            <div class="code-showcase">
+              <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 16px;">Status Services:</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+                <span class="status-indicator status-running">
+                  <span class="material-symbols-outlined status-icon">check_circle</span>
+                  Apache: Running
+                </span>
+                <span class="status-indicator status-running">
+                  <span class="material-symbols-outlined status-icon">check_circle</span>
+                  MySQL: Running
+                </span>
+                <span class="status-indicator status-stopped">
+                  <span class="material-symbols-outlined status-icon">cancel</span>
+                  FileZilla: Stopped
+                </span>
+              </div>
+              <p class="md3-body-medium">
+                Untuk development PHP, kalian cukup menjalankan <strong>Apache</strong> saja. 
+                MySQL diperlukan jika akan menggunakan database.
+              </p>
+            </div>
+
+            <!-- Directory Structure -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">folder</span>
+                Struktur Direktori XAMPP
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-bash">C:\xampp\
+├── htdocs\          # Folder web files (PENTING!)
+├── php\             # PHP interpreter
+├── apache\          # Apache web server
+├── mysql\           # MySQL database
+└── xampp-control.exe # Control panel</code></pre>
+                </div>
+                <p class="md3-body-medium" style="margin-top: 12px;">
+                  <strong>htdocs</strong> adalah folder di mana kalian akan menyimpan semua file PHP dan website.
+                </p>
+              </div>
+            </div>
+
+            <!-- Quick Test -->
+            <div class="exercise-box">
+              <div class="exercise-title">
+                <span class="material-symbols-outlined">science</span>
+                Quick Test - Apakah Server Berjalan?
+              </div>
+              <ol class="md3-body-medium">
+                <li>Start Apache di XAMPP Control Panel</li>
+                <li>Buka browser dan kunjungi: <code>http://localhost</code></li>
+                <li>Jika muncul halaman XAMPP dashboard, berarti server sudah berjalan! 🎉</li>
+              </ol>
+            </div>
+
+            <div class="info-box warning">
+              <strong>❗ Troubleshooting:</strong>
+              <ul style="margin: 8px 0 0 20px;">
+                <li><strong>Port 80 sudah digunakan:</strong> Matikan Skype atau IIS</li>
+                <li><strong>Apache tidak bisa start:</strong> Run XAMPP sebagai Administrator</li>
+                <li><strong>Firewall blocking:</strong> Allow XAMPP melalui Windows Firewall</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PHP Syntax Basics -->
+      <section class="md3-section" id="php-syntax" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">code</span>
+                PHP Syntax Dasar
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              PHP (PHP: Hypertext Preprocessor) adalah bahasa server-side yang embedded dalam HTML. 
+              Mari pelajari syntax dasarnya:
+            </p>
+
+            <!-- PHP Tags -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">label</span>
+                PHP Opening & Closing Tags
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+    // PHP code di sini
+    echo "Hello World!";
+?&gt;</code></pre>
+                </div>
+                <p class="md3-body-medium" style="margin-top: 12px;">
+                  <strong>Penting:</strong> PHP code harus ditulis di antara tag <code>&lt;?php</code> dan <code>?&gt;</code>
+                </p>
+              </div>
+            </div>
+
+            <!-- First PHP File -->
+            <h3 class="md3-body-large" style="font-weight: 600; margin: 32px 0 16px 0;">File PHP Pertama</h3>
+            <p class="md3-body-medium">Buat file baru dengan nama <code>hello.php</code> di folder <code>C:\xampp\htdocs\</code>:</p>
+
+            <div class="md3-code-block">
+              <pre><code class="language-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Belajar PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Selamat Datang di PHP!&lt;/h1&gt;
+    
+    &lt;!-- HTML biasa --&gt;
+    &lt;p&gt;Kalimat ini dibuat dengan HTML&lt;/p&gt;
+    
+    &lt;?php
+        // PHP code
+        echo "&lt;p&gt;Kalimat ini dibuat dengan PHP&lt;/p&gt;";
+        echo "&lt;p&gt;Waktu sekarang: " . date("Y-m-d H:i:s") . "&lt;/p&gt;";
+    ?&gt;
+    
+    &lt;!-- HTML lagi --&gt;
+    &lt;p&gt;PHP dan HTML bisa dicampur dalam satu file&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+
+            <!-- Output Example -->
+            <div class="image-container">
+              <img src="image/bukaserver.png" alt="PHP Output Example" style="max-width: 100%;">
+              <div class="image-caption">
+                <strong>Output di browser</strong> - Hasil dari file PHP pertama
+              </div>
+            </div>
+
+            <!-- Testing Your File -->
+            <div class="exercise-box">
+              <div class="exercise-title">
+                <span class="material-symbols-outlined">assignment</span>
+                Cara Test File PHP
+              </div>
+              <ol class="md3-body-medium">
+                <li>Simpan file sebagai <code>hello.php</code> di <code>C:\xampp\htdocs\</code></li>
+                <li>Pastikan Apache sudah running di XAMPP</li>
+                <li>Buka browser dan kunjungi: <code>http://localhost/hello.php</code></li>
+                <li>Lihat hasilnya! PHP code akan diproses di server</li>
+              </ol>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="info-box tip">
+              <strong>📝 Penting untuk Diingat:</strong>
+              <ul style="margin: 8px 0 0 20px;">
+                <li><strong>File extension:</strong> Harus <code>.php</code> bukan <code>.html</code></li>
+                <li><strong>Server required:</strong> PHP butuh server (Apache) untuk dijalankan</li>
+                <li><strong>Case sensitive:</strong> PHP adalah case-sensitive untuk variabel</li>
+                <li><strong>Semicolon:</strong> Setiap statement PHP diakhiri dengan <code>;</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Variables & Data Types -->
+      <section class="md3-section" id="variables" data-aos="fade-up">
+        <div class="md3-card md3-card-outlined">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">data_object</span>
+                Variabel & Tipe Data
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Variabel adalah container untuk menyimpan data. Di PHP, variabel diawali dengan tanda <code>$</code>:
+            </p>
+
+            <!-- Variable Declaration -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">edit</span>
+                Deklarasi Variabel
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+// String
+$nama = "Budi Santoso";
+$alamat = 'Jakarta Selatan';
+
+// Integer
+$umur = 25;
+$jumlah = 100;
+
+// Float/Double
+$tinggi = 175.5;
+$berat = 68.7;
+
+// Boolean
+$aktif = true;
+$menikah = false;
+
+// Array
+$hobi = ["membaca", "coding", "gaming"];
+$nilai = array(85, 90, 78, 92);
+
+// Null
+$kosong = null;
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Data Types Table -->
+            <h3 class="md3-body-large" style="font-weight: 600; margin: 32px 0 16px 0;">Tipe Data PHP</h3>
+            <div class="table-responsive">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Tipe Data</th>
+                    <th>Deskripsi</th>
+                    <th>Contoh</th>
+                    <th>Function Check</th>
+                  </tr>
+                </thead>
+              <tbody>
+                <tr>
+                  <td><strong>String</strong></td>
+                  <td>Teks/karakter</td>
+                  <td><code>"Hello World"</code></td>
+                  <td><code>is_string()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Integer</strong></td>
+                  <td>Bilangan bulat</td>
+                  <td><code>42</code></td>
+                  <td><code>is_int()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Float</strong></td>
+                  <td>Bilangan desimal</td>
+                  <td><code>3.14</code></td>
+                  <td><code>is_float()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Boolean</strong></td>
+                  <td>True/False</td>
+                  <td><code>true</code></td>
+                  <td><code>is_bool()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Array</strong></td>
+                  <td>Kumpulan data</td>
+                  <td><code>[1, 2, 3]</code></td>
+                  <td><code>is_array()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Null</strong></td>
+                  <td>Tidak ada nilai</td>
+                  <td><code>null</code></td>
+                  <td><code>is_null()</code></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+
+            <!-- Practical Example -->
+            <h3 class="md3-body-large" style="font-weight: 600; margin: 32px 0 16px 0;">Contoh Praktis</h3>
+            <div class="md3-code-block">
+              <pre><code class="language-php">&lt;?php
+// Data mahasiswa
+$nama = "Siti Nurhaliza";
+$nim = 12345678;
+$ipk = 3.85;
+$aktif = true;
+$mata_kuliah = ["PHP", "JavaScript", "Database", "HTML/CSS"];
+
+// Menampilkan informasi
+echo "&lt;h2&gt;Data Mahasiswa&lt;/h2&gt;";
+echo "&lt;p&gt;&lt;strong&gt;Nama:&lt;/strong&gt; " . $nama . "&lt;/p&gt;";
+echo "&lt;p&gt;&lt;strong&gt;NIM:&lt;/strong&gt; " . $nim . "&lt;/p&gt;";
+echo "&lt;p&gt;&lt;strong&gt;IPK:&lt;/strong&gt; " . $ipk . "&lt;/p&gt;";
+echo "&lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; " . ($aktif ? "Aktif" : "Tidak Aktif") . "&lt;/p&gt;";
+
+// Menampilkan array
+echo "&lt;h3&gt;Mata Kuliah:&lt;/h3&gt;&lt;ul&gt;";
+foreach ($mata_kuliah as $mk) {
+    echo "&lt;li&gt;" . $mk . "&lt;/li&gt;";
+}
+echo "&lt;/ul&gt;";
+
+// Cek tipe data
+echo "&lt;h3&gt;Debug Info:&lt;/h3&gt;";
+echo "Tipe data nama: " . gettype($nama) . "&lt;br&gt;";
+echo "Tipe data umur: " . gettype($nim) . "&lt;br&gt;";
+echo "Tipe data IPK: " . gettype($ipk) . "&lt;br&gt;";
+?&gt;</code></pre>
+            </div>
+
+            <div class="output-example">
+              <strong>Output:</strong><br>
+              <strong>Nama:</strong> Siti Nurhaliza<br>
+              <strong>NIM:</strong> 12345678<br>
+              <strong>IPK:</strong> 3.85<br>
+              <strong>Status:</strong> Aktif<br>
+              <br>
+              <strong>Mata Kuliah:</strong><br>
+              • PHP<br>
+              • JavaScript<br>
+              • Database<br>
+              • HTML/CSS<br>
+              <br>
+              <strong>Debug Info:</strong><br>
+              Tipe data nama: string<br>
+              Tipe data umur: integer<br>
+              Tipe data IPK: double
+            </div>
+
+            <!-- Variable Rules -->
+            <div class="info-box warning">
+              <strong>📋 Aturan Penamaan Variabel:</strong>
+              <ul style="margin: 8px 0 0 20px;">
+                <li><strong>Harus diawali dengan $:</strong> <code>$nama</code> ✅, <code>nama</code> ❌</li>
+                <li><strong>Karakter pertama huruf atau underscore:</strong> <code>$_nama</code> ✅, <code>$1nama</code> ❌</li>
+                <li><strong>Case sensitive:</strong> <code>$Nama</code> ≠ <code>$nama</code></li>
+                <li><strong>Tidak boleh ada spasi:</strong> <code>$nama_lengkap</code> ✅, <code>$nama lengkap</code> ❌</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Control Structures -->
+      <section class="md3-section" id="control-structures" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">account_tree</span>
+                Control Structures
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Control structures memungkinkan program untuk membuat keputusan dan mengulang kode. 
+              Mari pelajari kondisi dan perulangan di PHP:
+            </p>
+
+            <!-- IF Statement -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">fork_right</span>
+                Kondisi (If Statement)
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+$nilai = 85;
+
+// If sederhana
+if ($nilai >= 80) {
+    echo "Nilai Anda: A (Sangat Baik)";
+}
+
+// If-else
+if ($nilai >= 80) {
+    echo "Lulus dengan baik";
+} else {
+    echo "Perlu belajar lebih giat";
+}
+
+// If-elseif-else
+if ($nilai >= 90) {
+    $grade = "A+";
+} elseif ($nilai >= 80) {
+    $grade = "A";
+} elseif ($nilai >= 70) {
+    $grade = "B";
+} elseif ($nilai >= 60) {
+    $grade = "C";
+} else {
+    $grade = "D";
+}
+
+echo "Grade Anda: " . $grade;
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Switch Statement -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">alt_route</span>
+                Switch Statement
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+$hari = date('N'); // 1=Senin, 7=Minggu
+
+switch ($hari) {
+    case 1:
+        $nama_hari = "Senin";
+        $motivasi = "Semangat memulai minggu baru!";
+        break;
+    case 2:
+        $nama_hari = "Selasa";
+        $motivasi = "Terus berjuang!";
+        break;
+    case 3:
+        $nama_hari = "Rabu";
+        $motivasi = "Pertengahan minggu, jangan menyerah!";
+        break;
+    case 4:
+        $nama_hari = "Kamis";
+        $motivasi = "Hampir weekend!";
+        break;
+    case 5:
+        $nama_hari = "Jumat";
+        $motivasi = "Last push sebelum weekend!";
+        break;
+    case 6:
+    case 7:
+        $nama_hari = ($hari == 6) ? "Sabtu" : "Minggu";
+        $motivasi = "Waktunya istirahat dan refreshing!";
+        break;
+    default:
+        $nama_hari = "Unknown";
+        $motivasi = "Hari yang aneh...";
+}
+
+echo "&lt;h3&gt;Hari ini: {$nama_hari}&lt;/h3&gt;";
+echo "&lt;p&gt;{$motivasi}&lt;/p&gt;";
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Loops -->
+            <h3 class="md3-body-large" style="font-weight: 600; margin: 32px 0 16px 0;">Perulangan (Loops)</h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+              <!-- For Loop -->
+              <div class="syntax-card">
+                <div class="syntax-header">For Loop</div>
+                <div class="syntax-body">
+                  <div class="md3-code-block" style="font-size: 13px;">
+                    <pre><code class="language-php">&lt;?php
+// For loop dasar
+for ($i = 1; $i &lt;= 5; $i++) {
+    echo "Angka: " . $i . "&lt;br&gt;";
+}
+
+// Membuat tabel perkalian
+echo "&lt;h4&gt;Tabel Perkalian 5:&lt;/h4&gt;";
+for ($i = 1; $i &lt;= 10; $i++) {
+    $hasil = 5 * $i;
+    echo "5 x {$i} = {$hasil}&lt;br&gt;";
+}
+?&gt;</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- While Loop -->
+              <div class="syntax-card">
+                <div class="syntax-header">While Loop</div>
+                <div class="syntax-body">
+                  <div class="md3-code-block" style="font-size: 13px;">
+                    <pre><code class="language-php">&lt;?php
+$counter = 1;
+
+// While loop
+while ($counter &lt;= 5) {
+    echo "Counter: " . $counter . "&lt;br&gt;";
+    $counter++;
+}
+
+// Mencari bilangan genap
+$num = 2;
+echo "&lt;h4&gt;5 Bilangan Genap:&lt;/h4&gt;";
+$count = 0;
+while ($count &lt; 5) {
+    echo $num . " ";
+    $num += 2;
+    $count++;
+}
+?&gt;</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Foreach Loop -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">refresh</span>
+                Foreach Loop (untuk Array)
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+// Array sederhana
+$buah = ["Apel", "Jeruk", "Mangga", "Pisang"];
+
+echo "&lt;h4&gt;Daftar Buah:&lt;/h4&gt;&lt;ul&gt;";
+foreach ($buah as $item) {
+    echo "&lt;li&gt;" . $item . "&lt;/li&gt;";
+}
+echo "&lt;/ul&gt;";
+
+// Array dengan key dan value
+$mahasiswa = [
+    "nama" =&gt; "Andi Susanto",
+    "nim" =&gt; "12345678",
+    "jurusan" =&gt; "Informatika",
+    "semester" =&gt; 5
+];
+
+echo "&lt;h4&gt;Data Mahasiswa:&lt;/h4&gt;&lt;dl&gt;";
+foreach ($mahasiswa as $key =&gt; $value) {
+    echo "&lt;dt&gt;" . ucfirst($key) . ":&lt;/dt&gt;";
+    echo "&lt;dd&gt;" . $value . "&lt;/dd&gt;";
+}
+echo "&lt;/dl&gt;";
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Practical Example -->
+            <div class="exercise-box">
+              <div class="exercise-title">
+                <span class="material-symbols-outlined">code</span>
+                Latihan: Sistem Penilaian Sederhana
+              </div>
+              <div class="md3-code-block" style="margin-top: 12px;">
+                <pre><code class="language-php">&lt;?php
+$nilai_mahasiswa = [
+    ["nama" =&gt; "Budi", "nilai" =&gt; 85],
+    ["nama" =&gt; "Siti", "nilai" =&gt; 92],
+    ["nama" =&gt; "Andi", "nilai" =&gt; 76],
+    ["nama" =&gt; "Rina", "nilai" =&gt; 88],
+    ["nama" =&gt; "Doni", "nilai" =&gt; 65]
+];
+
+echo "&lt;h3&gt;Hasil Evaluasi Mahasiswa&lt;/h3&gt;";
+echo "&lt;table border='1' style='border-collapse: collapse; width: 100%;'&gt;";
+echo "&lt;tr&gt;&lt;th&gt;Nama&lt;/th&gt;&lt;th&gt;Nilai&lt;/th&gt;&lt;th&gt;Grade&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;";
+
+foreach ($nilai_mahasiswa as $mhs) {
+    // Tentukan grade
+    if ($mhs["nilai"] &gt;= 90) {
+        $grade = "A";
+    } elseif ($mhs["nilai"] &gt;= 80) {
+        $grade = "B";
+    } elseif ($mhs["nilai"] &gt;= 70) {
+        $grade = "C";
+    } else {
+        $grade = "D";
+    }
+    
+    // Tentukan status
+    $status = ($mhs["nilai"] &gt;= 70) ? "LULUS" : "TIDAK LULUS";
+    $warna = ($status == "LULUS") ? "green" : "red";
+    
+    echo "&lt;tr&gt;";
+    echo "&lt;td&gt;" . $mhs["nama"] . "&lt;/td&gt;";
+    echo "&lt;td&gt;" . $mhs["nilai"] . "&lt;/td&gt;";
+    echo "&lt;td&gt;" . $grade . "&lt;/td&gt;";
+    echo "&lt;td style='color: {$warna}; font-weight: bold;'&gt;" . $status . "&lt;/td&gt;";
+    echo "&lt;/tr&gt;";
+}
+
+echo "&lt;/table&gt;";
+?&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Functions -->
+      <section class="md3-section" id="functions" data-aos="fade-up">
+        <div class="md3-card md3-card-outlined">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">functions</span>
+                Functions & Include
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Functions memungkinkan kita untuk mengorganisir kode yang dapat digunakan kembali. 
+              Mari pelajari cara membuat dan menggunakan function di PHP:
+            </p>
+
+            <!-- Basic Function -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">play_circle</span>
+                Function Dasar
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+// Function sederhana tanpa parameter
+function sayHello() {
+    echo "Hello, World!";
+}
+
+// Function dengan parameter
+function greetUser($nama) {
+    echo "Halo, " . $nama . "! Selamat datang.";
+}
+
+// Function dengan return value
+function hitungLuas($panjang, $lebar) {
+    $luas = $panjang * $lebar;
+    return $luas;
+}
+
+// Function dengan default parameter
+function buatProfile($nama, $umur = 20, $kota = "Jakarta") {
+    return "Nama: {$nama}, Umur: {$umur}, Kota: {$kota}";
+}
+
+// Memanggil functions
+sayHello(); // Output: Hello, World!
+echo "&lt;br&gt;";
+
+greetUser("Budi"); // Output: Halo, Budi! Selamat datang.
+echo "&lt;br&gt;";
+
+$luas = hitungLuas(10, 5);
+echo "Luas persegi panjang: " . $luas . " m²";
+echo "&lt;br&gt;";
+
+echo buatProfile("Siti", 25, "Bandung");
+echo "&lt;br&gt;";
+
+echo buatProfile("Andi"); // Menggunakan default values
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Functions -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">settings</span>
+                Function Lanjutan
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+// Function dengan multiple return values
+function hitungBangunDatar($panjang, $lebar) {
+    $luas = $panjang * $lebar;
+    $keliling = 2 * ($panjang + $lebar);
+    
+    return [
+        "luas" =&gt; $luas,
+        "keliling" =&gt; $keliling,
+        "panjang" =&gt; $panjang,
+        "lebar" =&gt; $lebar
+    ];
+}
+
+// Function untuk validasi
+function validasiEmail($email) {
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    }
+    return false;
+}
+
+// Function rekursif (memanggil dirinya sendiri)
+function faktorial($n) {
+    if ($n &lt;= 1) {
+        return 1;
+    }
+    return $n * faktorial($n - 1);
+}
+
+// Contoh penggunaan
+$hasil = hitungBangunDatar(8, 6);
+echo "&lt;h4&gt;Hasil Perhitungan Persegi Panjang:&lt;/h4&gt;";
+echo "Panjang: " . $hasil["panjang"] . " cm&lt;br&gt;";
+echo "Lebar: " . $hasil["lebar"] . " cm&lt;br&gt;";
+echo "Luas: " . $hasil["luas"] . " cm²&lt;br&gt;";
+echo "Keliling: " . $hasil["keliling"] . " cm&lt;br&gt;&lt;br&gt;";
+
+// Test validasi email
+$emails = ["test@email.com", "invalid-email", "user@domain.co.id"];
+foreach ($emails as $email) {
+    $status = validasiEmail($email) ? "✅ Valid" : "❌ Invalid";
+    echo $email . " → " . $status . "&lt;br&gt;";
+}
+
+echo "&lt;br&gt;Faktorial 5 = " . faktorial(5);
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Include & Require -->
+            <h3 class="md3-body-large" style="font-weight: 600; margin: 32px 0 16px 0;">Include & Require</h3>
+            <p class="md3-body-medium">
+              Include dan require memungkinkan kita untuk memisahkan kode ke file terpisah dan menggunakannya kembali:
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 16px;">
+              <!-- Config File Example -->
+              <div class="syntax-card">
+                <div class="syntax-header">config.php</div>
+                <div class="syntax-body">
+                  <div class="md3-code-block" style="font-size: 13px;">
+                    <pre><code class="language-php">&lt;?php
+// File konfigurasi
+$site_name = "Belajar PHP";
+$version = "1.0";
+$admin_email = "admin@example.com";
+
+// Database config
+$db_host = "localhost";
+$db_name = "belajar_php";
+$db_user = "root";
+$db_pass = "";
+
+// Fungsi helper
+function formatTanggal($date) {
+    return date("d/m/Y", strtotime($date));
+}
+?&gt;</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main File Example -->
+              <div class="syntax-card">
+                <div class="syntax-header">index.php</div>
+                <div class="syntax-body">
+                  <div class="md3-code-block" style="font-size: 13px;">
+                    <pre><code class="language-php">&lt;?php
+// Menggunakan include
+include 'config.php';
+
+echo "&lt;h1&gt;" . $site_name . "&lt;/h1&gt;";
+echo "&lt;p&gt;Version: " . $version . "&lt;/p&gt;";
+echo "&lt;p&gt;Contact: " . $admin_email . "&lt;/p&gt;";
+
+// Menggunakan fungsi dari file lain
+echo "&lt;p&gt;Tanggal: " . formatTanggal("2024-01-15") . "&lt;/p&gt;";
+
+// Include file HTML
+include 'header.html';
+include 'content.php';
+include 'footer.html';
+?&gt;</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Include vs Require -->
+            <div class="info-box tip">
+              <strong>📋 Perbedaan Include vs Require:</strong>
+              <ul style="margin: 8px 0 0 20px;">
+                <li><strong>include:</strong> Jika file tidak ditemukan, hanya warning. Script tetap jalan.</li>
+                <li><strong>require:</strong> Jika file tidak ditemukan, error fatal. Script berhenti.</li>
+                <li><strong>include_once/require_once:</strong> Hanya include sekali, mencegah duplikasi.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Database Connection -->
+      <section class="md3-section" id="database" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">database</span>
+                Database Connection Dasar
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Salah satu kekuatan PHP adalah kemampuannya berinteraksi dengan database. 
+              Mari pelajari cara koneksi ke MySQL menggunakan MySQLi:
+            </p>
+
+            <!-- Database Setup -->
+            <div class="step-card" data-aos="fade-right">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3 class="md3-body-large" style="font-weight: 600; margin-bottom: 8px;">Setup Database</h3>
+                <p class="md3-body-medium">
+                  Buka phpMyAdmin di <code>http://localhost/phpmyadmin</code> dan buat database baru:
+                </p>
+                <div class="md3-code-block">
+                  <pre><code class="language-sql">CREATE DATABASE belajar_php;
+USE belajar_php;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    umur INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Connection Code -->
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">link</span>
+                Koneksi Database
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+// Database connection
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "belajar_php";
+
+// Membuat koneksi
+$conn = new mysqli($host, $username, $password, $database);
+
+// Cek koneksi
+if ($conn-&gt;connect_error) {
+    die("Koneksi gagal: " . $conn-&gt;connect_error);
+}
+
+echo "Koneksi database berhasil!";
+
+// Jangan lupa tutup koneksi
+$conn-&gt;close();
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- CRUD Operations -->
+            <h3 class="md3-body-large" style="font-weight: 600; margin: 32px 0 16px 0;">CRUD Operations</h3>
+            
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">add</span>
+                Create (Insert Data)
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+// Koneksi database (sama seperti di atas)
+$conn = new mysqli("localhost", "root", "", "belajar_php");
+
+// Insert data
+$nama = "Budi Santoso";
+$email = "budi@email.com";
+$umur = 25;
+
+$sql = "INSERT INTO users (nama, email, umur) VALUES (?, ?, ?)";
+$stmt = $conn-&gt;prepare($sql);
+$stmt-&gt;bind_param("ssi", $nama, $email, $umur);
+
+if ($stmt-&gt;execute()) {
+    echo "Data berhasil ditambahkan! ID: " . $conn-&gt;insert_id;
+} else {
+    echo "Error: " . $stmt-&gt;error;
+}
+
+$stmt-&gt;close();
+$conn-&gt;close();
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="syntax-card">
+              <div class="syntax-header">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">visibility</span>
+                Read (Select Data)
+              </div>
+              <div class="syntax-body">
+                <div class="md3-code-block">
+                  <pre><code class="language-php">&lt;?php
+$conn = new mysqli("localhost", "root", "", "belajar_php");
+
+// Select all data
+$sql = "SELECT id, nama, email, umur, created_at FROM users ORDER BY created_at DESC";
+$result = $conn-&gt;query($sql);
+
+if ($result-&gt;num_rows &gt; 0) {
+    echo "&lt;h3&gt;Daftar Users:&lt;/h3&gt;";
+    echo "&lt;table border='1' style='border-collapse: collapse; width: 100%;'&gt;";
+    echo "&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Nama&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Umur&lt;/th&gt;&lt;th&gt;Tanggal&lt;/th&gt;&lt;/tr&gt;";
+    
+    while ($row = $result-&gt;fetch_assoc()) {
+        echo "&lt;tr&gt;";
+        echo "&lt;td&gt;" . $row["id"] . "&lt;/td&gt;";
+        echo "&lt;td&gt;" . $row["nama"] . "&lt;/td&gt;";
+        echo "&lt;td&gt;" . $row["email"] . "&lt;/td&gt;";
+        echo "&lt;td&gt;" . $row["umur"] . "&lt;/td&gt;";
+        echo "&lt;td&gt;" . date("d/m/Y", strtotime($row["created_at"])) . "&lt;/td&gt;";
+        echo "&lt;/tr&gt;";
+    }
+    echo "&lt;/table&gt;";
+} else {
+    echo "Tidak ada data ditemukan.";
+}
+
+$conn-&gt;close();
+?&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Best Practices -->
+            <div class="info-box success">
+              <strong>✅ Best Practices Database:</strong>
+              <ul style="margin: 8px 0 0 20px;">
+                <li><strong>Gunakan Prepared Statements:</strong> Mencegah SQL Injection</li>
+                <li><strong>Validasi Input:</strong> Selalu validasi data sebelum insert</li>
+                <li><strong>Tutup Koneksi:</strong> Gunakan <code>$conn-&gt;close()</code></li>
+                <li><strong>Handle Errors:</strong> Selalu cek error dan handle dengan baik</li>
+                <li><strong>Gunakan Transactions:</strong> Untuk operasi yang complex</li>
+              </ul>
+            </div>
+
+            <!-- Complete Example -->
+            <div class="exercise-box">
+              <div class="exercise-title">
+                <span class="material-symbols-outlined">assignment</span>
+                Project Mini: Sistem Registrasi Sederhana
+              </div>
+              <div class="md3-code-block" style="margin-top: 12px;">
+                <pre><code class="language-php">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Registrasi User&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Form Registrasi&lt;/h2&gt;
+    
+    &lt;form method="POST" action=""&gt;
+        &lt;p&gt;
+            &lt;label&gt;Nama: &lt;/label&gt;
+            &lt;input type="text" name="nama" required&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label&gt;Email: &lt;/label&gt;
+            &lt;input type="email" name="email" required&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label&gt;Umur: &lt;/label&gt;
+            &lt;input type="number" name="umur" min="1" max="120" required&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;input type="submit" name="submit" value="Daftar"&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+
+    &lt;?php
+    if (isset($_POST['submit'])) {
+        $conn = new mysqli("localhost", "root", "", "belajar_php");
+        
+        if ($conn-&gt;connect_error) {
+            die("Koneksi gagal: " . $conn-&gt;connect_error);
+        }
+        
+        $nama = $_POST['nama'];
+        $email = $_POST['email'];
+        $umur = $_POST['umur'];
+        
+        // Cek apakah email sudah ada
+        $check_sql = "SELECT id FROM users WHERE email = ?";
+        $check_stmt = $conn-&gt;prepare($check_sql);
+        $check_stmt-&gt;bind_param("s", $email);
+        $check_stmt-&gt;execute();
+        $check_result = $check_stmt-&gt;get_result();
+        
+        if ($check_result-&gt;num_rows &gt; 0) {
+            echo "&lt;p style='color: red;'&gt;Email sudah terdaftar!&lt;/p&gt;";
+        } else {
+            // Insert user baru
+            $insert_sql = "INSERT INTO users (nama, email, umur) VALUES (?, ?, ?)";
+            $insert_stmt = $conn-&gt;prepare($insert_sql);
+            $insert_stmt-&gt;bind_param("ssi", $nama, $email, $umur);
+            
+            if ($insert_stmt-&gt;execute()) {
+                echo "&lt;p style='color: green;'&gt;Registrasi berhasil! Selamat datang, " . htmlspecialchars($nama) . "&lt;/p&gt;";
+            } else {
+                echo "&lt;p style='color: red;'&gt;Terjadi kesalahan: " . $insert_stmt-&gt;error . "&lt;/p&gt;";
+            }
+            $insert_stmt-&gt;close();
+        }
+        
+        $check_stmt-&gt;close();
+        $conn-&gt;close();
+    }
+    ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+              <p class="md3-body-medium" style="margin-top: 12px;">
+                <strong>Simpan sebagai:</strong> <code>registrasi.php</code> di folder htdocs, 
+                lalu akses via <code>http://localhost/registrasi.php</code>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Floating Action Button -->
+  <button class="md3-fab" id="scroll-to-top">
+    <span class="material-symbols-outlined">keyboard_arrow_up</span>
+  </button>
+
+  <!-- Scripts -->
+  <script src="js/prism.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/material3-interactions.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true
+    });
+
+    // Theme Toggle - Fixed version
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+    const root = document.documentElement;
+
+    function updateTheme(isDark) {
+      const theme = isDark ? 'dark' : 'light';
+      
+      // Save current scroll position
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Update both body and root element
+      body.setAttribute('data-theme', theme);
+      root.setAttribute('data-theme', theme);
+      
+      // Update icon
+      if (isDark) {
+        themeIcon.textContent = 'light_mode';
+      } else {
+        themeIcon.textContent = 'dark_mode';
+      }
+      
+      // Save to localStorage
+      localStorage.setItem('theme', theme);
+      
+      // Force CSS update without affecting scroll position
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollPosition);
+      });
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      updateTheme(savedTheme === 'dark');
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      updateTheme(prefersDark);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || root.getAttribute('data-theme');
+      const isDark = currentTheme !== 'dark';
+      updateTheme(isDark);
+    });
+
+    // Scroll to top
+    const scrollButton = document.getElementById('scroll-to-top');
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Show/hide scroll button
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollButton.style.opacity = '1';
+        scrollButton.style.visibility = 'visible';
+      } else {
+        scrollButton.style.opacity = '0';
+        scrollButton.style.visibility = 'hidden';
+      }
+    });
+
+    // Mobile navigation
+    const menuToggle = document.getElementById('menu-toggle');
+    const navRail = document.getElementById('navigation-rail');
+    let isNavOpen = false;
+
+    menuToggle.addEventListener('click', () => {
+      isNavOpen = !isNavOpen;
+      if (window.innerWidth <= 768) {
+        navRail.style.display = isNavOpen ? 'flex' : 'none';
+      }
+    });
+
+    // Navigation active state
+    const navItems = document.querySelectorAll('.md3-navigation-rail-item');
+    const sections = document.querySelectorAll('.md3-section[id]');
+
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === `#${current}`) {
+          item.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Initial scroll button state
+    scrollButton.style.opacity = '0';
+    scrollButton.style.visibility = 'hidden';
+    scrollButton.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
+  </script>
+
+</body>
 </html>

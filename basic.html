@@ -1,363 +1,779 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Basic HTML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar HTML - Material Design 3</title>
   <link rel="icon" type="image/png" href="image/flixdz_top.png">
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-    crossorigin="anonymous"></script>
-  <!-- Prism JS -->
+  
+  <!-- Prevent theme flash (set theme before CSS paints) -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        var s = document.createElement('style');
+        s.textContent = t === 'dark' ? 'html{background:#131318;color:#E6E0E9;}' : 'html{background:#FFFBFE;color:#1C1B1F;}';
+        document.head.appendChild(s);
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Local fonts are loaded via CSS @font-face -->
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <!-- Material 3 CSS -->
+  <link rel="stylesheet" href="css/material3-redesign.css">
+  
+  <!-- Prism CSS for Code Highlighting -->
   <link rel="stylesheet" href="css/prism.css">
-  <script src="js/prism.js"></script>
-  <!-- Dark Mode -->
-  <link rel="stylesheet" href="css/dark-mode.css">
-  <!-- AOS PLUGIN -->
+  
+  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/nav.css" rel="stylesheet">
-  <script src="js/theme.js"></script>
-  <link rel="stylesheet" href="css/multilevel.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+  
+  <style>
+    /* Enhanced Navigation Rail - Centered and Fixed */
+    .nav-section {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .nav-section-title {
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 12px;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    
+    .md3-navigation-rail-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      margin: 2px 0;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--md-sys-color-on-surface-variant);
+      transition: all 0.2s ease;
+      gap: 4px;
+      width: 72px;
+      min-height: 56px;
+    }
+    
+    .md3-navigation-rail-item:hover {
+      background-color: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+    }
+    
+    .md3-navigation-rail-item.active {
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+    }
+    
+    .nav-label {
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 64px;
+    }
+
+    /* Additional custom styles */
+    .hero-section {
+      background: linear-gradient(135deg, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-secondary-container) 100%);
+      padding: 48px 0;
+      text-align: center;
+      margin-bottom: 32px;
+      border-radius: var(--md-sys-shape-corner-large);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-icon {
+      font-size: 72px;
+      color: var(--md-sys-color-primary);
+      margin-bottom: 16px;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .stat-card {
+      text-align: center;
+      padding: 24px 16px;
+    }
+    
+    .stat-number {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--md-sys-color-primary);
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-top: 4px;
+    }
+    
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: var(--md-sys-shape-corner-small);
+      transition: background-color 0.2s ease;
+    }
+    
+    .feature-item:hover {
+      background-color: color-mix(in srgb, var(--md-sys-color-primary) 5%, transparent);
+    }
+    
+    .feature-icon {
+      color: var(--md-sys-color-primary);
+      font-size: 20px;
+    }
+    
+  </style>
 </head>
 
-<body>
-   <nav class="navbar bg-light navbar-expand-lg sticky-top" id="NavBar">
-        <div class="container-fluid">
-            <a href="#"><img class="navbar-brand" id="light" width="100"></a>
-            <button class="navbar-toggler collapsed border-0 shadow-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation" style="box-shadow:none; outline:none;">
-                <span class="icon-bar top-bar"></span>
-                <span class="icon-bar middle-bar"></span>
-                <span class="icon-bar bottom-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav text-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="https://github.com/muhfhri"><iconify-icon
-                                inline icon="line-md:github-loop"></iconify-icon> GitHub</a>
-                    </li>
-                </ul>
-                <div class="ms-auto">
-                    <input type="checkbox" class="btn-check" id="darkSwitch" checked autocomplete="off">
-                    <label class="btn btn-dark btn-sm rounded-5" for="darkSwitch" data-aos-duration="2000"
-                        data-aos="fade-in"><iconify-icon id="darkmode"></iconify-icon></label>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Navbar End -->
+<body data-theme="light">
 
-  <nav aria-label="breadcrumb" class="my-3">
-  <ol class="breadcrumb px-3 py-2">
-    <li class="breadcrumb-item">
-      <a href="index.html" class="m3-color fw-bold text-decoration-none"> Home</a>
-    </li>
-    <li class="breadcrumb-item dropdown" id="breadcrumb-html-dropdown">
-      <a class="dropdown-toggle m3-color fw-bold text-decoration-none" href="#" id="breadcrumbHtmlDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        HTML
+  <!-- Material 3 App Bar -->
+  <header class="md3-top-app-bar">
+    <button class="md3-icon-button" id="menu-toggle">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <h1 class="md3-top-app-bar-title">Belajar HTML</h1>
+    <button class="md3-icon-button" id="theme-toggle">
+      <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+    </button>
+    <a href="https://github.com/muhfhri" target="_blank" class="md3-icon-button">
+      <span class="material-symbols-outlined">code</span>
+    </a>
+  </header>
+
+  <!-- Navigation Rail -->
+  <nav class="md3-navigation-rail" id="navigation-rail">
+    <div class="nav-section">
+      <div class="nav-section-title">Navigation</div>
+      <a href="index.html" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">home</span>
+        <span class="nav-label">Home</span>
       </a>
-      <ul class="dropdown-menu" aria-labelledby="breadcrumbHtmlDropdown">
-        <li><a class="dropdown-item active" href="#">Basic HTML</a></li>
-        <li><a class="dropdown-item" href="format-text.html">Format Text</a></li>
-        <!-- Tambahkan halaman HTML lain di sini -->
-      </ul>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Basic HTML</li>
-  </ol>
-</nav>
-
-  <div class="container p-3 mb-2">
-    <center data-aos="fade-up">
-      <iconify-icon icon="akar-icons:html-fill" inline width="100" class="m3-color"></iconify-icon>
-      <br><small>Belajar HTML5</small>
-    </center>
-
-    <!-- Pendahuluan -->
-    <div class="container py-4" data-aos="zoom-in">
-      <hr class="mb-4">
-      <h3 class="mb-3"><i class="fa fa-mortar-board"></i> Pendahuluan</h3>
-      <p>
-        Kalian ingin belajar <i>ngoding</i> tapi masih belum paham konsep dasarnya?
-        <br>Tenang! Kali ini saya akan ajarkan kalian cara menulis kode HTML dengan mudah.
-      </p>
     </div>
 
-    <!-- Daftar Isi -->
-    <div class="container py-4" data-aos="zoom-in">
-      <div class="p-3 border rounded bg-light">
-        <p class="mb-2">
-          <iconify-icon inline icon="line-md:align-right"></iconify-icon>
-          <span class="h5"> Daftar Isi Halaman Web</span>
+    <div class="nav-section">
+      <div class="nav-section-title">HTML Tutorial</div>
+      <a href="basic.html" class="md3-navigation-rail-item active">
+        <span class="material-symbols-outlined">school</span>
+        <span class="nav-label">Basic HTML</span>
+      </a>
+      <a href="format-text.html" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">format_bold</span>
+        <span class="nav-label">Format Text</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Bagian Halaman</div>
+      <a href="#basik" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">play_circle</span>
+        <span class="nav-label">Basic</span>
+      </a>
+      <a href="#taghtml" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">code</span>
+        <span class="nav-label">Tag HTML</span>
+      </a>
+      <a href="#buatpara" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">article</span>
+        <span class="nav-label">Paragraf</span>
+      </a>
+      <a href="#masukgambar" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">image</span>
+        <span class="nav-label">Gambar</span>
+      </a>
+      <a href="#aturfont" class="md3-navigation-rail-item">
+        <span class="material-symbols-outlined">font_download</span>
+        <span class="nav-label">Font</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="md3-content">
+    <div class="md3-container">
+      
+      <!-- Breadcrumb -->
+      <nav class="md3-breadcrumb" data-aos="fade-in">
+        <a href="index.html" class="md3-breadcrumb-item">Home</a>
+        <span class="md3-breadcrumb-separator material-symbols-outlined">chevron_right</span>
+        <span class="md3-breadcrumb-item current">Basic HTML</span>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section md3-card" data-aos="zoom-in">
+        <div class="hero-icon">
+          <span class="material-symbols-outlined" style="font-size: inherit;">code</span>
+        </div>
+        <h1 class="md3-display-large" style="margin-bottom: 16px;">Belajar HTML5</h1>
+        <p class="md3-body-large" style="max-width: 600px; margin: 0 auto;">
+          Pelajari dasar-dasar HTML dengan pendekatan modern dan interaktif. 
+          Cocok untuk pemula yang ingin memulai perjalanan programming.
         </p>
-        <ul class="list-unstyled ms-3">
-          <li><a href="#basik" class="text-decoration-none">🔹 Basic HTML</a></li>
-          <li><a href="#taghtml" class="text-decoration-none">🔹 Tag HTML</a></li>
-          <li><a href="#buatpara" class="text-decoration-none">🔹 Membuat Paragraf</a></li>
-          <li><a href="#masukgambar" class="text-decoration-none">🔹 Memasukkan Gambar</a></li>
-          <li><a href="#aturfont" class="text-decoration-none">🔹 Mengatur Font</a></li>
-        </ul>
-      </div>
-    </div>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number">5</span>
+            <div class="stat-label">Topik Utama</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">15</span>
+            <div class="stat-label">Contoh Kode</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <div class="stat-label">Gratis</div>
+          </div>
+        </div>
+      </section>
 
+      <!-- Introduction -->
+      <section class="md3-section" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">school</span>
+                Pendahuluan
+              </h2>
+            </div>
+            <p class="md3-body-large">
+              Kalian ingin belajar <em>ngoding</em> tapi masih belum paham konsep dasarnya?
+              Tenang! Kali ini saya akan ajarkan kalian cara menulis kode HTML dengan mudah dan menyenangkan.
+            </p>
+          </div>
+        </div>
+      </section>
 
+      <!-- Table of Contents -->
+      <section class="md3-section" data-aos="fade-up">
+        <div class="md3-toc md3-card">
+          <div class="md3-toc-title">
+            <span class="material-symbols-outlined">list</span>
+            Daftar Isi Tutorial
+          </div>
+          <ul class="md3-toc-list">
+            <li class="md3-toc-item">
+              <a href="#basik" class="md3-toc-link">
+                <span class="material-symbols-outlined">play_circle</span>
+                Basic HTML
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#taghtml" class="md3-toc-link">
+                <span class="material-symbols-outlined">code</span>
+                Tag HTML
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#buatpara" class="md3-toc-link">
+                <span class="material-symbols-outlined">article</span>
+                Membuat Paragraf
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#masukgambar" class="md3-toc-link">
+                <span class="material-symbols-outlined">image</span>
+                Memasukkan Gambar
+              </a>
+            </li>
+            <li class="md3-toc-item">
+              <a href="#aturfont" class="md3-toc-link">
+                <span class="material-symbols-outlined">font_download</span>
+                Mengatur Font
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <div class="container py-4" data-aos="zoom-in" id="basik">
-      <hr class="mb-4">
-      <h3 class="mb-3"><i class="fa fa-question-circle"></i> Basic HTML</h3>
-      <p>
-        Pertama, siapkan dulu alat untuk ngoding kalian, seperti komputer, laptop, atau smartphone yang kalian miliki.
-        <br><br>
-        Saya sarankan jika kalian punya laptop atau komputer, gunakan aplikasi <a
-          href="https://code.visualstudio.com/download" target="_blank">Visual Studio Code</a>, tersedia untuk Windows
-        dan MacOS.
-        <br><br>
-        <strong>"Pakai HP bisa nggak?"</strong> Bisa!
-        <span class="text-danger">Tapi ingat, ngoding di HP biasanya lebih ribet dibanding di PC, jadi tergantung niat
-          kalian masing-masing.</span>
-        Kalau ingin coba di HP, saya rekomendasikan aplikasi <a
-          href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" class="text-success"
-          target="_blank">Acode</a>, atau aplikasi sejenis yang bisa kalian cari sendiri.
-        <br><br>
-        Kalau semuanya sudah diinstal dan siap digunakan, ayo kita lanjut ke tahap berikutnya.
-      </p>
-    </div>
+      <!-- Basic HTML Section -->
+      <section class="md3-section" id="basik" data-aos="fade-up">
+        <div class="md3-card md3-card-outlined">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">help</span>
+                Basic HTML
+              </h2>
+            </div>
+            
+            <p class="md3-body-large">
+              Pertama, siapkan dulu alat untuk ngoding kalian. Saya rekomendasikan beberapa pilihan:
+            </p>
 
+            <div class="stats-grid">
+              <div class="md3-card md3-card-filled stat-card">
+                <span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-sys-color-primary);">computer</span>
+                <div class="stat-label" style="margin-top: 8px;">Desktop/Laptop</div>
+                <p class="md3-body-medium" style="margin-top: 8px;">
+                  <a href="https://code.visualstudio.com/download" target="_blank" class="md3-button md3-button-text">
+                    VS Code
+                    <span class="material-symbols-outlined">open_in_new</span>
+                  </a>
+                </p>
+              </div>
+              
+              <div class="md3-card md3-card-filled stat-card">
+                <span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-sys-color-secondary);">phone_android</span>
+                <div class="stat-label" style="margin-top: 8px;">Smartphone</div>
+                <p class="md3-body-medium" style="margin-top: 8px;">
+                  <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" target="_blank" class="md3-button md3-button-text">
+                    Acode
+                    <span class="material-symbols-outlined">open_in_new</span>
+                  </a>
+                </p>
+              </div>
+            </div>
 
-    <div class="container py-4" data-aos="fade-up" id="taghtml">
-      <hr class="mb-4">
-      <h3 class="mb-3"><i class="fa fa-code"></i> Tag HTML</h3>
+            <div class="md3-card md3-card-filled" style="margin-top: 16px; padding: 16px; border-left: 4px solid var(--md-sys-color-tertiary);">
+              <p class="md3-body-medium" style="margin: 0;">
+                <strong>💡 Tips:</strong> Ngoding di HP memang bisa, tapi untuk pengalaman terbaik saya sarankan menggunakan PC atau laptop.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <p>
-        Langkah pertama yang perlu kalian lakukan adalah mengetik kode <code class="language-html">html:5</code> (khusus
-        pengguna Visual Studio Code).
-        Dengan mengetik itu, editor akan secara otomatis menghasilkan struktur dasar HTML seperti berikut:
-      </p>
+      <!-- HTML Tags Section -->
+      <section class="md3-section" id="taghtml" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">code</span>
+                Tag HTML
+              </h2>
+            </div>
 
-      <pre class="language-html"><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
+            <p class="md3-body-large">
+              Langkah pertama yang perlu kalian lakukan adalah mengetik kode <code>html:5</code> (khusus pengguna Visual Studio Code).
+              Dengan mengetik itu, editor akan secara otomatis menghasilkan struktur dasar HTML:
+            </p>
+
+            <div class="md3-code-block">
+              <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;id&quot;&gt;
   &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
+    &lt;title&gt;Website Saya&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
-
+    &lt;!-- Konten website di sini --&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+            </div>
 
-      <p>
-        Kalau editor kalian tidak secara otomatis menghasilkan struktur seperti itu, tenang saja!
-        Kalian bisa <strong>salin kode di atas</strong> dan tempel di file HTML kalian.
-      </p>
+            <div class="md3-card md3-card-filled" style="margin-top: 16px; padding: 16px;">
+              <h3 class="md3-body-large" style="margin-bottom: 12px; font-weight: 500;">Penjelasan Struktur:</h3>
+              <ul class="feature-list">
+                <li class="feature-item">
+                  <span class="material-symbols-outlined feature-icon">description</span>
+                  <div>
+                    <strong>&lt;!DOCTYPE html&gt;</strong> - Memberitahu browser bahwa ini adalah HTML5
+                  </div>
+                </li>
+                <li class="feature-item">
+                  <span class="material-symbols-outlined feature-icon">language</span>
+                  <div>
+                    <strong>&lt;html lang="id"&gt;</strong> - Root element dengan bahasa Indonesia
+                  </div>
+                </li>
+                <li class="feature-item">
+                  <span class="material-symbols-outlined feature-icon">settings</span>
+                  <div>
+                    <strong>&lt;head&gt;</strong> - Berisi metadata dan konfigurasi
+                  </div>
+                </li>
+                <li class="feature-item">
+                  <span class="material-symbols-outlined feature-icon">visibility</span>
+                  <div>
+                    <strong>&lt;body&gt;</strong> - Berisi konten yang terlihat di browser
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paragraph Section -->
+      <section class="md3-section" id="buatpara" data-aos="fade-up">
+        <div class="md3-card md3-card-outlined">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">article</span>
+                Membuat Paragraf
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Di dalam HTML, kalian bisa membuat teks dengan berbagai jenis tag:
+            </p>
+
+            <div class="stats-grid">
+              <div class="md3-card md3-card-filled">
+                <div class="md3-card-content">
+                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">title</span>
+                    Heading
+                  </h3>
+                  <p class="md3-body-medium">Tag &lt;h1&gt; sampai &lt;h6&gt; untuk judul</p>
+                </div>
+              </div>
+              
+              <div class="md3-card md3-card-filled">
+                <div class="md3-card-content">
+                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">notes</span>
+                    Paragraf
+                  </h3>
+                  <p class="md3-body-medium">Tag &lt;p&gt; untuk teks paragraf</p>
+                </div>
+              </div>
+              
+              <div class="md3-card md3-card-filled">
+                <div class="md3-card-content">
+                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">keyboard_return</span>
+                    Line Break
+                  </h3>
+                  <p class="md3-body-medium">Tag &lt;br&gt; untuk baris baru</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="md3-body-large">Contoh penggunaan:</p>
+
+            <div class="md3-code-block">
+              <pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;Judul Utama&lt;/h1&gt;
+  &lt;h2&gt;Sub Judul&lt;/h2&gt;
+  &lt;p&gt;Ini adalah paragraf pertama.
+    &lt;br&gt;Dan ini baris baru dalam paragraf yang sama.
+  &lt;/p&gt;
+  &lt;p&gt;Ini paragraf kedua yang terpisah.&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+            </div>
+
+            <div class="md3-card md3-card-filled" style="margin-top: 16px;">
+              <div class="md3-card-content">
+                <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 12px;">
+                  <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">preview</span>
+                  Hasil Preview:
+                </h3>
+                <div style="border: 1px solid var(--md-sys-color-outline-variant); border-radius: 8px; padding: 16px; background-color: var(--md-sys-color-surface);">
+                  <h1 style="margin: 0 0 8px 0; font-size: 24px;">Judul Utama</h1>
+                  <h2 style="margin: 0 0 8px 0; font-size: 20px;">Sub Judul</h2>
+                  <p style="margin: 0 0 8px 0;">Ini adalah paragraf pertama.<br>Dan ini baris baru dalam paragraf yang sama.</p>
+                  <p style="margin: 0;">Ini paragraf kedua yang terpisah.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Images Section -->
+      <section class="md3-section" id="masukgambar" data-aos="fade-up">
+        <div class="md3-card md3-card-elevated">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">image</span>
+                Memasukkan Gambar
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Untuk menambahkan gambar, gunakan tag <code>&lt;img&gt;</code> dengan atribut <code>src</code> dan <code>alt</code>:
+            </p>
+
+            <div class="md3-code-block">
+              <pre><code class="language-html">&lt;img src=&quot;gambar.jpg&quot; alt=&quot;Deskripsi gambar&quot; width=&quot;300&quot;&gt;</code></pre>
+            </div>
+
+            <div class="stats-grid" style="margin-top: 24px;">
+              <div class="md3-card md3-card-filled">
+                <div class="md3-card-content">
+                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">link</span>
+                    Atribut src
+                  </h3>
+                  <p class="md3-body-medium">Menentukan lokasi file gambar</p>
+                </div>
+              </div>
+              
+              <div class="md3-card md3-card-filled">
+                <div class="md3-card-content">
+                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">accessibility</span>
+                    Atribut alt
+                  </h3>
+                  <p class="md3-body-medium">Deskripsi untuk aksesibilitas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Font Styling Section -->
+      <section class="md3-section" id="aturfont" data-aos="fade-up">
+        <div class="md3-card md3-card-outlined">
+          <div class="md3-card-content">
+            <div class="md3-section-header">
+              <h2 class="md3-headline-large">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">font_download</span>
+                Mengatur Font
+              </h2>
+            </div>
+
+            <p class="md3-body-large">
+              Kalian bisa mengatur tampilan teks menggunakan CSS inline dengan atribut <code>style</code>:
+            </p>
+
+            <div class="feature-list">
+              <li class="feature-item">
+                <span class="material-symbols-outlined feature-icon">palette</span>
+                <div>
+                  <strong>color</strong> - Mengatur warna teks (contoh: <code>color: blue;</code>)
+                </div>
+              </li>
+              <li class="feature-item">
+                <span class="material-symbols-outlined feature-icon">format_size</span>
+                <div>
+                  <strong>font-size</strong> - Mengatur ukuran teks (contoh: <code>font-size: 20px;</code>)
+                </div>
+              </li>
+              <li class="feature-item">
+                <span class="material-symbols-outlined feature-icon">font_download</span>
+                <div>
+                  <strong>font-family</strong> - Mengatur jenis font (contoh: <code>font-family: Arial;</code>)
+                </div>
+              </li>
+            </div>
+
+            <div class="md3-code-block">
+              <pre><code class="language-html">&lt;p style=&quot;font-family: Arial; font-size: 20px; color: blue;&quot;&gt;
+  Teks dengan styling
+&lt;/p&gt;</code></pre>
+            </div>
+
+            <div class="md3-card md3-card-filled" style="margin-top: 16px;">
+              <div class="md3-card-content">
+                <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 12px;">
+                  <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">preview</span>
+                  Hasil:
+                </h3>
+                <p style="font-family: Arial; font-size: 20px; color: #1976d2; margin: 0;">
+                  Teks dengan styling
+                </p>
+              </div>
+            </div>
+
+            <div class="md3-card md3-card-filled" style="margin-top: 16px; padding: 16px; border-left: 4px solid var(--md-sys-color-primary);">
+              <p class="md3-body-medium" style="margin: 0;">
+                <strong>💡 Pro Tips:</strong> Untuk font yang lebih menarik, kunjungi 
+                <a href="https://fonts.google.com" target="_blank" class="md3-chip">
+                  <span class="material-symbols-outlined">open_in_new</span>
+                  Google Fonts
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
+  </main>
 
+  <!-- Floating Action Button -->
+  <button class="md3-fab" id="scroll-to-top">
+    <span class="material-symbols-outlined">keyboard_arrow_up</span>
+  </button>
 
-    <div class="container py-4" data-aos="fade-up" id="buatpara">
-      <hr class="mb-4">
-      <h3 class="mb-3"><i class="fa fa-paragraph"></i> Membuat Paragraf</h3>
+  <!-- Scripts -->
+  <script src="js/prism.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/material3-interactions.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true
+    });
 
-      <p>
-        Di dalam HTML, kalian bisa membuat teks dengan berbagai jenis tag. Misalnya:
-      <ul>
-        <li>Membuat heading menggunakan tag <code>&lt;h1&gt;</code> hingga <code>&lt;h6&gt;</code></li>
-        <li>Membuat paragraf menggunakan tag <code>&lt;p&gt;</code></li>
-        <li>Membuat baris baru menggunakan tag <code>&lt;br&gt;</code></li>
-      </ul>
-      Nah, berikut ini contoh kode untuk menampilkan teks <strong>Hello World!</strong> dengan heading, paragraf, dan
-      baris baru menggunakan HTML:
-      </p>
+    // Theme Toggle - Fixed version
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+    const root = document.documentElement;
 
-      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Ini heading 1&lt;/h1&gt;
-    &lt;h6&gt;Ini heading 6&lt;/h6&gt;
-    &lt;p&gt;Ini Paragraf
-      &lt;br&gt;Dan ini Break Rule atau garis baru.
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+    function updateTheme(isDark) {
+      const theme = isDark ? 'dark' : 'light';
+      
+      // Save current scroll position
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Update both body and root element
+      body.setAttribute('data-theme', theme);
+      root.setAttribute('data-theme', theme);
+      
+      // Update icon
+      if (isDark) {
+        themeIcon.textContent = 'light_mode';
+      } else {
+        themeIcon.textContent = 'dark_mode';
+      }
+      
+      // Save to localStorage
+      localStorage.setItem('theme', theme);
+      
+      // Force CSS update without affecting scroll position
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollPosition);
+      });
+    }
 
-      <div class="p-3 rounded bg-light border mt-4" data-aos="fade-right">
-        <strong>Hasil:</strong>
-        <h1 class="mt-3">Ini heading 1</h1>
-        <h6>Ini heading 6</h6>
-        <p>Ini Paragraf<br>Dan ini break rule atau garis baru.</p>
-      </div>
-    </div>
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      updateTheme(savedTheme === 'dark');
+    } else {
+      // Check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      updateTheme(prefersDark);
+    }
 
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme') || root.getAttribute('data-theme');
+      const isDark = currentTheme !== 'dark';
+      updateTheme(isDark);
+    });
 
-    <div class="container py-4" data-aos="fade-up">
-      <p>
-        Untuk membuat paragraf seperti contoh di bawah ini, kalian bisa menggunakan tag <code>&lt;p&gt;</code> dan
-        menambahkan <code>&lt;br&gt;</code> jika ingin membuat baris baru dalam paragraf:
-      </p>
+    // Scroll to top
+    const scrollButton = document.getElementById('scroll-to-top');
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;Lorem Ipsum &lt;!-- Ini adalah kepala paragraf --&gt;
-      &lt;!-- br di bawah ini adalah isi atau lanjutan paragraf --&gt;
-      &lt;br&gt;Cupidatat nulla commodo est dolore esse velit ad magna amet sit aliquip duis. 
-      Ullamco culpa quis exercitation occaecat pariatur eu amet enim velit magna esse ipsum. 
-      In nisi proident eu cillum ex.
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+    // Show/hide scroll button
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollButton.style.opacity = '1';
+        scrollButton.style.visibility = 'visible';
+      } else {
+        scrollButton.style.opacity = '0';
+        scrollButton.style.visibility = 'hidden';
+      }
+    });
 
-      <p>
-        Kalian bisa mencoba menuliskan kode ini di berbagai software editor seperti <strong>VS Code</strong>,
-        <strong>Sublime Text</strong>, atau <strong>Notepad++</strong>.
-        Jika ingin langsung mencoba secara online, kalian bisa mencari website editor HTML favorit seperti:
-      </p>
+    // Mobile navigation
+    const menuToggle = document.getElementById('menu-toggle');
+    const navRail = document.getElementById('navigation-rail');
+    let isNavOpen = false;
 
-      <ul class="list-unstyled">
-        <li><a href="https://codepen.io" class="btn btn-outline-dark mt-2" target="_blank">CodePen</a></li>
-        <li><a href="https://jsfiddle.net" class="btn btn-outline-dark mt-2" target="_blank">JSFiddle</a></li>
-        <li><a href="https://playcode.io" class="btn btn-outline-dark mt-2" target="_blank">PlayCode</a></li>
-      </ul>
-    </div>
+    menuToggle.addEventListener('click', () => {
+      isNavOpen = !isNavOpen;
+      if (window.innerWidth <= 768) {
+        navRail.style.display = isNavOpen ? 'flex' : 'none';
+      }
+    });
 
-    <div class="container py-4" data-aos="fade-up" id="masukgambar">
-      <hr class="mb-4">
-      <h3 class="mb-3"><i class="fa fa-image"></i> Memasukkan Gambar</h3>
+    // Navigation active state
+    const navItems = document.querySelectorAll('.md3-navigation-rail-item');
+    const sections = document.querySelectorAll('.md3-section[id]');
 
-      <p>
-        Untuk memasukkan gambar ke dalam HTML, pertama-tama kalian harus mengetahui gambar mana yang ingin digunakan.
-        Gunakan tag <code>&lt;img&gt;</code> untuk menampilkannya.
-        <br><br>
-        Contoh dasar penggunaan:
-      </p>
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
 
-      <code class="language-html">&lt;img src=&quot;contohgambar.png&quot;&gt;</code>
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === `#${current}`) {
+          item.classList.add('active');
+        }
+      });
+    }
 
-      <p class="mt-3">
-        Kode di atas akan menampilkan gambar dengan nama <strong>contohgambar.png</strong>. Pastikan file gambar berada
-        dalam folder yang sama dengan file HTML kalian.
-        <br><br>
-        Untuk mengatur ukuran gambar, kalian bisa menambahkan atribut <code>width</code>. Contoh:
-      </p>
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
 
-      <pre><code class="language-html">&lt;img src=&quot;flixdz.png&quot; width=&quot;130&quot;&gt;</code></pre>
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
 
-      <div class="bg-light border p-3 rounded" data-aos="fade-right">
-        <strong>Hasil:</strong><br>
-        <img src="image/flixdz.png" width="130" alt="Contoh gambar flixdz">
-      </div>
-
-      <p class="mt-4">
-        <strong>Bagaimana jika gambar tidak muncul?</strong>
-        <br>
-        Kalian bisa menggunakan atribut <code>alt</code> untuk menampilkan teks pengganti jika gambar gagal dimuat. Ini
-        sangat berguna untuk meningkatkan aksesibilitas.
-      </p>
-
-      <pre><code class="language-html">&lt;img src=&quot;flixdz.png&quot; width=&quot;130&quot; alt=&quot;Gambar tidak akan muncul&quot;&gt;</code></pre>
-
-      <div class="bg-light border p-3 rounded" data-aos="fade-right">
-        <strong>Output (jika gambar gagal):</strong><br>
-        <img src="flixdz.png" width="130" alt="Gambar tidak akan muncul">
-      </div>
-    </div>
-
-    <div class="container py-4" data-aos="fade-up" id="aturfont">
-      <hr class="mb-4">
-      <h3 class="mb-3"><i class="fa fa-font"></i> Mengatur Font</h3>
-
-      <p>
-        Pertama-tama, tentukan teks mana yang ingin kalian atur tampilannya sesuai keinginan.
-        <br>Dalam contoh ini, kita akan menggunakan tag <code class="language-html">&lt;p&gt;</code> untuk membuat
-        paragraf.
-        <br><br>
-        Untuk mengatur tampilan teks secara langsung di HTML, kita bisa menggunakan <strong>inline CSS</strong> — yaitu
-        CSS yang ditulis langsung di dalam atribut <code>style</code> pada tag HTML.
-      </p>
-
-      <p><strong>Berikut beberapa properti CSS yang bisa kalian gunakan:</strong></p>
-      <ul>
-        <li><code>color</code> → Mengatur warna teks (misalnya: <code>color: lightblue;</code>)</li>
-        <li><code>font-size</code> → Mengatur ukuran teks (misalnya: <code>font-size: 24px;</code>)</li>
-        <li><code>font-family</code> → Mengatur jenis font (misalnya: <code>font-family: 'Times New Roman';</code>)</li>
-      </ul>
-
-      <p>Contoh penggunaan kombinasi ketiga properti tersebut:</p>
-
-      <pre><code class="language-html">&lt;p style=&quot;font-family: 'Times New Roman', sans-serif; font-size: 24px; color: lightblue;&quot;&gt;Halo&lt;/p&gt;</code></pre>
-
-      <div class="bg-dark text-white p-3 mt-3 rounded" data-aos="fade-right">
-        <strong>Hasil:</strong><br>
-        <p style="font-family: 'Times New Roman', sans-serif; font-size: 24px; color: lightblue;">Halo</p>
-      </div>
-
-      <p class="mt-4">
-        Kalian bisa mengganti font sesuai selera. Jika ingin mencari font yang menarik dan gratis, kunjungi <a
-          href="https://fonts.google.com" target="_blank">Google Fonts</a> atau website penyedia font lainnya.
-      </p>
-
-      <p class="mt-4">
-        <strong>Bagaimana jika kalian ingin menggunakan font hasil unduhan sendiri?</strong> Berikut contoh penggunaan
-        <code>@font-face</code> di CSS:
-      </p>
-
-      <pre><code class="language-css">@font-face {
-  font-family: 'Relaxing Sans'; /* Bebas beri nama font */
-  src: url('relaxingfont-regular.ttf'); /* Path ke file font */
-}
-body {
-  font-family: 'Relaxing Sans', sans-serif;
-}</code></pre>
-    </div>
-  </div>
-
-    <!-- Footer Start -->
-    <div id="footer"></div>
-    <!-- Footer End -->
-
-
-    <!-- Tombol ke atas -->
-    <button type="button" class="btn btn-m3-you-color bg-material btn-floating rounded-4 shadow btn-lg"
-      id="btn-back-to-top"><iconify-icon inline icon="line-md:chevron-up"></iconify-icon>
-    </button>
-    <!--JAVA SCRIPT FOR AOS-->
-    <script>
-      AOS.init();
-    </script>
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"></script>
-    <script src="js/multilevel.js"></script>
-    <script src="js/footer.js"></script>
-    <script src="js/button_top.js"></script>
-    <script src="js/dark-mode-switch.js"></script>
+    // Initial scroll button state
+    scrollButton.style.opacity = '0';
+    scrollButton.style.visibility = 'hidden';
+    scrollButton.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
+  </script>
 
 </body>
-
 </html>
