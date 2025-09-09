@@ -1,23 +1,12 @@
-/* Google Sans Fonts */
-@font-face {
-    font-family: 'Google Sans';
-    src: url('font/GoogleSans-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Google Sans Text';
-    src: url('font/GoogleSansText-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
-
+/* Font Declarations */
+/* Manrope will be loaded from Google Fonts */
+/* Fallback to local Google Sans Mono for code */
 @font-face {
     font-family: 'Google Sans Mono';
     src: url('font/GoogleSansMono-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 :root {
@@ -95,8 +84,46 @@
     box-sizing: border-box;
 }
 
+/* Remove default browser outline and focus styles */
+*:focus {
+    outline: none;
+}
+
+/* Custom focus styles for better accessibility */
+button:focus-visible,
+.btn:focus-visible,
+.chip:focus-visible,
+.fab:focus-visible,
+.fab-settings:focus-visible,
+.theme-toggle:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+}
+
+/* Remove tap highlight on mobile */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow text selection for content elements */
+p, h1, h2, h3, h4, h5, h6, span, div[class*="body"], div[class*="headline"], div[class*="title"], input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
 body {
-    font-family: 'Google Sans Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     background-color: var(--md-sys-color-background);
     color: var(--md-sys-color-on-background);
     line-height: 1.6;
@@ -104,28 +131,43 @@ body {
     overflow-x: hidden;
 }
 
-/* Material 3 Typography with Google Sans */
-.display-large { font-family: 'Google Sans'; font-size: clamp(36px, 8vw, 57px); line-height: 1.12; font-weight: 400; letter-spacing: -0.25px; }
-.display-medium { font-family: 'Google Sans'; font-size: clamp(28px, 6vw, 45px); line-height: 1.16; font-weight: 400; }
-.display-small { font-family: 'Google Sans'; font-size: clamp(24px, 5vw, 36px); line-height: 1.22; font-weight: 400; }
-.headline-large { font-family: 'Google Sans'; font-size: clamp(20px, 4vw, 32px); line-height: 1.25; font-weight: 400; }
-.headline-medium { font-family: 'Google Sans'; font-size: clamp(18px, 3.5vw, 28px); line-height: 1.29; font-weight: 400; }
-.headline-small { font-family: 'Google Sans'; font-size: clamp(16px, 3vw, 24px); line-height: 1.33; font-weight: 400; }
-.title-large { font-family: 'Google Sans'; font-size: clamp(14px, 2.5vw, 22px); line-height: 1.27; font-weight: 500; }
-.title-medium { font-family: 'Google Sans'; font-size: clamp(12px, 2vw, 16px); line-height: 1.5; font-weight: 500; letter-spacing: 0.1px; }
-.title-small { font-family: 'Google Sans'; font-size: clamp(11px, 1.8vw, 14px); line-height: 1.43; font-weight: 500; letter-spacing: 0.1px; }
-.body-large { font-family: 'Google Sans Text'; font-size: clamp(14px, 2vw, 16px); line-height: 1.5; font-weight: 400; letter-spacing: 0.5px; }
-.body-medium { font-family: 'Google Sans Text'; font-size: clamp(12px, 1.8vw, 14px); line-height: 1.43; font-weight: 400; letter-spacing: 0.25px; }
-.body-small { font-family: 'Google Sans Text'; font-size: clamp(10px, 1.5vw, 12px); line-height: 1.33; font-weight: 400; letter-spacing: 0.4px; }
-.label-large { font-family: 'Google Sans'; font-size: clamp(12px, 1.8vw, 14px); line-height: 1.43; font-weight: 500; letter-spacing: 0.1px; }
-.label-medium { font-family: 'Google Sans'; font-size: clamp(10px, 1.5vw, 12px); line-height: 1.33; font-weight: 500; letter-spacing: 0.5px; }
-.label-small { font-family: 'Google Sans'; font-size: clamp(9px, 1.3vw, 11px); line-height: 1.45; font-weight: 500; letter-spacing: 0.5px; }
+/* Material 3 Typography with Inter */
+.display-large { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(40px, 8vw, 64px); line-height: 1.12; font-weight: 300; letter-spacing: -0.5px; }
+.display-medium { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(32px, 6vw, 48px); line-height: 1.16; font-weight: 300; letter-spacing: -0.25px; }
+.display-small { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(28px, 5vw, 40px); line-height: 1.22; font-weight: 400; letter-spacing: -0.1px; }
+.headline-large { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(24px, 4vw, 36px); line-height: 1.25; font-weight: 500; letter-spacing: -0.1px; }
+.headline-medium { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(20px, 3.5vw, 32px); line-height: 1.29; font-weight: 500; }
+.headline-small { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(18px, 3vw, 28px); line-height: 1.33; font-weight: 500; }
+.title-large { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(16px, 2.5vw, 24px); line-height: 1.27; font-weight: 600; letter-spacing: 0.05px; }
+.title-medium { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(14px, 2vw, 18px); line-height: 1.4; font-weight: 600; letter-spacing: 0.1px; }
+.title-small { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(12px, 1.8vw, 16px); line-height: 1.43; font-weight: 600; letter-spacing: 0.1px; }
+.body-large { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(15px, 2vw, 18px); line-height: 1.6; font-weight: 400; letter-spacing: 0.15px; }
+.body-medium { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(13px, 1.8vw, 16px); line-height: 1.5; font-weight: 400; letter-spacing: 0.1px; }
+.body-small { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(11px, 1.5vw, 14px); line-height: 1.4; font-weight: 400; letter-spacing: 0.25px; }
+.label-large { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(13px, 1.8vw, 16px); line-height: 1.43; font-weight: 600; letter-spacing: 0.1px; }
+.label-medium { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(11px, 1.5vw, 14px); line-height: 1.33; font-weight: 600; letter-spacing: 0.25px; }
+.label-small { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(10px, 1.3vw, 12px); line-height: 1.45; font-weight: 600; letter-spacing: 0.4px; }
 
-/* Code styling */
+/* Bold styling for important elements using Inter */
+.bold, strong, b,
+.hero-title,
+.project-title,
+.timeline-school,
+.timeline-period,
+h1, h2, h3, h4, h5, h6,
+.btn,
+.chip,
+.theme-toggle {
+    font-family: 'Manrope', system-ui, sans-serif !important;
+    font-weight: 600;
+}
+
+/* Code styling - Keep Google Sans Mono */
 code, .code, pre {
-    font-family: 'Google Sans Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-family: 'Google Sans Mono', 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
     font-size: clamp(12px, 1.8vw, 14px);
     letter-spacing: 0;
+    font-weight: 400;
 }
 
 /* Material Design Icons */
@@ -178,7 +220,7 @@ code, .code, pre {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Google Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
 }
 
@@ -216,7 +258,7 @@ code, .code, pre {
     padding: 10px 24px;
     border-radius: 20px;
     border: none;
-    font-family: 'Google Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -246,6 +288,11 @@ code, .code, pre {
 .btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.btn:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15), 0 0 0 2px var(--md-sys-color-primary);
 }
 
 .btn-filled:hover {
@@ -466,7 +513,7 @@ code, .code, pre {
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: 'Google Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
     letter-spacing: 0.1px;
     display: flex;
@@ -483,6 +530,11 @@ code, .code, pre {
 .chip:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.chip:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15), 0 0 0 2px var(--md-sys-color-primary);
 }
 
 /* Page sections */
@@ -546,6 +598,28 @@ code, .code, pre {
         height: 48px;
         font-size: 20px;
     }
+    
+    /* Weather widget responsive */
+    .weather-widget {
+        min-height: 60px;
+        padding: 10px 14px 18px 14px;
+    }
+    
+    .weather-info {
+        font-size: 12px;
+        max-width: 200px;
+    }
+    
+    .weather-edit-btn {
+        top: 6px;
+        right: 6px;
+        padding: 3px;
+    }
+    
+    .top-info-bar {
+        flex-direction: column;
+        gap: 16px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -579,20 +653,125 @@ code, .code, pre {
     animation: spin 1s ease-in-out infinite;
 }
 
+/* Loading for material symbols */
+.material-symbols-rounded.loading {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 0;
+    animation: spin 1s linear infinite;
+    font-size: 18px;
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* Additional animations for weather loading */
+@keyframes progress-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Weather Widget - Enhanced for OpenWeatherMap */
 .weather-widget {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px 20px 16px; /* Extra bottom padding untuk indicators */
     background: var(--md-sys-color-surface-container);
     border-radius: 12px;
     border: 1px solid var(--md-sys-color-outline-variant);
     position: relative;
+    min-height: 68px; /* Fixed height agar tidak jumping */
+    transition: all 0.2s ease;
+    align-items: center;
+    text-align: center;
+}
+
+.weather-widget:hover {
+    background: var(--md-sys-color-surface-container-high);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.weather-first-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.weather-city-temp {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+    flex: 1;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    margin: 0 8px;
+}
+
+.weather-city-temp:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+}
+
+.weather-info {
+    display: none; /* Tidak digunakan lagi */
+}
+
+/* Weather Description Container */
+.weather-description-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    min-height: 24px;
+    animation: fadeInUp 0.5s ease-out;
+    width: 100%;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.weather-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.4;
+    text-align: center;
+    animation: slideText 0.5s ease-out;
+    transition: opacity 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideText {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Transition for weather description icon */
+#weather-desc-icon {
+    transition: opacity 0.3s ease-in-out;
 }
 
 #weather-icon img {
@@ -622,7 +801,7 @@ code, .code, pre {
     border-radius: 6px;
     padding: 4px 8px;
     font-size: 14px;
-    font-family: 'Google Sans Text', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 #weather-city-btn {
@@ -650,7 +829,7 @@ code, .code, pre {
     border-radius: 16px;
     margin: 20px 0;
     text-align: center;
-    font-family: 'Google Sans Text', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 500;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -747,7 +926,7 @@ code, .code, pre {
 }
 
 .typing-text {
-    font-family: 'Google Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: clamp(18px, 4vw, 32px);
     font-weight: 500;
     color: var(--md-sys-color-primary);
@@ -781,6 +960,7 @@ code, .code, pre {
     border-radius: 12px;
     text-align: center;
     border: 1px solid var(--md-sys-color-outline-variant);
+    position: relative; /* For absolute positioned elements inside */
 }
 
 .time-display {
@@ -824,7 +1004,7 @@ code, .code, pre {
     border-radius: 16px;
     border: 1px solid var(--md-sys-color-outline-variant);
     transition: all 0.3s ease;
-    font-family: 'Google Sans Text', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .demo-link:hover {
@@ -858,7 +1038,7 @@ code, .code, pre {
 
 .demo-content h4 {
     margin: 0 0 8px 0;
-    font-family: 'Google Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-weight: 600;
     color: var(--md-sys-color-on-surface);
@@ -993,7 +1173,7 @@ code, .code, pre {
 .settings-header h3 {
     margin: 0;
     color: var(--md-sys-color-on-surface);
-    font-family: 'Google Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .close-btn {
@@ -1034,7 +1214,7 @@ code, .code, pre {
 .setting-info h4 {
     margin: 0 0 4px 0;
     color: var(--md-sys-color-on-surface);
-    font-family: 'Google Sans Text', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
 
@@ -1048,7 +1228,7 @@ code, .code, pre {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Google Sans Text', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -1064,6 +1244,36 @@ code, .code, pre {
     background: var(--md-sys-color-error-container);
     color: var(--md-sys-color-on-error-container);
     border-color: var(--md-sys-color-error);
+}
+
+/* Settings Panel Buttons */
+.settings-panel .btn-outlined,
+.settings-panel #refreshPaletteBtn {
+    background: transparent;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 20px;
+    padding: 8px 16px;
+    color: var(--md-sys-color-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    text-decoration: none;
+}
+
+.settings-panel .btn-outlined:hover,
+.settings-panel #refreshPaletteBtn:hover {
+    background: var(--md-sys-color-primary-container);
+    border-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary-container);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 @media (max-width: 768px) {
@@ -1213,11 +1423,13 @@ code, .code, pre {
     padding: 4px;
     border-radius: 4px;
     transition: all 0.2s ease;
+    z-index: 20; /* Above indicators */
 }
 
 .weather-edit-btn:hover {
     background: var(--md-sys-color-surface-container);
     color: var(--md-sys-color-on-surface);
+    transform: scale(1.1);
 }
 
 /* Achievement Dots - Clickable */

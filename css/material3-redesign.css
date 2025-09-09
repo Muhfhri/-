@@ -1,30 +1,8 @@
 /* Material Design 3 - Custom Implementation */
 
-/* Local Font Declarations */
-@font-face {
-  font-family: 'Google Sans';
-  src: url('../css/font/GoogleSans-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Google Sans Rounded';
-  src: url('../css/font/GoogleSansRounded-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Google Sans Text';
-  src: url('../css/font/GoogleSansText-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
+/* Font Declarations */
+/* Inter will be loaded from Google Fonts */
+/* Keep Google Sans Mono for code elements */
 @font-face {
   font-family: 'Google Sans Mono';
   src: url('../css/font/GoogleSansMono-Regular.ttf') format('truetype');
@@ -91,31 +69,31 @@
   --md-sys-color-outline-dark: #938F99;
   --md-sys-color-outline-variant-dark: #49454F;
   
-  /* Material 3 Typography - Using Local Fonts */
-  --md-sys-typescale-display-large-font: 'Google Sans', system-ui, sans-serif;
+  /* Material 3 Typography - Using Inter */
+  --md-sys-typescale-display-large-font: 'Inter', system-ui, sans-serif;
   --md-sys-typescale-display-large-size: 57px;
   --md-sys-typescale-display-large-line-height: 64px;
-  --md-sys-typescale-display-large-weight: 400;
+  --md-sys-typescale-display-large-weight: 300;
   
-  --md-sys-typescale-headline-large-font: 'Google Sans', system-ui, sans-serif;
+  --md-sys-typescale-headline-large-font: 'Inter', system-ui, sans-serif;
   --md-sys-typescale-headline-large-size: 32px;
   --md-sys-typescale-headline-large-line-height: 40px;
-  --md-sys-typescale-headline-large-weight: 400;
+  --md-sys-typescale-headline-large-weight: 500;
   
-  --md-sys-typescale-body-large-font: 'Google Sans Rounded', system-ui, sans-serif;
+  --md-sys-typescale-body-large-font: 'Inter', system-ui, sans-serif;
   --md-sys-typescale-body-large-size: 16px;
   --md-sys-typescale-body-large-line-height: 24px;
   --md-sys-typescale-body-large-weight: 400;
   
-  --md-sys-typescale-body-medium-font: 'Google Sans Rounded', system-ui, sans-serif;
+  --md-sys-typescale-body-medium-font: 'Inter', system-ui, sans-serif;
   --md-sys-typescale-body-medium-size: 14px;
   --md-sys-typescale-body-medium-line-height: 20px;
   --md-sys-typescale-body-medium-weight: 400;
   
-  --md-sys-typescale-label-large-font: 'Google Sans Rounded', system-ui, sans-serif;
+  --md-sys-typescale-label-large-font: 'Inter', system-ui, sans-serif;
   --md-sys-typescale-label-large-size: 14px;
   --md-sys-typescale-label-large-line-height: 20px;
-  --md-sys-typescale-label-large-weight: 500;
+  --md-sys-typescale-label-large-weight: 600;
   
   /* Material 3 Elevation */
   --md-sys-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
@@ -163,6 +141,43 @@
 /* Base styles */
 * {
   box-sizing: border-box;
+}
+
+/* Remove default browser outline and focus styles */
+*:focus {
+    outline: none;
+}
+
+/* Custom focus styles for better accessibility */
+button:focus-visible,
+.md3-button:focus-visible,
+.md3-chip:focus-visible,
+.md3-fab:focus-visible,
+.md3-icon-button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+}
+
+/* Remove tap highlight on mobile */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow text selection for content elements */
+p, h1, h2, h3, h4, h5, h6, span, .md3-body-large, .md3-body-medium, .md3-headline-large, .md3-display-large, input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 body {
@@ -366,6 +381,10 @@ body {
   background-color: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, var(--md-sys-color-primary));
 }
 
+.md3-button:focus {
+  box-shadow: var(--md-sys-elevation-1), 0 0 0 2px var(--md-sys-color-primary);
+}
+
 .md3-button-outlined {
   background-color: transparent;
   color: var(--md-sys-color-primary);
@@ -409,6 +428,10 @@ body {
   box-shadow: var(--md-sys-elevation-4);
 }
 
+.md3-fab:focus {
+  box-shadow: var(--md-sys-elevation-4), 0 0 0 2px var(--md-sys-color-primary);
+}
+
 /* Material 3 Chips */
 .md3-chip {
   height: 32px;
@@ -430,6 +453,11 @@ body {
 
 .md3-chip:hover {
   background-color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 8%, transparent);
+}
+
+.md3-chip:focus {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 8%, transparent);
+  box-shadow: 0 0 0 2px var(--md-sys-color-primary);
 }
 
 .md3-chip.selected {
