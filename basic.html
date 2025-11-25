@@ -1,779 +1,979 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Belajar HTML - Material Design 3</title>
-  <link rel="icon" type="image/png" href="image/flixdz_top.png">
-  
-  <!-- Prevent theme flash (set theme before CSS paints) -->
-  <script>
-    (function(){
-      try {
-        var t = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', t);
-        var s = document.createElement('style');
-        s.textContent = t === 'dark' ? 'html{background:#131318;color:#E6E0E9;}' : 'html{background:#FFFBFE;color:#1C1B1F;}';
-        document.head.appendChild(s);
-      } catch(e) {}
-    })();
-  </script>
-  <!-- Local fonts are loaded via CSS @font-face -->
-  
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
-  
-  <!-- Material 3 CSS -->
-  <link rel="stylesheet" href="css/material3-redesign.css">
-  
-  <!-- Prism CSS for Code Highlighting -->
-  <link rel="stylesheet" href="css/prism.css">
-  
-  <!-- AOS Animation -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <style>
-    /* Enhanced Navigation Rail - Centered and Fixed */
-    .nav-section {
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngoding</title>
     
-    .nav-section-title {
-      color: var(--md-sys-color-on-surface-variant);
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 8px 12px;
-      margin-bottom: 4px;
-      text-align: center;
-    }
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     
-    .md3-navigation-rail-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 8px;
-      margin: 2px 0;
-      border-radius: 16px;
-      text-decoration: none;
-      color: var(--md-sys-color-on-surface-variant);
-      transition: all 0.2s ease;
-      gap: 4px;
-      width: 72px;
-      min-height: 56px;
+    <style>/* =======================================================
+   GLOBAL FIX — Anti Overflow & Box-Sizing
+======================================================= */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Anti bocor ke kanan */
+}
+
+/* =======================================================
+   1. HEADER PEMBELAJARAN
+======================================================= */
+
+.lesson-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    margin-bottom: 3rem;
+    padding: 3rem 1.5rem 2rem;
+    border-bottom: 2px solid var(--md-outline);
+
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ikon utama */
+.lesson-header .main-icon {
+    font-size: 88px;
+    color: var(--md-primary);
+
+    background: var(--md-primary-container);
+    border-radius: 28px;
+    padding: 20px;
+    margin-bottom: 1rem;
+
+    box-shadow: 0 8px 15px rgba(var(--md-primary-rgb), 0.2);
+    transition: 0.3s ease;
+}
+
+.lesson-header .main-icon:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 20px rgba(var(--md-primary-rgb), 0.3);
+}
+
+/* Title */
+.lesson-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--md-text-main);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.5px;
+}
+
+/* Subtitle */
+.lesson-header p.subtitle {
+    max-width: 700px;
+    font-size: 1.15rem;
+    color: var(--md-text-sub);
+}
+
+
+
+/* =======================================================
+   2. SECTION INTRO (PERKENALAN)
+======================================================= */
+
+.intro-html {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Container utama */
+.intro-container {
+    background: var(--md-surface-container);
+    border: 1px solid var(--md-outline);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+
+    max-width: 900px;
+    width: 100%;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    transition: 0.3s ease;
+}
+
+.intro-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 38px rgba(0,0,0,0.22);
+}
+
+/* Judul */
+.intro-container h2 {
+    color: var(--md-text-main);
+    font-size: 2.1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.intro-container h2 span {
+    font-size: 32px;
+    color: var(--md-primary);
+}
+
+/* Paragraf */
+.intro-text {
+    color: var(--md-text-sub);
+    line-height: 1.6;
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+}
+
+
+
+/* =======================================================
+   3. INFO GRID — Card Kecil
+======================================================= */
+
+.info-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.info-card {
+    background: var(--md-surface);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--nav-border);
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+.info-card:hover {
+    background: var(--md-surface-container);
+    transform: translateY(-4px);
+}
+
+.info-card .icon {
+    font-size: 34px;
+    padding: 10px;
+    border-radius: 14px;
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+    margin-bottom: 0.8rem;
+}
+
+.info-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
+    color: var(--md-text-main);
+}
+
+.info-card p {
+    color: var(--md-text-sub);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+
+/* =============================================
+   PRISM RESPONSIVE FIX — Anti Overflow
+   Tidak mengubah warna, tidak mengganggu prism.css
+============================================= */
+
+/* Bungkus code block agar tidak bocor */
+pre[class*="language-"],
+code[class*="language-"] {
+    max-width: 100%;
+    white-space: pre-wrap !important;   /* Biar baris panjang membungkus */
+    word-break: break-word !important;  /* Pecah kata panjang */
+}
+
+/* Pre container aman */
+pre[class*="language-"] {
+    overflow-x: auto !important;  /* Scroll horizontal jika butuh */
+    padding: 1.2rem !important;   /* Konsisten, tapi tanpa styling tambahan */
+    margin-bottom: 2rem;
+    border-radius: 16px;          /* Menyatu dengan desain kamu */
+}
+
+/* Mencegah pembesaran layout */
+code[class*="language-"] {
+    display: block;
+
+    overflow-wrap: break-word;
+    white-space: pre-wrap !important;
+}
+
+/* Jika ada container luar seperti .code-box */
+.code-box {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden; /* Mencegah glitch overflow */
+    margin-bottom: 2rem;
+}
+/* =======================================================
+   WRAPPER UTAMA LEARN HTML
+======================================================= */
+.learn-html {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3rem;
+    /* padding kiri-kanan dihapus */
+}
+
+/* CONTAINER APA YANG DIPERLAJARI */
+.learn-container {
+    width: 100%;
+    max-width: 900px; /* maksimal container */
+    background: var(--md-surface-container);
+    border: 1px solid var(--md-outline);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    overflow: hidden; /* cegah elemen anak meluber */
+}
+
+/* TITLE SECTION */
+.learn-container h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--md-text-main);
+}
+
+.learn-container h2 span {
+    font-size: 32px;
+    color: var(--md-primary);
+}
+
+/* LIST APA YANG AKAN DIPERLAJARI */
+.learn-list {
+    list-style: none;
+    margin-bottom: 3rem;
+}
+
+.learn-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--md-surface);
+    padding: 1rem 1.2rem;
+    border-radius: 18px;
+    border: 1px solid var(--nav-border);
+    margin-bottom: 0.8rem;
+    transition: 0.25s ease;
+    word-break: break-word; /* cegah teks panjang meluber */
+}
+
+.learn-list li:hover {
+    background: var(--md-surface-container);
+}
+
+.learn-list .icon {
+    color: var(--md-primary);
+    font-size: 26px;
+}
+
+/* OUTPUT TITLE */
+.output-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 2rem 0 1rem 0;
+}
+
+.output-title span {
+    font-size: 28px;
+    color: var(--md-primary);
+}
+
+/* OUTPUT PREVIEW */
+.output-preview {
+    width: 100%;
+    background: var(--md-surface);
+    border: 1px solid var(--nav-border);
+    border-radius: 18px;
+    padding: 1.4rem 1rem;
+    overflow-x: auto; /* aman jika ada elemen panjang */
+}
+
+.output-preview * {
+    max-width: 100%; /* cegah anak meluber */
+    word-wrap: break-word;
+}
+
+/* ================================
+   DAFTAR ISI (TOC)
+================================ */
+.toc-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--md-surface-container);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--md-outline);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+.toc-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--md-text-main);
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-list li {
+    margin-bottom: 0.8rem;
+}
+
+.toc-list a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--md-primary);
+    font-size: 1.1rem;
+    padding: 0.6rem 1rem;
+    border-radius: 16px;
+    transition: 0.25s ease;
+}
+
+.toc-list a:hover {
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+}
+
+.toc-list a span {
+    font-size: 28px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .toc-container {
+        padding: 1.5rem;
     }
-    
-    .md3-navigation-rail-item:hover {
-      background-color: var(--md-sys-color-surface-container);
-      color: var(--md-sys-color-on-surface);
+    .toc-container h2 {
+        font-size: 1.7rem;
     }
-    
-    .md3-navigation-rail-item.active {
-      background-color: var(--md-sys-color-secondary-container);
-      color: var(--md-sys-color-on-secondary-container);
+    .toc-list a {
+        font-size: 1rem;
     }
-    
-    .nav-label {
-      font-size: 10px;
-      font-weight: 500;
-      text-align: center;
-      line-height: 1.2;
-      max-width: 64px;
+}
+/* =======================================================
+   4. RESPONSIVE FIXES
+======================================================= */
+
+/* Layar kecil */
+@media (max-width: 480px) {
+    .lesson-header h1 {
+        font-size: 2.3rem;
     }
 
-    /* Additional custom styles */
-    .hero-section {
-      background: linear-gradient(135deg, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-secondary-container) 100%);
-      padding: 48px 0;
-      text-align: center;
-      margin-bottom: 32px;
-      border-radius: var(--md-sys-shape-corner-large);
-      position: relative;
-      overflow: hidden;
+    .intro-container {
+        padding: 2rem 1.2rem;
     }
-    
-    .hero-icon {
-      font-size: 72px;
-      color: var(--md-sys-color-primary);
-      margin-bottom: 16px;
-      animation: bounce 2s infinite;
+}
+
+/* Grid fix untuk layar sangat kecil */
+@media (max-width: 360px) {
+    .info-grid {
+        grid-template-columns: 1fr;
     }
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-10px);
-      }
-      60% {
-        transform: translateY(-5px);
-      }
+}
+
+/* TAG EXAMPLE */
+.tag-example {
+    margin-bottom: 2rem;
+}
+
+.tag-example h3 {
+    font-size: 1.3rem;
+    color: var(--md-primary);
+    margin-bottom: 0.5rem;
+}
+
+.tag-example p {
+    color: var(--md-text-sub);
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+/* OUTPUT PREVIEW */
+.output-preview {
+    background: var(--md-surface);
+    border: 1px solid var(--nav-border);
+    padding: 1rem;
+    border-radius: 14px;
+    overflow-x: auto; /* aman dari bocor */
+}
+
+.output-preview h1,
+.output-preview p,
+.output-preview a,
+.output-preview img {
+    margin: 0.5rem 0;
+}
+
+.output-preview img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.code-title {
+    display: flex;          /* Gunakan flex untuk menyusun horizontal */
+    align-items: center;    /* Center vertikal ikon dan teks */
+    gap: 10px;              /* Jarak antara ikon dan teks */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;      /* Ukuran teks bisa disesuaikan */
+}
+
+.code-title span {
+    font-size: 28px;        /* Ukuran ikon */
+    color: var(--md-primary);
+    display: inline-flex;    /* Flex untuk centering ikon jika perlu */
+    align-items: center;
+    justify-content: center;
+}
+
+/* RESPONSIVE FIXES */
+@media (max-width: 480px) {
+    .learn-container h2 {
+        font-size: 1.7rem;
     }
-    
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin: 24px 0;
+    .tag-example h3 {
+        font-size: 1.1rem;
     }
-    
-    .stat-card {
-      text-align: center;
-      padding: 24px 16px;
+}
+
+#img-size-slider {
+    width: 100%;
+    max-width: 300px;
+    margin: 0.5rem 0 1rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .learn-container h2 {
+        font-size: 1.7rem;
     }
-    
-    .stat-number {
-      font-size: 32px;
-      font-weight: 600;
-      color: var(--md-sys-color-primary);
-      display: block;
+    .learn-container p {
+        font-size: 1rem;
     }
-    
-    .stat-label {
-      font-size: 14px;
-      color: var(--md-sys-color-on-surface-variant);
-      margin-top: 4px;
-    }
-    
-    .feature-list {
-      display: grid;
-      gap: 12px;
-      list-style: none;
-      padding: 0;
-      margin: 16px 0;
-    }
-    
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px;
-      border-radius: var(--md-sys-shape-corner-small);
-      transition: background-color 0.2s ease;
-    }
-    
-    .feature-item:hover {
-      background-color: color-mix(in srgb, var(--md-sys-color-primary) 5%, transparent);
-    }
-    
-    .feature-icon {
-      color: var(--md-sys-color-primary);
-      font-size: 20px;
-    }
-    
-  </style>
+}
+
+</style>
+
 </head>
+<body>
 
-<body data-theme="light">
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
-  <!-- Material 3 App Bar -->
-  <header class="md3-top-app-bar">
-    <button class="md3-icon-button" id="menu-toggle">
-      <span class="material-symbols-outlined">menu</span>
+    <button class="fab" onclick="toggleSettings()">
+        <span class="material-symbols-rounded">settings</span>
     </button>
-    <h1 class="md3-top-app-bar-title">Belajar HTML</h1>
-    <button class="md3-icon-button" id="theme-toggle">
-      <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
-    </button>
-    <a href="https://github.com/muhfhri" target="_blank" class="md3-icon-button">
-      <span class="material-symbols-outlined">code</span>
-    </a>
-  </header>
 
-  <!-- Navigation Rail -->
-  <nav class="md3-navigation-rail" id="navigation-rail">
-    <div class="nav-section">
-      <div class="nav-section-title">Navigation</div>
-      <a href="index.html" class="md3-navigation-rail-item">
-        <span class="material-symbols-outlined">home</span>
-        <span class="nav-label">Home</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">HTML Tutorial</div>
-      <a href="basic.html" class="md3-navigation-rail-item active">
-        <span class="material-symbols-outlined">school</span>
-        <span class="nav-label">Basic HTML</span>
-      </a>
-      <a href="format-text.html" class="md3-navigation-rail-item">
-        <span class="material-symbols-outlined">format_bold</span>
-        <span class="nav-label">Format Text</span>
-      </a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-title">Bagian Halaman</div>
-      <a href="#basik" class="md3-navigation-rail-item">
-        <span class="material-symbols-outlined">play_circle</span>
-        <span class="nav-label">Basic</span>
-      </a>
-      <a href="#taghtml" class="md3-navigation-rail-item">
-        <span class="material-symbols-outlined">code</span>
-        <span class="nav-label">Tag HTML</span>
-      </a>
-      <a href="#buatpara" class="md3-navigation-rail-item">
-        <span class="material-symbols-outlined">article</span>
-        <span class="nav-label">Paragraf</span>
-      </a>
-      <a href="#masukgambar" class="md3-navigation-rail-item">
-        <span class="material-symbols-outlined">image</span>
-        <span class="nav-label">Gambar</span>
-      </a>
-      <a href="#aturfont" class="md3-navigation-rail-item">
-        <span class="material-symbols-outlined">font_download</span>
-        <span class="nav-label">Font</span>
-      </a>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="md3-content">
-    <div class="md3-container">
-      
-      <!-- Breadcrumb -->
-      <nav class="md3-breadcrumb" data-aos="fade-in">
-        <a href="index.html" class="md3-breadcrumb-item">Home</a>
-        <span class="md3-breadcrumb-separator material-symbols-outlined">chevron_right</span>
-        <span class="md3-breadcrumb-item current">Basic HTML</span>
-      </nav>
-
-      <!-- Hero Section -->
-      <section class="hero-section md3-card" data-aos="zoom-in">
-        <div class="hero-icon">
-          <span class="material-symbols-outlined" style="font-size: inherit;">code</span>
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-group">
+            <span class="settings-title">Tema Warna</span>
+            <div class="color-options">
+                <div class="color-dot" style="background: #8ab4f8;" onclick="setHue(210)"></div> <div class="color-dot" style="background: #c084fc;" onclick="setHue(270)"></div> <div class="color-dot" style="background: #86efac;" onclick="setHue(140)"></div> <div class="color-dot" style="background: #fca5a5;" onclick="setHue(0)"></div>   <div class="color-dot" style="background: #fdba74;" onclick="setHue(30)"></div>  </div>
         </div>
-        <h1 class="md3-display-large" style="margin-bottom: 16px;">Belajar HTML5</h1>
-        <p class="md3-body-large" style="max-width: 600px; margin: 0 auto;">
-          Pelajari dasar-dasar HTML dengan pendekatan modern dan interaktif. 
-          Cocok untuk pemula yang ingin memulai perjalanan programming.
+        <div class="settings-group">
+            <span class="settings-title">Mode Tampilan</span>
+            <div class="mode-options">
+                <button class="mode-btn" onclick="setMode('light')" title="Terang">
+                    <span class="material-symbols-rounded">light_mode</span>
+                </button>
+                <button class="mode-btn" onclick="setMode('auto')" title="Auto">
+                    <span class="material-symbols-rounded">brightness_auto</span>
+                </button>
+                <button class="mode-btn" onclick="setMode('dark')" title="Gelap">
+                    <span class="material-symbols-rounded">dark_mode</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+<nav class="nav-rail">
+    <div class="nav-links">
+        <a href="#basic-html-lesson" class="nav-item" title="Home / Basic HTML">
+            <span class="material-symbols-rounded">home</span>
+        </a>
+        <a href="#html-tags" class="nav-item" title="Tag HTML">
+            <span class="material-symbols-rounded">tag</span>
+        </a>
+        <a href="#html-paragraph" class="nav-item" title="Membuat Paragraf">
+            <span class="material-symbols-rounded">article</span>
+        </a>
+        <a href="#html-image" class="nav-item" title="Memasukkan Gambar">
+            <span class="material-symbols-rounded">image</span>
+        </a>
+        <a href="#font-html" class="nav-item" title="Mengatur Font">
+            <span class="material-symbols-rounded">format_size</span>
+        </a>
+    </div>
+</nav>
+
+<main>
+<section id="basic-html-lesson">
+    <div class="lesson-header">
+        <span class="material-symbols-rounded main-icon">html</span>
+        <h1>Dasar Struktur HTML</h1>
+        <p class="subtitle">
+            Panduan komprehensif untuk memahami struktur fundamental dari sebuah halaman web. Siap membangun fondasi digital pertama Anda!
         </p>
-        
-        <!-- Stats -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-number">5</span>
-            <div class="stat-label">Topik Utama</div>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">15</span>
-            <div class="stat-label">Contoh Kode</div>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">100%</span>
-            <div class="stat-label">Gratis</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Introduction -->
-      <section class="md3-section" data-aos="fade-up">
-        <div class="md3-card md3-card-elevated">
-          <div class="md3-card-content">
-            <div class="md3-section-header">
-              <h2 class="md3-headline-large">
-                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">school</span>
-                Pendahuluan
-              </h2>
-            </div>
-            <p class="md3-body-large">
-              Kalian ingin belajar <em>ngoding</em> tapi masih belum paham konsep dasarnya?
-              Tenang! Kali ini saya akan ajarkan kalian cara menulis kode HTML dengan mudah dan menyenangkan.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Table of Contents -->
-      <section class="md3-section" data-aos="fade-up">
-        <div class="md3-toc md3-card">
-          <div class="md3-toc-title">
-            <span class="material-symbols-outlined">list</span>
-            Daftar Isi Tutorial
-          </div>
-          <ul class="md3-toc-list">
-            <li class="md3-toc-item">
-              <a href="#basik" class="md3-toc-link">
-                <span class="material-symbols-outlined">play_circle</span>
-                Basic HTML
-              </a>
-            </li>
-            <li class="md3-toc-item">
-              <a href="#taghtml" class="md3-toc-link">
-                <span class="material-symbols-outlined">code</span>
-                Tag HTML
-              </a>
-            </li>
-            <li class="md3-toc-item">
-              <a href="#buatpara" class="md3-toc-link">
-                <span class="material-symbols-outlined">article</span>
-                Membuat Paragraf
-              </a>
-            </li>
-            <li class="md3-toc-item">
-              <a href="#masukgambar" class="md3-toc-link">
-                <span class="material-symbols-outlined">image</span>
-                Memasukkan Gambar
-              </a>
-            </li>
-            <li class="md3-toc-item">
-              <a href="#aturfont" class="md3-toc-link">
-                <span class="material-symbols-outlined">font_download</span>
-                Mengatur Font
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Basic HTML Section -->
-      <section class="md3-section" id="basik" data-aos="fade-up">
-        <div class="md3-card md3-card-outlined">
-          <div class="md3-card-content">
-            <div class="md3-section-header">
-              <h2 class="md3-headline-large">
-                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">help</span>
-                Basic HTML
-              </h2>
-            </div>
-            
-            <p class="md3-body-large">
-              Pertama, siapkan dulu alat untuk ngoding kalian. Saya rekomendasikan beberapa pilihan:
-            </p>
-
-            <div class="stats-grid">
-              <div class="md3-card md3-card-filled stat-card">
-                <span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-sys-color-primary);">computer</span>
-                <div class="stat-label" style="margin-top: 8px;">Desktop/Laptop</div>
-                <p class="md3-body-medium" style="margin-top: 8px;">
-                  <a href="https://code.visualstudio.com/download" target="_blank" class="md3-button md3-button-text">
-                    VS Code
-                    <span class="material-symbols-outlined">open_in_new</span>
-                  </a>
-                </p>
-              </div>
-              
-              <div class="md3-card md3-card-filled stat-card">
-                <span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-sys-color-secondary);">phone_android</span>
-                <div class="stat-label" style="margin-top: 8px;">Smartphone</div>
-                <p class="md3-body-medium" style="margin-top: 8px;">
-                  <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree" target="_blank" class="md3-button md3-button-text">
-                    Acode
-                    <span class="material-symbols-outlined">open_in_new</span>
-                  </a>
-                </p>
-              </div>
-            </div>
-
-            <div class="md3-card md3-card-filled" style="margin-top: 16px; padding: 16px; border-left: 4px solid var(--md-sys-color-tertiary);">
-              <p class="md3-body-medium" style="margin: 0;">
-                <strong>💡 Tips:</strong> Ngoding di HP memang bisa, tapi untuk pengalaman terbaik saya sarankan menggunakan PC atau laptop.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- HTML Tags Section -->
-      <section class="md3-section" id="taghtml" data-aos="fade-up">
-        <div class="md3-card md3-card-elevated">
-          <div class="md3-card-content">
-            <div class="md3-section-header">
-              <h2 class="md3-headline-large">
-                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">code</span>
-                Tag HTML
-              </h2>
-            </div>
-
-            <p class="md3-body-large">
-              Langkah pertama yang perlu kalian lakukan adalah mengetik kode <code>html:5</code> (khusus pengguna Visual Studio Code).
-              Dengan mengetik itu, editor akan secara otomatis menghasilkan struktur dasar HTML:
-            </p>
-
-            <div class="md3-code-block">
-              <pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;id&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
-    &lt;title&gt;Website Saya&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!-- Konten website di sini --&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-            </div>
-
-            <div class="md3-card md3-card-filled" style="margin-top: 16px; padding: 16px;">
-              <h3 class="md3-body-large" style="margin-bottom: 12px; font-weight: 500;">Penjelasan Struktur:</h3>
-              <ul class="feature-list">
-                <li class="feature-item">
-                  <span class="material-symbols-outlined feature-icon">description</span>
-                  <div>
-                    <strong>&lt;!DOCTYPE html&gt;</strong> - Memberitahu browser bahwa ini adalah HTML5
-                  </div>
-                </li>
-                <li class="feature-item">
-                  <span class="material-symbols-outlined feature-icon">language</span>
-                  <div>
-                    <strong>&lt;html lang="id"&gt;</strong> - Root element dengan bahasa Indonesia
-                  </div>
-                </li>
-                <li class="feature-item">
-                  <span class="material-symbols-outlined feature-icon">settings</span>
-                  <div>
-                    <strong>&lt;head&gt;</strong> - Berisi metadata dan konfigurasi
-                  </div>
-                </li>
-                <li class="feature-item">
-                  <span class="material-symbols-outlined feature-icon">visibility</span>
-                  <div>
-                    <strong>&lt;body&gt;</strong> - Berisi konten yang terlihat di browser
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Paragraph Section -->
-      <section class="md3-section" id="buatpara" data-aos="fade-up">
-        <div class="md3-card md3-card-outlined">
-          <div class="md3-card-content">
-            <div class="md3-section-header">
-              <h2 class="md3-headline-large">
-                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">article</span>
-                Membuat Paragraf
-              </h2>
-            </div>
-
-            <p class="md3-body-large">
-              Di dalam HTML, kalian bisa membuat teks dengan berbagai jenis tag:
-            </p>
-
-            <div class="stats-grid">
-              <div class="md3-card md3-card-filled">
-                <div class="md3-card-content">
-                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">title</span>
-                    Heading
-                  </h3>
-                  <p class="md3-body-medium">Tag &lt;h1&gt; sampai &lt;h6&gt; untuk judul</p>
-                </div>
-              </div>
-              
-              <div class="md3-card md3-card-filled">
-                <div class="md3-card-content">
-                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">notes</span>
-                    Paragraf
-                  </h3>
-                  <p class="md3-body-medium">Tag &lt;p&gt; untuk teks paragraf</p>
-                </div>
-              </div>
-              
-              <div class="md3-card md3-card-filled">
-                <div class="md3-card-content">
-                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">keyboard_return</span>
-                    Line Break
-                  </h3>
-                  <p class="md3-body-medium">Tag &lt;br&gt; untuk baris baru</p>
-                </div>
-              </div>
-            </div>
-
-            <p class="md3-body-large">Contoh penggunaan:</p>
-
-            <div class="md3-code-block">
-              <pre><code class="language-html">&lt;body&gt;
-  &lt;h1&gt;Judul Utama&lt;/h1&gt;
-  &lt;h2&gt;Sub Judul&lt;/h2&gt;
-  &lt;p&gt;Ini adalah paragraf pertama.
-    &lt;br&gt;Dan ini baris baru dalam paragraf yang sama.
-  &lt;/p&gt;
-  &lt;p&gt;Ini paragraf kedua yang terpisah.&lt;/p&gt;
-&lt;/body&gt;</code></pre>
-            </div>
-
-            <div class="md3-card md3-card-filled" style="margin-top: 16px;">
-              <div class="md3-card-content">
-                <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 12px;">
-                  <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">preview</span>
-                  Hasil Preview:
-                </h3>
-                <div style="border: 1px solid var(--md-sys-color-outline-variant); border-radius: 8px; padding: 16px; background-color: var(--md-sys-color-surface);">
-                  <h1 style="margin: 0 0 8px 0; font-size: 24px;">Judul Utama</h1>
-                  <h2 style="margin: 0 0 8px 0; font-size: 20px;">Sub Judul</h2>
-                  <p style="margin: 0 0 8px 0;">Ini adalah paragraf pertama.<br>Dan ini baris baru dalam paragraf yang sama.</p>
-                  <p style="margin: 0;">Ini paragraf kedua yang terpisah.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Images Section -->
-      <section class="md3-section" id="masukgambar" data-aos="fade-up">
-        <div class="md3-card md3-card-elevated">
-          <div class="md3-card-content">
-            <div class="md3-section-header">
-              <h2 class="md3-headline-large">
-                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">image</span>
-                Memasukkan Gambar
-              </h2>
-            </div>
-
-            <p class="md3-body-large">
-              Untuk menambahkan gambar, gunakan tag <code>&lt;img&gt;</code> dengan atribut <code>src</code> dan <code>alt</code>:
-            </p>
-
-            <div class="md3-code-block">
-              <pre><code class="language-html">&lt;img src=&quot;gambar.jpg&quot; alt=&quot;Deskripsi gambar&quot; width=&quot;300&quot;&gt;</code></pre>
-            </div>
-
-            <div class="stats-grid" style="margin-top: 24px;">
-              <div class="md3-card md3-card-filled">
-                <div class="md3-card-content">
-                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">link</span>
-                    Atribut src
-                  </h3>
-                  <p class="md3-body-medium">Menentukan lokasi file gambar</p>
-                </div>
-              </div>
-              
-              <div class="md3-card md3-card-filled">
-                <div class="md3-card-content">
-                  <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 8px;">
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">accessibility</span>
-                    Atribut alt
-                  </h3>
-                  <p class="md3-body-medium">Deskripsi untuk aksesibilitas</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Font Styling Section -->
-      <section class="md3-section" id="aturfont" data-aos="fade-up">
-        <div class="md3-card md3-card-outlined">
-          <div class="md3-card-content">
-            <div class="md3-section-header">
-              <h2 class="md3-headline-large">
-                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">font_download</span>
-                Mengatur Font
-              </h2>
-            </div>
-
-            <p class="md3-body-large">
-              Kalian bisa mengatur tampilan teks menggunakan CSS inline dengan atribut <code>style</code>:
-            </p>
-
-            <div class="feature-list">
-              <li class="feature-item">
-                <span class="material-symbols-outlined feature-icon">palette</span>
-                <div>
-                  <strong>color</strong> - Mengatur warna teks (contoh: <code>color: blue;</code>)
-                </div>
-              </li>
-              <li class="feature-item">
-                <span class="material-symbols-outlined feature-icon">format_size</span>
-                <div>
-                  <strong>font-size</strong> - Mengatur ukuran teks (contoh: <code>font-size: 20px;</code>)
-                </div>
-              </li>
-              <li class="feature-item">
-                <span class="material-symbols-outlined feature-icon">font_download</span>
-                <div>
-                  <strong>font-family</strong> - Mengatur jenis font (contoh: <code>font-family: Arial;</code>)
-                </div>
-              </li>
-            </div>
-
-            <div class="md3-code-block">
-              <pre><code class="language-html">&lt;p style=&quot;font-family: Arial; font-size: 20px; color: blue;&quot;&gt;
-  Teks dengan styling
-&lt;/p&gt;</code></pre>
-            </div>
-
-            <div class="md3-card md3-card-filled" style="margin-top: 16px;">
-              <div class="md3-card-content">
-                <h3 class="md3-body-large" style="font-weight: 500; margin-bottom: 12px;">
-                  <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">preview</span>
-                  Hasil:
-                </h3>
-                <p style="font-family: Arial; font-size: 20px; color: #1976d2; margin: 0;">
-                  Teks dengan styling
-                </p>
-              </div>
-            </div>
-
-            <div class="md3-card md3-card-filled" style="margin-top: 16px; padding: 16px; border-left: 4px solid var(--md-sys-color-primary);">
-              <p class="md3-body-medium" style="margin: 0;">
-                <strong>💡 Pro Tips:</strong> Untuk font yang lebih menarik, kunjungi 
-                <a href="https://fonts.google.com" target="_blank" class="md3-chip">
-                  <span class="material-symbols-outlined">open_in_new</span>
-                  Google Fonts
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
     </div>
-  </main>
+</section>
 
-  <!-- Floating Action Button -->
-  <button class="md3-fab" id="scroll-to-top">
-    <span class="material-symbols-outlined">keyboard_arrow_up</span>
-  </button>
+<section id="intro-html" class="intro-html">
+    <div class="intro-container">
+        <h2>
+            <span class="material-symbols-rounded">school</span>
+            Apa Itu HTML?
+        </h2>
 
-  <!-- Scripts -->
-  <script src="js/prism.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="js/material3-interactions.js"></script>
-  
-  <script>
-    // Initialize AOS
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true
-    });
+        <p class="intro-text">
+            HTML (<strong>HyperText Markup Language</strong>) adalah fondasi utama dari setiap halaman web. 
+            Melalui HTML, kita menyusun struktur konten seperti teks, gambar, tombol, hingga layout dasar 
+            yang akan diperindah menggunakan CSS dan dihidupkan oleh JavaScript.
+        </p>
 
-    // Theme Toggle - Fixed version
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const body = document.body;
-    const root = document.documentElement;
+        <div class="info-grid">
+            <div class="info-card">
+                <span class="material-symbols-rounded icon">code</span>
+                <h3>Struktur Utama</h3>
+                <p>Menyusun kerangka halaman dengan elemen yang terorganisir.</p>
+            </div>
 
-    function updateTheme(isDark) {
-      const theme = isDark ? 'dark' : 'light';
-      
-      // Save current scroll position
-      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Update both body and root element
-      body.setAttribute('data-theme', theme);
-      root.setAttribute('data-theme', theme);
-      
-      // Update icon
-      if (isDark) {
-        themeIcon.textContent = 'light_mode';
-      } else {
-        themeIcon.textContent = 'dark_mode';
-      }
-      
-      // Save to localStorage
-      localStorage.setItem('theme', theme);
-      
-      // Force CSS update without affecting scroll position
-      requestAnimationFrame(() => {
-        window.scrollTo(0, scrollPosition);
-      });
+            <div class="info-card">
+                <span class="material-symbols-rounded icon">layers</span>
+                <h3>Fondasi Web</h3>
+                <p>Bekerja berdampingan dengan CSS & JavaScript untuk membangun pengalaman web modern.</p>
+            </div>
+
+            <div class="info-card">
+                <span class="material-symbols-rounded icon">language</span>
+                <h3>Universal</h3>
+                <p>Dipahami oleh seluruh browser di dunia tanpa perlu instalasi tambahan.</p>
+            </div>
+        </div>
+
+        <div class="highlight-tip">
+            <span class="material-symbols-rounded">tips_and_updates</span>
+            <p>Pelajari struktur HTML terlebih dahulu—ini akan membuat perjalanan belajar web jauh lebih mudah.</p>
+        </div>
+    </div>
+</section>
+
+<section id="toc" class="toc-container">
+    <h2>Daftar Isi Halaman</h2>
+
+    <ul class="toc-list">
+        <li>
+            <a href="#basic-html">
+                <span class="material-symbols-rounded">html</span>
+                Basic HTML
+            </a>
+        </li>
+        <li>
+            <a href="#tag-html">
+                <span class="material-symbols-rounded">tag</span>
+                Tag HTML
+            </a>
+        </li>
+        <li>
+            <a href="#paragraf">
+                <span class="material-symbols-rounded">article</span>
+                Membuat Paragraf
+            </a>
+        </li>
+        <li>
+            <a href="#gambar">
+                <span class="material-symbols-rounded">image</span>
+                Memasukkan Gambar
+            </a>
+        </li>
+        <li>
+            <a href="#font">
+                <span class="material-symbols-rounded">format_color_text</span>
+                Mengatur Font
+            </a>
+        </li>
+    </ul>
+</section>
+
+<!-- Contoh Section Target -->
+<section id="basic-html" class="learn-html">
+    <div class="learn-container">
+
+        <h2>
+            <span class="material-symbols-rounded">html</span>
+            Basic HTML
+        </h2>
+
+        <p>HTML membangun fondasi halaman web. Berikut contoh kode sederhana:</p>
+
+        <div class="code-box">
+            <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Contoh Basic HTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Halo Dunia!&lt;/h1&gt;
+    &lt;p&gt;Ini paragraf pertama saya.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+        </div>
+
+        <h3 class="output-title">
+            <span class="material-symbols-rounded">visibility</span>
+            Hasilnya:
+        </h3>
+
+        <div class="output-preview">
+            <h1>Halo Dunia!</h1>
+            <p>Ini paragraf pertama saya.</p>
+        </div>
+    </div>
+</section>
+
+<section id="html-tags" class="learn-html">
+  <div class="learn-container">
+
+    <h2>
+      <span class="material-symbols-rounded">tag</span>
+      Apa Itu Tag HTML?
+    </h2>
+
+    <p>
+      Tag HTML adalah elemen dasar yang digunakan untuk memberi struktur pada sebuah halaman web. 
+      Setiap tag memiliki fungsi tertentu, misalnya menandai judul, paragraf, link, atau gambar.
+    </p>
+
+    <!-- Contoh Tag 1 -->
+    <div class="tag-example">
+      <h3>&lt;h1&gt; - Heading</h3>
+      <p>Digunakan untuk menampilkan judul atau heading. Ada <code>&lt;h1&gt;</code> sampai <code>&lt;h6&gt;</code>.</p>
+      <div class="output-preview">
+        <h1>Judul Halaman</h1>
+      </div>
+    </div>
+
+    <!-- Contoh Tag 2 -->
+    <div class="tag-example">
+      <h3>&lt;p&gt; - Paragraf</h3>
+      <p>Digunakan untuk menampilkan teks paragraf.</p>
+      <div class="output-preview">
+        <p>Ini adalah paragraf contoh.</p>
+      </div>
+    </div>
+
+    <!-- Contoh Tag 3 -->
+    <div class="tag-example">
+      <h3>&lt;a&gt; - Link</h3>
+      <p>Digunakan untuk membuat tautan (hyperlink) ke halaman lain atau ke bagian dalam halaman.</p>
+      <div class="output-preview">
+        <a href="#">Klik di sini</a>
+      </div>
+    </div>
+
+    <!-- Contoh Tag 4 -->
+    <div class="tag-example">
+      <h3>&lt;img&gt; - Gambar</h3>
+      <p>Digunakan untuk menampilkan gambar.</p>
+      <div class="output-preview">
+        <img src="https://placehold.co/150" alt="Contoh Gambar">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="html-paragraph" class="learn-html">
+  <div class="learn-container">
+
+    <h2>
+      <span class="material-symbols-rounded">article</span>
+      Membuat Paragraf
+    </h2>
+
+    <p>
+      Paragraf di HTML digunakan untuk menampilkan teks dalam blok terpisah. Tag yang digunakan adalah <code>&lt;p&gt;</code>.
+      Setiap paragraf dimulai dengan <code>&lt;p&gt;</code> dan diakhiri dengan <code>&lt;/p&gt;</code>.
+    </p>
+
+    <!-- Contoh Kode -->
+    <h3 class="code-title">
+      <span class="material-symbols-rounded">code</span>
+      Contoh Kode Paragraf
+    </h3>
+
+    <div class="code-box">
+      <pre><code class="language-html">
+&lt;p&gt;Ini adalah paragraf pertama.&lt;/p&gt;
+&lt;p&gt;Ini paragraf kedua.&lt;/p&gt;
+      </code></pre>
+    </div>
+
+    <!-- Output Preview -->
+    <h3 class="output-title">
+      <span class="material-symbols-rounded">visibility</span>
+      Hasilnya:
+    </h3>
+
+    <div class="output-preview">
+      <p>Ini adalah paragraf pertama.</p>
+      <p>Ini paragraf kedua.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="html-image" class="learn-html">
+  <div class="learn-container">
+
+    <h2>
+      <span class="material-symbols-rounded">image</span>
+      Memasukkan Gambar
+    </h2>
+
+    <p>
+      Tag <code>&lt;img&gt;</code> digunakan untuk menampilkan gambar di halaman web. Atribut pentingnya adalah <code>src</code> untuk sumber gambar dan <code>alt</code> untuk deskripsi.
+    </p>
+
+    <!-- Contoh Kode -->
+    <h3 class="code-title">
+      <span class="material-symbols-rounded">code</span>
+      Contoh Kode Gambar
+    </h3>
+
+    <div class="code-box">
+      <pre><code class="language-html">
+&lt;img src="https://placehold.co/150" alt="Contoh Gambar" width="150" height="150"&gt;
+      </code></pre>
+    </div>
+
+    <!-- Output Preview dengan Fitur Edit Size -->
+    <h3 class="output-title">
+      <span class="material-symbols-rounded">visibility</span>
+      Hasilnya:
+    </h3>
+
+    <div class="output-preview">
+      <label>
+        Ubah ukuran gambar:
+        <input type="range" min="50" max="500" value="150" id="img-size-slider">
+      </label>
+      <br>
+      <img id="demo-image" src="https://placehold.co/150" alt="Contoh Gambar">
+    </div>
+<script>
+  const slider = document.getElementById("img-size-slider");
+const img = document.getElementById("demo-image");
+
+slider.addEventListener("input", () => {
+    const size = slider.value;
+    img.width = size;
+    img.height = size;
+});
+</script>
+  </div>
+</section>
+
+<section id="font-html" class="learn-html">
+  <div class="learn-container">
+
+    <h2>
+      <span class="material-symbols-rounded">format_size</span>
+      Mengatur Font
+    </h2>
+
+    <p class="intro-text">
+      Kamu bisa mengubah ukuran, jenis, dan gaya font menggunakan CSS. Contohnya:
+    </p>
+
+    <!-- Contoh Kode -->
+    <h3 class="code-title">
+      <span class="material-symbols-rounded">code</span>
+      Contoh CSS Mengatur Font
+    </h3>
+
+    <div class="code-box">
+      <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    p {
+      font-family: 'Arial', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      color: #2b2b2b;
     }
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      updateTheme(savedTheme === 'dark');
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      updateTheme(prefersDark);
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: 32px;
+      color: #1a73e8;
     }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Judul Utama&lt;/h1&gt;
+  &lt;p&gt;Ini paragraf dengan font yang sudah diatur.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+    </div>
 
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme') || root.getAttribute('data-theme');
-      const isDark = currentTheme !== 'dark';
-      updateTheme(isDark);
-    });
+    <!-- Output Preview -->
+    <h3 class="output-title">
+      <span class="material-symbols-rounded">visibility</span>
+      Hasilnya:
+    </h3>
 
-    // Scroll to top
-    const scrollButton = document.getElementById('scroll-to-top');
-    scrollButton.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    <div class="output-preview">
+      <h1 style="font-family: 'Georgia', serif; font-size: 32px; color: #1a73e8;">
+        Judul Utama
+      </h1>
+      <p style="font-family: 'Arial', sans-serif; font-size: 20px; font-weight: bold; color: #2b2b2b;">
+        Ini paragraf dengan font yang sudah diatur.
+      </p>
+    </div>
 
-    // Show/hide scroll button
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        scrollButton.style.opacity = '1';
-        scrollButton.style.visibility = 'visible';
-      } else {
-        scrollButton.style.opacity = '0';
-        scrollButton.style.visibility = 'hidden';
-      }
-    });
+  </div>
+</section>
+        <footer class="site-footer">
+        
+        <div class="copyright">
+            &copy; <script>document.write(new Date().getFullYear())</script> Muhammad Fachri Al Husein. <br>
+            Dibuat dengan penuh semangat⚡
+        </div>
 
-    // Mobile navigation
-    const menuToggle = document.getElementById('menu-toggle');
-    const navRail = document.getElementById('navigation-rail');
-    let isNavOpen = false;
+        <div class="credits-container">
+            
+            <div class="credit-chip" title="Design System">
+                <span class="material-symbols-rounded">palette</span>
+                <span>Material You Design</span>
+            </div>
 
-    menuToggle.addEventListener('click', () => {
-      isNavOpen = !isNavOpen;
-      if (window.innerWidth <= 768) {
-        navRail.style.display = isNavOpen ? 'flex' : 'none';
-      }
-    });
+            <div class="credit-chip" title="Hosting Provider">
+                <span class="material-symbols-rounded">dns</span> <span>GitHub Pages</span>
+            </div>
 
-    // Navigation active state
-    const navItems = document.querySelectorAll('.md3-navigation-rail-item');
-    const sections = document.querySelectorAll('.md3-section[id]');
+            <div class="credit-chip" title="Typography">
+                <span class="material-symbols-rounded">text_fields</span>
+                <span>Plus Jakarta Sans</span>
+            </div>
 
-    function updateActiveNav() {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (window.scrollY >= sectionTop) {
-          current = section.getAttribute('id');
+        </div>
+    </footer>
+</main>
+
+
+ 
+ <script src="js/prism.js"></script>
+
+    <script>
+        // --- 1. SETTINGS & THEME LOGIC ---
+        
+        // Load Saved Settings
+        const savedHue = localStorage.getItem('theme-hue') || 210;
+        const savedMode = localStorage.getItem('theme-mode') || 'auto';
+        
+        // Apply awal
+        setHue(savedHue);
+        applyMode(savedMode);
+
+        function toggleSettings() {
+            document.getElementById('settingsModal').classList.toggle('open');
         }
-      });
 
-      navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href') === `#${current}`) {
-          item.classList.add('active');
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('settingsModal');
+            const fab = document.querySelector('.fab');
+            if (!modal.contains(e.target) && !fab.contains(e.target)) {
+                modal.classList.remove('open');
+            }
+        });
+
+        function setHue(hue) {
+            document.documentElement.style.setProperty('--hue', hue);
+            localStorage.setItem('theme-hue', hue);
         }
-      });
-    }
 
-    window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav();
-
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        function setMode(mode) {
+            localStorage.setItem('theme-mode', mode);
+            applyMode(mode);
         }
-      });
-    });
 
-    // Initial scroll button state
-    scrollButton.style.opacity = '0';
-    scrollButton.style.visibility = 'hidden';
-    scrollButton.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
-  </script>
+        function applyMode(mode) {
+            // Update Active Button UI
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`.mode-btn[onclick="setMode('${mode}')"]`);
+            if(activeBtn) activeBtn.classList.add('active');
 
+            // Apply Class to Body
+            if (mode === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    document.body.classList.add('light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                }
+            } else if (mode === 'light') {
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+            }
+        }
+
+        // --- 2. PRELOADER ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.visibility = 'hidden'; }, 500);
+        });
+
+        // --- 3. SCROLL ANIMATION ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Nav Active State
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        nav.classList.remove('active');
+                        if(nav.getAttribute('href') === '#' + id) nav.classList.add('active');
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+    </script>
+    
 </body>
 </html>

@@ -3,813 +3,466 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Fachri Al Husein - On Top!</title>
-    <meta name="description" content="Portfolio Material 3 Muhammad Fachri Al Husein (muhfhri._) - Beginner Developer, Web & Android Development">
-    <meta name="keywords" content="Muhammad Fachri Al Husein, muhfhri, portfolio, material 3, web developer, android developer">
-    <meta name="author" content="Muhammad Fachri Al Husein">
+    <title>Portofolio - Muhammad Fachri Al Husein</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="image/logo_light.png">
-    
-    <!-- Prevent theme flash (set theme before CSS paints) -->
-    <script>
-      (function(){
-        try {
-          var t = localStorage.getItem('theme') || localStorage.getItem('selectedTheme') || 'light';
-          if (t !== 'dark' && t !== 'light') t = (t === 'forest') ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', t);
-          var s = document.createElement('style');
-          s.id = 'preload-theme-style';
-          s.textContent = t === 'dark' ? 'html{background:#131318;color:#E6E0E9;}' : 'html{background:#FFFBFE;color:#1C1B1F;}';
-          document.head.appendChild(s);
-        } catch(e) {}
-      })();
-    </script>
-    
-    <!-- Google Fonts - Inter (Optimized Loading) -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Preload most used font weights -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Material Design 3 Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
-    
-    <!-- Material 3 Styles -->
-    <link rel="stylesheet" href="css/material3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
 </head>
 <body>
-    <!-- Top App Bar -->
-    <header class="top-app-bar">
-        <img src="css/image/light.gif" alt="Muhfhri Logo" class="app-bar-logo" id="app-bar-logo">
-        <div style="flex: 1;"></div>
-                    <button class="theme-toggle" id="theme-toggle">
-                        <span class="material-symbols-rounded">dark_mode</span>
-                        <span class="theme-text">Dark</span>
-                    </button>
-    </header>
 
-    <main class="container">
-        <!-- Top Info Bar -->
-        <div class="top-info-bar">
-            <div class="info-card">
-                <div id="time-display" class="time-display">Loading...</div>
-                <div id="date-display" class="body-small" style="margin-top: 4px; color: var(--md-sys-color-on-surface-variant);">Loading...</div>
-            </div>
-            <div class="info-card weather-widget" id="weather">
-                <div class="weather-first-line">
-                    <span id="weather-icon" class="material-symbols-rounded" style="color: var(--md-sys-color-primary);">sunny</span>
-                    <span id="weather-city-temp" class="weather-city-temp">Loading...</span>
-                    <button id="weather-edit-btn" class="weather-edit-btn" title="Edit lokasi">
-                        <span class="material-symbols-rounded" style="font-size: 16px;">edit</span>
-                    </button>
-                </div>
-                <div class="weather-description-container">
-                    <span id="weather-desc-icon" class="material-symbols-rounded" style="font-size: 18px; margin-right: 6px; color: var(--md-sys-color-primary);">info</span>
-                    <span id="weather-description" class="weather-description">Loading...</span>
-                </div>
-                <div id="weather-info" class="weather-info"></div>
-                <div id="weather-edit-box" style="display:none;"></div>
-            </div>
-        </div>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
-        <!-- Navigation Chips -->
-        <nav class="nav-chips">
-            <button class="chip active" data-section="about">
-                <span class="material-symbols-rounded" style="font-size: 18px;">person</span>
-                Tentang
-            </button>
-            <button class="chip" data-section="projects">
-                <span class="material-symbols-rounded" style="font-size: 18px;">work</span>
-                Projek
-            </button>
-            <button class="chip" data-section="skills">
-                <span class="material-symbols-rounded" style="font-size: 18px;">code</span>
-                Skills
-            </button>
-            <button class="chip" data-section="education">
-                <span class="material-symbols-rounded" style="font-size: 18px;">school</span>
-                Pendidikan
-            </button>
-            <button class="chip" data-section="credits">
-                <span class="material-symbols-rounded" style="font-size: 18px;">explore</span>
-                Demo
-            </button>
-            <button class="chip" data-section="more">
-                <span class="material-symbols-rounded" style="font-size: 18px;">more_horiz</span>
-                Lainnya
-            </button>
-        </nav>
-
-        <!-- About Section -->
-        <section id="about" class="page-section active">
-            <!-- Hero -->
-            <div class="hero">
-                <img src="image/muhfhri.png" alt="Muhammad Fachri Al Husein" class="hero-avatar">
-                <h1 class="display-medium hero-title"><strong>Muhammad Fachri Al Husein</strong></h1>
-                <p class="headline-small hero-subtitle"><strong>@muhfhri._ • @flixpseal • Beginner Developer</strong></p>
-                <p class="body-large" style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Alumni SMK Nurul Islam Jakarta Jurusan Rekayasa Perangkat Lunak
-                </p>
-                
-                <div class="social-buttons">
-                    <a href="https://github.com/muhfhri" class="btn btn-filled">
-                        <span class="material-symbols-rounded">code</span>
-                        GitHub
-                    </a>
-                    <a href="https://instagram.com/muhfhri._" class="btn btn-outlined">
-                        <span class="material-symbols-rounded">photo_camera</span>
-                        Instagram
-                    </a>
-                    <a href="https://youtube.com/channel/UCzU0mlmLis0p2XOvRL1r0-Q" class="btn btn-outlined">
-                        <span class="material-symbols-rounded">play_circle</span>
-                        YouTube
-                    </a>
-                    <a href="https://twitter.com/flixpseal" class="btn btn-outlined">
-                        <span class="material-symbols-rounded">alternate_email</span>
-                        Twitter
-                    </a>
-                </div>
-            </div>
-
-            <!-- About Card - Redesigned -->
-            <div class="card">
-                <h2 class="headline-small" style="margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
-                    <span class="material-symbols-rounded">info</span>
-                    Tentang Saya
-                </h2>
-                <div style="display: grid; gap: 24px;">
-                    <div>
-                        <h3 class="title-medium" style="margin-bottom: 12px; color: var(--md-sys-color-primary);">
-                            Background
-                        </h3>
-                        <p class="body-large" style="line-height: 1.7;">
-                            Saya adalah seseorang yang sangat tertarik dengan dunia teknologi terutama Software, Website ataupun Android sudah menjadi kesukaan saya sejak lama. Sebagai alumni SMK Nurul Islam Jakarta ke-35 Jurusan Rekayasa Perangkat Lunak, saya terus belajar dan mengembangkan kemampuan di bidang pengembangan aplikasi dan website.
-                        </p>
-                    </div>
-                    <div>
-                        <h3 class="title-medium" style="margin-bottom: 12px; color: var(--md-sys-color-primary);">
-                            Philosophy
-                        </h3>
-                        <p class="body-medium code" style="color: var(--md-sys-color-error); font-style: italic;">
-                            "try to be a dev, cuz being a dev is really hard af"
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- YouTube Channel Card - Improved -->
-            <div class="card card-filled">
-                <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
-                    <img src="https://socialcounts.org/_next/image?url=https%3A%2F%2Fyt3.ggpht.com%2FVHlK_2JACt8C8ZLd4UJ5bC_ltTJ9_BshTI0RFT8XjWLgC70GNN1LcFguNnRmC--JuIXZ3__w%3Ds240-c-k-c0x00ffffff-no-rj&w=256&q=75" 
-                         alt="Flixdz YouTube Channel" 
-                         style="width: 72px; height: 72px; border-radius: 16px; object-fit: cover; flex-shrink: 0;">
-                    <div style="flex: 1;">
-                        <h3 class="title-large" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                            Flixdz
-                            <span class="material-symbols-rounded" style="color: #FF0000; font-size: 20px;">play_circle</span>
-                        </h3>
-                        <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 8px;">YouTube Channel</p>
-                        <div id="yt-stats" class="label-large" style="color: var(--md-sys-color-primary);">
-                            <span class="loading"></span> Loading subscribers...
-                        </div>
-                    </div>
-                </div>
-                <a href="https://youtube.com/channel/UCzU0mlmLis0p2XOvRL1r0-Q" class="btn btn-filled" target="_blank">
-                    <span class="material-symbols-rounded">open_in_new</span>
-                    Visit Channel
-                </a>
-            </div>
-
-            <!-- Achievements Section -->
-            <div class="card">
-                <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
-                    <span class="material-symbols-rounded">emoji_events</span>
-                    Achievements
-                </h3>
-                <div id="rotating-achievement" class="achievement-box">
-                    🎓 Loading achievements...
-                </div>
-                <div id="achievement-indicators" class="achievement-indicators"></div>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="card">
-                <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
-                    <span class="material-symbols-rounded">contact_mail</span>
-                    Get In Touch
-                </h3>
-                <p class="body-medium" style="margin-bottom: 20px; color: var(--md-sys-color-on-surface-variant);">
-                    Tertarik untuk berkolaborasi atau ingin tahu lebih lanjut? Jangan ragu untuk menghubungi saya!
-                </p>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                    <a href="mailto:frezzcraft109@gmail.com" class="btn btn-outlined">
-                        <span class="material-symbols-rounded">email</span>
-                        frezzcraft109@gmail.com
-                    </a>
-                    <a href="https://github.com/muhfhri" class="btn btn-outlined" target="_blank">
-                        <span class="material-symbols-rounded">code</span>
-                        github.com/muhfhri
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section - Fixed Grid -->
-        <section id="projects" class="page-section">
-            <div style="text-align: center; margin: 48px 0;">
-                <h2 class="display-small">
-                    <span class="material-symbols-rounded" style="font-size: 48px; vertical-align: middle; margin-right: 16px;">work</span>
-                    Projek Saya
-                </h2>
-                <p class="body-large" style="color: var(--md-sys-color-on-surface-variant); margin-top: 16px;">
-                    Beberapa projek yang telah saya kerjakan dengan teknologi modern
-                </p>
-            </div>
-
-            <div class="project-grid">
-                <!-- Project 1: Transjakarta -->
-                <div class="card project-card">
-                    <img src="image/tjweb.jpg" alt="Transjakarta Fan Web" class="project-image">
-                    <div class="project-content">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                            <h3 class="project-title"><strong>Transjakarta Fan Web</strong></h3>
-                            <span class="material-symbols-rounded" style="color: var(--md-sys-color-tertiary); font-size: 24px;">star</span>
-                        </div>
-                        <p class="project-description">
-                            Website interaktif untuk pencarian rute, koridor, dan informasi bus Transjakarta. Dibuat dengan data real dan UI modern menggunakan HTML, CSS, dan JavaScript.
-                        </p>
-                        <a href="https://muhfhri.github.io/jakmove" class="btn btn-filled" target="_blank">
-                            <span class="material-symbols-rounded">open_in_new</span>
-                            Lihat Projek
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 2: Material 3 Web -->
-                <div class="card project-card">
-                    <img src="image/m3web.jpg" alt="Material 3 Website" class="project-image">
-                    <div class="project-content">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                            <h3 class="project-title"><strong>Material 3 Website</strong></h3>
-                            <span class="material-symbols-rounded" style="color: var(--md-sys-color-error); font-size: 24px;">local_fire_department</span>
-                        </div>
-                        <p class="project-description">
-                            Website demo Material 3 (Material You) dengan tema dinamis, komponen interaktif, dan desain modern berbasis Google Material Design System.
-                        </p>
-                        <a href="https://flixdz.github.io/minecraft" class="btn btn-filled" target="_blank">
-                            <span class="material-symbols-rounded">open_in_new</span>
-                            Lihat Projek
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 3: Hexa Developer -->
-                <div class="card project-card">
-                    <img src="https://hexadevteam.github.io/hexa/image/white-theme-logo.png" alt="Hexa Team Developer" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><strong>Hexa Team Developer</strong></h3>
-                        <p class="project-description">
-                            Kontributor dan developer di Hexa Team, komunitas pengembang yang berfokus pada kolaborasi dan pengembangan aplikasi/website open-source.
-                        </p>
-                        <a href="https://hexadevteam.github.io/hexa/" class="btn btn-filled" target="_blank">
-                            <span class="material-symbols-rounded">open_in_new</span>
-                            Lihat Portofolio
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="page-section">
-            <div style="text-align: center; margin: 48px 0;">
-                <h2 class="display-small">
-                    <span class="material-symbols-rounded" style="font-size: 48px; vertical-align: middle; margin-right: 16px;">code</span>
-                    Skills & Technologies
-                </h2>
-                <p class="body-large" style="color: var(--md-sys-color-on-surface-variant); margin-top: 16px;">
-                    Bahasa & Framework yang dipelajari
-                </p>
-            </div>
-
-            <div class="skills-grid">
-                <div class="skill-chip">
-                    <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">javascript</span>
-                    <div class="title-small"><strong>JavaScript</strong></div>
-                    <div class="body-small" style="opacity: 0.8; margin-top: 4px;">Web Interactivity</div>
-                </div>
-                <div class="skill-chip">
-                    <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">code</span>
-                    <div class="title-small"><strong>PHP</strong></div>
-                    <div class="body-small" style="opacity: 0.8; margin-top: 4px;">Backend Development</div>
-                </div>
-                <div class="skill-chip">
-                    <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">web</span>
-                    <div class="title-small"><strong>Laravel</strong></div>
-                    <div class="body-small" style="opacity: 0.8; margin-top: 4px;">PHP Framework</div>
-                </div>
-                <div class="skill-chip">
-                    <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">layers</span>
-                    <div class="title-small"><strong>Filament</strong></div>
-                    <div class="body-small" style="opacity: 0.8; margin-top: 4px;">Admin Panel</div>
-                </div>
-                <div class="skill-chip">
-                    <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">html</span>
-                    <div class="title-small"><strong>HTML/CSS</strong></div>
-                    <div class="body-small" style="opacity: 0.8; margin-top: 4px;">Frontend</div>
-                </div>
-                <div class="skill-chip">
-                    <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">storage</span>
-                    <div class="title-small"><strong>Database</strong></div>
-                    <div class="body-small" style="opacity: 0.8; margin-top: 4px;">MySQL/SQLite</div>
-                </div>
-            </div>
-
-            <!-- Development Tools -->
-            <div class="card" style="margin-top: 32px;">
-                <h3 class="title-large" style="margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
-                    <span class="material-symbols-rounded">build</span>
-                    Development Tools
-                </h3>
-                <div class="skills-grid">
-                    <div class="skill-chip">
-                        <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">code</span>
-                        <div class="title-small">VS Code</div>
-                        <div class="body-small" style="opacity: 0.8; margin-top: 4px;">Code Editor</div>
-                    </div>
-                    <div class="skill-chip">
-                        <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">phone_android</span>
-                        <div class="title-small">Acode</div>
-                        <div class="body-small" style="opacity: 0.8; margin-top: 4px;">Mobile Editor</div>
-                    </div>
-                    <div class="skill-chip">
-                        <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">code</span>
-                        <div class="title-small">GitHub</div>
-                        <div class="body-small" style="opacity: 0.8; margin-top: 4px;">Version Control</div>
-                    </div>
-                    <div class="skill-chip">
-                        <span class="material-symbols-rounded" style="font-size: 32px; display: block; margin-bottom: 12px;">palette</span>
-                        <div class="title-small">Design Tools</div>
-                        <div class="body-small" style="opacity: 0.8; margin-top: 4px;">UI/UX Design</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section - Modern Timeline -->
-        <section id="education" class="page-section">
-            <div style="text-align: center; margin: 48px 0;">
-                <h2 class="display-small">
-                    <span class="material-symbols-rounded" style="font-size: 48px; vertical-align: middle; margin-right: 16px;">school</span>
-                    Riwayat Pendidikan
-                </h2>
-                <p class="body-large" style="color: var(--md-sys-color-on-surface-variant); margin-top: 16px;">
-                    Perjalanan pendidikan dari SD hingga SMK
-                </p>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">2014 – 2017</div>
-                    <h3 class="timeline-school">SDN Bintara Jaya 03</h3>
-                    <p class="timeline-level">Sekolah Dasar</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2017 – 2019</div>
-                    <h3 class="timeline-school">SDN Pondok Kopi 03</h3>
-                    <p class="timeline-level">Sekolah Dasar</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2019 – 2022</div>
-                    <h3 class="timeline-school">SMPN 156 Jakarta</h3>
-                    <p class="timeline-level">Sekolah Menengah Pertama</p>
-                </div>
-
-                <div class="timeline-item" style="border-left-color: var(--md-sys-color-secondary); background: var(--md-sys-color-secondary-container);">
-                    <div class="timeline-year" style="color: var(--md-sys-color-secondary);">2022 – 2025</div>
-                    <h3 class="timeline-school">SMKS Nurul Islam Jakarta</h3>
-                    <p class="timeline-level">Rekayasa Perangkat Lunak</p>
-                    <div style="margin-top: 8px; padding: 8px 12px; background: var(--md-sys-color-primary-container); border-radius: 8px; display: inline-block;">
-                        <span class="body-small" style="color: var(--md-sys-color-on-primary-container); font-weight: 500;">Currently Graduated</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Credits/Demo Section -->
-        <section id="credits" class="page-section" style="display: none;">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="display-small">
-                        <span class="material-symbols-rounded" style="font-size: 48px; vertical-align: middle; margin-right: 16px;">explore</span>
-                        Demo & Tutorial
-                    </h2>
-                    <p class="body-large" style="color: var(--md-sys-color-on-surface-variant); margin-top: 16px;">
-                        Koleksi tutorial dan demo aplikasi yang saya buat
-                    </p>
-                </div>
-
-                <!-- Platform Apps -->
-                <div class="demo-category">
-                    <h3 class="headline-small" style="margin-bottom: 16px;">
-                        <span class="material-symbols-rounded" style="vertical-align: middle; margin-right: 8px;">devices</span>
-                        Platform Apps
-                    </h3>
-                    <div class="demo-links">
-                        <a href="android.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">android</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Android App</h4>
-                                <p>Showcase aplikasi Android dengan screenshot dan detail fitur-fitur yang telah dibuat</p>
-                            </div>
-                        </a>
-                        <a href="windows.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">desktop_windows</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Windows Tools</h4>
-                                <p>Koleksi tools dan aplikasi Windows dengan demo dan screenshot lengkap</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- HTML Tutorials -->
-                <div class="demo-category">
-                    <h3 class="headline-small" style="margin-bottom: 16px;">
-                        <span class="material-symbols-rounded" style="vertical-align: middle; margin-right: 8px;">code</span>
-                        HTML Tutorial
-                    </h3>
-                    <div class="demo-links">
-                        <a href="basic.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">html</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Basic HTML</h4>
-                                <p>Tutorial dasar HTML dengan contoh code dan syntax highlighting lengkap</p>
-                            </div>
-                        </a>
-                        <a href="format-text.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">code</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Format Teks HTML</h4>
-                                <p>Belajar format teks HTML dengan berbagai styling dan efek khusus</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- PHP Tutorials -->
-                <div class="demo-category">
-                    <h3 class="headline-small" style="margin-bottom: 16px;">
-                        <span class="material-symbols-rounded" style="vertical-align: middle; margin-right: 8px;">data_object</span>
-                        PHP Tutorial
-                    </h3>
-                    <div class="demo-links">
-                        <a href="basicphp.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">terminal</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Basic PHP</h4>
-                                <p>Tutorial fundamental PHP dengan contoh code dan penjelasan detail untuk pemula</p>
-                            </div>
-                        </a>
-                        <a href="varphp.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">data_object</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Variabel PHP</h4>
-                                <p>Memahami penggunaan variabel dalam PHP dengan berbagai tipe data dan contoh</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Other Demo -->
-                <div class="demo-category">
-                    <h3 class="headline-small" style="margin-bottom: 16px;">
-                        <span class="material-symbols-rounded" style="vertical-align: middle; margin-right: 8px;">more_horiz</span>
-                        Demo Lainnya
-                    </h3>
-                    <div class="demo-links">
-                        <a href="islamic.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">mosque</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Islamic</h4>
-                                <p>Halaman khusus Jadwal Sholat, countdown Puasa Ramadhan 1447 H, dan quote inspiratif</p>
-                            </div>
-                        </a>
-                        <a href="quran.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">import_contacts</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Al Qur'an</h4>
-                                <p>Menyediakan Al Quran digital yang lengkap dengan beragam fitur yang berguna seperti pencarian ayat, surah, dan masih banyak lagi</p>
-                            </div>
-                        </a>
-                        <a href="others.html" class="demo-link">
-                            <div class="demo-icon">
-                                <span class="material-symbols-rounded">info</span>
-                            </div>
-                            <div class="demo-content">
-                                <h4>Credits</h4>
-                                <p>Credits dan teknologi yang digunakan dalam pengembangan website ini</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- More Section -->
-        <section id="more" class="page-section">
-            <div style="text-align: center; margin: 48px 0;">
-                <h2 class="display-small">
-                    <span class="material-symbols-rounded" style="font-size: 48px; vertical-align: middle; margin-right: 16px;">auto_awesome</span>
-                    Lainnya
-                </h2>
-                <p class="body-large" style="color: var(--md-sys-color-on-surface-variant); margin-top: 16px;">
-                    Logo, changelog, dan informasi tambahan
-                </p>
-            </div>
-
-            <!-- Logo Section -->
-            <div class="card logo-section">
-                <h3 class="title-large" style="margin-bottom: 20px; display: flex; align-items: center; gap: 12px; justify-content: center;">
-                    <span class="material-symbols-rounded">logo_dev</span>
-                    Logo Muhfhri
-                </h3>
-                <div style="text-align: center; margin: 24px 0;">
-                    <img id="logo-display" src="css/image/light.gif" alt="Logo Muhfhri" style="max-width: 200px; height: auto; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
-                </div>
-                <div class="logo-meaning">
-                    <h4 class="title-medium" style="margin-bottom: 16px; color: var(--md-sys-color-primary);">Makna Logo</h4>
-                    <ul class="body-medium">
-                        <li><strong>Bentuk Geometris Kiri:</strong> Melambangkan pondasi hidup yang kuat dan sederhana.</li>
-                        <li><strong>Teks Muhfhri:</strong> Titik dan garis pada teks menggambarkan arah dan perjalanan hidup.</li>
-                        <li><strong>Panah ke Kanan:</strong> Simbol semangat untuk terus maju ke depan.</li>
-                        <li><strong>Panah ke Kiri:</strong> Mengingatkan untuk tidak melupakan pengalaman masa lalu.</li>
-                        <li><strong>Desain Minimalis:</strong> Mencerminkan siklus hidup antara masa lalu dan masa depan, serta semangat untuk terus berkembang menjadi lebih baik.</li>
-                    </ul>
-                    <p class="body-small" style="font-style: italic; color: var(--md-sys-color-on-surface-variant); margin-top: 16px;">
-                        Logo ini adalah refleksi perjalanan hidup yang sederhana, penuh makna, dan selalu berproses.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Typing Effect -->
-            <div class="typing-container">
-                <div id="typing-text" class="typing-text"></div>
-            </div>
-
-            <!-- Changelog -->
-            <div class="card">
-                <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
-                    <span class="material-symbols-rounded">update</span>
-                    Changelog
-                </h3>
-                <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 20px;">
-                    Catatan update dan perubahan terbaru di website ini. Stay tuned!
-                </p>
-                <div class="changelog-list">
-                    <div class="changelog-item">[2025-01-15] Implementasi Material You dengan random color palette setiap refresh</div>
-                    <div class="changelog-item">[2025-01-15] Pisahkan CSS dan JavaScript ke file terpisah untuk struktur yang lebih rapi</div>
-                    <div class="changelog-item">[2025-01-15] Redesign bagian About dengan layout yang lebih responsif dan modern</div>
-                    <div class="changelog-item">[2025-01-15] Perbaiki grid projek agar tidak kaku dan teks tidak terpotong</div>
-                    <div class="changelog-item">[2025-01-15] Tambah logo animasi di navbar yang berubah sesuai tema (light/dark)</div>
-                    <div class="changelog-item">[2025-01-15] Redesain timeline pendidikan dengan desain Material 3 yang lebih clean</div>
-                    <div class="changelog-item">[2025-01-15] Tambah weather widget, time display, dan achievements rotator</div>
-                    <div class="changelog-item highlight">[2025-01-15] MIGRASI KE MATERIAL 3 DESIGN SYSTEM</div>
-                    <div class="changelog-item">[2025-01-15] Optimasi untuk semua ukuran layar dengan responsive padding</div>
-                    <div class="changelog-item">[2025-01-15] Kurangi efek berlebihan untuk tampilan Material 3 yang lebih klasik</div>
-                    <div class="changelog-item">[2025-01-15] Import elemen penting dari portofolio.html: logo section, typing effect</div>
-                </div>
-            </div>
-
-            <!-- Developer Info -->
-            <div class="card">
-                <div style="text-align: center;">
-                    <h4 class="title-medium" style="margin-bottom: 16px;">
-                        Code Editor & Tools
-                    </h4>
-                    <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="material-symbols-rounded" style="color: var(--md-sys-color-primary);">code</span>
-                            <span class="body-medium">VS Code</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="material-symbols-rounded" style="color: var(--md-sys-color-primary);">phone_android</span>
-                            <span class="body-medium">Acode</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="material-symbols-rounded" style="color: var(--md-sys-color-primary);">palette</span>
-                            <span class="body-medium">Material 3</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Material 3 Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>
-                        <span class="material-symbols-rounded" style="font-size: 20px; vertical-align: middle; margin-right: 8px;">person</span>
-                        Muhammad Fachri Al Husein
-                    </h3>
-                    <p class="body-medium" style="color: var(--md-sys-color-on-surface-variant); line-height: 1.6;">
-                        Beginner developer yang passionate dalam pengembangan web dan aplikasi. Selalu belajar teknologi baru dan berkontribusi dalam komunitas open-source.
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>
-                        <span class="material-symbols-rounded" style="font-size: 20px; vertical-align: middle; margin-right: 8px;">link</span>
-                        Quick Links
-                    </h3>
-                    <ul class="footer-links">
-                        <li><a href="#about" onclick="document.querySelector('[data-section=about]').click()">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">info</span>
-                            Tentang
-                        </a></li>
-                        <li><a href="#projects" onclick="document.querySelector('[data-section=projects]').click()">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">work</span>
-                            Projek
-                        </a></li>
-                        <li><a href="#skills" onclick="document.querySelector('[data-section=skills]').click()">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">code</span>
-                            Skills
-                        </a></li>
-                        <li><a href="#education" onclick="document.querySelector('[data-section=education]').click()">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">school</span>
-                            Pendidikan
-                        </a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>
-                        <span class="material-symbols-rounded" style="font-size: 20px; vertical-align: middle; margin-right: 8px;">work</span>
-                        Featured Projects
-                    </h3>
-                    <ul class="footer-links">
-                        <li><a href="https://muhfhri.github.io/jakmove" target="_blank">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">directions_bus</span>
-                            Transjakarta Fan Web
-                        </a></li>
-                        <li><a href="https://flixdz.github.io/minecraft" target="_blank">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">palette</span>
-                            Material 3 Website
-                        </a></li>
-                        <li><a href="https://hexadevteam.github.io/hexa/" target="_blank">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">groups</span>
-                            Hexa Team Developer
-                        </a></li>
-                        <li><a href="https://github.com/muhfhri" target="_blank">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">code</span>
-                            More on GitHub
-                        </a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>
-                        <span class="material-symbols-rounded" style="font-size: 20px; vertical-align: middle; margin-right: 8px;">contact_mail</span>
-                        Contact
-                    </h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:frezzcraft109@gmail.com">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">email</span>
-                            frezzcraft109@gmail.com
-                        </a></li>
-                        <li><a href="https://wa.me/62" target="_blank">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">phone</span>
-                            WhatsApp
-                        </a></li>
-                        <li><a href="https://t.me/muhfhri" target="_blank">
-                            <span class="material-symbols-rounded" style="font-size: 16px;">chat</span>
-                            Telegram
-                        </a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <div class="footer-social">
-                    <a href="https://github.com/muhfhri" target="_blank" aria-label="GitHub">
-                        <span class="material-symbols-rounded">code</span>
-                    </a>
-                    <a href="https://instagram.com/muhfhri._" target="_blank" aria-label="Instagram">
-                        <span class="material-symbols-rounded">photo_camera</span>
-                    </a>
-                    <a href="https://youtube.com/channel/UCzU0mlmLis0p2XOvRL1r0-Q" target="_blank" aria-label="YouTube">
-                        <span class="material-symbols-rounded">play_circle</span>
-                    </a>
-                    <a href="https://twitter.com/flixpseal" target="_blank" aria-label="Twitter">
-                        <span class="material-symbols-rounded">alternate_email</span>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100044505125193" target="_blank" aria-label="Facebook">
-                        <span class="material-symbols-rounded">public</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@flixpseal" target="_blank" aria-label="TikTok">
-                        <span class="material-symbols-rounded">music_note</span>
-                    </a>
-                </div>
-                
-                <p class="body-small" style="margin-bottom: 8px;">
-                    © 2025 Muhammad Fachri Al Husein. Built with ❤️ using Material Design 3
-                </p>
-                <p class="body-small" style="opacity: 0.8;">
-                    <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle;">palette</span>
-                    <span id="current-palette">Material You</span> Design System • 
-                    <button onclick="refreshPalette()" style="background: none; border: none; color: inherit; cursor: pointer; text-decoration: underline;">
-                        Refresh Palette
-                    </button>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating Action Buttons -->
-    <button class="fab" id="scrollToTop" aria-label="Scroll to top">
-        <span class="material-symbols-rounded">keyboard_arrow_up</span>
-    </button>
-    
-    <button class="fab-settings" id="settingsButton" aria-label="Settings">
+    <button class="fab" onclick="toggleSettings()">
         <span class="material-symbols-rounded">settings</span>
     </button>
-    
-    <!-- Settings Panel -->
-    <div class="settings-panel" id="settingsPanel">
-        <div class="settings-header">
-            <h3 class="title-large">Pengaturan</h3>
-            <button class="close-btn" id="closeSettings">
-                <span class="material-symbols-rounded">close</span>
-            </button>
+
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-group">
+            <span class="settings-title">Tema Warna</span>
+            <div class="color-options">
+                <div class="color-dot" style="background: #8ab4f8;" onclick="setHue(210)"></div> <div class="color-dot" style="background: #c084fc;" onclick="setHue(270)"></div> <div class="color-dot" style="background: #86efac;" onclick="setHue(140)"></div> <div class="color-dot" style="background: #fca5a5;" onclick="setHue(0)"></div>   <div class="color-dot" style="background: #fdba74;" onclick="setHue(30)"></div>  </div>
         </div>
-        <div class="settings-content">
-            <!-- Theme Setting -->
-            <div class="setting-item">
-                <div class="setting-info">
-                    <h4 class="body-large">Tema</h4>
-                    <p class="body-small" style="color: var(--md-sys-color-on-surface-variant);">Pilih tema terang atau gelap</p>
-                </div>
-                <button class="setting-toggle theme-toggle-alt" id="themeToggleAlt">
+        <div class="settings-group">
+            <span class="settings-title">Mode Tampilan</span>
+            <div class="mode-options">
+                <button class="mode-btn" onclick="setMode('light')" title="Terang">
+                    <span class="material-symbols-rounded">light_mode</span>
+                </button>
+                <button class="mode-btn" onclick="setMode('auto')" title="Auto">
+                    <span class="material-symbols-rounded">brightness_auto</span>
+                </button>
+                <button class="mode-btn" onclick="setMode('dark')" title="Gelap">
                     <span class="material-symbols-rounded">dark_mode</span>
-                    <span class="toggle-text">Dark</span>
-                </button>
-            </div>
-            
-            <!-- Palette Lock Setting -->
-            <div class="setting-item">
-                <div class="setting-info">
-                    <h4 class="body-large">Kunci Palette</h4>
-                    <p class="body-small" style="color: var(--md-sys-color-on-surface-variant);">Kunci palette warna agar tidak berubah saat refresh</p>
-                </div>
-                <button class="setting-toggle palette-lock-toggle" id="paletteLockToggle">
-                    <span class="material-symbols-rounded">lock_open</span>
-                    <span class="toggle-text">Unlock</span>
-                </button>
-            </div>
-            
-            <!-- Palette Refresh -->
-            <div class="setting-item">
-                <div class="setting-info">
-                    <h4 class="body-large">Ganti Palette</h4>
-                    <p class="body-small" style="color: var(--md-sys-color-on-surface-variant);">Ganti ke palette warna acak</p>
-                </div>
-                <button class="btn-outlined" id="refreshPaletteBtn">
-                    <span class="material-symbols-rounded">palette</span>
-                    Ganti Palette
                 </button>
             </div>
         </div>
     </div>
-    
-    <!-- Settings Overlay -->
-    <div class="settings-overlay" id="settingsOverlay"></div>
 
-    <!-- Material 3 JavaScript -->
-    <script src="js/material3.js"></script>
-    <!-- Real-time Weather -->
-    <script src="js/weather.js"></script>
+    <nav class="nav-rail">
+      
+        <div class="nav-logo">MF</div>
+        <div class="nav-links">
+            <a href="#home" class="nav-item"><span class="material-symbols-rounded">person</span></a>
+            <a href="#skills" class="nav-item"><span class="material-symbols-rounded">code</span></a>
+            <a href="#projects" class="nav-item"><span class="material-symbols-rounded">terminal</span></a>
+<a href="#resources" class="nav-item" title="Library & Apps">
+        <span class="material-symbols-rounded">library_books</span>
+    </a>
+            <a href="#contact" class="nav-item"><span class="material-symbols-rounded">link</span></a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home">
+
+             <img 
+            src="image/muhfhri.png" 
+            alt="Muhammad Fachri Al Husein Profile Picture" 
+            class="profile-avatar" style="margin-top: 20px"
+        > 
+            <h1>Muhammad Fachri<br>Al Husein</h1>
+            <p class="subtitle">Freelance Developer & Lulusan Rekayasa Perangkat Lunak</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <span class="badge">💻 Freelancer</span>
+                <span class="badge">🚀 Web Developer</span>
+                <span class="badge highlight">🏆 Best Graduate</span>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">history_edu</span> Pendidikan</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="school-name">SMKS Nurul Islam Jakarta</div>
+                    <div class="school-level">Rekayasa Perangkat Lunak</div>
+                    <p style="margin-top:8px; color:var(--md-text-sub); font-size:0.9rem;">
+                        Prestasi: Ranking 1 & 2 berturut-turut, Lulusan Terbaik semua jurusan.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="school-name">SMPN 156 Jakarta</div>
+                    <div class="school-level">Sekolah Menengah Pertama</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="school-name">SDN Pondok Kopi 03</div>
+                    <div class="school-level">Sekolah Dasar (Kelas 5-6)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="school-name">SDN Bintara Jaya 03</div>
+                    <div class="school-level">Sekolah Dasar (Kelas 1-4)</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">bolt</span> Keahlian</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <span class="material-symbols-rounded" style="font-size: 36px; color: #f7df1e;">javascript</span>
+                    <p style="margin-top: 10px; font-weight: 600;">JavaScript</p>
+                </div>
+                <div class="skill-box">
+                    <span class="material-symbols-rounded" style="font-size: 36px; color: #777bb4;">php</span>
+                    <p style="margin-top: 10px; font-weight: 600;">PHP</p>
+                </div>
+                <div class="skill-box">
+                    <span class="material-symbols-rounded" style="font-size: 36px; color: #38bdf8;">css</span>
+                    <p style="margin-top: 10px; font-weight: 600;">Tailwind</p>
+                </div>
+                <div class="skill-box">
+                    <span class="material-symbols-rounded" style="font-size: 36px; color: #e34f26;">html</span>
+                    <p style="margin-top: 10px; font-weight: 600;">HTML5</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">folder_open</span> Projects</h2>
+            
+            <div class="project-card">
+                <div class="project-img">
+                    <span class="material-symbols-rounded" style="font-size: 4rem;">directions_bus</span>
+                </div>
+                <div class="project-content">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">JakMove</h3>
+                    <p style="color: var(--md-text-sub); margin-bottom: 1rem;">Website Integrasi Transportasi Umum yang dibuat menggunakan HTML, JS, serta GTFS untuk data real-time.</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <span class="badge">GTFS</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">Transport</span>
+                    </div>
+                    <a href="https://muhfhri.github.io/jakmove" target="_blank" class="btn">
+                        Kunjungi Web <span class="material-symbols-rounded">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+<section id="resources">
+    <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">library_books</span> Library & Apps</h2>
+    <p class="subtitle">Kumpulan materi belajar dan perangkat lunak buatan saya.</p>
+
+    <h3 style="margin-top: 2.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+        <span class="material-symbols-rounded">school</span> Materi Belajar
+    </h3>
+    
+    <div class="resource-grid">
+        
+        <a href="basic.html" class="tech-card">
+            <div class="tech-header" style="background: linear-gradient(135deg, #FF6B6B, #EE5253);">
+                <span class="material-symbols-rounded tech-icon">html</span>
+            </div>
+            <div class="tech-body">
+                <div class="tech-title">Basic HTML</div>
+                <div class="tech-desc">Pelajari struktur dasar pembuatan website dari nol hingga tag-tag penting.</div>
+                <div class="tech-badge">
+                    <span>Baca Materi</span>
+                    <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="format-text.html" class="tech-card">
+            <div class="tech-header" style="background: linear-gradient(135deg, #FF9F43, #F368E0);">
+                <span class="material-symbols-rounded tech-icon">text_fields</span>
+            </div>
+            <div class="tech-body">
+                <div class="tech-title">Format Text</div>
+                <div class="tech-desc">Teknik typography, heading, paragraph, dan styling teks sederhana di HTML.</div>
+                <div class="tech-badge">
+                    <span>Baca Materi</span>
+                    <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="basicphp.html" class="tech-card">
+            <div class="tech-header" style="background: linear-gradient(135deg, #5f27cd, #341f97);">
+                <span class="material-symbols-rounded tech-icon">php</span>
+            </div>
+            <div class="tech-body">
+                <div class="tech-title">Basic PHP</div>
+                <div class="tech-desc">Pengenalan bahasa server-side, sintaks dasar, dan cara kerjanya.</div>
+                <div class="tech-badge">
+                    <span>Baca Materi</span>
+                    <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="varphp.html" class="tech-card">
+            <div class="tech-header" style="background: linear-gradient(135deg, #54a0ff, #2e86de);">
+                <span class="material-symbols-rounded tech-icon">data_object</span>
+            </div>
+            <div class="tech-body">
+                <div class="tech-title">Variables PHP</div>
+                <div class="tech-desc">Memahami tipe data, variabel, dan konstanta dalam pemrograman PHP.</div>
+                <div class="tech-badge">
+                    <span>Baca Materi</span>
+                    <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+
+    <h3 style="margin-top: 3.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+        <span class="material-symbols-rounded">download</span> Download Software
+    </h3>
+
+    <div class="resource-grid">
+        
+        <a href="android.html" class="tech-card">
+            <div class="tech-header" style="background: linear-gradient(135deg, #10ac84, #1dd1a1);">
+                <span class="material-symbols-rounded tech-icon">android</span>
+            </div>
+            <div class="tech-body">
+                <div class="tech-title">Android</div>
+                <div class="tech-desc">Kumpulan Custom ROM dan Module penting.</div>
+                <div class="tech-badge">
+                    <span class="material-symbols-rounded" style="font-size: 18px;">visibility</span>
+                    <span>Lihat</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="windows.html" class="tech-card">
+            <div class="tech-header" style="background: linear-gradient(135deg, #0abde3, #2980b9);">
+                <span class="material-symbols-rounded tech-icon">desktop_windows</span>
+            </div>
+            <div class="tech-body">
+                <div class="tech-title">Software Windows</div>
+                <div class="tech-desc">Kumpulan ISO Windows & Office</div>
+                <div class="tech-badge">
+                    <span class="material-symbols-rounded" style="font-size: 18px;">visibility</span>
+                    <span>Lihat</span>
+                </div>
+            </div>
+        </a>
+<a href="islamic.html" class="tech-card">
+    <div class="tech-header" style="background: linear-gradient(135deg, #00b894, #00816a);">
+        <span class="material-symbols-rounded tech-icon">mosque</span>
+    </div>
+    <div class="tech-body">
+        <div class="tech-title">Website Islami</div>
+        <div class="tech-desc">Dapatkan <b>Waktu Sholat Real-Time</b> disertai dengan ayat Al Qur'an.</div>
+        <div class="tech-badge">
+            <span class="material-symbols-rounded" style="font-size: 18px;">visibility</span>
+            <span>Lihat</span>
+        </div>
+    </div>
+</a>
+
+
+    </div>
+</section>
+
+
+
+        <section id="contact">
+            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">connect_without_contact</span> Kontak</h2>
+            <div class="social-grid" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem;">
+                <a href="https://github.com/muhfhri" target="_blank" class="btn-outline">
+                    <span class="material-symbols-rounded">code</span> GitHub
+                </a>
+                <a href="https://instagram.com/muhfhri._" target="_blank" class="btn-outline">
+                    <span class="material-symbols-rounded">photo_camera</span> Instagram
+                </a>
+                <a href="https://youtube.com/@flixpseal" target="_blank" class="btn-outline">
+                    <span class="material-symbols-rounded">play_circle</span> YouTube
+                </a>
+            </div>
+        </section>
+        
+            <section id="brand" class="brand-section">
+<h2><span class="material-symbols-rounded" style="color:var(--md-primary)">auto_awesome</span> Brand Identity</h2>
+        <div class="brand-card">
+            
+            <div class="brand-visual">
+              
+                <img src="css/image/dark.gif" alt="Logo Muhfhri Light" class="brand-logo-large logo-show-dark">
+                
+                <img src="css/image/light.gif" alt="Logo Muhfhri Dark" class="brand-logo-large logo-show-light">
+            </div>
+
+            <div class="brand-content">
+                <p class="subtitle" style="margin-bottom: 0;">Refleksi perjalanan hidup yang sederhana, penuh makna, dan selalu berproses.</p>
+                
+                <div class="brand-list">
+                    
+                    <div class="brand-item">
+                        <div class="brand-icon">
+                            <span class="material-symbols-rounded">check_box_outline_blank</span>
+                        </div>
+                        <div class="brand-text">
+                            <h4>Bentuk Geometris</h4>
+                            <p>Melambangkan pondasi hidup yang kuat, stabil, namun tetap sederhana.</p>
+                        </div>
+                    </div>
+
+                    <div class="brand-item">
+                        <div class="brand-icon">
+                            <span class="material-symbols-rounded">text_fields</span>
+                        </div>
+                        <div class="brand-text">
+                            <h4>Tipografi & Garis</h4>
+                            <p>Titik dan garis pada teks menggambarkan arah yang jelas dan perjalanan hidup yang unik.</p>
+                        </div>
+                    </div>
+
+                    <div class="brand-item">
+                        <div class="brand-icon">
+                            <span class="material-symbols-rounded">arrow_forward</span>
+                        </div>
+                        <div class="brand-text">
+                            <h4>Panah ke Kanan</h4>
+                            <p>Simbol optimisme dan semangat untuk terus maju ke depan (Future).</p>
+                        </div>
+                    </div>
+
+                    <div class="brand-item">
+                        <div class="brand-icon">
+                            <span class="material-symbols-rounded">arrow_back</span>
+                        </div>
+                        <div class="brand-text">
+                            <h4>Panah ke Kiri</h4>
+                            <p>Mengingatkan untuk tidak melupakan akar dan pengalaman masa lalu (History).</p>
+                        </div>
+                    </div>
+
+                    <div class="brand-item">
+                        <div class="brand-icon">
+                            <span class="material-symbols-rounded">all_inclusive</span>
+                        </div>
+                        <div class="brand-text">
+                            <h4>Desain Minimalis</h4>
+                            <p>Mencerminkan siklus hidup yang seimbang dan semangat untuk terus berkembang menjadi lebih baik.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+        
+        <footer class="site-footer">
+        
+        <div class="copyright">
+            &copy; <script>document.write(new Date().getFullYear())</script> Muhammad Fachri Al Husein. <br>
+            Dibuat dengan penuh semangat⚡
+        </div>
+
+        <div class="credits-container">
+            
+            <div class="credit-chip" title="Design System">
+                <span class="material-symbols-rounded">palette</span>
+                <span>Material You Design</span>
+            </div>
+
+            <div class="credit-chip" title="Hosting Provider">
+                <span class="material-symbols-rounded">dns</span> <span>GitHub Pages</span>
+            </div>
+
+            <div class="credit-chip" title="Typography">
+                <span class="material-symbols-rounded">text_fields</span>
+                <span>Plus Jakarta Sans</span>
+            </div>
+
+        </div>
+    </footer>
+    </main>
+
+    <script>
+        // --- 1. SETTINGS & THEME LOGIC ---
+        
+        // Load Saved Settings
+        const savedHue = localStorage.getItem('theme-hue') || 210;
+        const savedMode = localStorage.getItem('theme-mode') || 'auto';
+        
+        // Apply awal
+        setHue(savedHue);
+        applyMode(savedMode);
+
+        function toggleSettings() {
+            document.getElementById('settingsModal').classList.toggle('open');
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('settingsModal');
+            const fab = document.querySelector('.fab');
+            if (!modal.contains(e.target) && !fab.contains(e.target)) {
+                modal.classList.remove('open');
+            }
+        });
+
+        function setHue(hue) {
+            document.documentElement.style.setProperty('--hue', hue);
+            localStorage.setItem('theme-hue', hue);
+        }
+
+        function setMode(mode) {
+            localStorage.setItem('theme-mode', mode);
+            applyMode(mode);
+        }
+
+        function applyMode(mode) {
+            // Update Active Button UI
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`.mode-btn[onclick="setMode('${mode}')"]`);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // Apply Class to Body
+            if (mode === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    document.body.classList.add('light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                }
+            } else if (mode === 'light') {
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+            }
+        }
+
+        // --- 2. PRELOADER ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.visibility = 'hidden'; }, 500);
+        });
+
+        // --- 3. SCROLL ANIMATION ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Nav Active State
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        nav.classList.remove('active');
+                        if(nav.getAttribute('href') === '#' + id) nav.classList.add('active');
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+    </script>
 </body>
 </html>
