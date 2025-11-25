@@ -1,0 +1,648 @@
+
+        /* --- 1. FIXED DESIGN TOKENS (Sistem Warna Lebih Stabil) --- */
+        :root {
+            --hue: 210; /* Default Blue */
+            
+            /* --- DARK MODE VARIABLES (DEFAULT) --- */
+            --md-bg: hsl(var(--hue), 20%, 6%);
+            --md-surface: hsl(var(--hue), 20%, 10%);
+            --md-surface-container: hsl(var(--hue), 20%, 16%);
+            
+            --md-primary: hsl(var(--hue), 80%, 75%);
+            --md-on-primary: hsl(var(--hue), 10%, 10%); /* Teks hitam di tombol terang */
+            --md-primary-container: hsl(var(--hue), 60%, 30%);
+            --md-on-primary-container: hsl(var(--hue), 90%, 95%);
+            
+            --md-outline: hsl(var(--hue), 10%, 40%);
+            --md-text-main: hsl(var(--hue), 10%, 98%); /* Teks Putih */
+            --md-text-sub: hsl(var(--hue), 10%, 75%);  /* Teks Abu */
+            
+            --nav-border: rgba(255, 255, 255, 0.1);
+
+            --radius-lg: 24px;
+            --nav-width: 80px;
+            --fab-size: 56px;
+        }
+
+        /* --- LIGHT MODE OVERRIDES (Fixed Contrast) --- */
+        body.light-mode {
+            /* Background jadi Putih/Terang */
+            --md-bg: hsl(var(--hue), 20%, 98%);
+            --md-surface: hsl(var(--hue), 20%, 95%);
+            --md-surface-container: hsl(var(--hue), 20%, 90%);
+            
+            /* Primary jadi Gelap agar kontras di background terang */
+            --md-primary: hsl(var(--hue), 60%, 40%);
+            --md-on-primary: hsl(var(--hue), 10%, 98%); /* Teks putih di tombol gelap */
+            --md-primary-container: hsl(var(--hue), 40%, 85%);
+            --md-on-primary-container: hsl(var(--hue), 50%, 10%);
+            
+            --md-outline: hsl(var(--hue), 10%, 70%);
+            --md-text-main: hsl(var(--hue), 10%, 10%); /* Teks Hitam */
+            --md-text-sub: hsl(var(--hue), 10%, 35%);  /* Teks Abu Gelap */
+
+            --nav-border: rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- 2. RESET & BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--md-bg);
+            color: var(--md-text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 3. LOADING SPINNER --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--md-bg);
+            z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        .spinner {
+            width: 48px; height: 48px;
+            border: 5px solid var(--md-surface-container);
+            border-bottom-color: var(--md-primary);
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation { 100% { transform: rotate(360deg); } }
+
+        /* --- 4. NAVIGATION RAIL (Desktop Default) --- */
+        .nav-rail {
+            width: var(--nav-width); height: 100vh;
+            position: fixed; left: 0; top: 0;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 2rem 0;
+            background: var(--md-surface);
+            z-index: 1000;
+            border-right: 1px solid var(--nav-border);
+            transition: background 0.3s, border 0.3s;
+        }
+
+        .nav-logo { font-weight: 800; font-size: 1.5rem; color: var(--md-primary); margin-bottom: 3rem; }
+        .nav-links { display: flex; flex-direction: column; gap: 1rem; width: 100%; align-items: center; }
+        
+        .nav-item {
+            width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 99px;
+            color: var(--md-text-sub);
+            position: relative;
+            cursor: pointer;
+        }
+        .nav-item:hover { background-color: var(--md-surface-container); color: var(--md-text-main); }
+        .nav-item.active { background-color: var(--md-primary-container); color: var(--md-on-primary-container); }
+        .nav-item span { font-size: 24px; }
+
+        /* --- 5. MAIN CONTENT --- */
+        main {
+            margin-left: var(--nav-width);
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 1200px;
+            padding-bottom: 120px;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            opacity: 0; transform: translateY(30px);
+            transition: 0.8s cubic-bezier(0.2, 0, 0, 1);
+        }
+        section.visible { opacity: 1; transform: translateY(0); }
+
+        h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; color: var(--md-primary); }
+        h2 { font-size: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        .subtitle { font-size: 1.2rem; color: var(--md-text-sub); margin-bottom: 2rem; }
+
+/* --- COMPONENTS --- */
+
+/* Timeline Container (Base Line Statis) */
+.timeline { 
+    position: relative; 
+    padding-left: 20px; 
+    border-left: 2px solid var(--md-outline); /* Garis Dasar (Statik) */
+    
+    /* Tambahkan animasi progress ke pseudo-element ::after */
+}
+
+/* Garis Progres yang Bergerak (Animated Line) */
+.timeline::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Kunci: Mulai dari bawah (SD) */
+    left: -2px; /* Posisikan tepat di atas border-left */
+    width: 2px;
+    
+    /* Warna Progres (Primer) */
+    background: var(--md-primary); 
+    
+    /* Terapkan Animasi */
+    animation: timeline-progress 4s infinite alternate ease-in-out; 
+    /* 4s Durasi, Looping Bolak-balik, Gerakan Halus */
+}
+
+/* Timeline Item (Tidak perlu banyak perubahan, hanya penyesuaian dot) */
+.timeline-item { 
+    position: relative; 
+    margin-bottom: 2rem; 
+    padding-left: 20px; 
+}
+
+/* Timeline Dot (Sedikit diubah agar lebih kontras dengan garis yang bergerak) */
+.timeline-dot {
+    position: absolute; left: -29px; top: 5px;
+    width: 16px; height: 16px;
+    /* Ubah background dot agar lebih kontras di atas garis progres */
+    background: var(--md-primary); 
+    border: 4px solid var(--md-bg); 
+    border-radius: 50%;
+    z-index: 2; /* Penting agar dot berada di atas garis yang bergerak */
+}
+/* Anda juga bisa menambahkan efek pulse/zoom pada dot terakhir (SMK) jika mau */
+
+.school-name { font-weight: 700; font-size: 1.1rem; color: var(--md-text-main); }
+.school-level { color: var(--md-text-sub); font-size: 0.95rem; }
+/* Keyframes untuk Animasi Garis Progres (GERAK SATU ARAH) */
+@keyframes timeline-progress {
+    0% { height: 0%; } 
+    100% { height: 100%; }
+}
+
+
+
+        /* Badges */
+        .badge {
+            display: inline-block; padding: 6px 16px;
+            background: var(--md-surface-container);
+            border-radius: 8px; font-size: 0.9rem;
+            margin-right: 8px; margin-bottom: 8px;
+            border: 1px solid var(--md-outline);
+            color: var(--md-text-main);
+        }
+        .badge.highlight {
+            background: var(--md-primary-container); color: var(--md-on-primary-container);
+            border-color: transparent; font-weight: 600;
+        }
+
+        /* Cards */
+        .project-card {
+            background: var(--md-surface-container); border-radius: var(--radius-lg);
+            overflow: hidden; display: flex; flex-direction: column;
+            border: 1px solid var(--nav-border); transition: 0.3s;
+        }
+        .project-card:hover { transform: translateY(-5px); }
+        
+        @media(min-width: 768px) {
+            .project-card { flex-direction: row; }
+            .project-img { width: 40%; min-height: 250px; }
+            .project-content { width: 60%; }
+        }
+        .project-img {
+            background: linear-gradient(135deg, var(--md-primary-container), var(--md-surface));
+            display: flex; align-items: center; justify-content: center; color: var(--md-on-primary-container);
+        }
+        .project-content { padding: 2rem; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--md-primary); color: var(--md-on-primary);
+            padding: 12px 24px; border-radius: 99px; font-weight: 600;
+            margin-top: 1rem; cursor: pointer; border: none; font-family: inherit;
+        }
+        .btn-outline {
+            background: transparent; border: 1px solid var(--md-outline);
+            color: var(--md-text-main); padding: 12px 24px;
+            border-radius: 99px; display: inline-flex; align-items: center; gap: 8px; margin-right: 10px;
+        }
+        
+        /* Skills Grid */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+        .skill-box { background: var(--md-surface-container); padding: 1.5rem; border-radius: 16px; text-align: center; }
+
+        /* --- 6. FLOATING SETTINGS BUTTON & MODAL --- */
+        .fab {
+            position: fixed; bottom: 20px; right: 20px;
+            width: var(--fab-size); height: var(--fab-size);
+            background: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+            border-radius: 16px; border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1050; transition: 0.3s;
+        }
+        .fab:hover { transform: rotate(45deg); }
+
+        .settings-modal {
+            position: fixed; bottom: 90px; right: 20px;
+            background: var(--md-surface-container);
+            padding: 20px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            z-index: 1049; width: 280px;
+            transform: scale(0); transform-origin: bottom right;
+            transition: 0.3s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid var(--md-outline);
+            color: var(--md-text-main);
+        }
+        .settings-modal.open { transform: scale(1); }
+        
+        .settings-group { margin-bottom: 15px; }
+        .settings-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; display: block; }
+        
+        .color-options { display: flex; gap: 10px; flex-wrap: wrap; }
+        .color-dot {
+            width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+            border: 2px solid transparent; transition: 0.2s;
+        }
+        .color-dot:hover { transform: scale(1.1); }
+        
+        .mode-options { display: flex; background: rgba(0,0,0,0.1); border-radius: 99px; padding: 4px; }
+        .mode-btn {
+            flex: 1; border: none; background: transparent; color: var(--md-text-sub);
+            padding: 8px; border-radius: 99px; cursor: pointer; font-size: 1.2rem;
+            display: flex; justify-content: center;
+        }
+        .mode-btn.active { background: var(--md-surface); color: var(--md-primary); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+
+        /* --- 7. MOBILE RESPONSIVE FIXES (DIPERBAIKI SECARA PAKSA) --- */
+        @media (max-width: 768px) {
+            /* FIX NAVIGASI: 
+               1. Paksa width 100% dan height fix
+               2. Paksa flex-direction ROW (Horizontal)
+               3. Tambahkan background solid agar tidak transparan
+            */
+            .nav-rail {
+                width: 100%;
+                height: 70px; /* Tinggi fix agar tidak melayang */
+                min-height: auto;
+                
+                position: fixed; 
+                top: auto; /* Matikan posisi top */
+                bottom: 0; /* Paksa nempel bawah */
+                left: 0;
+                
+                flex-direction: row; /* Wajib Row */
+                justify-content: space-around; /* Bagi rata */
+                padding: 0;
+                
+                border-right: none;
+                border-top: 1px solid var(--nav-border);
+                background-color: var(--md-surface); /* Wajib background solid */
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+            }
+
+            .nav-logo { display: none; }
+            .nav-links { 
+                flex-direction: row; /* Wajib Row */
+                width: 100%; 
+                justify-content: space-around;
+                gap: 0;
+            }
+
+            .nav-item {
+                flex: 1; /* Bagi rata lebarnya */
+                width: auto; 
+                height: 70px; /* Samakan dengan container */
+                border-radius: 0;
+                display: flex; flex-direction: column; gap: 4px;
+            }
+
+            .nav-item.active {
+                background-color: transparent; 
+                color: var(--md-primary);
+            }
+            /* Indikator aktif di mobile pakai border atas atau icon berwarna */
+            .nav-item.active span { 
+                background: var(--md-primary-container);
+                color: var(--md-on-primary-container);
+                padding: 4px 20px;
+                border-radius: 20px;
+            }
+
+            /* Main Content padding */
+            main { 
+                margin-left: 0; 
+                padding: 2rem 1.5rem; 
+                padding-bottom: 100px; 
+            }
+            h1 { font-size: 2.2rem; }
+            
+            /* Posisi FAB agar tidak ketutup Nav */
+            .fab { bottom: 90px; right: 20px; }
+            .settings-modal { bottom: 160px; }
+        }
+
+.profile-avatar {
+    width: 150px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 5px solid var(--md-surface-container); 
+    box-shadow: 0 0 0 5px var(--md-primary-container); 
+    margin-bottom: 2rem;
+}
+/* --- STYLING KHUSUS LIBRARY & APPS --- */
+
+/* Grid Container */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 1.5rem;
+}
+
+/* Kartu Utama */
+.tech-card {
+    background-color: var(--md-surface-container);
+    border-radius: 24px; /* Sudut membulat Material You */
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--nav-border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek membal halus */
+    display: flex;
+    flex-direction: column;
+    text-decoration: none; /* Hilangkan garis bawah link */
+    height: 100%;
+}
+
+/* Efek Hover pada Kartu */
+.tech-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+    border-color: var(--md-primary);
+}
+
+/* Header Warna-warni di Atas */
+.tech-header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pola Background Halus di Header (Opsional) */
+.tech-header::after {
+    content: '';
+    position: absolute;
+    width: 100%; height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
+    background-size: 10px 10px;
+    opacity: 0.1;
+}
+
+/* Ikon Utama */
+.tech-icon {
+    font-size: 48px;
+    color: white;
+    z-index: 2;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+}
+
+.tech-card:hover .tech-icon {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+/* Bagian Teks */
+.tech-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tech-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--md-text-main);
+    margin-bottom: 0.5rem;
+}
+
+.tech-desc {
+    font-size: 0.9rem;
+    color: var(--md-text-sub);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Tombol Aksi Kecil (Pill) */
+.tech-badge {
+    margin-top: auto; /* Dorong ke bawah */
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--md-surface);
+    color: var(--md-text-main);
+    border: 1px solid var(--md-outline);
+    transition: 0.3s;
+}
+
+/* Warna Spesifik saat hover */
+.tech-card:hover .tech-badge {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    border-color: transparent;
+}
+/* --- CSS UNTUK MENGHILANGKAN EFEK BIRU SAAT KLIK/FOKUS --- */
+
+/* 1. Menghilangkan Outline Focus (Garis Biru di Desktop) */
+a:focus, button:focus, .nav-item:focus, .tech-card:focus {
+    /* Set outline ke none, lalu gunakan box-shadow sebagai pengganti yang lebih halus */
+    outline: none; 
+    /* Opsional: Anda bisa menggantinya dengan box-shadow yang lebih rapi */
+    /* box-shadow: 0 0 0 3px var(--md-primary); */
+}
+
+/* 2. Menghilangkan Tap Highlight Color (Warna Transparan di Mobile) */
+* {
+    /* Properti khusus untuk browser berbasis WebKit (Chrome, Safari, Android) */
+    -webkit-tap-highlight-color: transparent; 
+}
+
+/* 3. Mencegah Teks Terpilih (Opsional) */
+* {
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    user-select: none; /* Standard */
+}
+/* --- FOOTER & CREDITS STYLING --- */
+
+.site-footer {
+    margin-top: 6rem; /* Jarak dari konten atas */
+    padding-top: 2rem;
+    border-top: 1px solid var(--nav-border); /* Garis pemisah halus */
+    text-align: center;
+    color: var(--md-text-sub);
+    padding-bottom: 2rem; /* Ruang tambahan di bawah */
+}
+
+.copyright {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Container untuk Chips Credits */
+.credits-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap; /* Agar rapi di HP */
+}
+
+/* Styling Chip (Pil) */
+.credit-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--md-surface-container);
+    padding: 8px 16px;
+    border-radius: 99px; /* Bentuk Pil Sempurna */
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--md-text-sub);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: default; /* Kursor biasa karena hanya info */
+}
+
+/* Efek Hover Halus */
+.credit-chip:hover {
+    background-color: var(--md-surface);
+    border-color: var(--md-primary);
+    color: var(--md-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.credit-chip .material-symbols-rounded {
+    font-size: 18px; /* Ukuran ikon pas */
+}
+
+/* Khusus Mobile agar tidak terlalu mepet bawah karena ada navbar */
+@media (max-width: 768px) {
+    .site-footer {
+        margin-bottom: 20px; /* Tambahan jarak di atas navbar mobile */
+    }
+}
+/* --- BRAND & LOGO PHILOSOPHY SECTION --- */
+
+.brand-section {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+.brand-card {
+    background: var(--md-surface-container);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--nav-border);
+    padding: 3rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Bagian Visual Logo (Kiri) */
+.brand-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 250px;
+    padding: 2rem;
+    background: var(--md-bg); /* Background sedikit berbeda agar logo pop-up */
+    border-radius: var(--radius-lg);
+}
+
+.brand-logo-large {
+    width: 100%;
+    max-width: 300px; /* Ukuran maksimal logo */
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+/* Bagian Teks Filosofi (Kanan) */
+.brand-content {
+    flex: 2;
+}
+
+.brand-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.brand-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.brand-icon {
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+    min-width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.brand-text h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--md-text-main);
+    margin-bottom: 4px;
+}
+
+.brand-text p {
+    font-size: 0.95rem;
+    color: var(--md-text-sub);
+    line-height: 1.5;
+}
+
+/* --- LOGIKA GANTI GAMBAR (DARK/LIGHT) --- */
+/* Default (Dark Mode): Tampilkan Light GIF, Sembunyikan Dark GIF */
+.logo-show-dark { display: block; }
+.logo-show-light { display: none; }
+
+/* Light Mode: Tampilkan Dark GIF, Sembunyikan Light GIF */
+body.light-mode .logo-show-dark { display: none; }
+body.light-mode .logo-show-light { display: block; }
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .brand-card {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+    .brand-visual {
+        width: 100%;
+    }
+}
