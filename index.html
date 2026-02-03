@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-
 </head>
 <body>
 
@@ -62,21 +61,27 @@
     </nav>
 
     <main>
-        <section id="home">
-
-             <img 
+<section id="home">
+    <div class="home-card">
+        <img 
             src="image/muhfhri.png" 
             alt="Muhammad Fachri Al Husein Profile Picture" 
-            class="profile-avatar" style="margin-top: 20px"
+            class="profile-avatar"
         > 
-            <h1>Muhammad Fachri Al Husein</h1>
-            <p class="subtitle">Freelance Developer & Lulusan Rekayasa Perangkat Lunak</p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <span class="badge">💻 Freelancer</span>
-                <span class="badge">🚀 Web Developer</span>
-                <span class="badge highlight">🏆 Best Graduate</span>
-            </div>
-        </section>
+
+        <h1>Muhammad Fachri Al Husein</h1>
+<p class="subtitle grotesk">
+  Junior Web Developer dengan latar belakang Rekayasa Perangkat Lunak, 
+  tertarik pada UI yang bersih, animasi halus, dan pengalaman pengguna yang nyaman.
+</p>
+
+        <div class="badge-wrapper">
+            <span class="badge">💻 Freelancer</span>
+            <span class="badge">🚀 Web Developer</span>
+            <span class="badge highlight">🏆 Best Graduate</span>
+        </div>
+    </div>
+</section>
 
 <section id="linux-terminal">
   <div class="terminal-window">
@@ -103,35 +108,70 @@
   </div>
 </section>
 
-        <section id="education">
-            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">history_edu</span> Pendidikan</h2>
+<section id="education">
+    <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">history_edu</span> Pendidikan</h2>
+    
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="school-name grotesk">SMK Nurul Islam Jakarta</div>
+            <div class="school-level">Rekayasa Perangkat Lunak</div>
             
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="school-name">SMKS Nurul Islam Jakarta</div>
-                    <div class="school-level">Rekayasa Perangkat Lunak</div>
-                    <p style="margin-top:8px; color:var(--md-text-sub); font-size:0.9rem;">
-                        Prestasi: Ranking 1 & 2 berturut-turut, Lulusan Terbaik semua jurusan.
-                    </p>
+            <details class="prestasi-details">
+                <summary class="badge highlight" style="cursor: pointer; display: inline-flex; align-items: center; gap: 5px; margin: 10px;">
+                    <span class="material-symbols-rounded" style="font-size: 18px;">military_tech</span>
+                    Lihat Prestasi & Pengalaman
+                </summary>
+                
+                <div class="prestasi-content">
+                    <div class="exp-group">
+                        <h4><span class="material-symbols-rounded">groups</span> Organisasi</h4>
+                        <ul>
+                            <li><strong class="grotesk">Ketua PMR</strong> - Memimpin kegiatan kemanusiaan dan kesehatan sekolah.</li>
+                            <li><strong class="grotesk">Anggota OSIS</strong> - Berkontribusi dalam berbagai event internal sekolah sebagai sekbid Informasi Teknologi.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-group">
+                        <h4><span class="material-symbols-rounded">workspace_premium</span> Riwayat Ranking</h4>
+                        <table class="ranking-table">
+                            <tr><th class="grotesk">Kelas / Semester</th><th class="grotesk">Peringkat</th></tr>
+                            <tr><td>Kelas X - Smt 1</td><td>Peringkat 2</td></tr>
+                            <tr><td>Kelas X - Smt 2</td><td>Peringkat 1</td></tr>
+                            <tr><td>Kelas XI - Smt 1</td><td>Peringkat 1</td></tr>
+                            <tr><td>Kelas XI - Smt 2</td><td>Peringkat 2</td></tr>
+                            <tr><td>Kelas XII - Smt 1</td><td>Peringkat 3</td></tr>
+                            <tr><td>Kelas XII - Smt 2</td><td>Peringkat 1</td></tr>
+                        </table>
+                        <p class="grotesk">Meraih sertifikat BNSP sebagai Junior Programmer</p>
+                        <p class="honor-text">🏆 <strong>Lulusan Terbaik</strong> - Seluruh Jurusan Rekayasa Perangkat Lunak</p>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="school-name">SMPN 156 Jakarta</div>
-                    <div class="school-level">Sekolah Menengah Pertama</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="school-name">SDN Pondok Kopi 03</div>
-                    <div class="school-level">Sekolah Dasar (Kelas 5-6)</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="school-name">SDN Bintara Jaya 03</div>
-                    <div class="school-level">Sekolah Dasar (Kelas 1-4)</div>
-                </div>
-            </div>
-        </section>
+            </details>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="school-name grotesk">SMPN 156 Jakarta</div>
+            <div class="school-level">Sekolah Menengah Pertama</div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="school-name grotesk">SDN Pondok Kopi 03</div>
+            <div class="school-level">Sekolah Dasar (Pindah mulai dari kelas 5)</div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="school-name grotesk">SDN Bintara Jaya 03</div>
+            <div class="school-level">Sekolah Dasar</div>
+        </div>
+        
+        
+        </div>
+</section>
+
 
         <section id="skills">
             <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">bolt</span> Keahlian</h2>
@@ -155,21 +195,60 @@
             </div>
         </section>
 
+<section id="github-stats">
+    <details class="material-stats-collapse">
+        <summary class="stats-summary">
+            <div class="summary-content grotesk">
+                <span class="material-symbols-rounded">analytics</span>
+                <span>Tampilkan Statistik Coding (GitHub)</span>
+            </div>
+            <span class="material-symbols-rounded expand-icon">expand_more</span>
+        </summary>
+        
+        <div class="stats-reveal-area">
+            <img 
+              src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=muhfhri&layout=compact&theme=transparent&title_color=8ab4f8&hide_border=true" 
+              alt="Top Languages"
+              class="github-img-themed"
+              referrerpolicy="no-referrer"
+            />
+        </div>
+        <div class="stats-reveal-area">
+  <!-- GitHub Stats (Kontribusi) -->
+    <img 
+      src="https://github-readme-stats-sigma-five.vercel.app/api?username=muhfhri&show_icons=true&theme=transparent&title_color=8ab4f8&icon_color=8ab4f8&hide_border=true&count_private=true"
+      alt="GitHub Stats"
+      class="github-img-themed"
+      referrerpolicy="no-referrer"
+    />
+        </div>
+        
+        
+    </details>
+</section>
+
         <section id="projects">
             <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">folder_open</span> Projects</h2>
             
             <div class="project-card">
                 <div class="project-img">
-                    <span class="material-symbols-rounded" style="font-size: 4rem;">directions_bus</span>
+<img src="https://muhfhri.github.io/jakmove/css/image/jakmove.png" width="120">
                 </div>
+
                 <div class="project-content">
                     <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">JakMove</h3>
-                    <p style="color: var(--md-text-sub); margin-bottom: 1rem;">Website Integrasi Transportasi Umum yang dibuat menggunakan HTML, JS, serta GTFS untuk data real-time.</p>
+                    <p style="color: var(--md-text-sub); margin-bottom: 1rem;">Website Integrasi Transportasi Umum yang dibuat menggunakan HTML, JS, serta GTFS yang akan selalu diperbarui.</p>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
                         <span class="badge">GTFS</span>
                         <span class="badge">JavaScript</span>
                         <span class="badge">Transport</span>
                     </div>
+                    <div class="project-labels">
+    <span class="md-label primary grotesk">
+        <span class="material-symbols-rounded">update</span>
+        DIPERBARUI · Sel – 03 Feb 2026
+    </span>
+</div>
                     <a href="https://muhfhri.github.io/jakmove" target="_blank" class="btn">
                         Kunjungi Web <span class="material-symbols-rounded">open_in_new</span>
                     </a>
@@ -258,7 +337,7 @@
             </div>
             <div class="tech-body">
                 <div class="tech-title">Android</div>
-                <div class="tech-desc">Kumpulan Custom ROM dan Module penting.</div>
+                <div class="tech-desc">Kumpulan Custom ROM dan Module Magisk/KernelSU.</div>
                 <div class="tech-badge">
                     <span class="material-symbols-rounded" style="font-size: 18px;">visibility</span>
                     <span>Lihat</span>
@@ -297,23 +376,49 @@
     </div>
 </section>
 
+<section id="contact">
+    <h2>
+        <span class="material-symbols-rounded" style="color:var(--md-primary)">
+            connect_without_contact
+        </span>
+        Kontak
+    </h2>
 
+    <div class="contact-grid">
 
-        <section id="contact">
-            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">connect_without_contact</span> Kontak</h2>
-            <div class="social-grid" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem;">
-                <a href="https://github.com/muhfhri" target="_blank" class="btn-outline">
-                    <span class="material-symbols-rounded">code</span> GitHub
-                </a>
-                <a href="https://instagram.com/muhfhri._" target="_blank" class="btn-outline">
-                    <span class="material-symbols-rounded">photo_camera</span> Instagram
-                </a>
-                <a href="https://youtube.com/@flixpseal" target="_blank" class="btn-outline">
-                    <span class="material-symbols-rounded">play_circle</span> YouTube
-                </a>
+        <a href="https://github.com/muhfhri" target="_blank" class="contact-card">
+            <div class="contact-icon">
+                <span class="material-symbols-rounded">code</span>
             </div>
-        </section>
-        
+            <div class="contact-text">
+                <strong>GitHub</strong>
+                <span>@muhfhri</span>
+            </div>
+        </a>
+
+        <a href="https://instagram.com/muhfhri._" target="_blank" class="contact-card">
+            <div class="contact-icon">
+                <span class="material-symbols-rounded">photo_camera</span>
+            </div>
+            <div class="contact-text">
+                <strong>Instagram</strong>
+                <span>@muhfhri._</span>
+            </div>
+        </a>
+
+        <a href="https://youtube.com/@flixpseal" target="_blank" class="contact-card">
+            <div class="contact-icon">
+                <span class="material-symbols-rounded">play_circle</span>
+            </div>
+            <div class="contact-text">
+                <strong>YouTube</strong>
+                <span>@flixpseal</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
             <section id="brand" class="brand-section">
 <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">auto_awesome</span> Brand Identity</h2>
         <div class="brand-card">
@@ -406,7 +511,7 @@
 
             <div class="credit-chip" title="Typography">
                 <span class="material-symbols-rounded">text_fields</span>
-                <span>Google Sans Flex</span>
+                <span>Google Sans Flex</span> • <span class="grotesk">Space Grotesk</span>
             </div>
 
         </div>
@@ -491,211 +596,6 @@
 
         document.querySelectorAll('section').forEach(sec => observer.observe(sec));
     </script>
-
-<script>
-  
-const input = document.getElementById("hidden-terminal-input");
-const currentInput = document.getElementById("current-input");
-const terminalOutput = document.getElementById("terminal-output");
-
-// Definisi command aktif
-const commands = {
-  list: ["list", "daftar", "isi"],
-  help: ["help", "bantuan"],
-  info: ["info"],
-  social: ["social"],
-  greeting: ["halo", "hai", "hi", "hay"],
-  muhfhri: ["muhfhri"],
-  instagram: ["instagram"],
-  youtube: ["youtube"],
-  github: ["github"],
-  su: ["su"],
-  kill: ["kill"],
-};
-
-// Mapping sosial media ke URL
-const socialLinks = {
-  instagram: "https://www.instagram.com/muhfhri._",
-  youtube: "https://www.youtube.com/@flixpseal",
-  github: "https://github.com/muhfhri",
-};
-
-input.addEventListener("input", (e) => {
-  currentInput.textContent = e.target.value;
-});
-
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    const command = input.value.trim().toLowerCase();
-
-    if (command) {
-      const cmdLine = document.createElement("div");
-      cmdLine.classList.add("terminal-line");
-      cmdLine.innerHTML = `<span class="prompt">user@linux:~$</span> <span class="command-text">${command}</span>`;
-      terminalOutput.appendChild(cmdLine);
-
-      let matched = false;
-
-      // Jalankan perintah sosial media
-      if (socialLinks[command]) {
-        window.open(socialLinks[command], "_blank");
-        const line = document.createElement("div");
-        line.classList.add("terminal-line");
-        line.textContent = `Membuka ${command}...`;
-        terminalOutput.appendChild(line);
-        matched = true;
-      }
-
-      // Jalankan perintah utama
-      for (const key in commands) {
-        if (commands[key].includes(command)) {
-          matched = true;
-
-if (key === "list") {
-  const line = document.createElement("div");
-  line.classList.add("terminal-line");
-
-  // Gabungkan semua command dan sosial media ke satu array
-  let allCommands = [];
-
-  for (const k in commands) {
-    allCommands.push(commands[k][0]); // ambil nama command utama
-  }
-  for (const social in socialLinks) {
-    allCommands.push(social);
-  }
-
-  // Hapus duplikat dengan Set
-  allCommands = [...new Set(allCommands)];
-
-  line.textContent = allCommands.join(" | ");
-  terminalOutput.appendChild(line);
-}
-
-          if (key === "info") {
-            const line = document.createElement("div");
-            line.classList.add("terminal-line");
-            line.textContent = "versi 1 experimental, mungkin masih memiliki bug";
-            terminalOutput.appendChild(line);
-          }
-          
-          if (key === "help") {
-            const line = document.createElement("div");
-            line.classList.add("terminal-line");
-            line.textContent = "Gunakan {list} untuk melihat daftar list di terminal";
-            terminalOutput.appendChild(line);
-          }
-          
-          // Tambahkan setelah const command = input.value.trim().toLowerCase();
-if (command === "kill") {
-    matched = true;
-
-    setTimeout(() => {
-        document.body.innerHTML = `
-            <div style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                font-family: Arial, sans-serif;
-                background-color: #fafafa;
-                color: #444;
-                text-align: center;
-                user-select: none;
-            ">
-                <div style="margin-bottom: 20px;">
-                    <svg width="80" height="80" viewBox="0 0 48 48">
-                        <path fill="#9e9e9e" d="M40 6H8c-1.1 0-2 .9-2 2v32c0 1.1.9 2 2 2h32c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM18 14c1.1 0 2 .9 2 2s-.9 2-2 2a2 2 0 1 1 0-4zm12 0c1.1 0 2 .9 2 2s-.9 2-2 2a2 2 0 1 1 0-4zM24 36c-5.5 0-10-4.5-10-10h4c0 3.3 2.7 6 6 6s6-2.7 6-6h4c0 5.5-4.5 10-10 10z"/>
-                    </svg>
-                </div>
-
-                <h1 style="
-                    font-size: 32px;
-                    margin-bottom: 10px;
-                    font-weight: 600;
-                ">Aw, Snap!</h1>
-
-                <p style="
-                    font-size: 16px;
-                    max-width: 420px;
-                    line-height: 1.5;
-                    color: #666;
-                ">
-                    Something went wrong while displaying this webpage.
-                </p>
-
-                <button style="
-                    margin-top: 25px;
-                    padding: 10px 24px;
-                    background-color: #1a73e8;
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    font-size: 14px;
-                " onclick="location.reload()">
-                    Reload
-                </button>
-            </div>
-        `;
-
-        // Hapus semua script agar bener-bener "mati"
-        const scripts = document.querySelectorAll("script");
-        scripts.forEach(s => s.remove());
-
-        document.body.style.overflow = "hidden";
-    }, 350);
-}
-          
-          if (key === "su") {
-            const line = document.createElement("div");
-            line.classList.add("terminal-line");
-            line.textContent = "Bro benar benar ingin menjalankan su di website🥶";
-            terminalOutput.appendChild(line);
-          }
-
-          if (key === "social") {
-            const line = document.createElement("div");
-            line.classList.add("terminal-line");
-            line.textContent = "Sosial media: Instagram, YouTube, GitHub, LinkedIn. Ketik nama sosial media untuk membuka.";
-            terminalOutput.appendChild(line);
-          }
-
-          if (key === "greeting" || key === "muhfhri") {
-            const line = document.createElement("div");
-            line.classList.add("terminal-line");
-            line.textContent = "Halo👋 Perkenalkan nama Saya Muhammad Fachri Al Husein, kamu bisa memanggil saya Fachri, usia saya saat ini 18 Tahun, ada yang ingin kamu ketahui?";
-            terminalOutput.appendChild(line);
-          }
-        }
-      }
-
-      // Command khusus: clear
-      if (command === "clear") {
-        terminalOutput.innerHTML = "";
-        matched = true;
-      }
-
-      // Kalau tidak ada yang cocok
-      if (!matched) {
-        const errLine = document.createElement("div");
-        errLine.classList.add("terminal-line");
-        errLine.textContent = `bash: ${command}: command not found`;
-        terminalOutput.appendChild(errLine);
-      }
-    }
-
-    input.value = "";
-    currentInput.textContent = "";
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-  }
-});
-
-// Fokus input saat klik terminal
-document.querySelector(".terminal-window").addEventListener("click", () => {
-  input.focus();
-});
-</script>
+    <script src="js/script.js"></script>
 </body>
 </html>
