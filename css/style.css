@@ -44,6 +44,26 @@
             --nav-border: rgba(0, 0, 0, 0.1);
         }
 
+        /* --- AMOLED MODE OVERRIDES (Deep Black Background) --- */
+        body.amoled-mode {
+            /* Background hitam pekat untuk AMOLED */
+            --md-bg: #000000;
+            --md-surface: #0a0a0a;
+            --md-surface-container: #1a1a1a;
+            
+            /* Primary tetap terang untuk kontras */
+            --md-primary: hsl(var(--hue), 80%, 75%);
+            --md-on-primary: #000000; /* Teks hitam di tombol terang */
+            --md-primary-container: hsl(var(--hue), 60%, 20%);
+            --md-on-primary-container: hsl(var(--hue), 90%, 95%);
+            
+            --md-outline: #333333;
+            --md-text-main: #ffffff; /* Teks Putih */
+            --md-text-sub: #cccccc;  /* Teks Abu Terang */
+
+            --nav-border: rgba(255, 255, 255, 0.1);
+        }
+
         /* --- 2. RESET & BASE --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -218,6 +238,7 @@
             background: var(--md-surface-container); border-radius: var(--radius-lg);
             overflow: hidden; display: flex; flex-direction: column;
             border: 1px solid var(--nav-border); transition: 0.3s;
+            margin-bottom: 2rem;
         }
         .project-card:hover { transform: translateY(-5px); }
         
