@@ -42,6 +42,9 @@
                 <button class="mode-btn" onclick="setMode('dark')" title="Gelap">
                     <span class="material-symbols-rounded">dark_mode</span>
                 </button>
+                <button class="mode-btn" onclick="setMode('amoled')" title="AMOLED">
+                    <span class="material-symbols-rounded">contrast</span>
+                </button>
             </div>
         </div>
     </div>
@@ -83,31 +86,6 @@
     </div>
 </section>
 
-<section id="linux-terminal">
-  <div class="terminal-window">
-    <div class="terminal-header">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-    </div>
-    <div class="terminal-content" id="terminal-content">
-      
-      <!-- Baris prompt tetap -->
-      <div class="terminal-line" id="terminal-prompt">
-        <span class="prompt">user@linux:~$</span>
-        <span class="command-text" id="current-input"></span>
-        <span class="caret">|</span>
-      </div>
-
-      <!-- Container output -->
-      <div id="terminal-output"></div>
-
-      <!-- Input tersembunyi untuk menangkap ketikan user -->
-      <input type="text" id="hidden-terminal-input" autofocus>
-    </div>
-  </div>
-</section>
-
 <section id="education">
     <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">history_edu</span> Pendidikan</h2>
     
@@ -144,7 +122,7 @@
                             <tr><td>Kelas XII - Smt 2</td><td>Peringkat 1</td></tr>
                         </table>
                         <p class="grotesk">Meraih sertifikat BNSP sebagai Junior Programmer</p>
-                        <p class="honor-text">🏆 <strong>Lulusan Terbaik</strong> - Seluruh Jurusan Rekayasa Perangkat Lunak</p>
+                        <p class="honor-text">🏆 <strong>Lulusan  dengan Predikat Nilai Terbaik</strong> - Seluruh Jurusan</p>
                     </div>
                 </div>
             </details>
@@ -227,6 +205,33 @@
     </details>
 </section>
 
+<section id="linux-terminal">
+  <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">terminal</span> Terminal</h2>
+  <p class="subtitle">Gunakan terminal ini untuk mencoba perintah sederhana. Ketik sesuatu lalu tekan Enter. Masukkan <code>help</code> atau <code>list</code> untuk melihat daftar perintah yang tersedia.</p>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+    </div>
+    <div class="terminal-content" id="terminal-content">
+      
+      <!-- Baris prompt tetap -->
+      <div class="terminal-line" id="terminal-prompt">
+        <span class="prompt">user@linux:~$</span>
+        <span class="command-text" id="current-input"></span>
+        <span class="caret">|</span>
+      </div>
+
+      <!-- Container output -->
+      <div id="terminal-output"></div>
+
+      <!-- Input tersembunyi untuk menangkap ketikan user -->
+      <input type="text" id="hidden-terminal-input">
+    </div>
+  </div>
+</section>
+
         <section id="projects">
             <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">folder_open</span> Projects</h2>
             
@@ -251,6 +256,32 @@
 </div>
                     <a href="https://muhfhri.github.io/jakmove" target="_blank" class="btn">
                         Kunjungi Web <span class="material-symbols-rounded">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="image/tije.png" width="120" alt="Transjakarta Bus Gallery">
+                </div>
+
+                <div class="project-content">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;"><span style="color:#2980b9">Tije</span> Galeri</h3>
+                    <p style="color: var(--md-text-sub); margin-bottom: 1rem;">Galeri Transjakarta berisi koleksi foto bus dengan penomoran dan spesifikasi lengkap untuk dokumentasi transportasi umum Jakarta.</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <span class="badge">Gallery</span>
+                        <span class="badge">Photography</span>
+                        <span class="badge">Transport</span>
+                    </div>
+                    <div class="project-labels">
+                        <span class="md-label primary grotesk">
+                            <span class="material-symbols-rounded">update</span>
+                            DIPERBARUI · Min – 08 Mar 2026
+                        </span>
+                    </div>
+                    <a href="https://muhfhri.github.io/tj-galeri
+                    " target="_blank" class="btn">
+                        Kunjungi Galeri <span class="material-symbols-rounded">open_in_new</span>
                     </a>
                 </div>
             </div>
@@ -559,16 +590,15 @@
             if(activeBtn) activeBtn.classList.add('active');
 
             // Apply Class to Body
+            document.body.classList.remove('light-mode', 'amoled-mode');
             if (mode === 'auto') {
                 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
                     document.body.classList.add('light-mode');
-                } else {
-                    document.body.classList.remove('light-mode');
                 }
             } else if (mode === 'light') {
                 document.body.classList.add('light-mode');
-            } else {
-                document.body.classList.remove('light-mode');
+            } else if (mode === 'amoled') {
+                document.body.classList.add('amoled-mode');
             }
         }
 
