@@ -49,6 +49,27 @@
         </div>
     </div>
 
+    <!-- iOS 26 Floating Weather Widget -->
+    <div class="weather-widget" id="weatherWidget">
+        <div class="weather-card">
+            <div class="weather-header-row">
+                <div class="weather-icon" id="weather-icon"></div>
+                <div class="weather-main-info">
+                    <div class="weather-city" id="weather-city">Memuat...</div>
+                    <div id="weather-city-temp" class="weather-city-temp" style="cursor: pointer;">--°C</div>
+                    <div class="weather-description-container" style="opacity: 1; transition: opacity 0.3s;">
+                        <span id="weather-description" class="weather-description" style="display: inline;">Memuat...</span>
+                    </div>
+                </div>
+                <button id="weather-edit-btn" class="weather-btn-edit" title="Ubah Lokasi">
+                    <span class="material-symbols-rounded">edit</span>
+                </button>
+            </div>
+            <div id="weather-edit-box" class="weather-edit-box" style="display: none;"></div>
+            <div id="weather-info" style="display: none;"></div>
+        </div>
+    </div>
+
     <nav class="nav-rail">
       
         <div class="nav-logo">MF</div>
@@ -72,22 +93,29 @@
             class="profile-avatar"
         > 
 
-        <h1>Muhammad Fachri Al Husein</h1>
+       <h1 style="font-size: clamp(1rem, 5.7vw, 2.5rem); text-align: left; white-space: nowrap;">
+    Muhammad Fachri Al Husein
+</h1>
+
+
 <p class="subtitle grotesk">
   Junior Web Developer dengan latar belakang Rekayasa Perangkat Lunak, 
   tertarik pada UI yang bersih, animasi halus, dan pengalaman pengguna yang nyaman.
 </p>
 
         <div class="badge-wrapper">
-            <span class="badge">💻 Freelancer</span>
-            <span class="badge">🚀 Web Developer</span>
-            <span class="badge highlight">🏆 Best Graduate</span>
+            <span class="badge badge-android"><span class="material-symbols-rounded" style="font-size: inherit; vertical-align: middle; margin-right: 4px;">android</span>Android</span>
+            <span class="badge"><span class="material-symbols-rounded" style="font-size: inherit; vertical-align: middle; margin-right: 4px;">code</span>Web Developer</span>
+            <span class="badge highlight"><span class="material-symbols-rounded" style="font-size: inherit; vertical-align: middle; margin-right: 4px;">school</span>Best Graduate</span>
         </div>
     </div>
 </section>
 
 <section id="education">
-    <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">history_edu</span> Pendidikan</h2>
+    <h2 class="section-title-bounce">
+        <span class="material-symbols-rounded title-icon" style="color:var(--md-primary)">history_edu</span>
+        <span class="bounce-text">Pendidikan</span>
+    </h2>
     
     <div class="timeline">
         <div class="timeline-item">
@@ -152,7 +180,10 @@
 
 
         <section id="skills">
-            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">bolt</span> Keahlian</h2>
+            <h2 class="section-title-bounce">
+                <span class="material-symbols-rounded title-icon" style="color:var(--md-primary)">bolt</span>
+                <span class="bounce-text">Keahlian</span>
+            </h2>
             <div class="skills-grid">
                 <div class="skill-box">
                     <span class="material-symbols-rounded" style="font-size: 36px; color: #f7df1e;">javascript</span>
@@ -206,7 +237,10 @@
 </section>
 
 <section id="linux-terminal">
-  <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">terminal</span> Terminal</h2>
+  <h2 class="section-title-bounce">
+      <span class="material-symbols-rounded title-icon" style="color:var(--md-primary)">terminal</span>
+      <span class="bounce-text">Terminal</span>
+  </h2>
   <p class="subtitle">Gunakan terminal ini untuk mencoba perintah sederhana. Ketik sesuatu lalu tekan Enter. Masukkan <code>help</code> atau <code>list</code> untuk melihat daftar perintah yang tersedia.</p>
   <div class="terminal-window">
     <div class="terminal-header">
@@ -233,7 +267,10 @@
 </section>
 
         <section id="projects">
-            <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">folder_open</span> Projects</h2>
+            <h2 class="section-title-bounce">
+                <span class="material-symbols-rounded title-icon" style="color:var(--md-primary)">folder_open</span>
+                <span class="bounce-text">Projects</span>
+            </h2>
             
             <div class="project-card">
                 <div class="project-img">
@@ -288,7 +325,10 @@
         </section>
 
 <section id="resources">
-    <h2><span class="material-symbols-rounded" style="color:var(--md-primary)">library_books</span> Library & Apps</h2>
+    <h2 class="section-title-bounce">
+        <span class="material-symbols-rounded title-icon" style="color:var(--md-primary)">library_books</span>
+        <span class="bounce-text">Library & Apps</span>
+    </h2>
     <p class="subtitle">Kumpulan materi belajar dan perangkat lunak buatan saya.</p>
 
     <h3 style="margin-top: 2.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -408,11 +448,11 @@
 </section>
 
 <section id="contact">
-    <h2>
-        <span class="material-symbols-rounded" style="color:var(--md-primary)">
+    <h2 class="section-title-bounce">
+        <span class="material-symbols-rounded title-icon" style="color:var(--md-primary)">
             connect_without_contact
         </span>
-        Kontak
+        <span class="bounce-text">Kontak</span>
     </h2>
 
     <div class="contact-grid">
@@ -451,7 +491,10 @@
 </section>
 
             <section id="brand" class="brand-section">
-<h2><span class="material-symbols-rounded" style="color:var(--md-primary)">auto_awesome</span> Brand Identity</h2>
+<h2 class="section-title-bounce">
+    <span class="material-symbols-rounded title-icon" style="color:var(--md-primary)">auto_awesome</span>
+    <span class="bounce-text">Brand Identity</span>
+</h2>
         <div class="brand-card">
             
             <div class="brand-visual">
@@ -626,6 +669,7 @@
 
         document.querySelectorAll('section').forEach(sec => observer.observe(sec));
     </script>
+    <script src="js/weather.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
