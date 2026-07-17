@@ -259,10 +259,10 @@
     function renderWeather(data) {
         const iconEl = document.getElementById('weather-icon');
         const infoEl = document.getElementById('weather-info');
+        const cityEl = document.getElementById('weather-city');
         const cityTempEl = document.getElementById('weather-city-temp');
         const descEl = document.getElementById('weather-description');
-        const descIconEl = document.getElementById('weather-desc-icon');
-        if (!iconEl || !infoEl || !cityTempEl) return;
+        if (!iconEl || !cityEl || !cityTempEl) return;
 
         try {
             latestWeatherData = data;
@@ -281,24 +281,14 @@
                 iconEl.textContent = fallbackIcon;
             }
 
-            const tempMain = typeof temp === 'number' ? `${temp}°C` : '';
+            // Tampilkan kota dan suhu di elemen yang terpisah
+            cityEl.textContent = name;
+            const tempMain = typeof temp === 'number' ? `${temp}°C` : '--°C';
+            cityTempEl.textContent = tempMain;
             
-            // Baris pertama: Kota, Suhu (langsung ke elemen terpisah)
-            const cityTempText = `${name}, ${tempMain}`.trim();
-            cityTempEl.textContent = cityTempText;
-            
-            // Tampilkan deskripsi cuaca dan mulai animasi berganti-ganti
-            const descContainer = document.querySelector('.weather-description-container');
-            if (descContainer) {
-                // Gunakan fungsi buildInfoMessages yang sudah ada
-                weatherInfoMessages = buildInfoMessages(data, desc);
-                
-                // Mulai rotasi jika ada pesan
-                if (weatherInfoMessages.length > 0) {
-                    startWeatherInfoRotation();
-                } else {
-                    descContainer.innerHTML = '<span class="material-symbols-rounded" style="font-size: 18px; margin-right: 6px; color: var(--md-sys-color-primary);">info</span><span class="weather-description">Data cuaca tidak tersedia</span>';
-                }
+            // Tampilkan hanya deskripsi cuaca (tanpa rotasi)
+            if (descEl) {
+                descEl.textContent = desc;
             }
 
             // Clear info element (tidak digunakan)
@@ -612,9 +602,10 @@
         const style = document.createElement('style');
         style.id = 'weather-overlay-style';
         style.textContent = (
-            '.weather-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);backdrop-filter:saturate(120%) blur(2px);z-index:1000;}' +
-            '.weather-overlay.show{display:flex;}' +
-            '.weather-dialog{width:min(560px,92vw);max-height:88vh;overflow:auto;overflow-x:hidden;border-radius:16px;padding:20px;background:var(--md-sys-color-surface);color:var(--md-sys-color-on-surface);box-shadow:0 12px 40px rgba(0,0,0,0.3);}' +
+            '.weather-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);z-index:1000;opacity:0;pointer-events:none;transition:opacity 220ms ease;}' +
+            '.weather-overlay.show{opacity:1;pointer-events:auto;}' +
+            '.weather-dialog{width:min(560px,92vw);max-height:88vh;overflow:auto;overflow-x:hidden;border-radius:16px;padding:20px;background:var(--md-sys-color-surface);color:var(--md-sys-color-on-surface);box-shadow:0 12px 40px rgba(0,0,0,0.3);transform:translateY(8px) scale(.98);opacity:0;transition:transform 260ms cubic-bezier(.2,.9,.2,1),opacity 200ms ease;}' +
+            '.weather-overlay.show .weather-dialog{transform:translateY(0) scale(1);opacity:1;}' +
             '.weather-header{display:flex;align-items:center;justify-content:flex-end;margin-bottom:8px;gap:8px;}' +
             '.weather-actions{display:flex;gap:8px;flex-wrap:wrap;}' +
             '.weather-actions .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:10px;border:1px solid var(--md-sys-color-outline);background:transparent;color:inherit;cursor:pointer;}' +
@@ -691,6 +682,11 @@
     function openWeatherOverlay() {
         const overlay = ensureOverlayDom();
         renderOverlay(latestWeatherData);
+        // trigger animated show (ensure reflow)
+        // overlay is always present but hidden via opacity; force reflow then add .show
+        // so CSS transition runs.
+        // Keep body scroll locked while overlay visible.
+        overlay.offsetHeight;
         overlay.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
@@ -698,8 +694,14 @@
     function closeWeatherOverlay() {
         const overlay = document.getElementById('weather-overlay');
         if (!overlay) return;
+        // remove show to start fade-out; restore body overflow after transition
         overlay.classList.remove('show');
-        document.body.style.overflow = '';
+        const onEnd = (e) => {
+            if (e && e.target !== overlay) return;
+            overlay.removeEventListener('transitionend', onEnd);
+            document.body.style.overflow = '';
+        };
+        overlay.addEventListener('transitionend', onEnd);
     }
 
     function updateOverlayIfOpen() {

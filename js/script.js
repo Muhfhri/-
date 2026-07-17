@@ -2,6 +2,32 @@ const input = document.getElementById("hidden-terminal-input");
 const currentInput = document.getElementById("current-input");
 const terminalOutput = document.getElementById("terminal-output");
 
+// gantnti detik jadi nigga
+const bounceDuration = 5;
+const bounceStep = 0.08;
+
+document.querySelectorAll(".bounce-text").forEach((element) => {
+  const text = element.textContent.trim();
+  if (!text) return;
+
+  const title = element.closest('.section-title-bounce');
+  if (title) {
+    title.style.setProperty('--bounce-duration', `${bounceDuration}s`);
+  }
+
+  const fragment = document.createDocumentFragment();
+  Array.from(text).forEach((char, index) => {
+    const span = document.createElement("span");
+    span.className = "bounce-char";
+    span.textContent = char === " " ? "\u00A0" : char;
+    span.style.animationDelay = `${index * bounceStep}s`;
+    fragment.appendChild(span);
+  });
+
+  element.innerHTML = "";
+  element.appendChild(fragment);
+});
+
 // Definisi command aktif
 const commands = {
   list: ["list", "daftar", "isi"],
