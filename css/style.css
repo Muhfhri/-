@@ -1,4 +1,12 @@
 
+        /* --- 0. FONT FACES --- */
+        @font-face {
+            font-family: 'Google Sans Rounded';
+            src: url('font/GoogleSansRounded-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* --- 1. FIXED DESIGN TOKENS (Sistem Warna Lebih Stabil) --- */
         :root {
             --hue: 210; /* Default Blue */
@@ -73,6 +81,7 @@
             color: var(--md-text-main);
             font-family: 'Google Sans Flex', sans-serif;
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden;
             transition: background-color 0.3s, color 0.3s;
@@ -98,39 +107,82 @@
         }
         @keyframes rotation { 100% { transform: rotate(360deg); } }
 
-        /* --- 4. NAVIGATION RAIL (Desktop Default) --- */
+        /* --- 4. NAVIGATION RAIL (iOS Floating Bottom Navbar) --- */
         .nav-rail {
-            width: var(--nav-width); height: 100vh;
-            position: fixed; left: 0; top: 0;
-            display: flex; flex-direction: column; align-items: center;
-            padding: 2rem 0;
-            background: var(--md-surface);
+            width: calc(100% - 32px);
+            max-width: 400px;
+            height: 70px;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
-            border-right: 1px solid var(--nav-border);
-            transition: background 0.3s, border 0.3s;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, backdrop-filter 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
 
-        .nav-logo { font-weight: 800; font-size: 1.5rem; color: var(--md-primary); margin-bottom: 3rem; }
-        .nav-links { display: flex; flex-direction: column; gap: 1rem; width: 100%; align-items: center; }
+        body.light-mode .nav-rail {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.amoled-mode .nav-rail {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-logo { display: none; }
+        .nav-links { 
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
         
         .nav-item {
-            width: 56px; height: 56px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 99px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
             color: var(--md-text-sub);
             position: relative;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 5px;
         }
-        .nav-item:hover { background-color: var(--md-surface-container); color: var(--md-text-main); }
-        .nav-item.active { background-color: var(--md-primary-container); color: var(--md-on-primary-container); }
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--md-text-main);
+            transform: scale(1.1);
+        }
+        .nav-item.active {
+            background-color: var(--md-primary);
+            color: var(--md-on-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
         .nav-item span { font-size: 24px; }
 
         /* --- 5. MAIN CONTENT --- */
         main {
-            margin-left: var(--nav-width);
+            margin-left: 0;
             flex: 1;
             padding: 3rem 4rem;
-            max-width: calc(100vw - var(--nav-width));
+            max-width: 100vw;
             width: 100%;
             padding-bottom: 120px;
             overflow-x: hidden;
@@ -160,6 +212,38 @@
             hyphens: auto;
         }
         h2 { font-size: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        .section-title-bounce {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            white-space: nowrap;
+        }
+        .bounce-text {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+        .title-icon {
+            display: inline-block;
+            animation: bounceChar var(--bounce-duration, 5s) ease-in-out infinite;
+            animation-delay: 0s;
+            will-change: transform, opacity;
+        }
+        .bounce-char {
+            display: inline-block;
+            opacity: 0.95;
+            transform: translateY(0) scale(1);
+            animation: bounceChar var(--bounce-duration, 5s) ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+        @keyframes bounceChar {
+            0%, 100% { opacity: 0.95; transform: translateY(0) scale(1); }
+            8% { opacity: 1; transform: translateY(-2px) scale(1.04); }
+            18% { opacity: 1; transform: translateY(0) scale(1); }
+            70% { opacity: 0.95; transform: translateY(0) scale(1); }
+        }
         .subtitle { font-size: 0.9rem; color: var(--md-text-sub); margin-bottom: 2rem; }
 
 /* --- COMPONENTS --- */
@@ -227,6 +311,10 @@
             margin-right: 8px; margin-bottom: 8px;
             border: 1px solid var(--md-outline);
             color: var(--md-text-main);
+        }
+        .badge.badge-android {
+            font-family: 'Google Sans Rounded', sans-serif;
+            font-weight: 900;
         }
         .badge.highlight {
             background: var(--md-primary-container); color: var(--md-on-primary-container);
@@ -314,71 +402,27 @@
         .mode-btn.active { background: var(--md-surface); color: var(--md-primary); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
 
-        /* --- 7. MOBILE RESPONSIVE FIXES (DIPERBAIKI SECARA PAKSA) --- */
+        /* --- 7. MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 768px) {
-            /* FIX NAVIGASI: 
-               1. Paksa width 100% dan height fix
-               2. Paksa flex-direction ROW (Horizontal)
-               3. Tambahkan background solid agar tidak transparan
-            */
+            /* Floating navbar already centered at bottom, just adjust for smaller screens */
             .nav-rail {
-                width: 100%;
-                height: 70px; /* Tinggi fix agar tidak melayang */
-                min-height: auto;
-                
-                position: fixed; 
-                top: auto; /* Matikan posisi top */
-                bottom: 0; /* Paksa nempel bawah */
-                left: 0;
-                
-                flex-direction: row; /* Wajib Row */
-                justify-content: space-around; /* Bagi rata */
-                padding: 0;
-                
-                border-right: none;
-                border-top: 1px solid var(--nav-border);
-                background-color: var(--md-surface); /* Wajib background solid */
-                box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
-            }
-
-            .nav-logo { display: none; }
-            .nav-links { 
-                flex-direction: row; /* Wajib Row */
-                width: 100%; 
-                justify-content: space-around;
-                gap: 0;
-            }
-
-            .nav-item {
-                flex: 1; /* Bagi rata lebarnya */
-                width: auto; 
-                height: 70px; /* Samakan dengan container */
-                border-radius: 0;
-                display: flex; flex-direction: column; gap: 4px;
-            }
-
-            .nav-item.active {
-                background-color: transparent; 
-                color: var(--md-primary);
-            }
-            /* Indikator aktif di mobile pakai border atas atau icon berwarna */
-            .nav-item.active span { 
-                background: var(--md-primary-container);
-                color: var(--md-on-primary-container);
-                padding: 4px 20px;
-                border-radius: 20px;
+                width: calc(100% - 24px);
+                bottom: 15px;
+                max-width: calc(100vw - 24px);
             }
 
             /* Main Content padding */
             main { 
-                margin-left: 0; 
-                padding: 2rem 1.5rem; 
-                padding-bottom: 100px;
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+                padding-top: 110px;
+                padding-bottom: 110px;
                 max-width: 100vw;
                 width: 100%;
                 overflow-x: hidden;
                 box-sizing: border-box;
             }
+
             h1 { 
                 font-size: 2.2rem; 
                 word-wrap: break-word;
@@ -387,8 +431,8 @@
             }
             
             /* Posisi FAB agar tidak ketutup Nav */
-            .fab { bottom: 90px; right: 20px; }
-            .settings-modal { bottom: 160px; }
+            .fab { bottom: 100px; right: 20px; }
+            .settings-modal { bottom: 170px; }
         }
 /* Wrapper untuk border animasi */
 .avatar-wrapper {
@@ -797,6 +841,269 @@ body.light-mode .logo-show-light { display: block; }
     position: absolute;
     opacity: 0;
     pointer-events: none;
+}
+
+/* --- FLOATING WEATHER WIDGET (iOS 26 Style) --- */
+.weather-widget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    width: 100%;
+    max-width: 270px;
+    animation: slideInDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.weather-card {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+
+body.light-mode .weather-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.amoled-mode .weather-card {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.weather-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+body.light-mode .weather-card:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.weather-header-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.weather-icon {
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.weather-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.weather-main-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.weather-city {
+    font-size: 11px;
+    color: var(--md-text-sub);
+    margin-bottom: 2px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.weather-city-temp {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--md-primary);
+    margin-bottom: 2px;
+    transition: color 0.2s;
+    cursor: pointer;
+    line-height: 1.2;
+}
+
+.weather-city-temp:hover {
+    color: var(--md-primary);
+    text-decoration: underline;
+}
+
+.weather-description-container {
+    font-size: 11px;
+    color: var(--md-text-sub);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    word-break: break-word;
+    transition: opacity 0.3s;
+    line-height: 1.2;
+}
+
+.weather-description {
+    display: inline;
+    white-space: normal;
+}
+
+.weather-btn-edit {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 10px;
+    color: var(--md-text-main);
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.weather-btn-edit:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.1) rotate(20deg); }
+.weather-btn-edit span { font-size: 18px; }
+
+.weather-edit-box {
+    margin-top: 8px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    animation: expandDown 0.3s ease;
+}
+
+@keyframes expandDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 300px;
+    }
+}
+
+.weather-edit-box input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--md-text-main);
+    font-family: inherit;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.weather-edit-box input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--md-primary);
+    box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.2);
+}
+
+.weather-edit-box input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Button styles in weather edit box */
+.weather-edit-box .btn,
+.weather-edit-box button {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    margin-top: 8px;
+    margin-right: 8px;
+}
+
+.weather-edit-box .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.weather-edit-box .btn-outlined {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--md-text-main);
+}
+
+.weather-edit-box .btn-outlined:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.weather-edit-box .body-small {
+    font-size: 12px;
+    color: var(--md-text-sub);
+    margin-top: 8px;
+    font-weight: 400;
+}
+
+/* Responsive for mobile */
+@media (max-width: 480px) {
+    .weather-widget {
+        top: 15px;
+        right: 12px;
+        left: auto;
+        max-width: 200px;
+    }
+
+    .weather-card {
+        padding: 8px 10px;
+    }
+
+    .weather-icon {
+        min-width: 32px;
+        font-size: 28px;
+    }
+
+    .weather-icon img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .weather-city-temp {
+        font-size: 12px;
+    }
+
+    .weather-description-container {
+        font-size: 10px;
+    }
+
+    .weather-btn-edit {
+        padding: 5px;
+        font-size: 16px;
+    }
+
+    .weather-btn-edit span {
+        font-size: 16px;
+    }
 }
 
 /* Styling untuk Detail Prestasi */
